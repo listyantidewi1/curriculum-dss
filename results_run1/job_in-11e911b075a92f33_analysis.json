@@ -1,0 +1,308 @@
+{
+  "job_id": "in-11e911b075a92f33",
+  "text": "The Artist Insights Team delivers in -depth artist brand analysis, campaign recommendations and cultural trend insights to marketing executives, informing artist brand development, media buying, campaign planning and product development.",
+  "skills": [
+    {
+      "skill": "deliver in-depth artist brand analysis",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.538,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 0.9
+    },
+    {
+      "skill": "provide campaign recommendations",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.647,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.9,
+      "context_agreement": 0.9
+    },
+    {
+      "skill": "deliver cultural trend insights",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.539,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 0.9
+    },
+    {
+      "skill": "inform artist brand development",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.419,
+      "confidence_tier": "Low",
+      "source": "GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 0.9
+    },
+    {
+      "skill": "inform media buying",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.624,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.77,
+      "context_agreement": 0.9
+    },
+    {
+      "skill": "inform campaign planning",
+      "type": "Soft",
+      "bloom": "Apply",
+      "confidence_score": 0.574,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.82,
+      "context_agreement": 0.9
+    },
+    {
+      "skill": "inform product development",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.422,
+      "confidence_tier": "Low",
+      "source": "GPT",
+      "semantic_density": 0.84,
+      "context_agreement": 0.9
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "artist brand analysis",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "campaign recommendations",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "cultural trend insights",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "artist brand development",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "media buying",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "campaign planning",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "product development",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "digital_literacy": 0.1300610207713269,
+      "algorithms_programming": 0.10880204554768197,
+      "ai_development": 0.12064327764951013,
+      "workforce_insights": 0.17943324256050616
+    },
+    "knowledge_coverage": {
+      "digital_literacy": 0.3645488619804383,
+      "algorithms_programming": 0.3531094551086426,
+      "ai_development": 0.3824525356292725,
+      "workforce_insights": 0.42975125312805185,
+      "basic_job_skills_ohs": 0.34967275857925423,
+      "graphics_multimedia": 0.346596372127533
+    },
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.346596372127533,
+      "digital_literacy": 0.3645488619804383,
+      "oop": 0.0,
+      "workforce_insights": 0.42975125312805185,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.0,
+      "computational_thinking": 0.0,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.34967275857925423,
+      "ai_development": 0.3824525356292725,
+      "mobile_development": 0.0,
+      "web_development": 0.0,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.3531094551086426,
+      "data_analysis": 0.0,
+      "database_systems": 0.0
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 6,
+      "coverage_percentage": 0.11716480192385224,
+      "skill_coverage_pct": 0.028365241396264482,
+      "knowledge_coverage_pct": 0.11716480192385224,
+      "avg_skill_confidence": 0.5376284944457143,
+      "avg_knowledge_confidence": 0.75,
+      "hard_skill_count": 6,
+      "soft_skill_count": 1,
+      "knowledge_count": 7
+    },
+    "missing_components": [
+      "audio_editing",
+      "structured_programming",
+      "oop",
+      "game_modeling",
+      "ai_literacy_ethics",
+      "game_programming",
+      "computational_thinking",
+      "multimedia_programming",
+      "mobile_development",
+      "web_development",
+      "network_technology",
+      "data_analysis",
+      "database_systems"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.347,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.365,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.43,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.35,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.382,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.353,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 0,
+    "gpt_skill_count": 7,
+    "fused_skill_count": 7,
+    "model_agreement": 0.0,
+    "match_count": 0,
+    "extraction_time": 3.743704319000244
+  }
+}

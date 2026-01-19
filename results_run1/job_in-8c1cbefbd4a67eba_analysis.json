@@ -1,0 +1,317 @@
+{
+  "job_id": "in-8c1cbefbd4a67eba",
+  "text": "During LVC event execution, must be able to address technical issues and engage engineers from the appropriate domains to resolve. Must have excellent written and verbal communication skills. Secret Clearance. Preferred Requirements -------------------------- Experience with Tactical Data Analysis Connectivity System (TDACS), Gateway Manager (GWM, and Link Management and Monitoring Tool (LMMT) Familiarity with Joint Semi -Automated Forces/Joint Simulated Bus (JSAF/JBUS). DIS Experience with Model and Simulation Systems to include Joint Live Virtual Constructive (JLVC) and JSAF. Experience working with Navy training systems and command structure. Physical Requirements ------------------------- Office, industrial, or shipboard environment.",
+  "skills": [
+    {
+      "skill": "address technical issues",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.939,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.82,
+      "context_agreement": 1.24
+    },
+    {
+      "skill": "engage engineers",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.589,
+      "confidence_tier": "Medium Low",
+      "source": "BERT+GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 0.95
+    },
+    {
+      "skill": "communicate in writing",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.604,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 0.95
+    },
+    {
+      "skill": "communicate verbally",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.614,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.89,
+      "context_agreement": 0.95
+    },
+    {
+      "skill": "written",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.487,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.81,
+      "context_agreement": 0.86
+    },
+    {
+      "skill": "verbal communication skills.",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.713,
+      "confidence_tier": "Medium High",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.86,
+      "context_agreement": 0.86
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "Tactical Data Analysis Connectivity System",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Gateway Manager",
+      "confidence_score": 0.83,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Link Management and Monitoring Tool",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Joint Semi-Automated Forces",
+      "confidence_score": 0.829,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Joint Simulated Bus",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Joint Live Virtual Constructive",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Navy training systems",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Command structure",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Secret Clearance.",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "/",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "JBUS).",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {},
+    "knowledge_coverage": {
+      "computational_thinking": 0.3670515418052674,
+      "network_technology": 0.45071581396758564,
+      "multimedia_programming": 0.4370757937431336
+    },
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.0,
+      "digital_literacy": 0.0,
+      "oop": 0.0,
+      "workforce_insights": 0.0,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.0,
+      "computational_thinking": 0.3670515418052674,
+      "multimedia_programming": 0.4370757937431336,
+      "basic_job_skills_ohs": 0.0,
+      "ai_development": 0.0,
+      "mobile_development": 0.0,
+      "web_development": 0.0,
+      "network_technology": 0.45071581396758564,
+      "algorithms_programming": 0.0,
+      "data_analysis": 0.0,
+      "database_systems": 0.0
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 3,
+      "coverage_percentage": 0.06604437629031508,
+      "skill_coverage_pct": 0.0,
+      "knowledge_coverage_pct": 0.06604437629031508,
+      "avg_skill_confidence": 0.6576645557427183,
+      "avg_knowledge_confidence": 0.7270382394871929,
+      "hard_skill_count": 2,
+      "soft_skill_count": 4,
+      "knowledge_count": 11
+    },
+    "missing_components": [
+      "audio_editing",
+      "structured_programming",
+      "graphics_multimedia",
+      "digital_literacy",
+      "oop",
+      "workforce_insights",
+      "game_modeling",
+      "ai_literacy_ethics",
+      "game_programming",
+      "basic_job_skills_ohs",
+      "ai_development",
+      "mobile_development",
+      "web_development",
+      "algorithms_programming",
+      "data_analysis",
+      "database_systems"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.367,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.437,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.451,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 4,
+    "gpt_skill_count": 4,
+    "fused_skill_count": 6,
+    "model_agreement": 0.2500000596046448,
+    "match_count": 1,
+    "extraction_time": 6.423105001449585
+  }
+}

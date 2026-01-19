@@ -1,0 +1,455 @@
+{
+  "job_id": "in-197d019f060545e0",
+  "text": "Your work will directly support the development of effective and efficient data models that power our data products and enable strategic decision -making. Key Responsibilities: + Analyze business use cases to understand goals and value drivers. + Create conceptual models using Meta Models, Ontologies, and Knowledge Graphs to represent domain structures. + Develop logical and physical data models that support KPIs and product requirements. + Ensure models meet output needs including SQL endpoints, dashboards, reports, and APIs. + Support data cataloging, source -to -target mapping, and data quality rule setup for critical data elements. + Optimize cloud databases (e.g., Delta Lake, OneLake) for performance and scalability. + Collaborate with governance teams to define global modeling standards and best practices. + Work cross -functionally with data engineers, analysts, and other teams to implement and maintain robust data models.",
+  "skills": [
+    {
+      "skill": "analyze business use cases",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.77,
+      "context_agreement": 1.25
+    },
+    {
+      "skill": "create conceptual models",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.82,
+      "context_agreement": 1.25
+    },
+    {
+      "skill": "develop logical and physical data models",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.692,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.78,
+      "context_agreement": 0.96
+    },
+    {
+      "skill": "ensure models meet output needs",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.957,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.76,
+      "context_agreement": 1.25
+    },
+    {
+      "skill": "support data cataloging",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.999,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 1.25
+    },
+    {
+      "skill": "optimize cloud databases",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.513,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.82,
+      "context_agreement": 0.96
+    },
+    {
+      "skill": "collaborate with governance teams",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.67,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 0.96
+    },
+    {
+      "skill": "work cross-functionally with teams",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.671,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 0.96
+    },
+    {
+      "skill": "development of effective",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.531,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.82,
+      "context_agreement": 0.87
+    },
+    {
+      "skill": "efficient data models",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.528,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.79,
+      "context_agreement": 0.87
+    },
+    {
+      "skill": "understand goals",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.494,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.83,
+      "context_agreement": 0.87
+    },
+    {
+      "skill": "value drivers.",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.645,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.8,
+      "context_agreement": 0.87
+    },
+    {
+      "skill": "represent domain structures.",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.536,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.86,
+      "context_agreement": 0.87
+    },
+    {
+      "skill": "Develop logical",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.647,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.81,
+      "context_agreement": 0.87
+    },
+    {
+      "skill": "physical data models",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.527,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.78,
+      "context_agreement": 0.87
+    },
+    {
+      "skill": "source -to -target mapping",
+      "type": "Hard",
+      "bloom": "Understand",
+      "confidence_score": 0.526,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.77,
+      "context_agreement": 0.87
+    },
+    {
+      "skill": "data quality",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.488,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.77,
+      "context_agreement": 0.87
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "Meta Models",
+      "confidence_score": 0.828,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Ontologies",
+      "confidence_score": 0.827,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Knowledge Graphs",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "SQL endpoints",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "dashboards",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "reports",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "data cataloging",
+      "confidence_score": 0.828,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "source-to-target mapping",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "data quality",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Delta Lake",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "OneLake",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "SQL endpoints, dashboards, reports,",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "source",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "-to",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "-target mapping,",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.24624332899716891,
+      "data_analysis": 0.6320644258595493,
+      "ai_development": 0.14774722812856855,
+      "workforce_insights": 0.5204547637828281,
+      "basic_job_skills_ohs": 0.12653022531469907,
+      "structured_programming": 0.23964014249221993,
+      "oop": 0.6434470219670596,
+      "multimedia_programming": 0.6516527928255508
+    },
+    "knowledge_coverage": {
+      "computational_thinking": 0.4411998675819859,
+      "data_analysis": 0.5457482168721903,
+      "basic_job_skills_ohs": 0.4273032523150146
+    },
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.23964014249221993,
+      "graphics_multimedia": 0.0,
+      "digital_literacy": 0.0,
+      "oop": 0.6434470219670596,
+      "workforce_insights": 0.5204547637828281,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.0,
+      "computational_thinking": 0.4411998675819859,
+      "multimedia_programming": 0.6516527928255508,
+      "basic_job_skills_ohs": 0.4273032523150146,
+      "ai_development": 0.14774722812856855,
+      "mobile_development": 0.0,
+      "web_development": 0.0,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.0,
+      "data_analysis": 0.6320644258595493,
+      "database_systems": 0.0
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 8,
+      "coverage_percentage": 0.19492155236593564,
+      "skill_coverage_pct": 0.16883052259829706,
+      "knowledge_coverage_pct": 0.074434280882589,
+      "avg_skill_confidence": 0.6720695264663368,
+      "avg_knowledge_confidence": 0.7181190152466298,
+      "hard_skill_count": 15,
+      "soft_skill_count": 2,
+      "knowledge_count": 15
+    },
+    "missing_components": [
+      "audio_editing",
+      "graphics_multimedia",
+      "digital_literacy",
+      "game_modeling",
+      "ai_literacy_ethics",
+      "game_programming",
+      "mobile_development",
+      "web_development",
+      "network_technology",
+      "algorithms_programming",
+      "database_systems"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.24,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.643,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.52,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.441,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.652,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.427,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.148,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.632,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 13,
+    "gpt_skill_count": 8,
+    "fused_skill_count": 17,
+    "model_agreement": 0.3076923352021438,
+    "match_count": 4,
+    "extraction_time": 4.5806663036346436
+  }
+}

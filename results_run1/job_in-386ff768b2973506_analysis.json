@@ -1,0 +1,359 @@
+{
+  "job_id": "in-386ff768b2973506",
+  "text": "We offer a highly collaborative, caring team environment with a strong focus on learning and development, recognition for your individual contributions, and a variety of benefit options for you to choose from. Role and Responsibilities Develop and implement strategies to detect anomalous or malicious behavior with a focus on endpoint detection and response (EDR) capabilities. Create Security Information and Event Management (SIEM) EDR -based detection logic and craft custom endpoint detection and response (EDR) detection code for use in CrowdStrike Falcon or other EDR platforms. Analyze security alerting, with a focus on EDR alerting, to ensure proper tuning of detective content and to identify opportunities to improve detection. Utilize threat intelligence to ensure detection strategies are aligned to the most concerning and probable threat vectors and adversary tactics. Maintain documentation related to processes, detection strategies, and detection code.",
+  "skills": [
+    {
+      "skill": "develop and implement strategies",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.85,
+      "context_agreement": 1.21
+    },
+    {
+      "skill": "create detection logic",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.716,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 0.95
+    },
+    {
+      "skill": "craft custom detection code",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.524,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.78,
+      "context_agreement": 0.95
+    },
+    {
+      "skill": "analyze security alerting",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 1.23
+    },
+    {
+      "skill": "utilize threat intelligence",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.724,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.85,
+      "context_agreement": 0.95
+    },
+    {
+      "skill": "maintain documentation",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.604,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.9,
+      "context_agreement": 0.95
+    },
+    {
+      "skill": "Develop",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.639,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.81,
+      "context_agreement": 0.85
+    },
+    {
+      "skill": "detect anomalous or malicious behavior",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.638,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.8,
+      "context_agreement": 0.85
+    },
+    {
+      "skill": "Create Security Information",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.644,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.85,
+      "context_agreement": 0.85
+    },
+    {
+      "skill": "Event Management (SIEM) EDR -based detection logic",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.636,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.79,
+      "context_agreement": 0.85
+    },
+    {
+      "skill": "craft custom endpoint detection",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.523,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.81,
+      "context_agreement": 0.85
+    },
+    {
+      "skill": "response",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.489,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.84,
+      "context_agreement": 0.85
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "endpoint detection and response (EDR)",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Security Information and Event Management (SIEM)",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "CrowdStrike Falcon",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "threat intelligence",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "adversary tactics",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "endpoint detection",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "Security Information and Event Management",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "endpoint detection and",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.6566267016795163,
+      "digital_literacy": 0.31364263512322804,
+      "algorithms_programming": 0.27689781244751077,
+      "ai_literacy_ethics": 0.21699139343187906,
+      "workforce_insights": 0.21017630930356496,
+      "basic_job_skills_ohs": 0.23155233692122706,
+      "structured_programming": 0.2696423209347099,
+      "web_development": 0.30573200748822826,
+      "game_programming": 0.30496119253404297
+    },
+    "knowledge_coverage": {},
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.2696423209347099,
+      "graphics_multimedia": 0.0,
+      "digital_literacy": 0.31364263512322804,
+      "oop": 0.0,
+      "workforce_insights": 0.21017630930356496,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.21699139343187906,
+      "game_programming": 0.30496119253404297,
+      "computational_thinking": 0.6566267016795163,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.23155233692122706,
+      "ai_development": 0.0,
+      "mobile_development": 0.0,
+      "web_development": 0.30573200748822826,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.27689781244751077,
+      "data_analysis": 0.0,
+      "database_systems": 0.0
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 9,
+      "coverage_percentage": 0.146643300519153,
+      "skill_coverage_pct": 0.146643300519153,
+      "knowledge_coverage_pct": 0.0,
+      "avg_skill_confidence": 0.6778900054303779,
+      "avg_knowledge_confidence": 0.66825,
+      "hard_skill_count": 11,
+      "soft_skill_count": 1,
+      "knowledge_count": 8
+    },
+    "missing_components": [
+      "audio_editing",
+      "graphics_multimedia",
+      "oop",
+      "game_modeling",
+      "multimedia_programming",
+      "ai_development",
+      "mobile_development",
+      "network_technology",
+      "data_analysis",
+      "database_systems"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.27,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.314,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.21,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.217,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.305,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.657,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.232,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.306,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.277,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 8,
+    "gpt_skill_count": 6,
+    "fused_skill_count": 12,
+    "model_agreement": 0.24108941107988358,
+    "match_count": 2,
+    "extraction_time": 4.323453664779663
+  }
+}

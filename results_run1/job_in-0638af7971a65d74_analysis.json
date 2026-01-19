@@ -1,0 +1,260 @@
+{
+  "job_id": "in-0638af7971a65d74",
+  "text": "Optimize and establish processes and workflows to ensure smooth -running production operations. What You\u2019ll Bring --------------------- 5 + years of experience in motion design, animation, or 3D visual design (a blend of agency and in -house preferred).",
+  "skills": [
+    {
+      "skill": "optimize processes and workflows",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.568,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.82,
+      "context_agreement": 0.95
+    },
+    {
+      "skill": "establish processes and workflows",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.616,
+      "confidence_tier": "Medium",
+      "source": "BERT+GPT",
+      "semantic_density": 0.85,
+      "context_agreement": 0.95
+    },
+    {
+      "skill": "ensure smooth-running production operations",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.87,
+      "context_agreement": 1.22
+    },
+    {
+      "skill": "Optimize",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.642,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.84,
+      "context_agreement": 0.85
+    },
+    {
+      "skill": "workflows",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.491,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.87,
+      "context_agreement": 0.85
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "motion design",
+      "confidence_score": 0.827,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "animation",
+      "confidence_score": 0.82,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "3D visual design",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.2759866724508682,
+      "algorithms_programming": 0.24302568742260355,
+      "ai_development": 0.1615908955045002,
+      "basic_job_skills_ohs": 0.3821080823757862,
+      "structured_programming": 0.37579221845822597,
+      "game_programming": 0.33226131598712133
+    },
+    "knowledge_coverage": {
+      "graphics_multimedia": 0.6423304501414634
+    },
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.37579221845822597,
+      "graphics_multimedia": 0.6423304501414634,
+      "digital_literacy": 0.0,
+      "oop": 0.0,
+      "workforce_insights": 0.0,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.33226131598712133,
+      "computational_thinking": 0.2759866724508682,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.3821080823757862,
+      "ai_development": 0.1615908955045002,
+      "mobile_development": 0.0,
+      "web_development": 0.0,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.24302568742260355,
+      "data_analysis": 0.0,
+      "database_systems": 0.0
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 7,
+      "coverage_percentage": 0.1270050169652931,
+      "skill_coverage_pct": 0.09319815116837397,
+      "knowledge_coverage_pct": 0.033806865796919126,
+      "avg_skill_confidence": 0.6635277260246489,
+      "avg_knowledge_confidence": 0.825759434769551,
+      "hard_skill_count": 5,
+      "soft_skill_count": 0,
+      "knowledge_count": 3
+    },
+    "missing_components": [
+      "audio_editing",
+      "digital_literacy",
+      "oop",
+      "workforce_insights",
+      "game_modeling",
+      "ai_literacy_ethics",
+      "multimedia_programming",
+      "mobile_development",
+      "web_development",
+      "network_technology",
+      "data_analysis",
+      "database_systems"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.376,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.642,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.332,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.276,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.382,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.162,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.243,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 4,
+    "gpt_skill_count": 3,
+    "fused_skill_count": 5,
+    "model_agreement": 0.2376593053340912,
+    "match_count": 1,
+    "extraction_time": 1.9170808792114258
+  }
+}

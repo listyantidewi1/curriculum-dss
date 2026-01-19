@@ -1,0 +1,310 @@
+{
+  "job_id": "in-4fcebca3011abb68",
+  "text": "Qualifications Experience required: 6 + plus years of experience in marketing events. Demonstration of strong project management and organizational skills across virtual events, business administration and/or trade shows, or event management experience across Europe. Experience preferred: Supervisory or management experience. Education required: Bachelor\u2019s Degree in Event Planning, Hospitality, Marketing, Public Relations, Communications or equivalent. #LI -AS1 #LI -Remote MSA is committed to the principles of equal employment opportunity and to providing a workplace that is free from unlawful discrimination.",
+  "skills": [
+    {
+      "skill": "manage projects",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.774,
+      "confidence_tier": "Medium High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 1.19
+    },
+    {
+      "skill": "organize events",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.628,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 0.94
+    },
+    {
+      "skill": "supervise teams",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.655,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 0.94
+    },
+    {
+      "skill": "manage events",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.68,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.78,
+      "context_agreement": 0.94
+    },
+    {
+      "skill": "organizational skills",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.492,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.85
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "marketing events",
+      "confidence_score": 0.827,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "virtual events",
+      "confidence_score": 0.828,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "business administration",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "trade shows",
+      "confidence_score": 0.825,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "event management",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Event Planning",
+      "confidence_score": 0.827,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Hospitality",
+      "confidence_score": 0.826,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Marketing",
+      "confidence_score": 0.823,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Public Relations",
+      "confidence_score": 0.825,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Communications",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Bachelor\u2019s Degree",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "workforce_insights": 0.12014689404762198,
+      "multimedia_programming": 0.24979682160797034
+    },
+    "knowledge_coverage": {
+      "workforce_insights": 0.4828597450465207,
+      "network_technology": 0.4790766802704154,
+      "multimedia_programming": 0.48715955792963517
+    },
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.0,
+      "digital_literacy": 0.0,
+      "oop": 0.0,
+      "workforce_insights": 0.4828597450465207,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.0,
+      "computational_thinking": 0.0,
+      "multimedia_programming": 0.48715955792963517,
+      "basic_job_skills_ohs": 0.0,
+      "ai_development": 0.0,
+      "mobile_development": 0.0,
+      "web_development": 0.0,
+      "network_technology": 0.4790766802704154,
+      "algorithms_programming": 0.0,
+      "data_analysis": 0.0,
+      "database_systems": 0.0
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 3,
+      "coverage_percentage": 0.07626820964455638,
+      "skill_coverage_pct": 0.01947072187661012,
+      "knowledge_coverage_pct": 0.07626820964455638,
+      "avg_skill_confidence": 0.6460286440375922,
+      "avg_knowledge_confidence": 0.793090653153983,
+      "hard_skill_count": 2,
+      "soft_skill_count": 3,
+      "knowledge_count": 11
+    },
+    "missing_components": [
+      "audio_editing",
+      "structured_programming",
+      "graphics_multimedia",
+      "digital_literacy",
+      "oop",
+      "game_modeling",
+      "ai_literacy_ethics",
+      "game_programming",
+      "computational_thinking",
+      "basic_job_skills_ohs",
+      "ai_development",
+      "mobile_development",
+      "web_development",
+      "algorithms_programming",
+      "data_analysis",
+      "database_systems"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.483,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.487,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.479,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 2,
+    "gpt_skill_count": 4,
+    "fused_skill_count": 5,
+    "model_agreement": 0.217572420835495,
+    "match_count": 1,
+    "extraction_time": 2.3833699226379395
+  }
+}

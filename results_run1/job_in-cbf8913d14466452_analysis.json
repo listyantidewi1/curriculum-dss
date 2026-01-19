@@ -1,0 +1,363 @@
+{
+  "job_id": "in-cbf8913d14466452",
+  "text": "Our Space Systems team is made up of engineers, technicians, and designers who design, create, and put together our own satellites for missions across the commercial, government, and defence sectors, or who build and assemble satellite hardware and software that supports other satellite missions. SENIOR RF ENGINEER - TT & C SYSTEMS As part of the Space Systems RF team, you'll design, develop, and validate RF communications and navigation systems for Rocket Lab missions.",
+  "skills": [
+    {
+      "skill": "design RF communications and navigation systems",
+      "type": "Soft",
+      "bloom": "Create",
+      "confidence_score": 0.465,
+      "confidence_tier": "Low",
+      "source": "GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "develop RF communications and navigation systems",
+      "type": "Soft",
+      "bloom": "Create",
+      "confidence_score": 0.465,
+      "confidence_tier": "Low",
+      "source": "GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "validate RF communications and navigation systems",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.985,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 1.16
+    },
+    {
+      "skill": "design satellites",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.699,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.84,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "create satellites",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.699,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.84,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "put together satellites",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.669,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "build satellite hardware",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.696,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.82,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "assemble satellite hardware",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.45,
+      "confidence_tier": "Low",
+      "source": "GPT",
+      "semantic_density": 0.85,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "build satellite software",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.696,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.82,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "assemble satellite software",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.45,
+      "confidence_tier": "Low",
+      "source": "GPT",
+      "semantic_density": 0.85,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "design",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.614,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.78,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "develop",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.618,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.81,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "navigation systems",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.474,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.86,
+      "context_agreement": 0.83
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "RF communications",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "navigation systems",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "satellites",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "satellite hardware",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "satellite software",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Space Systems",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "TT & C Systems",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.23136651303081202,
+      "algorithms_programming": 0.28640378647469555,
+      "workforce_insights": 0.2034214568827273,
+      "basic_job_skills_ohs": 0.2241103862620151,
+      "oop": 0.24200917117000312,
+      "database_systems": 0.25931065529823805,
+      "game_modeling": 0.23925028609211343,
+      "game_programming": 0.29516002941318903,
+      "graphics_multimedia": 0.3003991388605793,
+      "audio_editing": 0.2554591458749097
+    },
+    "knowledge_coverage": {},
+    "combined_coverage": {
+      "audio_editing": 0.2554591458749097,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.3003991388605793,
+      "digital_literacy": 0.0,
+      "oop": 0.24200917117000312,
+      "workforce_insights": 0.2034214568827273,
+      "game_modeling": 0.23925028609211343,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.29516002941318903,
+      "computational_thinking": 0.23136651303081202,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.2241103862620151,
+      "ai_development": 0.0,
+      "mobile_development": 0.0,
+      "web_development": 0.0,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.28640378647469555,
+      "data_analysis": 0.0,
+      "database_systems": 0.25931065529823805
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 10,
+      "coverage_percentage": 0.1335205562820675,
+      "skill_coverage_pct": 0.1335205562820675,
+      "knowledge_coverage_pct": 0.0,
+      "avg_skill_confidence": 0.6139505887535273,
+      "avg_knowledge_confidence": 0.75,
+      "hard_skill_count": 10,
+      "soft_skill_count": 3,
+      "knowledge_count": 7
+    },
+    "missing_components": [
+      "structured_programming",
+      "digital_literacy",
+      "ai_literacy_ethics",
+      "multimedia_programming",
+      "ai_development",
+      "mobile_development",
+      "web_development",
+      "network_technology",
+      "data_analysis"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.255,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.3,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.242,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.203,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.239,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.295,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.231,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.224,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.286,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.259,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 4,
+    "gpt_skill_count": 10,
+    "fused_skill_count": 13,
+    "model_agreement": 0.08871369361877442,
+    "match_count": 1,
+    "extraction_time": 4.899193048477173
+  }
+}

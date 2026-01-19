@@ -1,0 +1,327 @@
+{
+  "job_id": "in-5b34fbd44ae40bd1",
+  "text": "Performance of such other duties appropriate to the post, including on call and the participation in extended opening rosters including weekend opening and other such services that may from time to time be introduced by the Head of Pharmacy Services Oncology Pharmacy Service: To be responsible for the safe and effective operation of the clinical pharmacy service for oncology and haematology out -patients and daycase patients Quality Ensure that the oncology pharmacy service is analysed and optimised by undertaking regular clinical/technical audits in relation usage and capacity.",
+  "skills": [
+    {
+      "skill": "perform duties appropriate to the post",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.587,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.77,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "participate in extended opening rosters",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.593,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "ensure safe and effective operation of clinical pharmacy service",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.579,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.79,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "analyse and optimise oncology pharmacy service",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.685,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "undertake clinical/technical audits",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.938,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.86,
+      "context_agreement": 1.19
+    },
+    {
+      "skill": "call",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.468,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.72,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "responsible for the safe",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.472,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.76,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "effective operation of the",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.473,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.77,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "Ensure that the oncology pharmacy service is analysed",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.622,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.77,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "optimised",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.483,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.87,
+      "context_agreement": 0.84
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "oncology pharmacy service",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "haematology out-patients",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "daycase patients",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "clinical pharmacy service",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "clinical/technical audits",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "weekend opening",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "basic_job_skills_ohs": 0.1363168154035311,
+      "structured_programming": 0.18166654164847962
+    },
+    "knowledge_coverage": {},
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.18166654164847962,
+      "graphics_multimedia": 0.0,
+      "digital_literacy": 0.0,
+      "oop": 0.0,
+      "workforce_insights": 0.0,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.0,
+      "computational_thinking": 0.0,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.1363168154035311,
+      "ai_development": 0.0,
+      "mobile_development": 0.0,
+      "web_development": 0.0,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.0,
+      "data_analysis": 0.0,
+      "database_systems": 0.0
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 2,
+      "coverage_percentage": 0.016735966160632144,
+      "skill_coverage_pct": 0.016735966160632144,
+      "knowledge_coverage_pct": 0.0,
+      "avg_skill_confidence": 0.5899649843375249,
+      "avg_knowledge_confidence": 0.7136666666666667,
+      "hard_skill_count": 8,
+      "soft_skill_count": 2,
+      "knowledge_count": 6
+    },
+    "missing_components": [
+      "audio_editing",
+      "graphics_multimedia",
+      "digital_literacy",
+      "oop",
+      "workforce_insights",
+      "game_modeling",
+      "ai_literacy_ethics",
+      "game_programming",
+      "computational_thinking",
+      "multimedia_programming",
+      "ai_development",
+      "mobile_development",
+      "web_development",
+      "network_technology",
+      "algorithms_programming",
+      "data_analysis",
+      "database_systems"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.182,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.136,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 6,
+    "gpt_skill_count": 5,
+    "fused_skill_count": 10,
+    "model_agreement": 0.15569142500559488,
+    "match_count": 1,
+    "extraction_time": 3.536067247390747
+  }
+}

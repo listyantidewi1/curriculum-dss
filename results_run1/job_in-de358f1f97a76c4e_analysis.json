@@ -1,0 +1,327 @@
+{
+  "job_id": "in-de358f1f97a76c4e",
+  "text": "These activities include; forming, planning and guiding the proposal cost team, managing all cost volume development activities such as compiling cost, schedule and technical elements in accordance with the Request for Proposal (RFP) specifications. The development of complex Excel -based cost models is crucial for strategy development, Leadership Team pricing reviews and submission.",
+  "skills": [
+    {
+      "skill": "form proposal cost team",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.68,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.75,
+      "context_agreement": 0.99
+    },
+    {
+      "skill": "plan proposal cost team",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.855,
+      "confidence_tier": "High",
+      "source": "GPT",
+      "semantic_density": 0.75,
+      "context_agreement": 1.25
+    },
+    {
+      "skill": "guide proposal cost team",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.76,
+      "context_agreement": 1.25
+    },
+    {
+      "skill": "manage cost volume development activities",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.812,
+      "confidence_tier": "High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.82,
+      "context_agreement": 1.28
+    },
+    {
+      "skill": "compile cost elements",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.649,
+      "confidence_tier": "Medium",
+      "source": "BERT+GPT",
+      "semantic_density": 0.79,
+      "context_agreement": 0.99
+    },
+    {
+      "skill": "compile schedule elements",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.484,
+      "confidence_tier": "Low",
+      "source": "GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 0.99
+    },
+    {
+      "skill": "compile technical elements",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.626,
+      "confidence_tier": "Medium",
+      "source": "BERT+GPT",
+      "semantic_density": 0.85,
+      "context_agreement": 0.99
+    },
+    {
+      "skill": "develop complex Excel-based cost models",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.79,
+      "context_agreement": 1.29
+    },
+    {
+      "skill": "forming",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.508,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.81,
+      "context_agreement": 0.89
+    },
+    {
+      "skill": "planning",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.672,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.84,
+      "context_agreement": 0.89
+    },
+    {
+      "skill": "schedule",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.672,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.84,
+      "context_agreement": 0.89
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "Excel",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Request for Proposal (RFP)",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "strategy development",
+      "confidence_score": 0.828,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Leadership Team pricing reviews",
+      "confidence_score": 0.83,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "submission",
+      "confidence_score": 0.82,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.24476014006180755
+    },
+    "knowledge_coverage": {
+      "computational_thinking": 0.48133173410732977,
+      "digital_literacy": 0.7474500972032557,
+      "data_analysis": 0.6050592956758011,
+      "workforce_insights": 0.41090189999953547,
+      "game_programming": 0.43475653823859695
+    },
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.0,
+      "digital_literacy": 0.7474500972032557,
+      "oop": 0.0,
+      "workforce_insights": 0.41090189999953547,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.43475653823859695,
+      "computational_thinking": 0.48133173410732977,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.0,
+      "ai_development": 0.0,
+      "mobile_development": 0.0,
+      "web_development": 0.0,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.0,
+      "data_analysis": 0.6050592956758011,
+      "database_systems": 0.0
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 5,
+      "coverage_percentage": 0.14102629290655364,
+      "skill_coverage_pct": 0.012882112634831976,
+      "knowledge_coverage_pct": 0.14102629290655364,
+      "avg_skill_confidence": 0.7235323598208901,
+      "avg_knowledge_confidence": 0.8118066720664501,
+      "hard_skill_count": 6,
+      "soft_skill_count": 5,
+      "knowledge_count": 5
+    },
+    "missing_components": [
+      "audio_editing",
+      "structured_programming",
+      "graphics_multimedia",
+      "oop",
+      "game_modeling",
+      "ai_literacy_ethics",
+      "multimedia_programming",
+      "basic_job_skills_ohs",
+      "ai_development",
+      "mobile_development",
+      "web_development",
+      "network_technology",
+      "algorithms_programming",
+      "database_systems"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.411,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.435,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.481,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.605,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 8,
+    "gpt_skill_count": 8,
+    "fused_skill_count": 11,
+    "model_agreement": 0.46052317321300507,
+    "match_count": 4,
+    "extraction_time": 3.3846755027770996
+  }
+}

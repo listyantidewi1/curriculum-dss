@@ -1,0 +1,346 @@
+{
+  "job_id": "in-3c790b492259666a",
+  "text": "Applies discretion and independent decision making to multiple job functions including; financial reporting, information management, content creation, special projects, strategy implementation, team and office management, employee onboarding, manages all data security and systems access issues, and takes direction from the manager on time allocation to ensure priorities align with organizational goals.",
+  "skills": [
+    {
+      "skill": "apply discretion and independent decision making",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.621,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "manage data security and systems access issues",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.67,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.77,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "align priorities with organizational goals",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.855,
+      "confidence_tier": "High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 1.19
+    },
+    {
+      "skill": "implement strategy",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.501,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.86,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "manage team and office",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.638,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.74,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "onboard employees",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.624,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.84,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "Applies discretion",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.481,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.86,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "independent decision making",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.481,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.85,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "manages all data security",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.509,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.77,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "systems access issues",
+      "type": "Hard",
+      "bloom": "Remember",
+      "confidence_score": 0.625,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.79,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "takes direction from the manager on time allocation",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.509,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.77,
+      "context_agreement": 0.84
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "financial reporting",
+      "confidence_score": 0.828,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "information management",
+      "confidence_score": 0.827,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "content creation",
+      "confidence_score": 0.827,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "special projects",
+      "confidence_score": 0.827,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "strategy implementation",
+      "confidence_score": 0.828,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "team and office management",
+      "confidence_score": 0.829,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "employee onboarding",
+      "confidence_score": 0.829,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.23744741377573392,
+      "digital_literacy": 0.1515443746611396,
+      "ai_literacy_ethics": 0.21096405928855977,
+      "game_programming": 0.1572780595721549
+    },
+    "knowledge_coverage": {
+      "computational_thinking": 0.4976420003946057,
+      "digital_literacy": 0.6070971946642646,
+      "data_analysis": 0.4759462670935678,
+      "workforce_insights": 0.41381313005250325
+    },
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.0,
+      "digital_literacy": 0.6070971946642646,
+      "oop": 0.0,
+      "workforce_insights": 0.41381313005250325,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.21096405928855977,
+      "game_programming": 0.1572780595721549,
+      "computational_thinking": 0.4976420003946057,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.0,
+      "ai_development": 0.0,
+      "mobile_development": 0.0,
+      "web_development": 0.0,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.0,
+      "data_analysis": 0.4759462670935678,
+      "database_systems": 0.0
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 6,
+      "coverage_percentage": 0.12435477426661348,
+      "skill_coverage_pct": 0.039854416173557276,
+      "knowledge_coverage_pct": 0.10497361011604955,
+      "avg_skill_confidence": 0.5919972088350322,
+      "avg_knowledge_confidence": 0.827673022057329,
+      "hard_skill_count": 7,
+      "soft_skill_count": 4,
+      "knowledge_count": 7
+    },
+    "missing_components": [
+      "audio_editing",
+      "structured_programming",
+      "graphics_multimedia",
+      "oop",
+      "game_modeling",
+      "multimedia_programming",
+      "basic_job_skills_ohs",
+      "ai_development",
+      "mobile_development",
+      "web_development",
+      "network_technology",
+      "algorithms_programming",
+      "database_systems"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.607,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.414,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.211,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.157,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.498,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.476,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 6,
+    "gpt_skill_count": 6,
+    "fused_skill_count": 11,
+    "model_agreement": 0.15688962737719217,
+    "match_count": 1,
+    "extraction_time": 3.844285011291504
+  }
+}

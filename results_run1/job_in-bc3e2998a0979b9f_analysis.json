@@ -1,0 +1,301 @@
+{
+  "job_id": "in-bc3e2998a0979b9f",
+  "text": "Secondary responsibilities may include: Delivery of Security training Staff Mentoring Assisting with the preparation of pre -sales and post sales collateral, documentation, and meetings Requirements and Experience A minimum of five years of incident analysis, security architecture, Cyber tooling support, or similar experience is required.",
+  "skills": [
+    {
+      "skill": "deliver security training",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 1.28
+    },
+    {
+      "skill": "mentor staff",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.787,
+      "confidence_tier": "Medium High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.79,
+      "context_agreement": 1.27
+    },
+    {
+      "skill": "prepare pre-sales collateral",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.468,
+      "confidence_tier": "Low",
+      "source": "GPT",
+      "semantic_density": 0.86,
+      "context_agreement": 0.99
+    },
+    {
+      "skill": "prepare post-sales collateral",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.837,
+      "confidence_tier": "High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 1.27
+    },
+    {
+      "skill": "analyze incidents",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.726,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.84,
+      "context_agreement": 0.99
+    },
+    {
+      "skill": "support cyber tooling",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.527,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.79,
+      "context_agreement": 0.99
+    },
+    {
+      "skill": "Assisting with the preparation of pre -sales",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.504,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.76,
+      "context_agreement": 0.89
+    },
+    {
+      "skill": "documentation",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.559,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.89
+    },
+    {
+      "skill": "meetings",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.512,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.84,
+      "context_agreement": 0.89
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "security architecture",
+      "confidence_score": 0.828,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "cyber tooling",
+      "confidence_score": 0.822,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "incident analysis",
+      "confidence_score": 0.828,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "basic_job_skills_ohs": 0.45034319069462014,
+      "web_development": 0.371848351990188
+    },
+    "knowledge_coverage": {
+      "computational_thinking": 0.45730800087681656,
+      "digital_literacy": 0.4756340442180034,
+      "basic_job_skills_ohs": 0.5702702745231829,
+      "oop": 0.48299819196734256
+    },
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.0,
+      "digital_literacy": 0.4756340442180034,
+      "oop": 0.48299819196734256,
+      "workforce_insights": 0.0,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.0,
+      "computational_thinking": 0.45730800087681656,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.5702702745231829,
+      "ai_development": 0.0,
+      "mobile_development": 0.0,
+      "web_development": 0.371848351990188,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.0,
+      "data_analysis": 0.0,
+      "database_systems": 0.0
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 5,
+      "coverage_percentage": 0.12410836124081755,
+      "skill_coverage_pct": 0.04327323908867411,
+      "knowledge_coverage_pct": 0.10453739534659713,
+      "avg_skill_confidence": 0.6578911738514202,
+      "avg_knowledge_confidence": 0.8258958313365777,
+      "hard_skill_count": 8,
+      "soft_skill_count": 1,
+      "knowledge_count": 3
+    },
+    "missing_components": [
+      "audio_editing",
+      "structured_programming",
+      "graphics_multimedia",
+      "workforce_insights",
+      "game_modeling",
+      "ai_literacy_ethics",
+      "game_programming",
+      "multimedia_programming",
+      "ai_development",
+      "mobile_development",
+      "network_technology",
+      "algorithms_programming",
+      "data_analysis",
+      "database_systems"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.476,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.483,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.457,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.57,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.372,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 6,
+    "gpt_skill_count": 6,
+    "fused_skill_count": 9,
+    "model_agreement": 0.4718017280101776,
+    "match_count": 3,
+    "extraction_time": 2.965245008468628
+  }
+}

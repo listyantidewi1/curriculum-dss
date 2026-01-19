@@ -1,0 +1,319 @@
+{
+  "job_id": "in-8690da14e01b3292",
+  "text": "Customer Service Provides excellent service and strives to exceed the expectations and needs of internal and external customers by following Encore\u2019s Service Standards. Maintains a positive relationship with all clients through effective communication. Meets with guests on site to ensure that their needs are met, and the equipment setup is working properly. Monitors events and checks in on customers throughout the day. Fosters and maintains the hotel/client relationship. Assists management in team member compliance with Encore\u2019s Service Standards.",
+  "skills": [
+    {
+      "skill": "provide excellent service",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.655,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 0.98
+    },
+    {
+      "skill": "exceed customer expectations",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.659,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.86,
+      "context_agreement": 0.98
+    },
+    {
+      "skill": "maintain positive relationships",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.691,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.89,
+      "context_agreement": 0.98
+    },
+    {
+      "skill": "communicate effectively",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.9,
+      "context_agreement": 1.23
+    },
+    {
+      "skill": "meet with guests",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.747,
+      "confidence_tier": "Medium High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.73,
+      "context_agreement": 1.24
+    },
+    {
+      "skill": "monitor events",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.804,
+      "confidence_tier": "High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 1.25
+    },
+    {
+      "skill": "check in on customers",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.787,
+      "confidence_tier": "Medium High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.74,
+      "context_agreement": 1.25
+    },
+    {
+      "skill": "foster client relationships",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.904,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.82,
+      "context_agreement": 0.98
+    },
+    {
+      "skill": "assist management",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.627,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.84,
+      "context_agreement": 0.98
+    },
+    {
+      "skill": "strives",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.502,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.81,
+      "context_agreement": 0.88
+    },
+    {
+      "skill": "Fosters",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.502,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.81,
+      "context_agreement": 0.88
+    },
+    {
+      "skill": "maintains the hotel / client relationship.",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.701,
+      "confidence_tier": "Medium High",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.79,
+      "context_agreement": 0.88
+    },
+    {
+      "skill": "Assists management in team member compliance",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.703,
+      "confidence_tier": "Medium High",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.8,
+      "context_agreement": 0.88
+    }
+  ],
+  "knowledge": [],
+  "coverage_analysis": {
+    "skill_coverage": {},
+    "knowledge_coverage": {},
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.0,
+      "digital_literacy": 0.0,
+      "oop": 0.0,
+      "workforce_insights": 0.0,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.0,
+      "computational_thinking": 0.0,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.0,
+      "ai_development": 0.0,
+      "mobile_development": 0.0,
+      "web_development": 0.0,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.0,
+      "data_analysis": 0.0,
+      "database_systems": 0.0
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 0,
+      "coverage_percentage": 0.0,
+      "skill_coverage_pct": 0.0,
+      "knowledge_coverage_pct": 0.0,
+      "avg_skill_confidence": 0.7138353892142052,
+      "avg_knowledge_confidence": 0.0,
+      "hard_skill_count": 2,
+      "soft_skill_count": 11,
+      "knowledge_count": 0
+    },
+    "missing_components": [
+      "audio_editing",
+      "structured_programming",
+      "graphics_multimedia",
+      "digital_literacy",
+      "oop",
+      "workforce_insights",
+      "game_modeling",
+      "ai_literacy_ethics",
+      "game_programming",
+      "computational_thinking",
+      "multimedia_programming",
+      "basic_job_skills_ohs",
+      "ai_development",
+      "mobile_development",
+      "web_development",
+      "network_technology",
+      "algorithms_programming",
+      "data_analysis",
+      "database_systems"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 9,
+    "gpt_skill_count": 9,
+    "fused_skill_count": 13,
+    "model_agreement": 0.3966607186529371,
+    "match_count": 4,
+    "extraction_time": 4.280874967575073
+  }
+}

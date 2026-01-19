@@ -1,0 +1,263 @@
+{
+  "job_id": "in-b6c5ee1b770b527f",
+  "text": "The project, funded by the Gates Foundation, engages nonprofit staff and educators in uncovering biases and designing and implementing practical AI tools, all within a knowledge hub that provides access to guidance and open -source code for building technology.",
+  "skills": [
+    {
+      "skill": "uncover biases",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.561,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 0.9
+    },
+    {
+      "skill": "design AI tools",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.67,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.73,
+      "context_agreement": 0.9
+    },
+    {
+      "skill": "implement AI tools",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.674,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.76,
+      "context_agreement": 0.9
+    },
+    {
+      "skill": "collaborate with nonprofit staff",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.574,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.82,
+      "context_agreement": 0.9
+    },
+    {
+      "skill": "collaborate with educators",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.577,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.84,
+      "context_agreement": 0.9
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "AI tools",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "knowledge hub",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "open-source code",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "digital_literacy": 0.26286932156248366,
+      "algorithms_programming": 0.40015567130510377,
+      "ai_literacy_ethics": 0.4472244918577054,
+      "ai_development": 0.5626054118509788,
+      "game_modeling": 0.22114481322052434
+    },
+    "knowledge_coverage": {
+      "algorithms_programming": 0.41589871644973764,
+      "ai_literacy_ethics": 0.46867221593856817,
+      "ai_development": 0.503975772857666
+    },
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.0,
+      "digital_literacy": 0.26286932156248366,
+      "oop": 0.0,
+      "workforce_insights": 0.0,
+      "game_modeling": 0.22114481322052434,
+      "ai_literacy_ethics": 0.46867221593856817,
+      "game_programming": 0.0,
+      "computational_thinking": 0.0,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.0,
+      "ai_development": 0.5626054118509788,
+      "mobile_development": 0.0,
+      "web_development": 0.0,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.41589871644973764,
+      "data_analysis": 0.0,
+      "database_systems": 0.0
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 5,
+      "coverage_percentage": 0.10164160415906803,
+      "skill_coverage_pct": 0.09968419525246294,
+      "knowledge_coverage_pct": 0.07308140553926168,
+      "avg_skill_confidence": 0.6110642027520001,
+      "avg_knowledge_confidence": 0.75,
+      "hard_skill_count": 3,
+      "soft_skill_count": 2,
+      "knowledge_count": 3
+    },
+    "missing_components": [
+      "audio_editing",
+      "structured_programming",
+      "graphics_multimedia",
+      "oop",
+      "workforce_insights",
+      "game_programming",
+      "computational_thinking",
+      "multimedia_programming",
+      "basic_job_skills_ohs",
+      "mobile_development",
+      "web_development",
+      "network_technology",
+      "data_analysis",
+      "database_systems"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.263,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.221,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.469,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.563,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.416,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 0,
+    "gpt_skill_count": 5,
+    "fused_skill_count": 5,
+    "model_agreement": 0.0,
+    "match_count": 0,
+    "extraction_time": 2.2828431129455566
+  }
+}

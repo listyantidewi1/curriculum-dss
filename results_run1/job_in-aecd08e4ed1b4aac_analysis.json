@@ -1,0 +1,309 @@
+{
+  "job_id": "in-aecd08e4ed1b4aac",
+  "text": "French is a plus. You might be a good fit if you ---------------------------------- Reflexively ask yourself, \"is this code the best way to make my users happy?\" Push through hard problems without giving up. Enjoy helping other engineers on your team to improve their frontend skills. Are not afraid to take on complicated systems. Are excited to learn to do some amount of backend work or even branch out to doing Android work - we love folks who are keen to broaden their skill sets! Work to make things easier for the next engineer who will touch your code. Always try to improve as a programmer and colleague. About engineering at Wave ----------------------------- You'll join an autonomous, cross -functional team focused on a single area of Wave's product.",
+  "skills": [
+    {
+      "skill": "ask yourself if code is the best way to make users happy",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.576,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.71,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "push through hard problems without giving up",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.71,
+      "confidence_tier": "Medium High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.77,
+      "context_agreement": 1.18
+    },
+    {
+      "skill": "help other engineers improve their frontend skills",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.585,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.79,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "take on complicated systems",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.584,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.78,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "learn to do backend work",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.661,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.72,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "branch out to doing Android work",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.663,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.74,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "make things easier for the next engineer who will touch your code",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.579,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.74,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "improve as a programmer and colleague",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.582,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.76,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "giving up.",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.465,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.74,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "helping other engineers on your team",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.657,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.76,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "learn",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.467,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.75,
+      "context_agreement": 0.83
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "Android",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "oop": 0.22892693113107737,
+      "web_development": 0.4524561272239087,
+      "mobile_development": 0.2935778694410549
+    },
+    "knowledge_coverage": {
+      "mobile_development": 0.6335884160220624
+    },
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.0,
+      "digital_literacy": 0.0,
+      "oop": 0.22892693113107737,
+      "workforce_insights": 0.0,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.0,
+      "computational_thinking": 0.0,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.0,
+      "ai_development": 0.0,
+      "mobile_development": 0.6335884160220624,
+      "web_development": 0.4524561272239087,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.0,
+      "data_analysis": 0.0,
+      "database_systems": 0.0
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 3,
+      "coverage_percentage": 0.06920902496721308,
+      "skill_coverage_pct": 0.05131373304189689,
+      "knowledge_coverage_pct": 0.03334675873800328,
+      "avg_skill_confidence": 0.5934884839646654,
+      "avg_knowledge_confidence": 0.8305000000000001,
+      "hard_skill_count": 4,
+      "soft_skill_count": 7,
+      "knowledge_count": 1
+    },
+    "missing_components": [
+      "audio_editing",
+      "structured_programming",
+      "graphics_multimedia",
+      "digital_literacy",
+      "workforce_insights",
+      "game_modeling",
+      "ai_literacy_ethics",
+      "game_programming",
+      "computational_thinking",
+      "multimedia_programming",
+      "basic_job_skills_ohs",
+      "ai_development",
+      "network_technology",
+      "algorithms_programming",
+      "data_analysis",
+      "database_systems"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.229,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.634,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.452,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 4,
+    "gpt_skill_count": 8,
+    "fused_skill_count": 11,
+    "model_agreement": 0.11669186502695084,
+    "match_count": 1,
+    "extraction_time": 3.3249459266662598
+  }
+}

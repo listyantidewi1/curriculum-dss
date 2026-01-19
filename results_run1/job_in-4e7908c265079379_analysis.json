@@ -1,0 +1,308 @@
+{
+  "job_id": "in-4e7908c265079379",
+  "text": "When you see a problem or an opportunity to improve, you drive the solution. Troubleshooting: participate in incidents resolutions, give developers helping hand in debugging applications, networks, databases, compute systems. Want to learn more about the problems we're solving and the culture we're building at Partly?",
+  "skills": [
+    {
+      "skill": "drive solutions for problems or opportunities",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.613,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "troubleshoot incidents",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.563,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.9,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "help developers debug applications",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.821,
+      "confidence_tier": "High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.87,
+      "context_agreement": 1.18
+    },
+    {
+      "skill": "debug networks",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.551,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "debug databases",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.553,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "debug compute systems",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.551,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.79,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "drive the solution.",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.469,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.77,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "Troubleshooting:",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.519,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "participate in incidents resolutions",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.477,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.85,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "give developers helping hand",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.507,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.79,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "networks",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.476,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.84,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "databases",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.479,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.87,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "compute systems.",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.624,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.83,
+      "context_agreement": 0.83
+    }
+  ],
+  "knowledge": [],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.559502833815757,
+      "algorithms_programming": 0.7079370666352197,
+      "data_analysis": 0.24320084622327579,
+      "ai_development": 0.16024377350645452,
+      "basic_job_skills_ohs": 0.2146612461867737,
+      "network_technology": 0.25682819593865236,
+      "structured_programming": 0.7281410613112294,
+      "database_systems": 0.1680296560537441,
+      "mobile_development": 0.15458042558993593,
+      "game_programming": 0.6229051053387845
+    },
+    "knowledge_coverage": {},
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.7281410613112294,
+      "graphics_multimedia": 0.0,
+      "digital_literacy": 0.0,
+      "oop": 0.0,
+      "workforce_insights": 0.0,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.6229051053387845,
+      "computational_thinking": 0.559502833815757,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.2146612461867737,
+      "ai_development": 0.16024377350645452,
+      "mobile_development": 0.15458042558993593,
+      "web_development": 0.0,
+      "network_technology": 0.25682819593865236,
+      "algorithms_programming": 0.7079370666352197,
+      "data_analysis": 0.24320084622327579,
+      "database_systems": 0.1680296560537441
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 10,
+      "coverage_percentage": 0.20084369529472773,
+      "skill_coverage_pct": 0.20084369529472773,
+      "knowledge_coverage_pct": 0.0,
+      "avg_skill_confidence": 0.5540610800836272,
+      "avg_knowledge_confidence": 0.0,
+      "hard_skill_count": 12,
+      "soft_skill_count": 1,
+      "knowledge_count": 0
+    },
+    "missing_components": [
+      "audio_editing",
+      "graphics_multimedia",
+      "digital_literacy",
+      "oop",
+      "workforce_insights",
+      "game_modeling",
+      "ai_literacy_ethics",
+      "multimedia_programming",
+      "web_development"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.623,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.56,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.215,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.16,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.155,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.257,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.243,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.168,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 8,
+    "gpt_skill_count": 6,
+    "fused_skill_count": 13,
+    "model_agreement": 0.1169082522392273,
+    "match_count": 1,
+    "extraction_time": 2.8739542961120605
+  }
+}

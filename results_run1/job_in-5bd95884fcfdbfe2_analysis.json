@@ -1,0 +1,321 @@
+{
+  "job_id": "in-5bd95884fcfdbfe2",
+  "text": "Experience implementing, managing, and supporting cloud (Azure) and hybrid database platforms Solid understanding of networking, distributed systems, and database concepts 8 -10 years exp",
+  "skills": [
+    {
+      "skill": "implement cloud platforms",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.656,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 0.9
+    },
+    {
+      "skill": "manage cloud platforms",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.623,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 0.9
+    },
+    {
+      "skill": "support cloud platforms",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.479,
+      "confidence_tier": "Low",
+      "source": "GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 0.9
+    },
+    {
+      "skill": "understand networking",
+      "type": "Hard",
+      "bloom": "Understand",
+      "confidence_score": 0.549,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.9,
+      "context_agreement": 0.9
+    },
+    {
+      "skill": "understand distributed systems",
+      "type": "Hard",
+      "bloom": "Understand",
+      "confidence_score": 0.547,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.88,
+      "context_agreement": 0.9
+    },
+    {
+      "skill": "understand database concepts",
+      "type": "Hard",
+      "bloom": "Understand",
+      "confidence_score": 0.56,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 1.0,
+      "context_agreement": 0.9
+    },
+    {
+      "skill": "implementing",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.506,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.81
+    },
+    {
+      "skill": "managing",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.464,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.84,
+      "context_agreement": 0.81
+    },
+    {
+      "skill": "supporting cloud (Azure)",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.497,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.82,
+      "context_agreement": 0.81
+    },
+    {
+      "skill": "hybrid database platforms",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.479,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 1.0,
+      "context_agreement": 0.81
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "Azure",
+      "confidence_score": 0.821,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "networking",
+      "confidence_score": 0.822,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "distributed systems",
+      "confidence_score": 0.828,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "database concepts",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.2159565144807825,
+      "digital_literacy": 0.26541945312024645,
+      "algorithms_programming": 0.2328588216597023,
+      "data_analysis": 0.48870679621324825,
+      "workforce_insights": 0.31524277557189107,
+      "basic_job_skills_ohs": 0.11423998632054767,
+      "network_technology": 0.3737054536998019,
+      "structured_programming": 0.14806479138983272,
+      "database_systems": 0.2798523089344144,
+      "multimedia_programming": 0.14834723290544077
+    },
+    "knowledge_coverage": {
+      "computational_thinking": 0.3991035461425782,
+      "digital_literacy": 0.4702803769652501,
+      "data_analysis": 0.5999999284744264,
+      "network_technology": 0.6086537363469011,
+      "database_systems": 0.45637167692184455
+    },
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.14806479138983272,
+      "graphics_multimedia": 0.0,
+      "digital_literacy": 0.4702803769652501,
+      "oop": 0.0,
+      "workforce_insights": 0.31524277557189107,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.0,
+      "computational_thinking": 0.3991035461425782,
+      "multimedia_programming": 0.14834723290544077,
+      "basic_job_skills_ohs": 0.11423998632054767,
+      "ai_development": 0.0,
+      "mobile_development": 0.0,
+      "web_development": 0.0,
+      "network_technology": 0.6086537363469011,
+      "algorithms_programming": 0.2328588216597023,
+      "data_analysis": 0.5999999284744264,
+      "database_systems": 0.45637167692184455
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 10,
+      "coverage_percentage": 0.18385067751044287,
+      "skill_coverage_pct": 0.13591548075241622,
+      "knowledge_coverage_pct": 0.1333899613079474,
+      "avg_skill_confidence": 0.536040160704,
+      "avg_knowledge_confidence": 0.8052079573646187,
+      "hard_skill_count": 10,
+      "soft_skill_count": 0,
+      "knowledge_count": 4
+    },
+    "missing_components": [
+      "audio_editing",
+      "graphics_multimedia",
+      "oop",
+      "game_modeling",
+      "ai_literacy_ethics",
+      "game_programming",
+      "ai_development",
+      "mobile_development",
+      "web_development"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.148,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.47,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.315,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.399,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.148,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.114,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.609,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.233,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.6,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.456,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 4,
+    "gpt_skill_count": 6,
+    "fused_skill_count": 10,
+    "model_agreement": 0.0,
+    "match_count": 0,
+    "extraction_time": 3.2482750415802
+  }
+}

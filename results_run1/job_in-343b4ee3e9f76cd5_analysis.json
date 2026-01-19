@@ -1,0 +1,381 @@
+{
+  "job_id": "in-343b4ee3e9f76cd5",
+  "text": "Process Analysis & Optimization Map and analyze current -state processes; identify inefficiencies and improvement opportunities. Define future -state workflows that support target business outcomes and product goals. Identify opportunities for process improvements and automation, including both using and developing AI -driven tools. Coordinate with SMEs and engineering to validate feasibility and constraints.",
+  "skills": [
+    {
+      "skill": "map and analyze current-state processes",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 1.21
+    },
+    {
+      "skill": "identify inefficiencies and improvement opportunities",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.9,
+      "context_agreement": 1.21
+    },
+    {
+      "skill": "define future-state workflows",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.851,
+      "confidence_tier": "High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.84,
+      "context_agreement": 1.24
+    },
+    {
+      "skill": "identify opportunities for process improvements and automation",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.842,
+      "confidence_tier": "High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.85,
+      "context_agreement": 1.11
+    },
+    {
+      "skill": "coordinate with SMEs and engineering",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.634,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.79,
+      "context_agreement": 0.96
+    },
+    {
+      "skill": "validate feasibility and constraints",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.87,
+      "context_agreement": 1.22
+    },
+    {
+      "skill": "Map",
+      "type": "Hard",
+      "bloom": "Understand",
+      "confidence_score": 0.628,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.69,
+      "context_agreement": 0.86
+    },
+    {
+      "skill": "improvement opportunities.",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.537,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.86
+    },
+    {
+      "skill": "support target business outcomes",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.645,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.82,
+      "context_agreement": 0.86
+    },
+    {
+      "skill": "product goals.",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.488,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.8,
+      "context_agreement": 0.86
+    },
+    {
+      "skill": "automation",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.499,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.86
+    },
+    {
+      "skill": "using",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.484,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.75,
+      "context_agreement": 0.86
+    },
+    {
+      "skill": "developing AI -driven tools.",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.525,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.79,
+      "context_agreement": 0.86
+    },
+    {
+      "skill": "Coordinate with SMEs",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.487,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.78,
+      "context_agreement": 0.86
+    },
+    {
+      "skill": "engineering",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.537,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.86
+    },
+    {
+      "skill": "constraints.",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.499,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.86
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "process analysis",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "workflow optimization",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "automation",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "AI-driven tools",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.20056868604908595,
+      "digital_literacy": 0.14724047502798787,
+      "algorithms_programming": 0.22645198090577867,
+      "data_analysis": 0.15825149206830325,
+      "ai_literacy_ethics": 0.18390444568633796,
+      "ai_development": 0.28968749780093217,
+      "workforce_insights": 0.15541825663911488
+    },
+    "knowledge_coverage": {
+      "computational_thinking": 0.4616909265518189,
+      "algorithms_programming": 0.38814303874969486,
+      "ai_literacy_ethics": 0.4045139193534852,
+      "ai_development": 0.4867868185043336,
+      "workforce_insights": 0.3414939165115357,
+      "basic_job_skills_ohs": 0.6000000000000001,
+      "structured_programming": 0.3442855596542359
+    },
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.3442855596542359,
+      "graphics_multimedia": 0.0,
+      "digital_literacy": 0.14724047502798787,
+      "oop": 0.0,
+      "workforce_insights": 0.3414939165115357,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.4045139193534852,
+      "game_programming": 0.0,
+      "computational_thinking": 0.4616909265518189,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.6000000000000001,
+      "ai_development": 0.4867868185043336,
+      "mobile_development": 0.0,
+      "web_development": 0.0,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.38814303874969486,
+      "data_analysis": 0.15825149206830325,
+      "database_systems": 0.0
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 9,
+      "coverage_percentage": 0.17538979718007344,
+      "skill_coverage_pct": 0.07165909653566004,
+      "knowledge_coverage_pct": 0.15931127259605812,
+      "avg_skill_confidence": 0.6660044878453529,
+      "avg_knowledge_confidence": 0.75,
+      "hard_skill_count": 15,
+      "soft_skill_count": 1,
+      "knowledge_count": 4
+    },
+    "missing_components": [
+      "audio_editing",
+      "graphics_multimedia",
+      "oop",
+      "game_modeling",
+      "game_programming",
+      "multimedia_programming",
+      "mobile_development",
+      "web_development",
+      "network_technology",
+      "database_systems"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.344,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.147,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.341,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.405,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.462,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.6,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.487,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.388,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.158,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 15,
+    "gpt_skill_count": 6,
+    "fused_skill_count": 16,
+    "model_agreement": 0.28156930800407165,
+    "match_count": 5,
+    "extraction_time": 6.787520170211792
+  }
+}

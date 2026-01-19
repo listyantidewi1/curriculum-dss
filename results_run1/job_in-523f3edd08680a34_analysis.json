@@ -1,0 +1,403 @@
+{
+  "job_id": "in-523f3edd08680a34",
+  "text": "Abilities Exposure to computer screens for an extended period of time. Sitting for extended periods of time. Reach by extending hands or arms in any direction. Have finger dexterity in order to manipulate objects with fingers rather than whole hands or arms, for example, using a keyboard. Listen to and understand information and ideas presented through spoken words and sentences. Communicate information and ideas in speaking so others will understand. Read and understand information and ideas presented in writing. Apply general rules to specific problems to produce answers that make sense. Identify and understand the speech of another person.",
+  "skills": [
+    {
+      "skill": "use a keyboard",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.662,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.72,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "listen to and understand information",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.617,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.79,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "communicate information in speaking",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.544,
+      "confidence_tier": "Medium Low",
+      "source": "BERT+GPT",
+      "semantic_density": 0.87,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "read and understand information",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.722,
+      "confidence_tier": "Medium High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.86,
+      "context_agreement": 1.17
+    },
+    {
+      "skill": "apply general rules to specific problems",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.78,
+      "context_agreement": 1.21
+    },
+    {
+      "skill": "identify and understand speech",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.618,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "Sitting for extended periods of time.",
+      "type": "Hard",
+      "bloom": "Understand",
+      "confidence_score": 0.508,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.76,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "Reach",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.47,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.75,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "extending hands or arms in any direction.",
+      "type": "Hard",
+      "bloom": "Understand",
+      "confidence_score": 0.507,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.75,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "finger",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.473,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.78,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "dexterity",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.482,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.87,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "manipulate objects",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.632,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.86,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "Listen to",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.636,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.72,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "ideas presented",
+      "type": "Hard",
+      "bloom": "Understand",
+      "confidence_score": 0.513,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.81,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "ideas",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.47,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.75,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "Read",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.467,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.72,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "ideas presented",
+      "type": "Hard",
+      "bloom": "Understand",
+      "confidence_score": 0.513,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.81,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "produce answers",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.626,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.81,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "Identify",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.63,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.84,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "understand the speech of another person.",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.473,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.78,
+      "context_agreement": 0.84
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "computer screens",
+      "confidence_score": 0.83,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "keyboard",
+      "confidence_score": 0.82,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "structured_programming": 0.5075339515331432,
+      "oop": 0.31758402455289286,
+      "graphics_multimedia": 0.16781344238716386
+    },
+    "knowledge_coverage": {},
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.5075339515331432,
+      "graphics_multimedia": 0.16781344238716386,
+      "digital_literacy": 0.0,
+      "oop": 0.31758402455289286,
+      "workforce_insights": 0.0,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.0,
+      "computational_thinking": 0.0,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.0,
+      "ai_development": 0.0,
+      "mobile_development": 0.0,
+      "web_development": 0.0,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.0,
+      "data_analysis": 0.0,
+      "database_systems": 0.0
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 3,
+      "coverage_percentage": 0.05225954834069473,
+      "skill_coverage_pct": 0.05225954834069473,
+      "knowledge_coverage_pct": 0.0,
+      "avg_skill_confidence": 0.5782096611064188,
+      "avg_knowledge_confidence": 0.82531661619246,
+      "hard_skill_count": 15,
+      "soft_skill_count": 5,
+      "knowledge_count": 2
+    },
+    "missing_components": [
+      "audio_editing",
+      "digital_literacy",
+      "workforce_insights",
+      "game_modeling",
+      "ai_literacy_ethics",
+      "game_programming",
+      "computational_thinking",
+      "multimedia_programming",
+      "basic_job_skills_ohs",
+      "ai_development",
+      "mobile_development",
+      "web_development",
+      "network_technology",
+      "algorithms_programming",
+      "data_analysis",
+      "database_systems"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.508,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.168,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.318,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 18,
+    "gpt_skill_count": 6,
+    "fused_skill_count": 20,
+    "model_agreement": 0.15083393785688612,
+    "match_count": 3,
+    "extraction_time": 10.646672487258911
+  }
+}

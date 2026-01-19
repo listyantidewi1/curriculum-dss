@@ -1,0 +1,306 @@
+{
+  "job_id": "in-80cb7561e63fb8f2",
+  "text": "You\u2019ll collaborate with our data engineers, analysts / dashboard developers, and fellow data scientists to turn ideas into insights \u2014 designing, building, and deploying data science solutions that make a measurable impact across passports, citizenship, and identity services within the Taituar\u0101 / Regulatory and Identity Services branch at the Department of Internal Affairs (DIA).",
+  "skills": [
+    {
+      "skill": "collaborate with data engineers, analysts, and data scientists",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.622,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.73,
+      "context_agreement": 0.95
+    },
+    {
+      "skill": "design data science solutions",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.687,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 0.95
+    },
+    {
+      "skill": "build data science solutions",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.686,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.79,
+      "context_agreement": 0.95
+    },
+    {
+      "skill": "deploy data science solutions",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 1.23
+    },
+    {
+      "skill": "turn ideas into insights",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.481,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.76,
+      "context_agreement": 0.85
+    },
+    {
+      "skill": "designing",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.53,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.87,
+      "context_agreement": 0.85
+    },
+    {
+      "skill": "building",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.527,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.84,
+      "context_agreement": 0.85
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "data science",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "passports",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "citizenship",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "identity services",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Taituar\u0101",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Regulatory and Identity Services",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Department of Internal Affairs",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.14558016143374397,
+      "algorithms_programming": 0.26783341775956787,
+      "data_analysis": 0.232443378750312,
+      "ai_literacy_ethics": 0.22814136879668762,
+      "ai_development": 0.16277861743330724,
+      "basic_job_skills_ohs": 0.14238065346372789,
+      "oop": 0.17503142096230823,
+      "database_systems": 0.21463896295688611,
+      "game_modeling": 0.19706992527718137,
+      "game_programming": 0.20572321012102565,
+      "graphics_multimedia": 0.2212133908734488,
+      "audio_editing": 0.16325426621029604
+    },
+    "knowledge_coverage": {
+      "digital_literacy": 0.41232408285141,
+      "data_analysis": 0.38937220573425296,
+      "ai_literacy_ethics": 0.33923871517181403
+    },
+    "combined_coverage": {
+      "audio_editing": 0.16325426621029604,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.2212133908734488,
+      "digital_literacy": 0.41232408285141,
+      "oop": 0.17503142096230823,
+      "workforce_insights": 0.0,
+      "game_modeling": 0.19706992527718137,
+      "ai_literacy_ethics": 0.33923871517181403,
+      "game_programming": 0.20572321012102565,
+      "computational_thinking": 0.14558016143374397,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.14238065346372789,
+      "ai_development": 0.16277861743330724,
+      "mobile_development": 0.0,
+      "web_development": 0.0,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.26783341775956787,
+      "data_analysis": 0.38937220573425296,
+      "database_systems": 0.21463896295688611
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 13,
+      "coverage_percentage": 0.1598125805394195,
+      "skill_coverage_pct": 0.1240046723178154,
+      "knowledge_coverage_pct": 0.06004921072407774,
+      "avg_skill_confidence": 0.6474825477005196,
+      "avg_knowledge_confidence": 0.75,
+      "hard_skill_count": 6,
+      "soft_skill_count": 1,
+      "knowledge_count": 7
+    },
+    "missing_components": [
+      "structured_programming",
+      "workforce_insights",
+      "multimedia_programming",
+      "mobile_development",
+      "web_development",
+      "network_technology"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.163,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.221,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.412,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.175,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.197,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.339,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.206,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.146,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.142,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.163,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.268,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.389,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.215,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 4,
+    "gpt_skill_count": 4,
+    "fused_skill_count": 7,
+    "model_agreement": 0.24823370575904846,
+    "match_count": 1,
+    "extraction_time": 3.1539995670318604
+  }
+}

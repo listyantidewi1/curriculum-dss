@@ -1,0 +1,331 @@
+{
+  "job_id": "in-904641051f776cfb",
+  "text": "Responsibilities include enhancing and maintaining system functionality, analyzing IDA and DOD requirements, and designing, testing, and documenting new security automation systems.",
+  "skills": [
+    {
+      "skill": "enhance system functionality",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.437,
+      "confidence_tier": "Low",
+      "source": "GPT",
+      "semantic_density": 0.86,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "maintain system functionality",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.941,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.89,
+      "context_agreement": 1.2
+    },
+    {
+      "skill": "analyze IDA and DOD requirements",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.667,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.77,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "design security automation systems",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.676,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "test security automation systems",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.674,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.82,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "document security automation systems",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.679,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.85,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "enhancing",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.481,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.87,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "analyzing IDA",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.472,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.78,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "DOD requirements",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.477,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.83,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "designing",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.518,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.87,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "testing",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.512,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.81,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "documenting new security automation systems.",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.515,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.84,
+      "context_agreement": 0.84
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "IDA",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "DOD",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "security automation systems",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.14227055158131738,
+      "digital_literacy": 0.24341454483881536,
+      "algorithms_programming": 0.2617445103871881,
+      "ai_development": 0.15907798685941119,
+      "basic_job_skills_ohs": 0.13914378101587754,
+      "oop": 0.1710522681052431,
+      "database_systems": 0.164750038074713,
+      "game_modeling": 0.192589750506863,
+      "game_programming": 0.2513909358389997,
+      "graphics_multimedia": 0.2161843401380114,
+      "audio_editing": 0.15954285441778904
+    },
+    "knowledge_coverage": {
+      "digital_literacy": 0.33064320087432864
+    },
+    "combined_coverage": {
+      "audio_editing": 0.15954285441778904,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.2161843401380114,
+      "digital_literacy": 0.33064320087432864,
+      "oop": 0.1710522681052431,
+      "workforce_insights": 0.0,
+      "game_modeling": 0.192589750506863,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.2513909358389997,
+      "computational_thinking": 0.14227055158131738,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.13914378101587754,
+      "ai_development": 0.15907798685941119,
+      "mobile_development": 0.0,
+      "web_development": 0.0,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.2617445103871881,
+      "data_analysis": 0.0,
+      "database_systems": 0.164750038074713
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 11,
+      "coverage_percentage": 0.11517843251577589,
+      "skill_coverage_pct": 0.11058745061916993,
+      "knowledge_coverage_pct": 0.017402273730227822,
+      "avg_skill_confidence": 0.5874400084453085,
+      "avg_knowledge_confidence": 0.75,
+      "hard_skill_count": 12,
+      "soft_skill_count": 0,
+      "knowledge_count": 3
+    },
+    "missing_components": [
+      "structured_programming",
+      "workforce_insights",
+      "ai_literacy_ethics",
+      "multimedia_programming",
+      "mobile_development",
+      "web_development",
+      "network_technology",
+      "data_analysis"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.16,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.216,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.331,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.171,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.193,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.251,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.142,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.139,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.159,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.262,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.165,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 7,
+    "gpt_skill_count": 6,
+    "fused_skill_count": 12,
+    "model_agreement": 0.1402876717703683,
+    "match_count": 1,
+    "extraction_time": 3.2066874504089355
+  }
+}

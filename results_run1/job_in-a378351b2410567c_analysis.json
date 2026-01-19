@@ -1,0 +1,350 @@
+{
+  "job_id": "in-a378351b2410567c",
+  "text": "Provide expert Cassandra database support to our nodes running in the cloud (AWS/Azure/GCP), using technologies such as Linux (Debian, Ubuntu), Docker, and languages including Java, Python and bash.",
+  "skills": [
+    {
+      "skill": "provide expert Cassandra database support",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.996,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.94,
+      "context_agreement": 1.21
+    },
+    {
+      "skill": "manage nodes running in the cloud",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.635,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.74,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "use Linux (Debian, Ubuntu)",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.668,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.77,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "use Docker",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.663,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.74,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "program in Java",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.425,
+      "confidence_tier": "Low",
+      "source": "GPT",
+      "semantic_density": 0.73,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "program in Python",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.427,
+      "confidence_tier": "Low",
+      "source": "GPT",
+      "semantic_density": 0.75,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "use bash",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.659,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.71,
+      "context_agreement": 0.93
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "Cassandra",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "AWS",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Azure",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "GCP",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Linux",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Debian",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Ubuntu",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Docker",
+      "confidence_score": 0.827,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Java",
+      "confidence_score": 0.826,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Python",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "bash",
+      "confidence_score": 0.82,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "/",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "/",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "GCP),",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "Ubuntu),",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.43165123871983224,
+      "algorithms_programming": 0.14493950283967272,
+      "oop": 0.2652048400857126,
+      "mobile_development": 0.13166295481701362
+    },
+    "knowledge_coverage": {
+      "computational_thinking": 0.5880550269811922,
+      "algorithms_programming": 0.4372332528926427,
+      "data_analysis": 0.414233087450266,
+      "oop": 0.7474500000000002,
+      "multimedia_programming": 0.43753658201808615,
+      "mobile_development": 0.5608466226312538
+    },
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.0,
+      "digital_literacy": 0.0,
+      "oop": 0.7474500000000002,
+      "workforce_insights": 0.0,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.0,
+      "computational_thinking": 0.5880550269811922,
+      "multimedia_programming": 0.43753658201808615,
+      "basic_job_skills_ohs": 0.0,
+      "ai_development": 0.0,
+      "mobile_development": 0.5608466226312538,
+      "web_development": 0.0,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.4372332528926427,
+      "data_analysis": 0.414233087450266,
+      "database_systems": 0.0
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 6,
+      "coverage_percentage": 0.1676502406301811,
+      "skill_coverage_pct": 0.051234659813801646,
+      "knowledge_coverage_pct": 0.1676502406301811,
+      "avg_skill_confidence": 0.6391780638680817,
+      "avg_knowledge_confidence": 0.7228848061939082,
+      "hard_skill_count": 7,
+      "soft_skill_count": 0,
+      "knowledge_count": 15
+    },
+    "missing_components": [
+      "audio_editing",
+      "structured_programming",
+      "graphics_multimedia",
+      "digital_literacy",
+      "workforce_insights",
+      "game_modeling",
+      "ai_literacy_ethics",
+      "game_programming",
+      "basic_job_skills_ohs",
+      "ai_development",
+      "web_development",
+      "network_technology",
+      "database_systems"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.588,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.438,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.561,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.437,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.414,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 1,
+    "gpt_skill_count": 7,
+    "fused_skill_count": 7,
+    "model_agreement": 0.14285714285714285,
+    "match_count": 1,
+    "extraction_time": 4.763182163238525
+  }
+}

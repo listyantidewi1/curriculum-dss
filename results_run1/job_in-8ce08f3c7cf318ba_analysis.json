@@ -1,0 +1,258 @@
+{
+  "job_id": "in-8ce08f3c7cf318ba",
+  "text": "You will work across the stack with React/Angular, Node.js, Python, REST APIs, and modern cloud services (including Firebase, where applicable), and contribute to discussions about system design and product features.",
+  "skills": [
+    {
+      "skill": "work across the stack",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.665,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.74,
+      "context_agreement": 0.97
+    },
+    {
+      "skill": "contribute to discussions about system design",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.881,
+      "confidence_tier": "High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 1.26
+    },
+    {
+      "skill": "contribute to discussions about product features",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.644,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 0.97
+    },
+    {
+      "skill": "product features.",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.498,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.84,
+      "context_agreement": 0.87
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "React",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Angular",
+      "confidence_score": 0.824,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Node.js",
+      "confidence_score": 0.829,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Python",
+      "confidence_score": 0.825,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "REST APIs",
+      "confidence_score": 0.828,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "modern cloud services",
+      "confidence_score": 0.83,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Firebase",
+      "confidence_score": 0.827,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "workforce_insights": 0.13735347375835755,
+      "web_development": 0.2892825532229347,
+      "game_programming": 0.12436832253787854
+    },
+    "knowledge_coverage": {
+      "digital_literacy": 0.4483732519805431,
+      "data_analysis": 0.41147688721073744,
+      "workforce_insights": 0.5296732198834418,
+      "oop": 0.7424766602754593,
+      "multimedia_programming": 0.4178886484644537,
+      "web_development": 0.7474500972032557,
+      "mobile_development": 0.7443508277595924
+    },
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.0,
+      "digital_literacy": 0.4483732519805431,
+      "oop": 0.7424766602754593,
+      "workforce_insights": 0.5296732198834418,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.12436832253787854,
+      "computational_thinking": 0.0,
+      "multimedia_programming": 0.4178886484644537,
+      "basic_job_skills_ohs": 0.0,
+      "ai_development": 0.0,
+      "mobile_development": 0.7443508277595924,
+      "web_development": 0.7474500972032557,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.0,
+      "data_analysis": 0.41147688721073744,
+      "database_systems": 0.0
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 8,
+      "coverage_percentage": 0.2192662060692296,
+      "skill_coverage_pct": 0.02900022892206162,
+      "knowledge_coverage_pct": 0.21272050488302546,
+      "avg_skill_confidence": 0.67194918392,
+      "avg_knowledge_confidence": 0.8276378334505216,
+      "hard_skill_count": 2,
+      "soft_skill_count": 2,
+      "knowledge_count": 7
+    },
+    "missing_components": [
+      "audio_editing",
+      "structured_programming",
+      "graphics_multimedia",
+      "game_modeling",
+      "ai_literacy_ethics",
+      "computational_thinking",
+      "basic_job_skills_ohs",
+      "ai_development",
+      "network_technology",
+      "algorithms_programming",
+      "database_systems"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.448,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.53,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.124,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.418,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.411,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 2,
+    "gpt_skill_count": 3,
+    "fused_skill_count": 4,
+    "model_agreement": 0.3333333333333333,
+    "match_count": 1,
+    "extraction_time": 2.5937230587005615
+  }
+}

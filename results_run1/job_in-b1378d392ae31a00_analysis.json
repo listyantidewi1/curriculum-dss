@@ -1,0 +1,331 @@
+{
+  "job_id": "in-b1378d392ae31a00",
+  "text": "Develops and publishes Information Security policies, procedures, standards and guidelines based on knowledge of best practices and compliance with Commonwealth IT Security policies, standards, and guidelines. Conducts campus -wide data classification assessment and security audits and manages remediation plans.",
+  "skills": [
+    {
+      "skill": "develop Information Security policies",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.71,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.86,
+      "context_agreement": 0.97
+    },
+    {
+      "skill": "publish Information Security policies",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.86,
+      "confidence_tier": "High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.86,
+      "context_agreement": 1.24
+    },
+    {
+      "skill": "conduct data classification assessment",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.587,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.86,
+      "context_agreement": 0.97
+    },
+    {
+      "skill": "conduct security audits",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 1.24
+    },
+    {
+      "skill": "manage remediation plans",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.853,
+      "confidence_tier": "High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 1.24
+    },
+    {
+      "skill": "Develops",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.538,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.84,
+      "context_agreement": 0.87
+    },
+    {
+      "skill": "procedures",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.506,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.87
+    },
+    {
+      "skill": "standards",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.503,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.87,
+      "context_agreement": 0.87
+    },
+    {
+      "skill": "guidelines",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.506,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.87
+    },
+    {
+      "skill": "Conducts campus -wide data classification assessment",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.537,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.83,
+      "context_agreement": 0.87
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "Information Security",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "best practices",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "compliance",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "IT Security policies",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "standards",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "guidelines",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "digital_literacy": 0.4310691131193926,
+      "algorithms_programming": 0.25254163363314586,
+      "ai_development": 0.16516078729739853,
+      "workforce_insights": 0.3096682684458507,
+      "basic_job_skills_ohs": 0.2957967426665003,
+      "database_systems": 0.22567965423348044
+    },
+    "knowledge_coverage": {
+      "digital_literacy": 0.6270952143073083,
+      "ai_literacy_ethics": 0.458291750586033,
+      "workforce_insights": 0.48251978158950815,
+      "basic_job_skills_ohs": 0.3339797258377076
+    },
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.0,
+      "digital_literacy": 0.6270952143073083,
+      "oop": 0.0,
+      "workforce_insights": 0.48251978158950815,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.458291750586033,
+      "game_programming": 0.0,
+      "computational_thinking": 0.0,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.3339797258377076,
+      "ai_development": 0.16516078729739853,
+      "mobile_development": 0.0,
+      "web_development": 0.0,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.25254163363314586,
+      "data_analysis": 0.0,
+      "database_systems": 0.22567965423348044
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 7,
+      "coverage_percentage": 0.1339615024991885,
+      "skill_coverage_pct": 0.0884166420734615,
+      "knowledge_coverage_pct": 0.10009928801687143,
+      "avg_skill_confidence": 0.6599584263319557,
+      "avg_knowledge_confidence": 0.7634166666666667,
+      "hard_skill_count": 10,
+      "soft_skill_count": 0,
+      "knowledge_count": 6
+    },
+    "missing_components": [
+      "audio_editing",
+      "structured_programming",
+      "graphics_multimedia",
+      "oop",
+      "game_modeling",
+      "game_programming",
+      "computational_thinking",
+      "multimedia_programming",
+      "mobile_development",
+      "web_development",
+      "network_technology",
+      "data_analysis"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.627,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.483,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.458,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.334,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.165,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.253,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.226,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 8,
+    "gpt_skill_count": 5,
+    "fused_skill_count": 10,
+    "model_agreement": 0.3481060788035393,
+    "match_count": 3,
+    "extraction_time": 3.0348217487335205
+  }
+}

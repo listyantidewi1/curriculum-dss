@@ -1,0 +1,294 @@
+{
+  "job_id": "in-84f10138a68b75f6",
+  "text": "The ideal candidate will combine deep expertise in Microsoft SQL Server administration with hands -on experience deploying, managing, and optimizing workloads in AWS GovCloud IaaS environments.",
+  "skills": [
+    {
+      "skill": "administer Microsoft SQL Server",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.653,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 0.9
+    },
+    {
+      "skill": "deploy workloads in AWS GovCloud IaaS environments",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.65,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.79,
+      "context_agreement": 0.9
+    },
+    {
+      "skill": "manage workloads in AWS GovCloud IaaS environments",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.622,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.79,
+      "context_agreement": 0.9
+    },
+    {
+      "skill": "optimize workloads in AWS GovCloud IaaS environments",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.651,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 0.9
+    },
+    {
+      "skill": "deploying",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.503,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.87,
+      "context_agreement": 0.81
+    },
+    {
+      "skill": "managing",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.464,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.84,
+      "context_agreement": 0.81
+    },
+    {
+      "skill": "optimizing workloads in",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.461,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.81,
+      "context_agreement": 0.81
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "Microsoft SQL Server",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "AWS GovCloud IaaS environments",
+      "confidence_score": 0.82,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Microsoft",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "SQL Server administration",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "AWS",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "algorithms_programming": 0.32228590167452564,
+      "data_analysis": 0.11205548446156166,
+      "workforce_insights": 0.1409497285096522,
+      "basic_job_skills_ohs": 0.17162000997988794,
+      "structured_programming": 0.11569042748180099,
+      "database_systems": 0.3481186733802039,
+      "web_development": 0.2690180811139382,
+      "mobile_development": 0.2635870184719292,
+      "game_programming": 0.15784537036863433
+    },
+    "knowledge_coverage": {
+      "digital_literacy": 0.2512700650691986,
+      "data_analysis": 0.40846356153488167,
+      "oop": 0.19701374616622921,
+      "database_systems": 0.5870799779891969
+    },
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.11569042748180099,
+      "graphics_multimedia": 0.0,
+      "digital_literacy": 0.2512700650691986,
+      "oop": 0.19701374616622921,
+      "workforce_insights": 0.1409497285096522,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.15784537036863433,
+      "computational_thinking": 0.0,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.17162000997988794,
+      "ai_development": 0.0,
+      "mobile_development": 0.2635870184719292,
+      "web_development": 0.2690180811139382,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.32228590167452564,
+      "data_analysis": 0.40846356153488167,
+      "database_systems": 0.5870799779891969
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 11,
+      "coverage_percentage": 0.1518328362294671,
+      "skill_coverage_pct": 0.10006161554958601,
+      "knowledge_coverage_pct": 0.07599091319786876,
+      "avg_skill_confidence": 0.5718566237142859,
+      "avg_knowledge_confidence": 0.6331665424644947,
+      "hard_skill_count": 7,
+      "soft_skill_count": 0,
+      "knowledge_count": 5
+    },
+    "missing_components": [
+      "audio_editing",
+      "graphics_multimedia",
+      "game_modeling",
+      "ai_literacy_ethics",
+      "computational_thinking",
+      "multimedia_programming",
+      "ai_development",
+      "network_technology"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.116,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.251,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.197,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.141,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.158,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.172,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.264,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.269,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.322,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.408,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.587,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 3,
+    "gpt_skill_count": 4,
+    "fused_skill_count": 7,
+    "model_agreement": 0.0,
+    "match_count": 0,
+    "extraction_time": 2.767970323562622
+  }
+}

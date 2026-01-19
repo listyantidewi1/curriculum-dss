@@ -1,0 +1,317 @@
+{
+  "job_id": "in-47b19fd945aadf48",
+  "text": "You\u2019re recognised as a proactive problem -solver and trusted technical expert, skilled at designing, deploying and optimising VMware virtual infrastructures and a strong understanding of Microsoft Active Directory (AD DS), Group Policy, OU structures, trusts, and domain/forest design.",
+  "skills": [
+    {
+      "skill": "design VMware virtual infrastructures",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.713,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.86,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "deploy VMware virtual infrastructures",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.589,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.86,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "optimise VMware virtual infrastructures",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.967,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.88,
+      "context_agreement": 1.21
+    },
+    {
+      "skill": "solve problems proactively",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.625,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.84,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "proactive",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.658,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.87,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "problem",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.478,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.81,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "-solver",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.515,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.81,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "designing",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.521,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.87,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "deploying",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.521,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.87,
+      "context_agreement": 0.84
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "VMware",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Microsoft Active Directory (AD DS)",
+      "confidence_score": 0.83,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Group Policy",
+      "confidence_score": 0.827,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "OU structures",
+      "confidence_score": 0.829,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "trusts",
+      "confidence_score": 0.827,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "domain/forest design",
+      "confidence_score": 0.828,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.14304044468951535,
+      "algorithms_programming": 0.3341316371857577,
+      "ai_development": 0.1599388329332318,
+      "basic_job_skills_ohs": 0.13989675369266868,
+      "structured_programming": 0.1556492805594051,
+      "oop": 0.17197791266690485,
+      "database_systems": 0.1656415782949432,
+      "web_development": 0.2789058536484937,
+      "mobile_development": 0.2732752593841648,
+      "game_modeling": 0.1936319445517779,
+      "graphics_multimedia": 0.21735421564438037,
+      "audio_editing": 0.1604062161093917
+    },
+    "knowledge_coverage": {},
+    "combined_coverage": {
+      "audio_editing": 0.1604062161093917,
+      "structured_programming": 0.1556492805594051,
+      "graphics_multimedia": 0.21735421564438037,
+      "digital_literacy": 0.0,
+      "oop": 0.17197791266690485,
+      "workforce_insights": 0.0,
+      "game_modeling": 0.1936319445517779,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.0,
+      "computational_thinking": 0.14304044468951535,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.13989675369266868,
+      "ai_development": 0.1599388329332318,
+      "mobile_development": 0.2732752593841648,
+      "web_development": 0.2789058536484937,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.3341316371857577,
+      "data_analysis": 0.0,
+      "database_systems": 0.1656415782949432
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 12,
+      "coverage_percentage": 0.12599210154529658,
+      "skill_coverage_pct": 0.12599210154529658,
+      "knowledge_coverage_pct": 0.0,
+      "avg_skill_confidence": 0.6206679725351345,
+      "avg_knowledge_confidence": 0.8287580621739229,
+      "hard_skill_count": 7,
+      "soft_skill_count": 2,
+      "knowledge_count": 6
+    },
+    "missing_components": [
+      "digital_literacy",
+      "workforce_insights",
+      "ai_literacy_ethics",
+      "game_programming",
+      "multimedia_programming",
+      "network_technology",
+      "data_analysis"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.16,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.156,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.217,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.172,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.194,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.143,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.14,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.16,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.273,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.279,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.334,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.166,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 6,
+    "gpt_skill_count": 4,
+    "fused_skill_count": 9,
+    "model_agreement": 0.16539845863978067,
+    "match_count": 1,
+    "extraction_time": 4.423306226730347
+  }
+}

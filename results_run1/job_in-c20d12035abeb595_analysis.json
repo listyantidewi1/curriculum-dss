@@ -1,0 +1,385 @@
+{
+  "job_id": "in-c20d12035abeb595",
+  "text": "To undertake office duties including diary management and message management, opening and distributing mail, operation of brought forward systems, dealing with telephone calls and enquiries, production of documents, typing and audio typing, photocopying, collating of documents and electronic filing as well as general administration support services.",
+  "skills": [
+    {
+      "skill": "manage diary",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.677,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.77,
+      "context_agreement": 0.98
+    },
+    {
+      "skill": "manage messages",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.683,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 0.98
+    },
+    {
+      "skill": "distribute mail",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 1.27
+    },
+    {
+      "skill": "operate brought forward systems",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.855,
+      "confidence_tier": "High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 1.24
+    },
+    {
+      "skill": "handle telephone calls",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.993,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.79,
+      "context_agreement": 1.26
+    },
+    {
+      "skill": "respond to enquiries",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.684,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.78,
+      "context_agreement": 0.98
+    },
+    {
+      "skill": "produce documents",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.853,
+      "confidence_tier": "High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 1.25
+    },
+    {
+      "skill": "type documents",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.692,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 0.98
+    },
+    {
+      "skill": "perform audio typing",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.77,
+      "context_agreement": 1.26
+    },
+    {
+      "skill": "photocopy documents",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.995,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.89,
+      "context_agreement": 1.24
+    },
+    {
+      "skill": "collate documents",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.699,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.84,
+      "context_agreement": 0.98
+    },
+    {
+      "skill": "file documents electronically",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.703,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.87,
+      "context_agreement": 0.98
+    },
+    {
+      "skill": "provide general administrative support",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.53,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.86,
+      "context_agreement": 0.98
+    },
+    {
+      "skill": "opening",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.504,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.81,
+      "context_agreement": 0.89
+    },
+    {
+      "skill": "enquiries",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.51,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.87,
+      "context_agreement": 0.89
+    },
+    {
+      "skill": "typing",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.501,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.78,
+      "context_agreement": 0.89
+    },
+    {
+      "skill": "collating of documents",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.542,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.8,
+      "context_agreement": 0.89
+    },
+    {
+      "skill": "administration support services.",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.675,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.89
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "electronic filing systems",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "electronic",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "digital_literacy": 0.5036631948549763,
+      "network_technology": 0.22117209057516088,
+      "audio_editing": 0.6108061495145553
+    },
+    "knowledge_coverage": {
+      "digital_literacy": 0.185667575597763
+    },
+    "combined_coverage": {
+      "audio_editing": 0.6108061495145553,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.0,
+      "digital_literacy": 0.5036631948549763,
+      "oop": 0.0,
+      "workforce_insights": 0.0,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.0,
+      "computational_thinking": 0.0,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.0,
+      "ai_development": 0.0,
+      "mobile_development": 0.0,
+      "web_development": 0.0,
+      "network_technology": 0.22117209057516088,
+      "algorithms_programming": 0.0,
+      "data_analysis": 0.0,
+      "database_systems": 0.0
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 3,
+      "coverage_percentage": 0.07029691762866803,
+      "skill_coverage_pct": 0.07029691762866803,
+      "knowledge_coverage_pct": 0.009771977663040159,
+      "avg_skill_confidence": 0.7275355664353264,
+      "avg_knowledge_confidence": 0.641,
+      "hard_skill_count": 18,
+      "soft_skill_count": 0,
+      "knowledge_count": 2
+    },
+    "missing_components": [
+      "structured_programming",
+      "graphics_multimedia",
+      "oop",
+      "workforce_insights",
+      "game_modeling",
+      "ai_literacy_ethics",
+      "game_programming",
+      "computational_thinking",
+      "multimedia_programming",
+      "basic_job_skills_ohs",
+      "ai_development",
+      "mobile_development",
+      "web_development",
+      "algorithms_programming",
+      "data_analysis",
+      "database_systems"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.611,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.504,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.221,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 11,
+    "gpt_skill_count": 13,
+    "fused_skill_count": 18,
+    "model_agreement": 0.42132333608774036,
+    "match_count": 6,
+    "extraction_time": 5.3995678424835205
+  }
+}

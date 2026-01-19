@@ -1,0 +1,388 @@
+{
+  "job_id": "in-705e1d3fe92c5000",
+  "text": "Define and enforce architectural standards and governance frameworks for the agent lifecycle, data lineage, observability, and interoperability. Technology Evaluation and Selection: Evaluate and select AI platforms, tools, and protocols, such as LangChain, AutoGen, or similar frameworks, ensuring they meet scalability, security, and performance requirements within the Azure environment. Implementation Oversight: Guide development and operations teams through the deployment, integration, and testing of AI solutions.",
+  "skills": [
+    {
+      "skill": "define architectural standards",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.708,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.88,
+      "context_agreement": 0.95
+    },
+    {
+      "skill": "enforce governance frameworks",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.975,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.89,
+      "context_agreement": 1.19
+    },
+    {
+      "skill": "evaluate AI platforms",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.767,
+      "confidence_tier": "Medium High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.78,
+      "context_agreement": 0.95
+    },
+    {
+      "skill": "select AI tools and protocols",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.52,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.75,
+      "context_agreement": 0.95
+    },
+    {
+      "skill": "guide development teams",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.68,
+      "confidence_tier": "Medium",
+      "source": "BERT+GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 1.09
+    },
+    {
+      "skill": "guide operations teams",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 1.09
+    },
+    {
+      "skill": "deploy AI solutions",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.711,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.77,
+      "context_agreement": 0.95
+    },
+    {
+      "skill": "integrate AI solutions",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.46,
+      "confidence_tier": "Low",
+      "source": "GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 0.95
+    },
+    {
+      "skill": "test AI solutions",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.75,
+      "context_agreement": 1.22
+    },
+    {
+      "skill": "Define",
+      "type": "Hard",
+      "bloom": "Remember",
+      "confidence_score": 0.634,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.78,
+      "context_agreement": 0.85
+    },
+    {
+      "skill": "enforce architectural standards",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.531,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.89,
+      "context_agreement": 0.85
+    },
+    {
+      "skill": "Evaluate",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.642,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.84,
+      "context_agreement": 0.85
+    },
+    {
+      "skill": "tools",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.479,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.75,
+      "context_agreement": 0.85
+    },
+    {
+      "skill": "protocols",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.491,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.87,
+      "context_agreement": 0.85
+    },
+    {
+      "skill": "deployment",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.543,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 1.0,
+      "context_agreement": 0.85
+    },
+    {
+      "skill": "integration",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.494,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.85
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "agent lifecycle",
+      "confidence_score": 0.829,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "data lineage",
+      "confidence_score": 0.829,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "observability",
+      "confidence_score": 0.829,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "interoperability",
+      "confidence_score": 0.827,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "LangChain",
+      "confidence_score": 0.829,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "AutoGen",
+      "confidence_score": 0.828,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Azure",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "digital_literacy": 0.30058732295719637,
+      "algorithms_programming": 0.4106702481577361,
+      "ai_literacy_ethics": 0.6054436618287083,
+      "ai_development": 1.029969910906203,
+      "workforce_insights": 0.28268505762856766,
+      "basic_job_skills_ohs": 0.2051684722574308,
+      "web_development": 0.2522898200892064,
+      "mobile_development": 0.3020453875848248,
+      "game_programming": 0.520271189104454
+    },
+    "knowledge_coverage": {
+      "data_analysis": 0.4196795822240659
+    },
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.0,
+      "digital_literacy": 0.30058732295719637,
+      "oop": 0.0,
+      "workforce_insights": 0.28268505762856766,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.6054436618287083,
+      "game_programming": 0.520271189104454,
+      "computational_thinking": 0.0,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.2051684722574308,
+      "ai_development": 1.029969910906203,
+      "mobile_development": 0.3020453875848248,
+      "web_development": 0.2522898200892064,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.4106702481577361,
+      "data_analysis": 0.4196795822240659,
+      "database_systems": 0.0
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 10,
+      "coverage_percentage": 0.2278321396178102,
+      "skill_coverage_pct": 0.20574374055338565,
+      "knowledge_coverage_pct": 0.02208839906442452,
+      "avg_skill_confidence": 0.664704547876364,
+      "avg_knowledge_confidence": 0.8289025455117226,
+      "hard_skill_count": 14,
+      "soft_skill_count": 2,
+      "knowledge_count": 7
+    },
+    "missing_components": [
+      "audio_editing",
+      "structured_programming",
+      "graphics_multimedia",
+      "oop",
+      "game_modeling",
+      "computational_thinking",
+      "multimedia_programming",
+      "network_technology",
+      "database_systems"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.301,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.283,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.605,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.52,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.205,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.302,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.252,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.411,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.42,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 12,
+    "gpt_skill_count": 9,
+    "fused_skill_count": 16,
+    "model_agreement": 0.2374788563202806,
+    "match_count": 4,
+    "extraction_time": 3.8033299446105957
+  }
+}

@@ -1,0 +1,338 @@
+{
+  "job_id": "in-d1444c3f64d37ea4",
+  "text": "Primary responsibilities include: Collecting and analyzing financial and industry data and metrics. Building and maintaining financial models and databases. Attending meetings with senior management teams and sell -side analysts. Participating in weekly training sessions.",
+  "skills": [
+    {
+      "skill": "collect financial and industry data",
+      "type": "Hard",
+      "bloom": "Remember",
+      "confidence_score": 0.521,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.79,
+      "context_agreement": 0.98
+    },
+    {
+      "skill": "analyze financial and industry data",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.71,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.79,
+      "context_agreement": 0.98
+    },
+    {
+      "skill": "build financial models",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.901,
+      "confidence_tier": "Very High",
+      "source": "GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 1.24
+    },
+    {
+      "skill": "maintain financial models",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.876,
+      "confidence_tier": "High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.85,
+      "context_agreement": 1.26
+    },
+    {
+      "skill": "attend meetings with senior management teams",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 1.27
+    },
+    {
+      "skill": "participate in weekly training sessions",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.777,
+      "confidence_tier": "Medium High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.82,
+      "context_agreement": 1.26
+    },
+    {
+      "skill": "Collecting",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.513,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.89
+    },
+    {
+      "skill": "analyzing financial",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.51,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.87,
+      "context_agreement": 0.89
+    },
+    {
+      "skill": "industry data",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.501,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.78,
+      "context_agreement": 0.89
+    },
+    {
+      "skill": "metrics.",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.507,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.84,
+      "context_agreement": 0.89
+    },
+    {
+      "skill": "Building",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.546,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.84,
+      "context_agreement": 0.89
+    },
+    {
+      "skill": "databases.",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.513,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.89
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "financial data",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "industry data",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "financial models",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "databases",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "algorithms_programming": 0.15534405034658524,
+      "data_analysis": 0.21696212608970628,
+      "workforce_insights": 0.16638187225191278,
+      "game_programming": 0.21308513642274646
+    },
+    "knowledge_coverage": {
+      "data_analysis": 0.4800100922584534,
+      "workforce_insights": 0.35445023775100715,
+      "database_systems": 0.3989888548851014,
+      "mobile_development": 0.38268817663192756
+    },
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.0,
+      "digital_literacy": 0.0,
+      "oop": 0.0,
+      "workforce_insights": 0.35445023775100715,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.21308513642274646,
+      "computational_thinking": 0.0,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.0,
+      "ai_development": 0.0,
+      "mobile_development": 0.38268817663192756,
+      "web_development": 0.0,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.15534405034658524,
+      "data_analysis": 0.4800100922584534,
+      "database_systems": 0.3989888548851014
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 6,
+      "coverage_percentage": 0.10445087096293797,
+      "skill_coverage_pct": 0.039567009742681625,
+      "knowledge_coverage_pct": 0.08505986113297313,
+      "avg_skill_confidence": 0.6562447458792168,
+      "avg_knowledge_confidence": 0.75,
+      "hard_skill_count": 10,
+      "soft_skill_count": 2,
+      "knowledge_count": 4
+    },
+    "missing_components": [
+      "audio_editing",
+      "structured_programming",
+      "graphics_multimedia",
+      "digital_literacy",
+      "oop",
+      "game_modeling",
+      "ai_literacy_ethics",
+      "computational_thinking",
+      "multimedia_programming",
+      "basic_job_skills_ohs",
+      "ai_development",
+      "web_development",
+      "network_technology"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.354,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.213,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.383,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.155,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.48,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.399,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 9,
+    "gpt_skill_count": 6,
+    "fused_skill_count": 12,
+    "model_agreement": 0.41815292835235596,
+    "match_count": 4,
+    "extraction_time": 4.506664276123047
+  }
+}

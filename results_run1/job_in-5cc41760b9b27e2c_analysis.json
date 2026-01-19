@@ -1,0 +1,251 @@
+{
+  "job_id": "in-5cc41760b9b27e2c",
+  "text": "JOB DESCRIPTION The Chief Data & Analytics Office (CDAO) at JPMorgan Chase is pivotal in advancing the firm's data and analytics capabilities, ensuring strong adherence to data & AI risk & control while enabling the data & analytics strategy for superior decision -making and business outcomes to serve our clients and markets.",
+  "skills": [
+    {
+      "skill": "advance data and analytics capabilities",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.629,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 0.9
+    },
+    {
+      "skill": "ensure adherence to data & AI risk & control",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.522,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.65,
+      "context_agreement": 0.9
+    },
+    {
+      "skill": "enable data & analytics strategy",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.475,
+      "confidence_tier": "Low",
+      "source": "GPT",
+      "semantic_density": 0.77,
+      "context_agreement": 0.9
+    },
+    {
+      "skill": "serve clients and markets",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.593,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.77,
+      "context_agreement": 0.9
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "data",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "AI",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "analytics",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "ai_literacy_ethics": 0.23470619558492778
+    },
+    "knowledge_coverage": {
+      "computational_thinking": 0.46187043826282037,
+      "digital_literacy": 0.4710905922353269,
+      "algorithms_programming": 0.3335201740264893,
+      "data_analysis": 0.5085775539278985,
+      "ai_literacy_ethics": 0.5069359302520753,
+      "ai_development": 0.46921355724334723
+    },
+    "combined_coverage": {
+      "computational_thinking": 0.46187043826282037,
+      "data_analysis": 0.5085775539278985,
+      "ai_literacy_ethics": 0.5069359302520753,
+      "network_technology": 0.0,
+      "web_development": 0.0,
+      "graphics_multimedia": 0.0,
+      "algorithms_programming": 0.3335201740264893,
+      "mobile_development": 0.0,
+      "structured_programming": 0.0,
+      "ai_development": 0.46921355724334723,
+      "digital_literacy": 0.4710905922353269,
+      "game_modeling": 0.0,
+      "database_systems": 0.0,
+      "workforce_insights": 0.0,
+      "audio_editing": 0.0,
+      "multimedia_programming": 0.0,
+      "game_programming": 0.0,
+      "basic_job_skills_ohs": 0.0,
+      "oop": 0.0
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 6,
+      "coverage_percentage": 0.14480043399726092,
+      "skill_coverage_pct": 0.01235295766236462,
+      "knowledge_coverage_pct": 0.14480043399726092,
+      "avg_skill_confidence": 0.55472111712,
+      "avg_knowledge_confidence": 0.7768333333333334,
+      "hard_skill_count": 3,
+      "soft_skill_count": 1,
+      "knowledge_count": 3
+    },
+    "missing_components": [
+      "network_technology",
+      "web_development",
+      "graphics_multimedia",
+      "mobile_development",
+      "structured_programming",
+      "game_modeling",
+      "database_systems",
+      "workforce_insights",
+      "audio_editing",
+      "multimedia_programming",
+      "game_programming",
+      "basic_job_skills_ohs",
+      "oop"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.462,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.509,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.507,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.334,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.469,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.471,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 0,
+    "gpt_skill_count": 4,
+    "fused_skill_count": 4,
+    "model_agreement": 0.0,
+    "match_count": 0,
+    "extraction_time": 4.924662351608276
+  }
+}

@@ -1,0 +1,515 @@
+{
+  "job_id": "in-5b260b023fe1d1ec",
+  "text": "What you will do: Partner with teams across engineering to improve platform quality, reliability, and developer experience. Enhance system observability through improved monitoring, alerting, and telemetry. Optimize database performance and scalability (primarily PostgreSQL). Collaborate with developers primarily using Ruby on Rails to embed DevOps best practices into the development lifecycle. Build, maintain, and optimize CI/CD pipelines to ensure scalable, reliable, and faster deployments. Implement Infrastructure as Code using Terraform to manage cloud resources. Manage and scale containerized infrastructure on Kubernetes. Support and evolve cloud environments on AWS (experience with GCP or Azure a plus). Participate in on -call rotations and provide support for critical production issues.",
+  "skills": [
+    {
+      "skill": "improve platform quality, reliability, and developer experience",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.579,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.84,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "enhance system observability through improved monitoring, alerting, and telemetry",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.45,
+      "confidence_tier": "Low",
+      "source": "GPT",
+      "semantic_density": 0.84,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "optimize database performance and scalability",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.98,
+      "context_agreement": 1.16
+    },
+    {
+      "skill": "collaborate with developers to embed DevOps best practices",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.568,
+      "confidence_tier": "Medium Low",
+      "source": "BERT+GPT",
+      "semantic_density": 0.79,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "build, maintain, and optimize CI/CD pipelines",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.77,
+      "context_agreement": 1.18
+    },
+    {
+      "skill": "implement Infrastructure as Code using Terraform",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.67,
+      "confidence_tier": "Medium",
+      "source": "BERT+GPT",
+      "semantic_density": 0.82,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "manage and scale containerized infrastructure on Kubernetes",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.411,
+      "confidence_tier": "Low",
+      "source": "GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "support and evolve cloud environments on AWS",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.506,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.76,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "participate in on-call rotations and provide support for critical production issues",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.584,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "Partner with teams",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.655,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.76,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "Enhance system observability",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.626,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.86,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "improved",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.511,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.84,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "monitoring",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.517,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "alerting",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.474,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.84,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "telemetry.",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.48,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "scalability",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.48,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "Collaborate with developers",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.512,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.85,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "Build",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.612,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.75,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "maintain",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.623,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.84,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "ensure scalable",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.62,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.81,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "reliable",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.474,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.84,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "faster deployments.",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.514,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.87,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "manage",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.638,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.78,
+      "context_agreement": 0.83
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "PostgreSQL",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Ruby on Rails",
+      "confidence_score": 0.824,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "DevOps",
+      "confidence_score": 0.83,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "CI/CD",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Infrastructure as Code",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Terraform",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Kubernetes",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "AWS",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "GCP",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Azure",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "PostgreSQL).",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "Ruby",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "on",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "CI",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "/",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "CD",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "digital_literacy": 0.18474977528482892,
+      "algorithms_programming": 0.30543963836532984,
+      "data_analysis": 0.5840233661191714,
+      "workforce_insights": 0.24179462682457623,
+      "basic_job_skills_ohs": 0.17047540829379648,
+      "network_technology": 0.2521950394640535,
+      "database_systems": 0.5500912384597926,
+      "mobile_development": 0.17152411310867124,
+      "game_programming": 0.4199900787630559
+    },
+    "knowledge_coverage": {
+      "data_analysis": 0.17964383525848385,
+      "workforce_insights": 0.6263945462083865,
+      "database_systems": 0.6000000000000001,
+      "web_development": 0.7412947261339649
+    },
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.0,
+      "digital_literacy": 0.18474977528482892,
+      "oop": 0.0,
+      "workforce_insights": 0.6263945462083865,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.4199900787630559,
+      "computational_thinking": 0.0,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.17047540829379648,
+      "ai_development": 0.0,
+      "mobile_development": 0.17152411310867124,
+      "web_development": 0.7412947261339649,
+      "network_technology": 0.2521950394640535,
+      "algorithms_programming": 0.30543963836532984,
+      "data_analysis": 0.5840233661191714,
+      "database_systems": 0.6000000000000001
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 10,
+      "coverage_percentage": 0.21347824693375045,
+      "skill_coverage_pct": 0.15159385708859346,
+      "knowledge_coverage_pct": 0.11301753197899134,
+      "avg_skill_confidence": 0.5871169170700729,
+      "avg_knowledge_confidence": 0.6879475576877594,
+      "hard_skill_count": 20,
+      "soft_skill_count": 3,
+      "knowledge_count": 16
+    },
+    "missing_components": [
+      "audio_editing",
+      "structured_programming",
+      "graphics_multimedia",
+      "oop",
+      "game_modeling",
+      "ai_literacy_ethics",
+      "computational_thinking",
+      "multimedia_programming",
+      "ai_development"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.185,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.626,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.42,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.17,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.172,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.252,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.305,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.584,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.6,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 18,
+    "gpt_skill_count": 9,
+    "fused_skill_count": 23,
+    "model_agreement": 0.1001390881008572,
+    "match_count": 2,
+    "extraction_time": 3.8566930294036865
+  }
+}

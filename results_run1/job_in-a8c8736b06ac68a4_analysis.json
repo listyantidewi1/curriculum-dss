@@ -1,0 +1,275 @@
+{
+  "job_id": "in-a8c8736b06ac68a4",
+  "text": "As a Senior DSO Engineer in our Design Services Organization (DSO) within the Engineering Enablement & Solutions (EE &S) division, you will lead a team of engineers responsible for the design, development, and integration of cutting -edge electrical systems for aerospace applications.",
+  "skills": [
+    {
+      "skill": "lead a team of engineers",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.613,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.72,
+      "context_agreement": 0.9
+    },
+    {
+      "skill": "design electrical systems",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.656,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 0.9
+    },
+    {
+      "skill": "develop electrical systems",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.657,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.84,
+      "context_agreement": 0.9
+    },
+    {
+      "skill": "integrate electrical systems",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.424,
+      "confidence_tier": "Low",
+      "source": "GPT",
+      "semantic_density": 0.86,
+      "context_agreement": 0.9
+    },
+    {
+      "skill": "design",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.602,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.78,
+      "context_agreement": 0.81
+    },
+    {
+      "skill": "development",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.506,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.81
+    },
+    {
+      "skill": "integration of cutting -edge electrical systems",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.461,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.81,
+      "context_agreement": 0.81
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "electrical systems",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "aerospace applications",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.2268934996067662,
+      "algorithms_programming": 0.27827030992841306,
+      "ai_development": 0.1412846363419141,
+      "workforce_insights": 0.1798609252166067,
+      "basic_job_skills_ohs": 0.2071689140571019,
+      "oop": 0.23733040302328584,
+      "database_systems": 0.25429739721281813,
+      "web_development": 0.1671665606540042,
+      "game_modeling": 0.23462485552578816,
+      "game_programming": 0.17762343654068485,
+      "graphics_multimedia": 0.2945915163006273,
+      "audio_editing": 0.25052034909820603
+    },
+    "knowledge_coverage": {
+      "basic_job_skills_ohs": 0.33573464155197147
+    },
+    "combined_coverage": {
+      "audio_editing": 0.25052034909820603,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.2945915163006273,
+      "digital_literacy": 0.0,
+      "oop": 0.23733040302328584,
+      "workforce_insights": 0.1798609252166067,
+      "game_modeling": 0.23462485552578816,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.17762343654068485,
+      "computational_thinking": 0.2268934996067662,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.33573464155197147,
+      "ai_development": 0.1412846363419141,
+      "mobile_development": 0.0,
+      "web_development": 0.1671665606540042,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.27827030992841306,
+      "data_analysis": 0.0,
+      "database_systems": 0.25429739721281813
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 12,
+      "coverage_percentage": 0.14622097531584663,
+      "skill_coverage_pct": 0.13945435807927456,
+      "knowledge_coverage_pct": 0.017670244292209026,
+      "avg_skill_confidence": 0.5597694609942857,
+      "avg_knowledge_confidence": 0.75,
+      "hard_skill_count": 6,
+      "soft_skill_count": 1,
+      "knowledge_count": 2
+    },
+    "missing_components": [
+      "structured_programming",
+      "digital_literacy",
+      "ai_literacy_ethics",
+      "multimedia_programming",
+      "mobile_development",
+      "network_technology",
+      "data_analysis"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.251,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.295,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.237,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.18,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.235,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.178,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.227,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.336,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.141,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.167,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.278,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.254,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 3,
+    "gpt_skill_count": 4,
+    "fused_skill_count": 7,
+    "model_agreement": 0.0,
+    "match_count": 0,
+    "extraction_time": 2.309166431427002
+  }
+}

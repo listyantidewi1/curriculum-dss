@@ -1,0 +1,477 @@
+{
+  "job_id": "in-37dc6e36b0e5dd26",
+  "text": "Familiarity with observability tools like Splunk and Dynatrace is a plus .\u2022Experienced in setting up, configuring, and monitoring PostgreSQL binary and logical replication (e.g., Binary Streaming, Bi -Directional Replication - BDR) .\u2022Strong skills in collecting diagnostics and tuning PostgreSQL and SQL performance.\u2022 Proficient in PostgreSQL procedural languages (PL/pgSQL, PL/Tcl, PL/Perl, PL/Python) and SQL. \u2022Excellent troubleshooting and debugging skills .\u2022Experience in performance tuning and automation for Postgres and AWS platforms.\u2022 Proficient in Linux, especially Oracle Linux Enterprise.\u2022 Familiarity with scripting languages such as Bash, KSH, and Perl.",
+  "skills": [
+    {
+      "skill": "set up PostgreSQL binary and logical replication",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.55,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.78,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "configure PostgreSQL binary and logical replication",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.556,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "monitor PostgreSQL binary and logical replication",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.555,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.82,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "collect diagnostics",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.961,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.89,
+      "context_agreement": 1.19
+    },
+    {
+      "skill": "tune PostgreSQL and SQL performance",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.633,
+      "confidence_tier": "Medium",
+      "source": "BERT+GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "troubleshoot and debug",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.669,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "perform performance tuning",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.674,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.84,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "automate Postgres and AWS platforms",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.428,
+      "confidence_tier": "Low",
+      "source": "GPT",
+      "semantic_density": 0.79,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "setting up",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.466,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.74,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "configuring",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.482,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "monitoring PostgreSQL binary",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.515,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.86,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "logical replication",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.516,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.87,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "SQL performance.\u2022",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.513,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.84,
+      "context_agreement": 0.83
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "observability",
+      "confidence_score": 0.83,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Splunk",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Dynatrace",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "PostgreSQL binary",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "logical replication",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Binary Streaming",
+      "confidence_score": 0.829,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Bi-Directional Replication - BDR",
+      "confidence_score": 0.828,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "PostgreSQL",
+      "confidence_score": 0.83,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "SQL",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "PL/pgSQL",
+      "confidence_score": 0.821,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "PL/Tcl",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "PL/Perl",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "PL/Python",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Linux",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Oracle Linux Enterprise",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Bash",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "KSH",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Perl",
+      "confidence_score": 0.828,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Bi",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "PostgreSQL procedural languages",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "/",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "PL",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "/",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "Tcl,",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "PL",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "/",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "PL",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.21957057305537608,
+      "digital_literacy": 0.1860374201951105,
+      "algorithms_programming": 0.6912972246420067,
+      "data_analysis": 0.2368328601411111,
+      "ai_development": 0.27743441271384733,
+      "network_technology": 0.2769375964674191,
+      "structured_programming": 0.5244443680619947,
+      "database_systems": 0.2166131226770844,
+      "game_programming": 0.29460018963202206
+    },
+    "knowledge_coverage": {
+      "computational_thinking": 0.4778062820434571,
+      "algorithms_programming": 0.35526062250137336,
+      "data_analysis": 0.7474500000000002,
+      "structured_programming": 0.4507288724393072,
+      "oop": 0.5012218952178956,
+      "database_systems": 0.7474499918997288
+    },
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.5244443680619947,
+      "graphics_multimedia": 0.0,
+      "digital_literacy": 0.1860374201951105,
+      "oop": 0.5012218952178956,
+      "workforce_insights": 0.0,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.29460018963202206,
+      "computational_thinking": 0.4778062820434571,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.0,
+      "ai_development": 0.27743441271384733,
+      "mobile_development": 0.0,
+      "web_development": 0.0,
+      "network_technology": 0.2769375964674191,
+      "algorithms_programming": 0.6912972246420067,
+      "data_analysis": 0.7474500000000002,
+      "database_systems": 0.7474499918997288
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 10,
+      "coverage_percentage": 0.24866733583544642,
+      "skill_coverage_pct": 0.1538825140834722,
+      "knowledge_coverage_pct": 0.17262724547904013,
+      "avg_skill_confidence": 0.5782229131984365,
+      "avg_knowledge_confidence": 0.7095398828828776,
+      "hard_skill_count": 13,
+      "soft_skill_count": 0,
+      "knowledge_count": 27
+    },
+    "missing_components": [
+      "audio_editing",
+      "graphics_multimedia",
+      "workforce_insights",
+      "game_modeling",
+      "ai_literacy_ethics",
+      "multimedia_programming",
+      "basic_job_skills_ohs",
+      "mobile_development",
+      "web_development"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.524,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.186,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.501,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.295,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.478,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.277,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.277,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.691,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 7,
+    "gpt_skill_count": 8,
+    "fused_skill_count": 13,
+    "model_agreement": 0.11902912706136703,
+    "match_count": 1,
+    "extraction_time": 5.914812088012695
+  }
+}

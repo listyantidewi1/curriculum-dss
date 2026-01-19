@@ -1,0 +1,295 @@
+{
+  "job_id": "in-e761efea713ca2e5",
+  "text": "Our Space Systems business designs and builds our extensive line of satellites, payloads, and their components, including spacecraft that have been selected to support NASA missions to the Moon and Mars and components used on the James Webb Space Telescope. About the Role As a Software Engineer in the Business Automation Terrestrial Software team, you will contribute significantly to designing, developing, and maintaining software systems that are fundamental to our mission success.",
+  "skills": [
+    {
+      "skill": "design software systems",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.73,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 0.96
+    },
+    {
+      "skill": "develop software systems",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.732,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.82,
+      "context_agreement": 0.96
+    },
+    {
+      "skill": "maintain software systems",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.985,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.85,
+      "context_agreement": 1.25
+    },
+    {
+      "skill": "designing",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.539,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.87,
+      "context_agreement": 0.87
+    },
+    {
+      "skill": "developing",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.542,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.87
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "satellites",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "payloads",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "spacecraft",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "NASA missions",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Moon",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Mars",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "James Webb Space Telescope",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "software systems",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.35527168096327016,
+      "algorithms_programming": 0.5599053979493018,
+      "ai_development": 0.2818089449194914,
+      "workforce_insights": 0.4210743369935593,
+      "basic_job_skills_ohs": 0.30699954611413005,
+      "structured_programming": 0.304869598097342,
+      "oop": 0.4899950263998587,
+      "database_systems": 0.17127130637886792,
+      "multimedia_programming": 0.3331694327079926,
+      "web_development": 0.14799423695731015,
+      "game_modeling": 0.463115821548137,
+      "game_programming": 0.19953310845977673,
+      "graphics_multimedia": 0.4408244736103584,
+      "audio_editing": 0.1658580747387617
+    },
+    "knowledge_coverage": {
+      "computational_thinking": 0.3565304875373841,
+      "algorithms_programming": 0.432456386089325,
+      "structured_programming": 0.3553067207336426,
+      "oop": 0.4041569352149964,
+      "multimedia_programming": 0.3909374713897706
+    },
+    "combined_coverage": {
+      "audio_editing": 0.1658580747387617,
+      "structured_programming": 0.3553067207336426,
+      "graphics_multimedia": 0.4408244736103584,
+      "digital_literacy": 0.0,
+      "oop": 0.4899950263998587,
+      "workforce_insights": 0.4210743369935593,
+      "game_modeling": 0.463115821548137,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.19953310845977673,
+      "computational_thinking": 0.3565304875373841,
+      "multimedia_programming": 0.3909374713897706,
+      "basic_job_skills_ohs": 0.30699954611413005,
+      "ai_development": 0.2818089449194914,
+      "mobile_development": 0.0,
+      "web_development": 0.14799423695731015,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.5599053979493018,
+      "data_analysis": 0.0,
+      "database_systems": 0.17127130637886792
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 14,
+      "coverage_percentage": 0.2500607870384395,
+      "skill_coverage_pct": 0.2442995255704294,
+      "knowledge_coverage_pct": 0.10207305268237467,
+      "avg_skill_confidence": 0.7056491495635938,
+      "avg_knowledge_confidence": 0.75,
+      "hard_skill_count": 5,
+      "soft_skill_count": 0,
+      "knowledge_count": 8
+    },
+    "missing_components": [
+      "digital_literacy",
+      "ai_literacy_ethics",
+      "mobile_development",
+      "network_technology",
+      "data_analysis"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.166,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.355,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.441,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.49,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.421,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.463,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.2,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.357,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.391,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.307,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.282,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.148,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.56,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.171,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 3,
+    "gpt_skill_count": 3,
+    "fused_skill_count": 5,
+    "model_agreement": 0.3239632646242777,
+    "match_count": 1,
+    "extraction_time": 2.406843423843384
+  }
+}

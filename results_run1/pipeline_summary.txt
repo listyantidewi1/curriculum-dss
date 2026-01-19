@@ -1,0 +1,38 @@
+============================================================
+ADVANCED SKILL EXTRACTION PIPELINE - SUMMARY
+============================================================
+
+Pipeline Statistics:
+- Total jobs processed: 20000
+- Average skills per job: 0.00
+- Average knowledge per job: 0.00
+- Average coverage: 0.00%
+- Average model agreement: 0.00%
+
+Advanced Features Used:
+1. [✓] Dynamic Thresholds - Context-aware similarity matching
+2. [✓] Continuous Confidence - 7-tier confidence system
+3. [✓] Context Awareness - Model agreement & Bloom consistency
+4. [✓] Partial Match Handling - Substring & fuzzy matching
+5. [✓] Better Coverage - More BERT skills with adjusted confidence
+
+Output Files:
+- skills: D:\Projects\skill-extraction\results\advanced_skills.csv (5568.3 KB)
+- knowledge: D:\Projects\skill-extraction\results\advanced_knowledge.csv (2083.7 KB)
+- coverage: D:\Projects\skill-extraction\results\coverage_report.csv (1546.6 KB)
+- summary: D:\Projects\skill-extraction\results\pipeline_summary.txt (0.0 KB)
+- comprehensive: D:\Projects\skill-extraction\results\comprehensive_analysis.csv (27112.9 KB)
+- comparison: D:\Projects\skill-extraction\results\model_comparison.csv (2887.9 KB)
+
+============================================================
+Comprehensive Analysis Files:
+1. comprehensive_analysis.csv - Complete extraction data for analysis
+2. model_comparison.csv - Side-by-side model comparison
+3. advanced_skills.csv - Final hybrid skills with taxonomy
+4. advanced_knowledge.csv - Final hybrid knowledge items
+5. coverage_report.csv - Curriculum coverage metrics
+6. job_*_analysis.json - Detailed JSON for each job
+
+============================================================
+Pipeline completed successfully!
+============================================================

@@ -1,0 +1,351 @@
+{
+  "job_id": "in-c352493a0fbbf73b",
+  "text": "Career Level - IC5 Experience and/or interest in database internals, distributed systems, replication technologies , load balancing algorithms, and design trade -offs among consistency, availability, and performance in distributed systems is required, as are the following skills: Expert -level proficiency in C programming Fluency in SQL; PL/SQL is a plus Solid background in relational database and operating system concepts Good understanding of concurrent programming concepts Strong software engineering and debugging skills Track record of delivering high -quality software under time constraints Strong collaboration skills, particularly in geographically distributed team",
+  "skills": [
+    {
+      "skill": "program in C",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.457,
+      "confidence_tier": "Low",
+      "source": "GPT",
+      "semantic_density": 0.7,
+      "context_agreement": 0.96
+    },
+    {
+      "skill": "use SQL",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.709,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.69,
+      "context_agreement": 0.96
+    },
+    {
+      "skill": "understand concurrent programming concepts",
+      "type": "Hard",
+      "bloom": "Understand",
+      "confidence_score": 0.407,
+      "confidence_tier": "Low",
+      "source": "GPT",
+      "semantic_density": 0.89,
+      "context_agreement": 0.96
+    },
+    {
+      "skill": "debug software",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 1.21
+    },
+    {
+      "skill": "deliver high-quality software under time constraints",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.762,
+      "confidence_tier": "Medium High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.82,
+      "context_agreement": 1.24
+    },
+    {
+      "skill": "collaborate in geographically distributed teams",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.674,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.86,
+      "context_agreement": 0.96
+    },
+    {
+      "skill": "design trade -offs",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.641,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.76,
+      "context_agreement": 0.87
+    },
+    {
+      "skill": "collaboration skills",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.5,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.89,
+      "context_agreement": 0.87
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "database internals",
+      "confidence_score": 0.829,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "distributed systems",
+      "confidence_score": 0.828,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "replication technologies",
+      "confidence_score": 0.83,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "load balancing algorithms",
+      "confidence_score": 0.83,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "consistency",
+      "confidence_score": 0.827,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "availability",
+      "confidence_score": 0.825,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "PL/SQL",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "relational database concepts",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "operating system concepts",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "concurrent programming concepts",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "software engineering",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "C programming",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "SQL;",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "PL",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "/",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "SQL",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "relational database and operating system concepts",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.9659347976288263,
+      "digital_literacy": 0.17362198421174804,
+      "algorithms_programming": 1.0207271418889097,
+      "data_analysis": 0.7721363557935876,
+      "structured_programming": 1.1276147730677837,
+      "oop": 0.15365074008310262,
+      "database_systems": 0.5377707734708799,
+      "mobile_development": 0.2922674492750262,
+      "game_programming": 0.9208000198546527
+    },
+    "knowledge_coverage": {
+      "computational_thinking": 0.6000000715255738,
+      "algorithms_programming": 0.7474500081002713,
+      "data_analysis": 0.5448778867721559,
+      "workforce_insights": 0.48017344371403825,
+      "basic_job_skills_ohs": 0.411414853644532,
+      "structured_programming": 0.4220640859329059,
+      "oop": 0.4731137697053364,
+      "database_systems": 0.4886984266988686,
+      "multimedia_programming": 0.4998921123766586,
+      "mobile_development": 0.17722841448783871,
+      "game_modeling": 0.4555976234239122
+    },
+    "combined_coverage": {
+      "computational_thinking": 0.9659347976288263,
+      "data_analysis": 0.7721363557935876,
+      "ai_literacy_ethics": 0.0,
+      "network_technology": 0.0,
+      "web_development": 0.0,
+      "graphics_multimedia": 0.0,
+      "algorithms_programming": 1.0207271418889097,
+      "mobile_development": 0.2922674492750262,
+      "structured_programming": 1.1276147730677837,
+      "ai_development": 0.0,
+      "digital_literacy": 0.17362198421174804,
+      "game_modeling": 0.4555976234239122,
+      "database_systems": 0.5377707734708799,
+      "workforce_insights": 0.48017344371403825,
+      "audio_editing": 0.0,
+      "multimedia_programming": 0.4998921123766586,
+      "game_programming": 0.9208000198546527,
+      "basic_job_skills_ohs": 0.411414853644532,
+      "oop": 0.4731137697053364
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 13,
+      "coverage_percentage": 0.4279507946345206,
+      "skill_coverage_pct": 0.3139223176460272,
+      "knowledge_coverage_pct": 0.27897424717800484,
+      "avg_skill_confidence": 0.6437968926323032,
+      "avg_knowledge_confidence": 0.7101175697463401,
+      "hard_skill_count": 6,
+      "soft_skill_count": 2,
+      "knowledge_count": 17
+    },
+    "missing_components": [
+      "ai_literacy_ethics",
+      "network_technology",
+      "web_development",
+      "graphics_multimedia",
+      "ai_development",
+      "audio_editing"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.292,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.174,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.456,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.538,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.48,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.5,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.411,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.473,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 4,
+    "gpt_skill_count": 6,
+    "fused_skill_count": 8,
+    "model_agreement": 0.3060995042324066,
+    "match_count": 2,
+    "extraction_time": 9.30747675895691
+  }
+}

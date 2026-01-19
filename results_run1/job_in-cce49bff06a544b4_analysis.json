@@ -1,0 +1,250 @@
+{
+  "job_id": "in-cce49bff06a544b4",
+  "text": "London 7 -9 Years UK Job Family Architecture / Design No. of Positions 2 Job Description (Posting). GEN AI Architect Job DescriptionJob Role Overview:As a GEN AI Architect, you will play a pivotal role in shaping the design, development, and deployment of advanced Gen AI systems within our organization.",
+  "skills": [
+    {
+      "skill": "design Gen AI systems",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.685,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.74,
+      "context_agreement": 0.96
+    },
+    {
+      "skill": "develop Gen AI systems",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.686,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.74,
+      "context_agreement": 0.96
+    },
+    {
+      "skill": "deploy Gen AI systems",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 1.22
+    },
+    {
+      "skill": "shaping the design",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.64,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.76,
+      "context_agreement": 0.86
+    },
+    {
+      "skill": "development",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.539,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.86
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "Gen AI systems",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "algorithms_programming": 0.5550519365254527,
+      "ai_literacy_ethics": 0.26437286568289875,
+      "ai_development": 0.5225574234488294,
+      "workforce_insights": 0.19178140587277995,
+      "basic_job_skills_ohs": 0.2208992617110129,
+      "oop": 0.22349536357569122,
+      "database_systems": 0.2116097891412774,
+      "web_development": 0.17824570833566578,
+      "game_modeling": 0.22953406771461998,
+      "game_programming": 0.18939555361106253,
+      "graphics_multimedia": 0.24315752714625566
+    },
+    "knowledge_coverage": {
+      "ai_literacy_ethics": 0.35096268653869633,
+      "ai_development": 0.3913283586502076
+    },
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.24315752714625566,
+      "digital_literacy": 0.0,
+      "oop": 0.22349536357569122,
+      "workforce_insights": 0.19178140587277995,
+      "game_modeling": 0.22953406771461998,
+      "ai_literacy_ethics": 0.35096268653869633,
+      "game_programming": 0.18939555361106253,
+      "computational_thinking": 0.0,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.2208992617110129,
+      "ai_development": 0.5225574234488294,
+      "mobile_development": 0.0,
+      "web_development": 0.17824570833566578,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.5550519365254527,
+      "data_analysis": 0.0,
+      "database_systems": 0.2116097891412774
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 11,
+      "coverage_percentage": 0.16403635387480758,
+      "skill_coverage_pct": 0.15947899488239717,
+      "knowledge_coverage_pct": 0.039067949746784424,
+      "avg_skill_confidence": 0.7100701199554107,
+      "avg_knowledge_confidence": 0.75,
+      "hard_skill_count": 5,
+      "soft_skill_count": 0,
+      "knowledge_count": 1
+    },
+    "missing_components": [
+      "audio_editing",
+      "structured_programming",
+      "digital_literacy",
+      "computational_thinking",
+      "multimedia_programming",
+      "mobile_development",
+      "network_technology",
+      "data_analysis"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.243,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.223,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.192,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.23,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.351,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.189,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.221,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.523,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.178,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.555,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.212,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 3,
+    "gpt_skill_count": 3,
+    "fused_skill_count": 5,
+    "model_agreement": 0.298242449760437,
+    "match_count": 1,
+    "extraction_time": 1.6537752151489258
+  }
+}

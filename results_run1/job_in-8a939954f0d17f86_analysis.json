@@ -1,0 +1,325 @@
+{
+  "job_id": "in-8a939954f0d17f86",
+  "text": "You\u2019ll develop a robust UI Art Bible, design and animate complete HUD and menus, and deliver clear, context -rich mock -ups that communicate exactly how the UI supports gameplay.",
+  "skills": [
+    {
+      "skill": "develop UI Art Bible",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.72,
+      "context_agreement": 1.19
+    },
+    {
+      "skill": "design HUD and menus",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.664,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.73,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "animate HUD and menus",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.665,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.74,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "deliver clear mock-ups",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.433,
+      "confidence_tier": "Low",
+      "source": "GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "communicate how UI supports gameplay",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.617,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.79,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "design",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.623,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.78,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "animate complete HUD",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.623,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.78,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "menus",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.471,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.75,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "deliver clear",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.474,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.78,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "context -rich mock -ups",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.471,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.75,
+      "context_agreement": 0.84
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "UI Art Bible",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "HUD",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "menus",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "mock-ups",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "gameplay",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.23475178784028844,
+      "algorithms_programming": 0.2879080983776462,
+      "basic_job_skills_ohs": 0.4452008127788577,
+      "oop": 0.2455501656730191,
+      "database_systems": 0.263104799133967,
+      "game_modeling": 0.24275081946060678,
+      "graphics_multimedia": 0.30479447517892416,
+      "audio_editing": 0.25919698436508803
+    },
+    "knowledge_coverage": {
+      "algorithms_programming": 0.3501181483268738,
+      "workforce_insights": 0.3432462573051453,
+      "multimedia_programming": 0.4495360136032105,
+      "game_modeling": 0.4009756565093995,
+      "game_programming": 0.4484803318977357,
+      "graphics_multimedia": 0.33606551885604863
+    },
+    "combined_coverage": {
+      "audio_editing": 0.25919698436508803,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.33606551885604863,
+      "digital_literacy": 0.0,
+      "oop": 0.2455501656730191,
+      "workforce_insights": 0.3432462573051453,
+      "game_modeling": 0.4009756565093995,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.4484803318977357,
+      "computational_thinking": 0.23475178784028844,
+      "multimedia_programming": 0.4495360136032105,
+      "basic_job_skills_ohs": 0.4452008127788577,
+      "ai_development": 0.0,
+      "mobile_development": 0.0,
+      "web_development": 0.0,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.3501181483268738,
+      "data_analysis": 0.0,
+      "database_systems": 0.263104799133967
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 11,
+      "coverage_percentage": 0.19874876190998073,
+      "skill_coverage_pct": 0.12017147067412619,
+      "knowledge_coverage_pct": 0.12254852244728492,
+      "avg_skill_confidence": 0.6041273744200943,
+      "avg_knowledge_confidence": 0.75,
+      "hard_skill_count": 9,
+      "soft_skill_count": 1,
+      "knowledge_count": 5
+    },
+    "missing_components": [
+      "structured_programming",
+      "digital_literacy",
+      "ai_literacy_ethics",
+      "ai_development",
+      "mobile_development",
+      "web_development",
+      "network_technology",
+      "data_analysis"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.259,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.336,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.246,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.343,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.401,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.448,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.235,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.45,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.445,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.35,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.263,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 6,
+    "gpt_skill_count": 5,
+    "fused_skill_count": 10,
+    "model_agreement": 0.15585416555404663,
+    "match_count": 1,
+    "extraction_time": 2.897771120071411
+  }
+}

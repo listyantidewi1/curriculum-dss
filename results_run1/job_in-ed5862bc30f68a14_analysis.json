@@ -1,0 +1,376 @@
+{
+  "job_id": "in-ed5862bc30f68a14",
+  "text": "This will be dependent on a project being entered into Daptiv. \u00b7 Provide weekly personal status reporting by COB Friday submitted on SharePoint. \u00b7 Utilize a SharePoint site for project and operational documentation; review existing documentation. CONTRACTOR SKILLS AND EXPERIENCE REQUIREMENTS REQUIRED SKILLS: The Data Modeler / Architect can design, develop, and implement data models and data lake architecture to provide reliable and scalable applications and systems to meet the organization\u2019s objectives and requirements.",
+  "skills": [
+    {
+      "skill": "design data models",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.742,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.76,
+      "context_agreement": 1.03
+    },
+    {
+      "skill": "develop data models",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.941,
+      "confidence_tier": "Very High",
+      "source": "GPT",
+      "semantic_density": 0.77,
+      "context_agreement": 1.31
+    },
+    {
+      "skill": "implement data models",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.913,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.79,
+      "context_agreement": 1.32
+    },
+    {
+      "skill": "design data lake architecture",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.991,
+      "confidence_tier": "Very High",
+      "source": "GPT",
+      "semantic_density": 0.95,
+      "context_agreement": 1.33
+    },
+    {
+      "skill": "develop data lake architecture",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.996,
+      "confidence_tier": "Very High",
+      "source": "GPT",
+      "semantic_density": 0.95,
+      "context_agreement": 1.33
+    },
+    {
+      "skill": "implement data lake architecture",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.952,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.98,
+      "context_agreement": 1.33
+    },
+    {
+      "skill": "provide weekly personal status reporting",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.875,
+      "confidence_tier": "High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.82,
+      "context_agreement": 1.34
+    },
+    {
+      "skill": "utilize SharePoint site for project documentation",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.751,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.82,
+      "context_agreement": 1.03
+    },
+    {
+      "skill": "review existing documentation",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.88,
+      "context_agreement": 1.31
+    },
+    {
+      "skill": "Utilize",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.696,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.81,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "design",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.692,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.78,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "develop",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.696,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.81,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "provide reliable",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.531,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.83,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "scalable applications",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.539,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "systems",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.529,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.81,
+      "context_agreement": 0.93
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "Daptiv",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "SharePoint",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "data models",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "data lake architecture",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "SharePoint site",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.5893083926886697,
+      "algorithms_programming": 0.31953441773722324,
+      "data_analysis": 0.46428601973671907,
+      "ai_development": 0.43645595410618127,
+      "workforce_insights": 0.22907041008951617,
+      "basic_job_skills_ohs": 0.2523680131669137,
+      "oop": 0.5125047639906712,
+      "database_systems": 0.4282790824440685,
+      "multimedia_programming": 0.45864161521868835,
+      "web_development": 0.46384087773131705,
+      "game_modeling": 0.2694167680348753,
+      "game_programming": 0.3323761044506558,
+      "graphics_multimedia": 0.33827586081915384,
+      "audio_editing": 0.2876694207473372
+    },
+    "knowledge_coverage": {
+      "computational_thinking": 0.3984803795814515,
+      "digital_literacy": 0.35055770874023445,
+      "data_analysis": 0.34326038360595706,
+      "ai_literacy_ethics": 0.33400701284408574,
+      "ai_development": 0.4222719311714173,
+      "web_development": 0.35153685808181767
+    },
+    "combined_coverage": {
+      "audio_editing": 0.2876694207473372,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.33827586081915384,
+      "digital_literacy": 0.35055770874023445,
+      "oop": 0.5125047639906712,
+      "workforce_insights": 0.22907041008951617,
+      "game_modeling": 0.2694167680348753,
+      "ai_literacy_ethics": 0.33400701284408574,
+      "game_programming": 0.3323761044506558,
+      "computational_thinking": 0.5893083926886697,
+      "multimedia_programming": 0.45864161521868835,
+      "basic_job_skills_ohs": 0.2523680131669137,
+      "ai_development": 0.43645595410618127,
+      "mobile_development": 0.0,
+      "web_development": 0.46384087773131705,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.31953441773722324,
+      "data_analysis": 0.46428601973671907,
+      "database_systems": 0.4282790824440685
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 16,
+      "coverage_percentage": 0.3192943380287532,
+      "skill_coverage_pct": 0.28326461584010476,
+      "knowledge_coverage_pct": 0.11579548810657704,
+      "avg_skill_confidence": 0.7894867417522119,
+      "avg_knowledge_confidence": 0.7064,
+      "hard_skill_count": 14,
+      "soft_skill_count": 1,
+      "knowledge_count": 5
+    },
+    "missing_components": [
+      "structured_programming",
+      "mobile_development",
+      "network_technology"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.288,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.338,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.351,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.513,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.229,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.269,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.334,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.332,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.589,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.459,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.252,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.436,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.464,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.32,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.464,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.428,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 10,
+    "gpt_skill_count": 9,
+    "fused_skill_count": 15,
+    "model_agreement": 0.667295354604721,
+    "match_count": 7,
+    "extraction_time": 5.022101163864136
+  }
+}

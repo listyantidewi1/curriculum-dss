@@ -1,0 +1,328 @@
+{
+  "job_id": "in-213c11618f2a6fd4",
+  "text": "The Public Information specialist will work closely with the Public Information Officer, contribute to social media planning and execution, and ensure consistent and accurate communication across all channels. Portfolio Encouragement: We encourage applicants to submit a portfolio showcasing samples of their storytelling, video production, photography, graphic design, and professional written communication work.",
+  "skills": [
+    {
+      "skill": "contribute to social media planning and execution",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.78,
+      "confidence_tier": "Medium High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.79,
+      "context_agreement": 1.16
+    },
+    {
+      "skill": "ensure consistent and accurate communication",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.901,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.87,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "showcase storytelling",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.439,
+      "confidence_tier": "Low",
+      "source": "GPT",
+      "semantic_density": 0.9,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "showcase video production",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.432,
+      "confidence_tier": "Low",
+      "source": "GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "showcase photography",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.437,
+      "confidence_tier": "Low",
+      "source": "GPT",
+      "semantic_density": 0.89,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "showcase graphic design",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.671,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "showcase professional written communication",
+      "type": "Soft",
+      "bloom": "Create",
+      "confidence_score": 0.477,
+      "confidence_tier": "Low",
+      "source": "GPT",
+      "semantic_density": 0.9,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "execution",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.479,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.87,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "ensure consistent",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.626,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.84,
+      "context_agreement": 0.83
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "social media",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "storytelling",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "video production",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "photography",
+      "confidence_score": 0.824,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "graphic design",
+      "confidence_score": 0.825,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "written communication",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "social",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.17941314716839765,
+      "digital_literacy": 0.3683329885422014,
+      "multimedia_programming": 0.20973123377622793,
+      "game_modeling": 0.10133752366199188,
+      "graphics_multimedia": 0.22962178850901022
+    },
+    "knowledge_coverage": {
+      "digital_literacy": 0.5022930622100831,
+      "algorithms_programming": 0.46710642770757393,
+      "multimedia_programming": 0.47037192862569044,
+      "game_modeling": 0.42310693265601906,
+      "graphics_multimedia": 0.43537976586226607
+    },
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.43537976586226607,
+      "digital_literacy": 0.5022930622100831,
+      "oop": 0.0,
+      "workforce_insights": 0.0,
+      "game_modeling": 0.42310693265601906,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.0,
+      "computational_thinking": 0.17941314716839765,
+      "multimedia_programming": 0.47037192862569044,
+      "basic_job_skills_ohs": 0.0,
+      "ai_development": 0.0,
+      "mobile_development": 0.0,
+      "web_development": 0.0,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.46710642770757393,
+      "data_analysis": 0.0,
+      "database_systems": 0.0
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 6,
+      "coverage_percentage": 0.13040375074894897,
+      "skill_coverage_pct": 0.05728614113988574,
+      "knowledge_coverage_pct": 0.1209609535295596,
+      "avg_skill_confidence": 0.5824889120513123,
+      "avg_knowledge_confidence": 0.7401092637607031,
+      "hard_skill_count": 7,
+      "soft_skill_count": 2,
+      "knowledge_count": 7
+    },
+    "missing_components": [
+      "audio_editing",
+      "structured_programming",
+      "oop",
+      "workforce_insights",
+      "ai_literacy_ethics",
+      "game_programming",
+      "basic_job_skills_ohs",
+      "ai_development",
+      "mobile_development",
+      "web_development",
+      "network_technology",
+      "data_analysis",
+      "database_systems"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.435,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.502,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.423,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.179,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.47,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.467,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 4,
+    "gpt_skill_count": 7,
+    "fused_skill_count": 9,
+    "model_agreement": 0.12143945693969727,
+    "match_count": 1,
+    "extraction_time": 3.1318252086639404
+  }
+}

@@ -1,0 +1,462 @@
+{
+  "job_id": "in-ea5fe0c67dbb09a7",
+  "text": "Requirements Bachelor\u2019s degree in computer science or equivalent. Minimum 3 + years of Proven experience as a full stack developer or similar role. Strong experience in back -end languages Java, Spring Boot. Strong experience in JavaScript frameworks such as ReactJS and Node.js. Strong Experience in designing and implementing REST based micro services using Spring Boot/Node.js. Knowledge of multiple front -end languages and libraries (HTML5/ CSS3, JavaScript, JSON, jQuery) Experience in developing event -driven applications and familiarity with Kafka or any messaging system. Familiarity with databases (Oracle OR MySQL OR MongoDB OR SQL Server), web servers (Nginx or Apache) and UI/UX design. Experience in containerized application development such as Docker/Kubernetes. Excellent communication and teamwork skills. Great attention to detail. Experience in scrum -based software development, JIRA and CI/CD.",
+  "skills": [
+    {
+      "skill": "design REST based micro services",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.923,
+      "confidence_tier": "Very High",
+      "source": "GPT",
+      "semantic_density": 0.77,
+      "context_agreement": 1.23
+    },
+    {
+      "skill": "implement REST based micro services",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 1.24
+    },
+    {
+      "skill": "develop event-driven applications",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.88,
+      "context_agreement": 1.25
+    },
+    {
+      "skill": "develop containerized applications",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.744,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.9,
+      "context_agreement": 0.96
+    },
+    {
+      "skill": "communicate effectively",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.625,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.9,
+      "context_agreement": 0.96
+    },
+    {
+      "skill": "work in a team",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.652,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.68,
+      "context_agreement": 0.96
+    },
+    {
+      "skill": "pay attention to detail",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.606,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.75,
+      "context_agreement": 0.96
+    },
+    {
+      "skill": "use JIRA",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.714,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.71,
+      "context_agreement": 0.96
+    },
+    {
+      "skill": "manage CI/CD pipeline",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.666,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.79,
+      "context_agreement": 0.96
+    },
+    {
+      "skill": "designing",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.538,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.87,
+      "context_agreement": 0.87
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "Java",
+      "confidence_score": 0.826,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Spring Boot",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "ReactJS",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Node.js",
+      "confidence_score": 0.824,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "HTML5",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "CSS3",
+      "confidence_score": 0.827,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "JavaScript",
+      "confidence_score": 0.823,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "JSON",
+      "confidence_score": 0.826,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "jQuery",
+      "confidence_score": 0.822,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Kafka",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Oracle",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "MySQL",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "MongoDB",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "SQL Server",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Nginx",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Apache",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Docker",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Kubernetes",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Scrum",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "JIRA",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "CI/CD",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Bachelor\u2019s degree",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "computer science",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "back",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "-end",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "JavaScript frameworks",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "REST",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "front",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "-end languages",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "/",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.14783606947482214,
+      "digital_literacy": 0.6148912054874353,
+      "algorithms_programming": 0.4946131274284905,
+      "ai_development": 0.1653010324956817,
+      "basic_job_skills_ohs": 0.1445869819763458,
+      "oop": 0.17774370528801225,
+      "database_systems": 0.17119493671795985,
+      "multimedia_programming": 1.0272027378599393,
+      "web_development": 0.42823404055674397,
+      "mobile_development": 0.4866847305905478,
+      "game_modeling": 0.20012371794171144,
+      "graphics_multimedia": 0.2246413103258716,
+      "audio_editing": 0.16578405191912518
+    },
+    "knowledge_coverage": {
+      "computational_thinking": 0.1822168467521667,
+      "digital_literacy": 0.6000000000000001,
+      "algorithms_programming": 0.431380340519572,
+      "data_analysis": 0.4417659759521485,
+      "workforce_insights": 0.6000000000000001,
+      "oop": 0.7435157711684703,
+      "database_systems": 0.6000001430511476,
+      "multimedia_programming": 0.4375365353177102,
+      "web_development": 0.7430136920571327,
+      "mobile_development": 0.5610016061156989
+    },
+    "combined_coverage": {
+      "audio_editing": 0.16578405191912518,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.2246413103258716,
+      "digital_literacy": 0.6148912054874353,
+      "oop": 0.7435157711684703,
+      "workforce_insights": 0.6000000000000001,
+      "game_modeling": 0.20012371794171144,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.0,
+      "computational_thinking": 0.1822168467521667,
+      "multimedia_programming": 1.0272027378599393,
+      "basic_job_skills_ohs": 0.1445869819763458,
+      "ai_development": 0.1653010324956817,
+      "mobile_development": 0.5610016061156989,
+      "web_development": 0.7430136920571327,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.4946131274284905,
+      "data_analysis": 0.4417659759521485,
+      "database_systems": 0.6000001430511476
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 15,
+      "coverage_percentage": 0.36361358950165085,
+      "skill_coverage_pct": 0.23414934989803618,
+      "knowledge_coverage_pct": 0.28107531110179196,
+      "avg_skill_confidence": 0.746931191590405,
+      "avg_knowledge_confidence": 0.7048761357535919,
+      "hard_skill_count": 7,
+      "soft_skill_count": 3,
+      "knowledge_count": 30
+    },
+    "missing_components": [
+      "structured_programming",
+      "ai_literacy_ethics",
+      "game_programming",
+      "network_technology"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.166,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.225,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.615,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.6,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.2,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.182,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.145,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.165,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.561,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.495,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.442,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.6,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 3,
+    "gpt_skill_count": 9,
+    "fused_skill_count": 10,
+    "model_agreement": 0.3218122654491,
+    "match_count": 3,
+    "extraction_time": 5.10567831993103
+  }
+}

@@ -1,0 +1,390 @@
+{
+  "job_id": "in-869d2b6b90adcda2",
+  "text": "Data Engineer or in a similar role. Strong programming skills using Python Working knowledge of relational databases and query authoring (SQL). Experience designing data models for optimal storage and retrieval to meet product and business requirements. Experience building scalable data pipelines using Spark (SparkSQL) with Airflow scheduler/executor framework or similar scheduling tools. Experience working with AWS data services or similar Apache projects (Spark, Flink, Hive, and Kafka). Understanding of Data Engineering tools/frameworks and standards to improve the productivity and quality of output for Data Engineers across the team. Well versed in modern software development practices (Agile, TDD, CICD) Benefits & Perks Atlassian offers a wide range of perks and benefits designed to support you, your family and to help you engage with your local community.",
+  "skills": [
+    {
+      "skill": "use Python",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.695,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.74,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "design data models",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.699,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.76,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "build scalable data pipelines",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 1.21
+    },
+    {
+      "skill": "work with AWS data services",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.67,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.74,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "improve productivity and quality",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.595,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.82,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "engage with local community",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.59,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.78,
+      "context_agreement": 0.93
+    },
+    {
+      "skill": "programming skills",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.519,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.86,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "designing data models for optimal storage",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.511,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.78,
+      "context_agreement": 0.84
+    },
+    {
+      "skill": "retrieval",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.484,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.87,
+      "context_agreement": 0.84
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "Python",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "relational databases",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "SQL",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Spark",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "SparkSQL",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Airflow scheduler",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "executor framework",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "AWS",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Flink",
+      "confidence_score": 0.827,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Hive",
+      "confidence_score": 0.826,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Kafka",
+      "confidence_score": 0.825,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Data Engineering tools",
+      "confidence_score": 0.823,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "frameworks",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Agile",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "TDD",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "CI/CD",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "query authoring",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "/",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "AWS data services",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.22908985836266293,
+      "digital_literacy": 0.15091343782159153,
+      "algorithms_programming": 0.25069784877125745,
+      "data_analysis": 1.110998058550241,
+      "ai_development": 0.18147926441614584,
+      "oop": 0.6470435584445395,
+      "database_systems": 0.30417808247836514,
+      "multimedia_programming": 0.2498044648731388,
+      "game_programming": 0.14310047769280101,
+      "graphics_multimedia": 0.22264185387861113
+    },
+    "knowledge_coverage": {
+      "computational_thinking": 0.4251425494938281,
+      "digital_literacy": 0.4193214915160616,
+      "data_analysis": 0.7113108622955827,
+      "workforce_insights": 0.6000000000000001,
+      "oop": 0.7474500000000002,
+      "database_systems": 0.5162067351732117,
+      "multimedia_programming": 0.42068788577914246,
+      "web_development": 0.46232489347457895,
+      "mobile_development": 0.414843499660492
+    },
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.22264185387861113,
+      "digital_literacy": 0.4193214915160616,
+      "oop": 0.7474500000000002,
+      "workforce_insights": 0.6000000000000001,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.14310047769280101,
+      "computational_thinking": 0.4251425494938281,
+      "multimedia_programming": 0.42068788577914246,
+      "basic_job_skills_ohs": 0.0,
+      "ai_development": 0.18147926441614584,
+      "mobile_development": 0.414843499660492,
+      "web_development": 0.46232489347457895,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.25069784877125745,
+      "data_analysis": 1.110998058550241,
+      "database_systems": 0.5162067351732117
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 13,
+      "coverage_percentage": 0.3113102399161248,
+      "skill_coverage_pct": 0.18368141606786076,
+      "knowledge_coverage_pct": 0.24827831144173143,
+      "avg_skill_confidence": 0.6404065671274239,
+      "avg_knowledge_confidence": 0.7525897211557941,
+      "hard_skill_count": 7,
+      "soft_skill_count": 2,
+      "knowledge_count": 19
+    },
+    "missing_components": [
+      "audio_editing",
+      "structured_programming",
+      "game_modeling",
+      "ai_literacy_ethics",
+      "basic_job_skills_ohs",
+      "network_technology"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.223,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.419,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.6,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.143,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.425,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.421,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.181,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.415,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.462,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.251,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.516,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 4,
+    "gpt_skill_count": 6,
+    "fused_skill_count": 9,
+    "model_agreement": 0.16475555300712585,
+    "match_count": 1,
+    "extraction_time": 3.35444974899292
+  }
+}

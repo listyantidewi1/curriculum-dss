@@ -1,0 +1,361 @@
+{
+  "job_id": "in-7bdfb998eb1870e8",
+  "text": "The ideal candidate will manage and maintain our servers, applications, databases, and caches, ensuring their smooth operation and optimal performance.",
+  "skills": [
+    {
+      "skill": "manage servers",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.636,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "maintain servers",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 1.18
+    },
+    {
+      "skill": "manage applications",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.685,
+      "confidence_tier": "Medium",
+      "source": "BERT+GPT",
+      "semantic_density": 0.89,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "maintain applications",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.561,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.9,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "manage databases",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.639,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "maintain databases",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.555,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.86,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "manage caches",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.634,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.78,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "maintain caches",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.55,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "ensure smooth operation",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.611,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "ensure optimal performance",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.615,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.84,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "manage",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.637,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.78,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "databases",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.476,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.87,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "caches",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.468,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.78,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "ensuring",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.473,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.84,
+      "context_agreement": 0.83
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "servers",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "applications",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "databases",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "caches",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.21378022814372577,
+      "algorithms_programming": 0.3011039606953733,
+      "data_analysis": 0.5392096689245088,
+      "workforce_insights": 0.24144361162368333,
+      "structured_programming": 0.21378013565685758,
+      "database_systems": 0.29578476904014195,
+      "multimedia_programming": 0.27453391019845075,
+      "mobile_development": 0.23419105714125948
+    },
+    "knowledge_coverage": {
+      "algorithms_programming": 0.476207184791565,
+      "data_analysis": 0.4800100922584534,
+      "ai_literacy_ethics": 0.41292350292205815,
+      "database_systems": 0.3989888548851014,
+      "multimedia_programming": 0.4073217630386353,
+      "web_development": 0.37873227596282966,
+      "mobile_development": 0.38268817663192756
+    },
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.21378013565685758,
+      "graphics_multimedia": 0.0,
+      "digital_literacy": 0.0,
+      "oop": 0.0,
+      "workforce_insights": 0.24144361162368333,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.41292350292205815,
+      "game_programming": 0.0,
+      "computational_thinking": 0.21378022814372577,
+      "multimedia_programming": 0.4073217630386353,
+      "basic_job_skills_ohs": 0.0,
+      "ai_development": 0.0,
+      "mobile_development": 0.38268817663192756,
+      "web_development": 0.37873227596282966,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.476207184791565,
+      "data_analysis": 0.5392096689245088,
+      "database_systems": 0.3989888548851014
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 10,
+      "coverage_percentage": 0.19289870539899434,
+      "skill_coverage_pct": 0.12178038639073689,
+      "knowledge_coverage_pct": 0.15457220265739843,
+      "avg_skill_confidence": 0.6100412601924299,
+      "avg_knowledge_confidence": 0.75,
+      "hard_skill_count": 12,
+      "soft_skill_count": 2,
+      "knowledge_count": 4
+    },
+    "missing_components": [
+      "audio_editing",
+      "graphics_multimedia",
+      "digital_literacy",
+      "oop",
+      "game_modeling",
+      "game_programming",
+      "basic_job_skills_ohs",
+      "ai_development",
+      "network_technology"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.214,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.241,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.413,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.214,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.407,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.383,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.379,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.476,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.539,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.399,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 6,
+    "gpt_skill_count": 10,
+    "fused_skill_count": 14,
+    "model_agreement": 0.09346196651458741,
+    "match_count": 1,
+    "extraction_time": 6.682975769042969
+  }
+}

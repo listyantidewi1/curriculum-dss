@@ -1,0 +1,385 @@
+{
+  "job_id": "in-084355a78d9e0024",
+  "text": "Implement robust CAAP solution a) Develop architecture and key data pipelines for SAP (S4 HANA, Successfactors, Payroll, Concur etc) data with SAP Datasphere and SAP Analytics Cloud (SAC) while ensuring that the data (including PII data) risks are adequately addressed. b) Ensure that the solution architecture addresses IA's objective and business need. c) Leverage of Gen AI and SAP Joule to expedite the implementation of CAAP solution. d) Work with Data Scientist/Data architect to create key data pipelines for SAP datasets.",
+  "skills": [
+    {
+      "skill": "develop architecture and key data pipelines",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.93,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 1.16
+    },
+    {
+      "skill": "ensure data risks are addressed",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.546,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.76,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "ensure solution architecture addresses business needs",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.567,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.94,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "leverage Gen AI and SAP Joule",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.632,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.72,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "work with Data Scientist/Data architect",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.613,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "Implement robust CAAP solution",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.62,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.8,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "Develop architecture",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.645,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 1.0,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "ensuring that the data (including",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.468,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.77,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "Ensure that the solution architecture addresses IA's objective",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.516,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.88,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "business need.",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.47,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.8,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "Leverage",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.475,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.84,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "expedite the implementation",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.512,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.85,
+      "context_agreement": 0.83
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "CAAP",
+      "confidence_score": 0.83,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "SAP",
+      "confidence_score": 0.83,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "S4 HANA",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Successfactors",
+      "confidence_score": 0.829,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Payroll",
+      "confidence_score": 0.827,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Concur",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "SAP Datasphere",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "SAP Analytics Cloud (SAC)",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "PII data",
+      "confidence_score": 0.824,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Gen AI",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "SAP Joule",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "HANA,",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    },
+    {
+      "knowledge": "Datasphere",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.2957886938069372,
+      "algorithms_programming": 0.21804483065497376,
+      "data_analysis": 0.7366317957838551,
+      "ai_literacy_ethics": 0.2180392056315025,
+      "workforce_insights": 0.1772866025553715,
+      "basic_job_skills_ohs": 0.1652802658670646,
+      "oop": 0.35825959597457785
+    },
+    "knowledge_coverage": {
+      "ai_literacy_ethics": 0.4639846788830072,
+      "ai_development": 0.4484544296584826
+    },
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.0,
+      "digital_literacy": 0.0,
+      "oop": 0.35825959597457785,
+      "workforce_insights": 0.1772866025553715,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.4639846788830072,
+      "game_programming": 0.0,
+      "computational_thinking": 0.2957886938069372,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.1652802658670646,
+      "ai_development": 0.4484544296584826,
+      "mobile_development": 0.0,
+      "web_development": 0.0,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.21804483065497376,
+      "data_analysis": 0.7366317957838551,
+      "database_systems": 0.0
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 8,
+      "coverage_percentage": 0.15072267858864577,
+      "skill_coverage_pct": 0.11417531527759382,
+      "knowledge_coverage_pct": 0.04802311097586789,
+      "avg_skill_confidence": 0.5828433821636588,
+      "avg_knowledge_confidence": 0.7712676011530254,
+      "hard_skill_count": 11,
+      "soft_skill_count": 1,
+      "knowledge_count": 13
+    },
+    "missing_components": [
+      "audio_editing",
+      "structured_programming",
+      "graphics_multimedia",
+      "digital_literacy",
+      "game_modeling",
+      "game_programming",
+      "multimedia_programming",
+      "mobile_development",
+      "web_development",
+      "network_technology",
+      "database_systems"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.358,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.177,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.464,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.296,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.165,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.448,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.218,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 8,
+    "gpt_skill_count": 5,
+    "fused_skill_count": 12,
+    "model_agreement": 0.10701088607311249,
+    "match_count": 1,
+    "extraction_time": 3.4649100303649902
+  }
+}

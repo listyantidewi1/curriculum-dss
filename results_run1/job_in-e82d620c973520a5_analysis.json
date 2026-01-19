@@ -1,0 +1,307 @@
+{
+  "job_id": "in-e82d620c973520a5",
+  "text": "Hybrid onsite 2 days/week or 8 days/month 1 interview will be onsite (2 interview process) Databricks is a must AWS or Azure Must be able to do code reviews of Python code Create designs and validate code \"own\" the architecture As the Data Engineering Manager, you will be responsible for architecting, implementing, and optimizing end -to -end data solutions on Databricks while integrating with core AWS services.",
+  "skills": [
+    {
+      "skill": "architect data solutions",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.745,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.82,
+      "context_agreement": 0.98
+    },
+    {
+      "skill": "implement data solutions",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.745,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.82,
+      "context_agreement": 0.98
+    },
+    {
+      "skill": "optimize data solutions",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.79,
+      "context_agreement": 1.24
+    },
+    {
+      "skill": "conduct code reviews",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.718,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.78,
+      "context_agreement": 0.98
+    },
+    {
+      "skill": "create designs",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 1.28
+    },
+    {
+      "skill": "validate code",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.78,
+      "context_agreement": 1.28
+    },
+    {
+      "skill": "own architecture",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.751,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 1.0,
+      "context_agreement": 0.98
+    },
+    {
+      "skill": "do code reviews of Python code",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.521,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.63,
+      "context_agreement": 0.88
+    },
+    {
+      "skill": "architecting",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.552,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.88
+    },
+    {
+      "skill": "implementing",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.552,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.88
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "Databricks",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "AWS",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Azure",
+      "confidence_score": 0.83,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Python",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.4718274836553366,
+      "algorithms_programming": 0.8334709285761349,
+      "data_analysis": 0.5397014103633542,
+      "ai_development": 0.480714278134709,
+      "structured_programming": 0.16152749583685985,
+      "oop": 0.5315567972024376,
+      "database_systems": 0.4536710613065257,
+      "multimedia_programming": 0.16183561818187037,
+      "game_modeling": 0.6207149117475342,
+      "graphics_multimedia": 0.582323425466982
+    },
+    "knowledge_coverage": {
+      "data_analysis": 0.4142330428987742,
+      "oop": 0.7474500000000002,
+      "multimedia_programming": 0.42068784122765074
+    },
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.16152749583685985,
+      "graphics_multimedia": 0.582323425466982,
+      "digital_literacy": 0.0,
+      "oop": 0.7474500000000002,
+      "workforce_insights": 0.0,
+      "game_modeling": 0.6207149117475342,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.0,
+      "computational_thinking": 0.4718274836553366,
+      "multimedia_programming": 0.42068784122765074,
+      "basic_job_skills_ohs": 0.0,
+      "ai_development": 0.480714278134709,
+      "mobile_development": 0.0,
+      "web_development": 0.0,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.8334709285761349,
+      "data_analysis": 0.5397014103633542,
+      "database_systems": 0.4536710613065257
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 10,
+      "coverage_percentage": 0.27958362296395195,
+      "skill_coverage_pct": 0.254597021603776,
+      "knowledge_coverage_pct": 0.0832826781119171,
+      "avg_skill_confidence": 0.7582946044021419,
+      "avg_knowledge_confidence": 0.8304999988749625,
+      "hard_skill_count": 10,
+      "soft_skill_count": 0,
+      "knowledge_count": 4
+    },
+    "missing_components": [
+      "audio_editing",
+      "digital_literacy",
+      "workforce_insights",
+      "ai_literacy_ethics",
+      "game_programming",
+      "basic_job_skills_ohs",
+      "mobile_development",
+      "web_development",
+      "network_technology"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.162,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.582,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.621,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.472,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.421,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.481,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.54,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.454,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 6,
+    "gpt_skill_count": 7,
+    "fused_skill_count": 10,
+    "model_agreement": 0.40915986469813753,
+    "match_count": 3,
+    "extraction_time": 3.254669189453125
+  }
+}

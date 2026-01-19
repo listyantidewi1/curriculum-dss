@@ -1,0 +1,342 @@
+{
+  "job_id": "in-c950642ab2f1aae8",
+  "text": "The Engineer will be hands -on working with a team of cloud Engineers, ETL developers, technical leads, DBAs, project managers and analysts to design and implement the Education portfolio data, data pipelines, and transformations in a more stream -lined, scalable and cost -effective set of solutions. Mandatory requirements Experience working with Oracle RDS Experience working with one or more AWS Cloud services such as S3 storage, Managed Airflow (MWAA), Data Migration Service (DMS) in support of building data pipelines Experience working with a variety of backend data sources (e.g.",
+  "skills": [
+    {
+      "skill": "design data solutions",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.76,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.79,
+      "context_agreement": 1.01
+    },
+    {
+      "skill": "implement data pipelines",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 1.3
+    },
+    {
+      "skill": "transform data",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.732,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 1.01
+    },
+    {
+      "skill": "work with Oracle RDS",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.722,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.73,
+      "context_agreement": 1.01
+    },
+    {
+      "skill": "use AWS Cloud services",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.752,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.74,
+      "context_agreement": 1.01
+    },
+    {
+      "skill": "build data pipelines",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 1.29
+    },
+    {
+      "skill": "collaborate with team",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.697,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.79,
+      "context_agreement": 1.01
+    },
+    {
+      "skill": "design",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.674,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.78,
+      "context_agreement": 0.91
+    },
+    {
+      "skill": "implement the Education portfolio data",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.678,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.8,
+      "context_agreement": 0.91
+    },
+    {
+      "skill": "transformations",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.526,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.91
+    },
+    {
+      "skill": "working with a variety of backend data sources",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.509,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.75,
+      "context_agreement": 0.91
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "Oracle RDS",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "AWS Cloud",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "S3 storage",
+      "confidence_score": 0.829,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Managed Airflow (MWAA)",
+      "confidence_score": 0.83,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Data Migration Service (DMS)",
+      "confidence_score": 0.83,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "data pipelines",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "backend data sources",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.5919410094163777,
+      "algorithms_programming": 0.31151007098968386,
+      "data_analysis": 1.4501504236080554,
+      "workforce_insights": 0.2364713184685033,
+      "oop": 0.26567983348022,
+      "database_systems": 0.3597030507981362,
+      "web_development": 0.20504782037836697,
+      "game_modeling": 0.26265100267095287,
+      "graphics_multimedia": 0.32978092599413034,
+      "audio_editing": 0.28044544268273364
+    },
+    "knowledge_coverage": {
+      "digital_literacy": 0.5309490912578224,
+      "data_analysis": 0.7474500972032557,
+      "workforce_insights": 0.4666366064574134,
+      "database_systems": 0.5092869528500812,
+      "web_development": 0.453600884385281
+    },
+    "combined_coverage": {
+      "audio_editing": 0.28044544268273364,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.32978092599413034,
+      "digital_literacy": 0.5309490912578224,
+      "oop": 0.26567983348022,
+      "workforce_insights": 0.4666366064574134,
+      "game_modeling": 0.26265100267095287,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.0,
+      "computational_thinking": 0.5919410094163777,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.0,
+      "ai_development": 0.0,
+      "mobile_development": 0.0,
+      "web_development": 0.453600884385281,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.31151007098968386,
+      "data_analysis": 1.4501504236080554,
+      "database_systems": 0.5092869528500812
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 11,
+      "coverage_percentage": 0.2869806444101448,
+      "skill_coverage_pct": 0.22596741570985054,
+      "knowledge_coverage_pct": 0.1425222964291502,
+      "avg_skill_confidence": 0.731755865809097,
+      "avg_knowledge_confidence": 0.8301602129084724,
+      "hard_skill_count": 10,
+      "soft_skill_count": 1,
+      "knowledge_count": 7
+    },
+    "missing_components": [
+      "structured_programming",
+      "ai_literacy_ethics",
+      "game_programming",
+      "multimedia_programming",
+      "basic_job_skills_ohs",
+      "ai_development",
+      "mobile_development",
+      "network_technology"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.28,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.33,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.531,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.266,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.467,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.263,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.592,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.454,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.312,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.509,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 6,
+    "gpt_skill_count": 7,
+    "fused_skill_count": 11,
+    "model_agreement": 0.5375319208417619,
+    "match_count": 4,
+    "extraction_time": 4.743842840194702
+  }
+}

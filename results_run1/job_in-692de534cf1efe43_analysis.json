@@ -1,0 +1,406 @@
+{
+  "job_id": "in-692de534cf1efe43",
+  "text": "Will design, develop and modify software systems, using scientific analysis and mathematical models to predict and measure outcome and consequences of design Will confer with system engineers and hardware engineers to derive software requirements and to obtain information on project limitations and capabilities, performance requirements and interfaces.",
+  "skills": [
+    {
+      "skill": "design software systems",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.753,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 0.99
+    },
+    {
+      "skill": "develop software systems",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.754,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.82,
+      "context_agreement": 0.99
+    },
+    {
+      "skill": "modify software systems",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 1.29
+    },
+    {
+      "skill": "use scientific analysis",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.753,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 0.99
+    },
+    {
+      "skill": "use mathematical models",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.483,
+      "confidence_tier": "Low",
+      "source": "GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 0.99
+    },
+    {
+      "skill": "predict outcomes",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.755,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 0.99
+    },
+    {
+      "skill": "measure consequences of design",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 1.25
+    },
+    {
+      "skill": "confer with system engineers",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.819,
+      "confidence_tier": "High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.79,
+      "context_agreement": 1.29
+    },
+    {
+      "skill": "confer with hardware engineers",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.784,
+      "confidence_tier": "Medium High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 1.25
+    },
+    {
+      "skill": "derive software requirements",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.991,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.86,
+      "context_agreement": 1.29
+    },
+    {
+      "skill": "obtain information on project limitations",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.794,
+      "confidence_tier": "Medium High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.82,
+      "context_agreement": 1.29
+    },
+    {
+      "skill": "obtain information on project capabilities",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.635,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 0.99
+    },
+    {
+      "skill": "obtain information on performance requirements",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.788,
+      "confidence_tier": "Medium High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.88,
+      "context_agreement": 1.25
+    },
+    {
+      "skill": "obtain information on interfaces",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.634,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.82,
+      "context_agreement": 0.99
+    },
+    {
+      "skill": "design",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.665,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.78,
+      "context_agreement": 0.89
+    },
+    {
+      "skill": "develop",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.67,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.81,
+      "context_agreement": 0.89
+    },
+    {
+      "skill": "predict",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.67,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.81,
+      "context_agreement": 0.89
+    },
+    {
+      "skill": "measure outcome",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.67,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.81,
+      "context_agreement": 0.89
+    },
+    {
+      "skill": "capabilities",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.519,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.89
+    },
+    {
+      "skill": "interfaces.",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.519,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.89
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "scientific analysis",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "mathematical models",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.6475009298171379,
+      "algorithms_programming": 0.5770243010421238,
+      "ai_development": 0.2904250120364578,
+      "workforce_insights": 0.5295695229410251,
+      "basic_job_skills_ohs": 0.3163859918578272,
+      "structured_programming": 0.3141909840774681,
+      "oop": 0.48227737893510503,
+      "database_systems": 0.2809395655607534,
+      "multimedia_programming": 0.5169379423734879,
+      "game_modeling": 0.47727556666407506,
+      "game_programming": 0.319779109496562,
+      "graphics_multimedia": 0.45430243679422305,
+      "audio_editing": 0.2767668564840872
+    },
+    "knowledge_coverage": {
+      "computational_thinking": 0.5957202717661859,
+      "ai_development": 0.4154776333719493
+    },
+    "combined_coverage": {
+      "audio_editing": 0.2767668564840872,
+      "structured_programming": 0.3141909840774681,
+      "graphics_multimedia": 0.45430243679422305,
+      "digital_literacy": 0.0,
+      "oop": 0.48227737893510503,
+      "workforce_insights": 0.5295695229410251,
+      "game_modeling": 0.47727556666407506,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.319779109496562,
+      "computational_thinking": 0.6475009298171379,
+      "multimedia_programming": 0.5169379423734879,
+      "basic_job_skills_ohs": 0.3163859918578272,
+      "ai_development": 0.4154776333719493,
+      "mobile_development": 0.0,
+      "web_development": 0.0,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.5770243010421238,
+      "data_analysis": 0.0,
+      "database_systems": 0.2809395655607534
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 13,
+      "coverage_percentage": 0.2951804326008329,
+      "skill_coverage_pct": 0.2885987156884386,
+      "knowledge_coverage_pct": 0.053220942375691326,
+      "avg_skill_confidence": 0.732769541598153,
+      "avg_knowledge_confidence": 0.8305000045001507,
+      "hard_skill_count": 14,
+      "soft_skill_count": 6,
+      "knowledge_count": 2
+    },
+    "missing_components": [
+      "digital_literacy",
+      "ai_literacy_ethics",
+      "mobile_development",
+      "web_development",
+      "network_technology",
+      "data_analysis"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.277,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.314,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.454,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.482,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.53,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.477,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.32,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.648,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.517,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.316,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.415,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.577,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.281,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 13,
+    "gpt_skill_count": 14,
+    "fused_skill_count": 20,
+    "model_agreement": 0.47145491412707735,
+    "match_count": 7,
+    "extraction_time": 10.230252504348755
+  }
+}

@@ -1,0 +1,250 @@
+{
+  "job_id": "in-7e52319ecdb8ac52",
+  "text": "You have deep expertise in prompt and context engineering, and are capable of designing, testing, and optimizing generative AI applications at scale.",
+  "skills": [
+    {
+      "skill": "design generative AI applications",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.7,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 0.96
+    },
+    {
+      "skill": "test generative AI applications",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.698,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 0.96
+    },
+    {
+      "skill": "optimize generative AI applications",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.997,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 1.23
+    },
+    {
+      "skill": "designing",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.537,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.87,
+      "context_agreement": 0.87
+    },
+    {
+      "skill": "testing",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.53,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.81,
+      "context_agreement": 0.87
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "prompt and context engineering",
+      "confidence_score": 0.83,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "generative AI",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.14740728982420767,
+      "algorithms_programming": 0.27119490628028325,
+      "ai_literacy_ethics": 0.484152674633701,
+      "ai_development": 0.8904094427246961,
+      "basic_job_skills_ohs": 0.14416762588932688,
+      "oop": 0.17722818235695045,
+      "database_systems": 0.17069840765429045,
+      "game_modeling": 0.1995432846403963,
+      "game_programming": 0.26046746931675585,
+      "graphics_multimedia": 0.22398976687712266,
+      "audio_editing": 0.16530321643620235
+    },
+    "knowledge_coverage": {
+      "ai_literacy_ethics": 0.3482491850852967,
+      "ai_development": 0.565771568472066,
+      "mobile_development": 0.426920358667358
+    },
+    "combined_coverage": {
+      "audio_editing": 0.16530321643620235,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.22398976687712266,
+      "digital_literacy": 0.0,
+      "oop": 0.17722818235695045,
+      "workforce_insights": 0.0,
+      "game_modeling": 0.1995432846403963,
+      "ai_literacy_ethics": 0.484152674633701,
+      "game_programming": 0.26046746931675585,
+      "computational_thinking": 0.14740728982420767,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.14416762588932688,
+      "ai_development": 0.8904094427246961,
+      "mobile_development": 0.426920358667358,
+      "web_development": 0.0,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.27119490628028325,
+      "data_analysis": 0.0,
+      "database_systems": 0.17069840765429045
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 12,
+      "coverage_percentage": 0.18744645396322585,
+      "skill_coverage_pct": 0.16497696140178594,
+      "knowledge_coverage_pct": 0.0705758480118274,
+      "avg_skill_confidence": 0.6922131820856772,
+      "avg_knowledge_confidence": 0.7898523486852647,
+      "hard_skill_count": 5,
+      "soft_skill_count": 0,
+      "knowledge_count": 2
+    },
+    "missing_components": [
+      "structured_programming",
+      "digital_literacy",
+      "workforce_insights",
+      "multimedia_programming",
+      "web_development",
+      "network_technology",
+      "data_analysis"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.165,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.224,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.177,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.2,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.484,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.26,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.147,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.144,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.427,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.271,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.171,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 3,
+    "gpt_skill_count": 3,
+    "fused_skill_count": 5,
+    "model_agreement": 0.3078272143999735,
+    "match_count": 1,
+    "extraction_time": 2.182642936706543
+  }
+}

@@ -1,0 +1,384 @@
+{
+  "job_id": "in-c988998ea0b5990b",
+  "text": "This may involve delivering a Threat Intel -led Red Team for a large enterprise, preparing command and control infrastructure, developing social engineering campaigns and the associated collateral, executing phishing campaigns and attempting to compromise internet -facing systems, conducting privilege escalation and lateral movement within customer networks, hunting for objectives with little -to -no information provided by the customer and exfiltrating data from the network all while avoiding detection from the customer security operations teams.",
+  "skills": [
+    {
+      "skill": "deliver Threat Intel-led Red Team",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.76,
+      "context_agreement": 1.34
+    },
+    {
+      "skill": "prepare command and control infrastructure",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.625,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 1.04
+    },
+    {
+      "skill": "develop social engineering campaigns",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.86,
+      "context_agreement": 1.35
+    },
+    {
+      "skill": "execute phishing campaigns",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.85,
+      "context_agreement": 1.34
+    },
+    {
+      "skill": "attempt to compromise internet-facing systems",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 1.35
+    },
+    {
+      "skill": "conduct privilege escalation",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.88,
+      "context_agreement": 1.34
+    },
+    {
+      "skill": "conduct lateral movement within customer networks",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 1.0,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.82,
+      "context_agreement": 1.34
+    },
+    {
+      "skill": "hunt for objectives with little-to-no information",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.998,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.8,
+      "context_agreement": 1.35
+    },
+    {
+      "skill": "exfiltrate data from the network",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.904,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.77,
+      "context_agreement": 1.32
+    },
+    {
+      "skill": "avoid detection from customer security operations teams",
+      "type": "Soft",
+      "bloom": "Apply",
+      "confidence_score": 0.722,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.81,
+      "context_agreement": 1.04
+    },
+    {
+      "skill": "preparing command",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.536,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.84,
+      "context_agreement": 0.94
+    },
+    {
+      "skill": "control infrastructure",
+      "type": "Hard",
+      "bloom": "Analyze",
+      "confidence_score": 0.584,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.94
+    },
+    {
+      "skill": "the associated collateral",
+      "type": "Hard",
+      "bloom": "Understand",
+      "confidence_score": 0.576,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.83,
+      "context_agreement": 0.94
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "Threat Intel",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Red Team",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "command and control infrastructure",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "social engineering campaigns",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "phishing campaigns",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "internet-facing systems",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "privilege escalation",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "lateral movement",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "customer networks",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "data exfiltration",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "security operations",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.18033057939729213,
+      "digital_literacy": 0.7753373352141041,
+      "algorithms_programming": 0.21161563034760192,
+      "structured_programming": 0.18033046785308104,
+      "multimedia_programming": 0.23014662653446197
+    },
+    "knowledge_coverage": {
+      "digital_literacy": 0.47432352304458625,
+      "algorithms_programming": 0.35386490821838384,
+      "ai_literacy_ethics": 0.3515609979629517,
+      "workforce_insights": 0.3698708295822144,
+      "basic_job_skills_ohs": 0.33347386121749883,
+      "network_technology": 0.36823346614837654
+    },
+    "combined_coverage": {
+      "audio_editing": 0.0,
+      "structured_programming": 0.18033046785308104,
+      "graphics_multimedia": 0.0,
+      "digital_literacy": 0.7753373352141041,
+      "oop": 0.0,
+      "workforce_insights": 0.3698708295822144,
+      "game_modeling": 0.0,
+      "ai_literacy_ethics": 0.3515609979629517,
+      "game_programming": 0.0,
+      "computational_thinking": 0.18033057939729213,
+      "multimedia_programming": 0.23014662653446197,
+      "basic_job_skills_ohs": 0.33347386121749883,
+      "ai_development": 0.0,
+      "mobile_development": 0.0,
+      "web_development": 0.0,
+      "network_technology": 0.36823346614837654,
+      "algorithms_programming": 0.35386490821838384,
+      "data_analysis": 0.0,
+      "database_systems": 0.0
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 9,
+      "coverage_percentage": 0.1654288985330718,
+      "skill_coverage_pct": 0.08304003364981795,
+      "knowledge_coverage_pct": 0.11849092558810587,
+      "avg_skill_confidence": 0.842053974336351,
+      "avg_knowledge_confidence": 0.75,
+      "hard_skill_count": 11,
+      "soft_skill_count": 2,
+      "knowledge_count": 11
+    },
+    "missing_components": [
+      "audio_editing",
+      "graphics_multimedia",
+      "oop",
+      "game_modeling",
+      "game_programming",
+      "ai_development",
+      "mobile_development",
+      "web_development",
+      "data_analysis",
+      "database_systems"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.18,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.37,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.352,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.18,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.23,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.333,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.368,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.354,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 11,
+    "gpt_skill_count": 10,
+    "fused_skill_count": 13,
+    "model_agreement": 0.7014641111547297,
+    "match_count": 8,
+    "extraction_time": 9.4903564453125
+  }
+}

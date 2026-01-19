@@ -1,0 +1,359 @@
+{
+  "job_id": "in-2b58f7a14326a069",
+  "text": "Our policy is to conduct background checks for all candidates who accept an offer of employment with us. Please note: No agency representation or submissions will be recognized for this vacancy. Bachelor's degree in Engineering with 8 + years of relevant experience. Substantial technical and practical experience in mechanical engineering in the same or similar industry including experience in working in multi -disciplinary projects and teams. Working experience in refining, chemical, and petro -chemical facilities. Working experience designing, developing and leading different phases of Engineering Projects; from early stages up to Detailed Engineering. Candidates must be eligible to work in USA and willing to work in the Elkview (Charleston) WV area.",
+  "skills": [
+    {
+      "skill": "conduct background checks",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.591,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "work in multi-disciplinary projects",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.985,
+      "confidence_tier": "Very High",
+      "source": "BERT+GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 1.2
+    },
+    {
+      "skill": "work in multi-disciplinary teams",
+      "type": "Soft",
+      "bloom": "Apply",
+      "confidence_score": 0.643,
+      "confidence_tier": "Medium",
+      "source": "GPT",
+      "semantic_density": 0.82,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "design engineering projects",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.706,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.85,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "develop engineering projects",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.707,
+      "confidence_tier": "Medium High",
+      "source": "GPT",
+      "semantic_density": 0.86,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "lead engineering projects",
+      "type": "Hard",
+      "bloom": "Evaluate",
+      "confidence_score": 0.58,
+      "confidence_tier": "Medium Low",
+      "source": "GPT",
+      "semantic_density": 0.83,
+      "context_agreement": 0.92
+    },
+    {
+      "skill": "teams.",
+      "type": "Soft",
+      "bloom": "N/A",
+      "confidence_score": 0.661,
+      "confidence_tier": "Medium",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.78,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "refining",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.476,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.84,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "chemical",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.476,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.84,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "petro -chemical facilities.",
+      "type": "Hard",
+      "bloom": "Apply",
+      "confidence_score": 0.477,
+      "confidence_tier": "Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.85,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "designing",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.516,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.87,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "developing",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.519,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.9,
+      "context_agreement": 0.83
+    },
+    {
+      "skill": "leading different phases of Engineering Projects",
+      "type": "Hard",
+      "bloom": "Create",
+      "confidence_score": 0.51,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)",
+      "semantic_density": 0.81,
+      "context_agreement": 0.83
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge": "mechanical engineering",
+      "confidence_score": 0.831,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "Detailed Engineering",
+      "confidence_score": 0.826,
+      "confidence_tier": "High",
+      "source": "BERT+GPT"
+    },
+    {
+      "knowledge": "refining facilities",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "chemical facilities",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "petro-chemical facilities",
+      "confidence_score": 0.75,
+      "confidence_tier": "Medium High",
+      "source": "GPT"
+    },
+    {
+      "knowledge": "Bachelor's degree",
+      "confidence_score": 0.532,
+      "confidence_tier": "Medium Low",
+      "source": "BERT (standalone)"
+    }
+  ],
+  "coverage_analysis": {
+    "skill_coverage": {
+      "computational_thinking": 0.2529239581016385,
+      "algorithms_programming": 0.4702910072547817,
+      "ai_development": 0.2762001810443259,
+      "workforce_insights": 0.6371011882897913,
+      "basic_job_skills_ohs": 0.15960198981510634,
+      "oop": 0.29244900900284104,
+      "database_systems": 0.16414077619842138,
+      "web_development": 0.14183273911693806,
+      "game_modeling": 0.28421442454706286,
+      "game_programming": 0.19122599130451529,
+      "graphics_multimedia": 0.34416103864231734,
+      "audio_editing": 0.1589528492198089
+    },
+    "knowledge_coverage": {
+      "computational_thinking": 0.4425198643962998
+    },
+    "combined_coverage": {
+      "audio_editing": 0.1589528492198089,
+      "structured_programming": 0.0,
+      "graphics_multimedia": 0.34416103864231734,
+      "digital_literacy": 0.0,
+      "oop": 0.29244900900284104,
+      "workforce_insights": 0.6371011882897913,
+      "game_modeling": 0.28421442454706286,
+      "ai_literacy_ethics": 0.0,
+      "game_programming": 0.19122599130451529,
+      "computational_thinking": 0.4425198643962998,
+      "multimedia_programming": 0.0,
+      "basic_job_skills_ohs": 0.15960198981510634,
+      "ai_development": 0.2762001810443259,
+      "mobile_development": 0.0,
+      "web_development": 0.14183273911693806,
+      "network_technology": 0.0,
+      "algorithms_programming": 0.4702910072547817,
+      "data_analysis": 0.0,
+      "database_systems": 0.16414077619842138
+    },
+    "metrics": {
+      "total_components": 19,
+      "covered_components": 12,
+      "coverage_percentage": 0.18751005572801105,
+      "skill_coverage_pct": 0.1775313238177657,
+      "knowledge_coverage_pct": 0.023290519178752623,
+      "avg_skill_confidence": 0.6038624918244166,
+      "avg_knowledge_confidence": 0.7397157879918814,
+      "hard_skill_count": 10,
+      "soft_skill_count": 3,
+      "knowledge_count": 6
+    },
+    "missing_components": [
+      "structured_programming",
+      "digital_literacy",
+      "ai_literacy_ethics",
+      "multimedia_programming",
+      "mobile_development",
+      "network_technology",
+      "data_analysis"
+    ],
+    "coverage_gaps": [
+      {
+        "component": "audio_editing",
+        "coverage_weight": 0.159,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "structured_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "graphics_multimedia",
+        "coverage_weight": 0.344,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "digital_literacy",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "oop",
+        "coverage_weight": 0.292,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "workforce_insights",
+        "coverage_weight": 0.637,
+        "severity": "low",
+        "suggestion": "Add both theoretical and practical aspects"
+      },
+      {
+        "component": "game_modeling",
+        "coverage_weight": 0.284,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_literacy_ethics",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "game_programming",
+        "coverage_weight": 0.191,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "computational_thinking",
+        "coverage_weight": 0.443,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "multimedia_programming",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "basic_job_skills_ohs",
+        "coverage_weight": 0.16,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "ai_development",
+        "coverage_weight": 0.276,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "mobile_development",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "web_development",
+        "coverage_weight": 0.142,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "network_technology",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "algorithms_programming",
+        "coverage_weight": 0.47,
+        "severity": "medium",
+        "suggestion": "Include more technical knowledge items"
+      },
+      {
+        "component": "data_analysis",
+        "coverage_weight": 0.0,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      },
+      {
+        "component": "database_systems",
+        "coverage_weight": 0.164,
+        "severity": "high",
+        "suggestion": "Consider adding more specific skills in this area"
+      }
+    ]
+  },
+  "extraction_metrics": {
+    "bert_skill_count": 8,
+    "gpt_skill_count": 6,
+    "fused_skill_count": 13,
+    "model_agreement": 0.12312743067741394,
+    "match_count": 1,
+    "extraction_time": 6.937263011932373
+  }
+}
