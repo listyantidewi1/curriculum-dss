@@ -266,7 +266,7 @@ All diagrams can be generated using the provided prompts in `/docs/prompts/`
 If you use this pipeline or insights from this project, please cite:
 
 ```
-[Your Name]. Future-aware hybrid skill extraction for curriculum intelligence. (2025)
+[Astuti, Listyanti Dewi]. Future-aware hybrid skill extraction for curriculum intelligence. (2025)
 ```
 
 ---
