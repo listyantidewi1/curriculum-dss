@@ -853,6 +853,35 @@ python recommendations.py --sensitivity
 
 ---
 
+## 17. Spektrum Keahlian Integration
+
+**Source:** Keputusan Menteri Pendidikan, Kebudayaan, Riset, dan Teknologi RI Nomor 244/M/2024 tentang Spektrum Keahlian dan Konversi Spektrum Keahlian SMK/MAK pada Kurikulum Merdeka.
+
+### Purpose
+
+The Spektrum Keahlian taxonomy provides an official Indonesian vocational classification (10 Bidang → Program → Konsentrasi). When a department is associated with a Spektrum code (e.g., 4.1.1 Rekayasa Perangkat Lunak), the pipeline filters `future_domains.csv` to only those domains deemed relevant for that vocational field.
+
+### Mapping Logic (future_weight_mapping.py)
+
+1. When `--spektrum-code` is set, load `spektrum_mapping.csv` (default: `data/spektrum_keahlian/` or `DATA/spektrum_keahlian/`).
+2. Look up the code in `primary_domain_ids` (semicolon-separated domain_ids).
+3. Filter `future_domains.csv` to only those `domain_id`s.
+4. If the code is not in the mapping, try `*` (fallback) row.
+5. If mapping file is missing or code has no match, use all domains (with a warning).
+
+### Reproducibility
+
+- `log_run_metadata.py` records `spektrum_code`, `future_domains_file`, and `spektrum_mapping_file` in `run_metadata.json`.
+- `evaluate_extraction.py` and `evaluate_future_mapping.py` accept `--spektrum-code` and record it in their reports for per-Bidang stratification and provenance.
+
+### Limitations
+
+- Spektrum mapping is manually curated; coverage of non-IT Bidang (e.g., Agribisnis, Pariwisata) may be incomplete.
+- `future_domains.csv` is IT/software-biased; applicability to other Bidang without domain expansion is limited.
+- Cross-Bidang validity of extraction and mapping metrics is untested when gold sets span multiple Spektrum codes.
+
+---
+
 ## Summary
 
 | Component | Key Formula / Method |

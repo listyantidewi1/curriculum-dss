@@ -140,6 +140,13 @@ def compute_trends_for_df(df: pd.DataFrame, min_jobs: int, fdr_alpha: float = 0.
         axis=1,
     )
 
+    # Flag skills with potential autocorrelation (DW < 1.5 = positive, DW > 2.5 = negative).
+    # Flagged skills have anti-conservative p-values; exclude from high-confidence trend claims.
+    trends["dw_flagged"] = trends["durbin_watson"].apply(
+        lambda dw: bool(dw is not None and not (isinstance(dw, float) and dw != dw)
+                        and (dw < 1.5 or dw > 2.5))
+    )
+
     return trends
 
 
@@ -153,6 +160,7 @@ def stability_analysis(df: pd.DataFrame, min_jobs_values: List[int],
 
     for mj in min_jobs_values:
         seed_sets = []
+        seed_sets_clean = []
         for seed_offset in range(n_seeds):
             df_sampled = df.sample(frac=0.9, random_state=base_seed + seed_offset).copy()
             trends = compute_trends_for_df(df_sampled, mj)
@@ -164,6 +172,17 @@ def stability_analysis(df: pd.DataFrame, min_jobs_values: List[int],
                 .tolist()
             )
             seed_sets.append(emerging)
+            # Clean set: exclude DW-flagged skills (potential autocorrelation)
+            if "dw_flagged" in trends.columns:
+                clean_trends = trends[~trends["dw_flagged"]]
+            else:
+                clean_trends = trends
+            emerging_clean = set(
+                clean_trends[clean_trends["trend_label"] == "Emerging"]
+                .nlargest(top_n, "slope")["skill"]
+                .tolist()
+            )
+            seed_sets_clean.append(emerging_clean)
 
         if len(seed_sets) < 2:
             results.append({
@@ -180,11 +199,20 @@ def stability_analysis(df: pd.DataFrame, min_jobs_values: List[int],
                     jacc = len(a & b) / len(a | b) if (a | b) else 0.0
                     jaccards.append(jacc)
 
+        jaccards_clean = []
+        for i in range(len(seed_sets_clean)):
+            for j in range(i + 1, len(seed_sets_clean)):
+                a, b = seed_sets_clean[i], seed_sets_clean[j]
+                if a or b:
+                    jacc = len(a & b) / len(a | b) if (a | b) else 0.0
+                    jaccards_clean.append(jacc)
+
         results.append({
             "min_jobs": mj,
             "n_seeds": len(seed_sets),
             "mean_jaccard": round(float(np.mean(jaccards)), 4) if jaccards else 0.0,
             "std_jaccard": round(float(np.std(jaccards)), 4) if jaccards else 0.0,
+            "mean_jaccard_clean": round(float(np.mean(jaccards_clean)), 4) if jaccards_clean else 0.0,
             "top_n": top_n,
         })
 
@@ -269,13 +297,33 @@ def main():
     print(f"[INFO] q-value stats: mean={trends['q_value'].mean():.4f}, "
           f"median={trends['q_value'].median():.4f}")
 
+    dw_summary = {}
     if "durbin_watson" in trends.columns:
         dw_valid = trends["durbin_watson"].dropna()
         if not dw_valid.empty:
-            dw_warn = ((dw_valid < 1.5) | (dw_valid > 2.5)).sum()
-            print(f"[INFO] Durbin-Watson stats: mean={dw_valid.mean():.2f}, "
-                  f"median={dw_valid.median():.2f}, "
-                  f"flagged (DW<1.5 or >2.5): {dw_warn}/{len(dw_valid)}")
+            n_pos_ac = int((dw_valid < 1.5).sum())
+            n_neg_ac = int((dw_valid > 2.5).sum())
+            n_ok = int(((dw_valid >= 1.5) & (dw_valid <= 2.5)).sum())
+            dw_summary = {
+                "n_skills_with_dw": len(dw_valid),
+                "n_positive_autocorr_dw_lt_1_5": n_pos_ac,
+                "n_acceptable_1_5_to_2_5": n_ok,
+                "n_negative_autocorr_dw_gt_2_5": n_neg_ac,
+                "pct_flagged": round((n_pos_ac + n_neg_ac) / len(dw_valid), 4),
+                "mean_dw": round(float(dw_valid.mean()), 4),
+                "median_dw": round(float(dw_valid.median()), 4),
+            }
+            print(f"[INFO] Durbin-Watson distribution: "
+                  f"DW<1.5 (pos autocorr)={n_pos_ac}, "
+                  f"1.5-2.5 (acceptable)={n_ok}, "
+                  f"DW>2.5 (neg autocorr)={n_neg_ac} "
+                  f"({dw_summary['pct_flagged']:.1%} flagged)")
+            if "dw_flagged" in trends.columns:
+                n_flagged_emerging = int(
+                    trends[(trends["trend_label"] == "Emerging") & trends["dw_flagged"]].shape[0]
+                )
+                print(f"[INFO] DW-flagged among Emerging skills: {n_flagged_emerging} "
+                      f"(treat with caution — potential autocorrelation)")
 
     out_path = out_dir / args.output
     trends.to_csv(out_path, index=False, encoding="utf-8-sig")
@@ -285,12 +333,36 @@ def main():
         print("[INFO] Running stability analysis...")
         min_jobs_values = [5, 10, 15, 20]
         stab = stability_analysis(df, min_jobs_values, top_n=20, n_seeds=3)
+
+        # Add DW distribution to the stability report
+        stab["dw_distribution"] = dw_summary
+
+        # Add clean top-20 emerging (DW-filtered) and its Jaccard vs full top-20
+        if "dw_flagged" in trends.columns:
+            top20_all = set(
+                trends[trends["trend_label"] == "Emerging"]
+                .nlargest(20, "slope")["skill"].tolist()
+            )
+            top20_clean = set(
+                trends[(trends["trend_label"] == "Emerging") & ~trends["dw_flagged"]]
+                .nlargest(20, "slope")["skill"].tolist()
+            )
+            union_dw = top20_all | top20_clean
+            inter_dw = top20_all & top20_clean
+            stab["clean_top20_emerging"] = sorted(top20_clean)
+            stab["clean_top20_jaccard_vs_all"] = round(
+                len(inter_dw) / len(union_dw), 4) if union_dw else 1.0
+            print(f"[INFO] Clean top-20 Jaccard (DW-filtered vs all): "
+                  f"{stab['clean_top20_jaccard_vs_all']:.4f}")
+
         stab_path = out_dir / "trend_stability_report.json"
         stab_path.write_text(json.dumps(stab, indent=2), encoding="utf-8")
         print(f"[INFO] Saved stability report to {stab_path}")
         for entry in stab["stability_by_min_jobs"]:
+            clean_j = entry.get('mean_jaccard_clean', entry['mean_jaccard'])
             print(f"  min_jobs={entry['min_jobs']}: "
-                  f"Jaccard={entry['mean_jaccard']:.3f} +/- {entry.get('std_jaccard', 0):.3f}")
+                  f"Jaccard={entry['mean_jaccard']:.3f} +/- {entry.get('std_jaccard', 0):.3f} "
+                  f"(clean={clean_j:.3f})")
 
     try:
         top_emerging = trends[trends["trend_label"] == "Emerging"].nlargest(10, "slope")

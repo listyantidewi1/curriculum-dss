@@ -104,6 +104,22 @@ def load_future_domains(path: Path) -> pd.DataFrame:
     # Ensure numeric
     df["trend_score"] = pd.to_numeric(df["trend_score"], errors="coerce").fillna(0.0)
 
+    # Add ordinal trend_tier if not already present (derived from trend_score).
+    _TIER_WEIGHT_MAP = {
+        "Strong_Growth": 1.0,
+        "Moderate_Growth": 0.7,
+        "Stable": 0.4,
+        "Declining": 0.0,
+    }
+    if "trend_tier" not in df.columns:
+        def _score_to_tier(s: float) -> str:
+            if s >= 0.8: return "Strong_Growth"
+            elif s >= 0.5: return "Moderate_Growth"
+            elif s >= 0.3: return "Stable"
+            else: return "Declining"
+        df["trend_tier"] = df["trend_score"].apply(_score_to_tier)
+    df["tier_weight"] = df["trend_tier"].map(_TIER_WEIGHT_MAP).fillna(0.0)
+
     # Build combined text for embedding (domain name + examples)
     df["domain_text"] = (
         df["future_domain"].astype(str).str.strip()
@@ -202,6 +218,19 @@ def main():
         help="Minimum similarity for valid domain assignment. Below this, "
              "future_weight is set to 0 (default: 0.3).",
     )
+    parser.add_argument(
+        "--spektrum-code",
+        type=str,
+        default=None,
+        help="Spektrum Keahlian code (e.g. 4.1.1) to filter future_domains via spektrum_mapping.csv. "
+             "When set, only primary_domain_ids for this code are used.",
+    )
+    parser.add_argument(
+        "--spektrum-mapping-file",
+        type=str,
+        default=None,
+        help="Path to spektrum_mapping.csv (default: data/spektrum_keahlian/spektrum_mapping.csv)",
+    )
 
     args = parser.parse_args()
 
@@ -265,6 +294,36 @@ def main():
     # Load future domains
     print(f"[INFO] Reading future domains from {domains_path}")
     domains_df = load_future_domains(domains_path)
+
+    # Filter by Spektrum code when provided (department-scoped domain selection)
+    if args.spektrum_code and str(args.spektrum_code).strip():
+        if args.spektrum_mapping_file:
+            mapping_path = Path(args.spektrum_mapping_file)
+        else:
+            base = Path(config.PROJECT_ROOT)
+            mapping_path = base / "data" / "spektrum_keahlian" / "spektrum_mapping.csv"
+            if not mapping_path.exists():
+                mapping_path = base / "DATA" / "spektrum_keahlian" / "spektrum_mapping.csv"
+        if mapping_path.exists():
+            mapping_df = pd.read_csv(mapping_path)
+            code = str(args.spektrum_code).strip()
+            row = mapping_df[mapping_df["spektrum_code"].astype(str).str.strip() == code]
+            if not row.empty:
+                primary = str(row.iloc[0].get("primary_domain_ids", "")).strip()
+                domain_ids = [d.strip() for d in primary.split(";") if d.strip()]
+                if domain_ids:
+                    domains_df = domains_df[domains_df["domain_id"].astype(str).str.strip().isin(domain_ids)].copy()
+                    print(f"[INFO] Filtered to {len(domains_df)} domains for Spektrum {code}")
+            else:
+                fallback = mapping_df[mapping_df["spektrum_code"].astype(str).str.strip() == "*"]
+                if not fallback.empty:
+                    primary = str(fallback.iloc[0].get("primary_domain_ids", "")).strip()
+                    domain_ids = [d.strip() for d in primary.split(";") if d.strip()]
+                    if domain_ids:
+                        domains_df = domains_df[domains_df["domain_id"].astype(str).str.strip().isin(domain_ids)].copy()
+                        print(f"[INFO] Spektrum {code} not in mapping; using * fallback ({len(domains_df)} domains)")
+        else:
+            print(f"[WARN] Spektrum mapping not found at {mapping_path}; using all domains")
     print(f"[INFO] Number of future domains: {len(domains_df)}")
 
     # Embeddings
@@ -335,6 +394,18 @@ def main():
     if below_floor.any():
         print(f"[INFO] {below_floor.sum()}/{len(result_df)} items below "
               f"similarity floor ({args.similarity_floor}); future_weight set to 0")
+
+    # Add trend_tier and tier-based future_weight (ordinal alternative to continuous trend_score).
+    # future_weight_tier uses tier_weight (1.0/0.7/0.4/0.0) instead of raw trend_score.
+    # This addresses the ordinal-scale concern (trend_scores are expert judgements, not
+    # interval measurements). See SCIENTIFIC_METHODOLOGY.md §7.
+    result_df["trend_tier"] = matched_domains["trend_tier"].values
+    result_df["tier_weight"] = matched_domains["tier_weight"].values
+    raw_tier_fw = result_df["similarity"] * result_df["tier_weight"]
+    raw_tier_fw = raw_tier_fw.copy()
+    raw_tier_fw[below_floor] = 0.0
+    result_df["future_weight_tier"] = raw_tier_fw
+
     result_df = result_df.sort_values("future_weight", ascending=False)
 
     print(f"[INFO] Mapping margin stats: "
@@ -345,6 +416,36 @@ def main():
     out_dir.mkdir(parents=True, exist_ok=True)
     result_df.to_csv(output_path, index=False, encoding="utf-8-sig")
     print(f"[INFO] Saved future weights to {output_path}")
+
+    # Sensitivity: compare top-20 by continuous future_weight vs tier-based future_weight_tier.
+    # A high Jaccard indicates the ranking is robust to the ordinal-vs-interval distinction.
+    try:
+        import json as _json
+        top20_continuous = set(
+            result_df.nlargest(20, "future_weight")[item_col].tolist()
+        )
+        top20_tier = set(
+            result_df.nlargest(20, "future_weight_tier")[item_col].tolist()
+        )
+        union_t = top20_continuous | top20_tier
+        inter_t = top20_continuous & top20_tier
+        jaccard_tier = round(len(inter_t) / len(union_t), 4) if union_t else 1.0
+        print(f"[INFO] Top-20 Jaccard (continuous vs tier-based future_weight): {jaccard_tier:.4f}")
+        sensitivity_tier = {
+            "top20_continuous": sorted(top20_continuous),
+            "top20_tier": sorted(top20_tier),
+            "jaccard_top20_continuous_vs_tier": jaccard_tier,
+            "interpretation": (
+                "Jaccard >= 0.80 indicates ranking is robust to ordinal-vs-interval distinction."
+                if jaccard_tier >= 0.80 else
+                "Jaccard < 0.80: tier-based ranking differs from continuous; review top items."
+            ),
+        }
+        sens_path = out_dir / "future_weight_tier_sensitivity.json"
+        sens_path.write_text(_json.dumps(sensitivity_tier, indent=2, ensure_ascii=False), encoding="utf-8")
+        print(f"[INFO] Saved tier sensitivity to {sens_path}")
+    except Exception as e:
+        print(f"[WARN] Could not compute tier sensitivity: {e}")
 
     # Plots only for knowledge mode (skills output is consumed by generate_competencies)
     if args.input_type == "knowledge":

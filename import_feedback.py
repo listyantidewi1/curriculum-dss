@@ -380,6 +380,95 @@ def compute_inter_rater_reliability(output_dir: Path, feedback_dir: Path) -> Non
         print("[INFO] No multi-reviewer data found; skipping inter-rater report.")
 
 
+def import_recommendation_feedback(labels_dir: Path) -> None:
+    """Import expert priority labels for recommendations; compute IRR on overlap items.
+
+    Reads DATA/labels/recommendations_for_review.csv (with reviewer_id and priority_label
+    filled in by experts). Merges by rank using majority vote. Computes Cohen's Kappa
+    on items where is_overlap=True (labeled by 2+ reviewers independently).
+
+    Outputs:
+        DATA/labels/recommendations_reviewed.csv  (merged labels)
+        DATA/labels/recommendations_irr.json       (Cohen's Kappa + agreement)
+    """
+    review_path = labels_dir / "recommendations_for_review.csv"
+    if not review_path.exists():
+        print("[INFO] No recommendations_for_review.csv found; skipping recommendation IRR.")
+        return
+
+    df = pd.read_csv(review_path)
+    required = {"priority_label", "reviewer_id", "rank"}
+    if not required.issubset(set(df.columns)):
+        print(f"[WARN] recommendations_for_review.csv missing columns: "
+              f"{required - set(df.columns)}")
+        return
+
+    df["priority_label"] = df["priority_label"].astype(str).str.strip().str.lower()
+    df["reviewer_id"] = df["reviewer_id"].astype(str).str.strip()
+    df = df[df["priority_label"].isin(["yes", "no", "partial"]) & (df["reviewer_id"] != "")].copy()
+    if df.empty:
+        print("[INFO] No filled recommendation priority labels found.")
+        return
+
+    # Majority vote by rank
+    merged_rows = []
+    for rank_val, grp in df.groupby("rank"):
+        votes = grp["priority_label"].tolist()
+        label = _majority(votes)
+        row = grp.iloc[0].to_dict()
+        row["priority_label"] = label
+        merged_rows.append(row)
+    merged = pd.DataFrame(merged_rows)
+
+    out_path = labels_dir / "recommendations_reviewed.csv"
+    merged.to_csv(out_path, index=False, encoding="utf-8-sig")
+    print(f"[INFO] Saved merged recommendation labels ({len(merged)} items) to {out_path}")
+
+    # IRR on overlap items (is_overlap == True)
+    if "is_overlap" not in df.columns:
+        print("[INFO] No is_overlap column; skipping recommendation IRR.")
+        return
+
+    overlap_df = df[df["is_overlap"].astype(str).str.lower().isin(["true", "1"])].copy()
+    reviewers = [r for r in overlap_df["reviewer_id"].unique() if r]
+    if len(reviewers) < 2:
+        print("[INFO] Need ≥2 reviewers on overlap items for recommendation IRR.")
+        return
+
+    pivot = overlap_df.pivot_table(
+        index="rank", columns="reviewer_id",
+        values="priority_label", aggfunc="first"
+    ).dropna()
+    valid_reviewers = [r for r in reviewers if r in pivot.columns]
+    if len(valid_reviewers) < 2 or len(pivot) < 5:
+        print(f"[INFO] Insufficient overlap for recommendation IRR "
+              f"(n={len(pivot)}, reviewers={len(valid_reviewers)}).")
+        return
+
+    r1, r2 = valid_reviewers[0], valid_reviewers[1]
+    labels1 = pivot[r1].tolist()
+    labels2 = pivot[r2].tolist()
+    kappa = _cohens_kappa(labels1, labels2)
+    po = sum(1 for a, b in zip(labels1, labels2) if a == b) / len(labels1)
+    irr_result = {
+        "status": "ok",
+        "reviewers": [r1, r2],
+        "overlap_items": len(pivot),
+        "observed_agreement": round(po, 4),
+        "cohens_kappa": round(kappa, 4),
+        "kappa_interpretation": (
+            "almost perfect" if kappa > 0.80 else
+            "substantial" if kappa > 0.60 else
+            "moderate" if kappa > 0.40 else
+            "fair" if kappa > 0.20 else "slight or worse"
+        ),
+    }
+    irr_path = labels_dir / "recommendations_irr.json"
+    irr_path.write_text(json.dumps(irr_result, indent=2, ensure_ascii=False), encoding="utf-8")
+    print(f"[INFO] Recommendation IRR: kappa={kappa:.4f} ({irr_result['kappa_interpretation']}), "
+          f"agreement={po:.1%} (n={len(pivot)})")
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Import human feedback from expert_review CSVs into feedback_store."
@@ -408,6 +497,9 @@ def main():
     import_knowledge_feedback(out_dir, feedback_dir)
     import_competency_feedback(out_dir, feedback_dir)
     compute_inter_rater_reliability(out_dir, feedback_dir)
+
+    labels_dir_path = Path(config.PROJECT_ROOT) / "DATA" / "labels"
+    import_recommendation_feedback(labels_dir_path)
 
     print("[INFO] Import complete.")
 

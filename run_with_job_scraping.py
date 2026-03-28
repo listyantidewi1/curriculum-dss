@@ -27,6 +27,12 @@ def main():
     parser.add_argument("--sample_size", type=int, default=10000)
     parser.add_argument("--output_dir", type=str, default=str(config.OUTPUT_DIR))
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument(
+        "--llm_concurrency",
+        type=int,
+        default=None,
+        help="Parallel LLM workers for pipeline (default: 3); use 1 for sequential",
+    )
     parser.add_argument("--translate", action="store_true", help="Translate non-English to English")
     parser.add_argument("--dedupe", action="store_true", help="Deduplicate sentences")
     parser.add_argument("--bert-knowledge", action="store_true", help="Fuse BERT knowledge (hybrid mode)")
@@ -89,6 +95,8 @@ def main():
     ]
     if args.bert_knowledge:
         pipeline_cmd.append("--bert-knowledge")
+    if args.llm_concurrency is not None:
+        pipeline_cmd.extend(["--llm_concurrency", str(args.llm_concurrency)])
 
     print(f"[3/3] Pipeline: {pipeline_input} -> {args.output_dir}")
     r = subprocess.run(pipeline_cmd, cwd=str(project_root))

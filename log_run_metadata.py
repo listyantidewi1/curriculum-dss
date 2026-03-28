@@ -66,6 +66,12 @@ def main():
     )
     parser.add_argument("--output_dir", type=str, default=str(config.OUTPUT_DIR))
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--spektrum-code", type=str, default=None,
+                        help="Spektrum Keahlian code (e.g. 4.1.1) for artifact provenance")
+    parser.add_argument("--future-domains-file", type=str, default=None,
+                        help="Path to future_domains.csv used for reproducibility")
+    parser.add_argument("--spektrum-mapping-file", type=str, default=None,
+                        help="Path to spektrum_mapping.csv used for domain filtering")
     args = parser.parse_args()
 
     out_dir = Path(args.output_dir)
@@ -99,6 +105,9 @@ def main():
         "config_parameters": {
             "output_dir": str(config.OUTPUT_DIR),
         },
+        "spektrum_code": args.spektrum_code if args.spektrum_code and str(args.spektrum_code).strip() else None,
+        "future_domains_file": args.future_domains_file if args.future_domains_file else None,
+        "spektrum_mapping_file": args.spektrum_mapping_file if args.spektrum_mapping_file else None,
     }
 
     try:

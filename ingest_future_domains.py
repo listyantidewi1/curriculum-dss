@@ -208,10 +208,28 @@ def main():
     df["trend_label"] = df["trend_label"].apply(normalize_trend_label)
     df["trend_score"] = pd.to_numeric(df["trend_score"], errors="coerce").fillna(0.0)
 
+    # Derive ordinal trend_tier from trend_score (addresses ordinal-scale measurement concern).
+    # trend_score values are ordinal judgements; trend_tier makes this explicit.
+    def _derive_trend_tier(score: float) -> str:
+        """Map trend_score to ordinal tier. Strong_Growth>=0.8, Moderate_Growth 0.5-0.79,
+        Stable 0.3-0.49, Declining<0.3 (including negative decline scores)."""
+        if score >= 0.8:
+            return "Strong_Growth"
+        elif score >= 0.5:
+            return "Moderate_Growth"
+        elif score >= 0.3:
+            return "Stable"
+        else:
+            return "Declining"
+
+    df["trend_tier"] = df["trend_score"].apply(_derive_trend_tier)
+
     out_path = Path(config.PROJECT_ROOT) / args.output
     df.to_csv(out_path, index=False, encoding="utf-8-sig")
     print(f"[INFO] Saved {len(df)} domains to {out_path}")
     print(f"[INFO] Sources: {df['source'].unique().tolist()}")
+    tier_counts = df["trend_tier"].value_counts().to_dict()
+    print(f"[INFO] Trend tiers: {tier_counts}")
 
 
 if __name__ == "__main__":

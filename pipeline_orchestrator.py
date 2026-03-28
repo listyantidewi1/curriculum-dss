@@ -89,10 +89,122 @@ def _write_run_log(paths: DepartmentPaths, payload: dict) -> None:
     (logs_dir / "latest_run.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
 
 
+def _build_generate_competencies_cmd(
+    results_dir: Path,
+    curriculum_file: Optional[Path],
+    vocational_field: Optional[str],
+    comprehensive: bool = False,
+    feedback_dir: Optional[Path] = None,
+) -> List[str]:
+    """Build generate_competencies.py command with optional --curriculum, --domain, --comprehensive."""
+    cmd = [
+        sys.executable,
+        str(PROJECT_ROOT / "generate_competencies.py"),
+        "--output_dir",
+        str(results_dir),
+    ]
+    if comprehensive:
+        cmd.append("--comprehensive")
+    if feedback_dir and feedback_dir.exists():
+        cmd.extend(["--feedback_dir", str(feedback_dir)])
+    if curriculum_file and curriculum_file.exists():
+        cmd.extend(["--curriculum", str(curriculum_file)])
+    if vocational_field and str(vocational_field).strip():
+        cmd.extend(["--domain", str(vocational_field).strip()])
+    return cmd
+
+
+def _build_future_weight_mapping_cmd(
+    results_dir: Path,
+    future_domains_file: Path,
+    input_type: str = "knowledge",
+    spektrum_code: Optional[str] = None,
+) -> List[str]:
+    """Build future_weight_mapping.py command with optional --spektrum-code."""
+    cmd = [
+        sys.executable,
+        str(PROJECT_ROOT / "future_weight_mapping.py"),
+        "--output_dir",
+        str(results_dir),
+        "--future_domains_file",
+        str(future_domains_file),
+        "--input_type",
+        input_type,
+    ]
+    if spektrum_code and str(spektrum_code).strip():
+        cmd.extend(["--spektrum-code", str(spektrum_code).strip()])
+    return cmd
+
+
+def _build_evaluate_cmd(script: str, results_dir: Path, spektrum_code: Optional[str] = None) -> List[str]:
+    """Build evaluate_extraction.py or evaluate_future_mapping.py command with optional --spektrum-code."""
+    cmd = [
+        sys.executable,
+        str(PROJECT_ROOT / script),
+        "--output_dir",
+        str(results_dir),
+    ]
+    if spektrum_code and str(spektrum_code).strip():
+        cmd.extend(["--spektrum-code", str(spektrum_code).strip()])
+    return cmd
+
+
+def _build_log_run_metadata_cmd(
+    results_dir: Path,
+    spektrum_code: Optional[str] = None,
+    future_domains_file: Optional[Path] = None,
+    spektrum_mapping_file: Optional[Path] = None,
+) -> List[str]:
+    """Build log_run_metadata.py command with optional provenance args."""
+    cmd = [
+        sys.executable,
+        str(PROJECT_ROOT / "log_run_metadata.py"),
+        "--output_dir",
+        str(results_dir),
+        "--seed",
+        str(config.RANDOM_SEED),
+    ]
+    if spektrum_code and str(spektrum_code).strip():
+        cmd.extend(["--spektrum-code", str(spektrum_code).strip()])
+    if future_domains_file:
+        cmd.extend(["--future-domains-file", str(future_domains_file)])
+    if spektrum_mapping_file and spektrum_mapping_file.exists():
+        cmd.extend(["--spektrum-mapping-file", str(spektrum_mapping_file)])
+    return cmd
+
+
+def _build_evaluate_extraction_cmd(results_dir: Path, spektrum_code: Optional[str] = None) -> List[str]:
+    """Build evaluate_extraction.py command with optional --spektrum-code."""
+    cmd = [
+        sys.executable,
+        str(PROJECT_ROOT / "evaluate_extraction.py"),
+        "--output_dir",
+        str(results_dir),
+    ]
+    if spektrum_code and str(spektrum_code).strip():
+        cmd.extend(["--spektrum-code", str(spektrum_code).strip()])
+    return cmd
+
+
+def _build_evaluate_future_mapping_cmd(results_dir: Path, spektrum_code: Optional[str] = None) -> List[str]:
+    """Build evaluate_future_mapping.py command with optional --spektrum-code."""
+    cmd = [
+        sys.executable,
+        str(PROJECT_ROOT / "evaluate_future_mapping.py"),
+        "--output_dir",
+        str(results_dir),
+    ]
+    if spektrum_code and str(spektrum_code).strip():
+        cmd.extend(["--spektrum-code", str(spektrum_code).strip()])
+    return cmd
+
+
 def run_department_pipeline(
     school_id: int,
     department_id: int,
     sample_size: int = 1000,
+    vocational_field: Optional[str] = None,
+    spektrum_code: Optional[str] = None,
 ) -> dict:
     """
     Run a department-scoped Phase-1 style pipeline.
@@ -174,24 +286,18 @@ def run_department_pipeline(
         ],
         [sys.executable, str(PROJECT_ROOT / "plot_generator.py"), "--output_dir", str(paths.results)],
         [sys.executable, str(PROJECT_ROOT / "verify_skills.py"), "--output_dir", str(paths.results)],
-        [
-            sys.executable,
-            str(PROJECT_ROOT / "future_weight_mapping.py"),
-            "--output_dir",
-            str(paths.results),
-            "--future_domains_file",
-            str(PROJECT_ROOT / "future_domains.csv"),
-        ],
-        [
-            sys.executable,
-            str(PROJECT_ROOT / "future_weight_mapping.py"),
-            "--output_dir",
-            str(paths.results),
-            "--input_type",
-            "skills",
-            "--future_domains_file",
-            str(PROJECT_ROOT / "future_domains.csv"),
-        ],
+        _build_future_weight_mapping_cmd(
+            paths.results,
+            PROJECT_ROOT / "future_domains.csv",
+            input_type="knowledge",
+            spektrum_code=spektrum_code,
+        ),
+        _build_future_weight_mapping_cmd(
+            paths.results,
+            PROJECT_ROOT / "future_domains.csv",
+            input_type="skills",
+            spektrum_code=spektrum_code,
+        ),
         [
             sys.executable,
             str(PROJECT_ROOT / "enrich_with_dates.py"),
@@ -208,7 +314,7 @@ def run_department_pipeline(
             "--only_hard",
             "--stability",
         ],
-        [sys.executable, str(PROJECT_ROOT / "generate_competencies.py"), "--output_dir", str(paths.results)],
+        _build_generate_competencies_cmd(paths.results, curriculum_file, vocational_field),
         [
             sys.executable,
             str(PROJECT_ROOT / "recommendations.py"),
@@ -268,7 +374,12 @@ def run_department_pipeline(
     return payload
 
 
-def run_department_phase2(school_id: int, department_id: int) -> dict:
+def run_department_phase2(
+    school_id: int,
+    department_id: int,
+    vocational_field: Optional[str] = None,
+    spektrum_code: Optional[str] = None,
+) -> dict:
     """
     Run Phase 2 (post-review) pipeline for a department.
 
@@ -293,6 +404,8 @@ def run_department_phase2(school_id: int, department_id: int) -> dict:
         }
         _write_run_log(paths, payload)
         return payload
+
+    curriculum_file = latest_upload(paths, "curriculum")
 
     steps = [
         [
@@ -327,15 +440,13 @@ def run_department_phase2(school_id: int, department_id: int) -> dict:
             "--feedback_dir",
             str(paths.feedback_store),
         ],
-        [
-            sys.executable,
-            str(PROJECT_ROOT / "generate_competencies.py"),
-            "--comprehensive",
-            "--output_dir",
-            str(paths.results),
-            "--feedback_dir",
-            str(paths.feedback_store),
-        ],
+        _build_generate_competencies_cmd(
+            paths.results,
+            curriculum_file,
+            vocational_field,
+            comprehensive=True,
+            feedback_dir=paths.feedback_store,
+        ),
         [
             sys.executable,
             str(PROJECT_ROOT / "export_competencies_for_review.py"),
@@ -367,26 +478,14 @@ def run_department_phase2(school_id: int, department_id: int) -> dict:
             "--output_dir",
             str(paths.results),
         ],
-        [
-            sys.executable,
-            str(PROJECT_ROOT / "evaluate_extraction.py"),
-            "--output_dir",
-            str(paths.results),
-        ],
-        [
-            sys.executable,
-            str(PROJECT_ROOT / "evaluate_future_mapping.py"),
-            "--output_dir",
-            str(paths.results),
-        ],
-        [
-            sys.executable,
-            str(PROJECT_ROOT / "log_run_metadata.py"),
-            "--output_dir",
-            str(paths.results),
-            "--seed",
-            str(config.RANDOM_SEED),
-        ],
+        _build_evaluate_extraction_cmd(paths.results, spektrum_code),
+        _build_evaluate_future_mapping_cmd(paths.results, spektrum_code),
+        _build_log_run_metadata_cmd(
+            paths.results,
+            spektrum_code=spektrum_code,
+            future_domains_file=PROJECT_ROOT / "future_domains.csv",
+            spektrum_mapping_file=_resolve_spektrum_mapping_path(),
+        ),
         [
             sys.executable,
             str(PROJECT_ROOT / "plot_generator.py"),

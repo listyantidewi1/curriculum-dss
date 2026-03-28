@@ -78,6 +78,15 @@ def _phase2_available(school_id: int, department_id: int) -> bool:
     return (dirs["results"] / "expert_review_skills.csv").exists()
 
 
+def _load_spektrum() -> dict:
+    """Load Spektrum Keahlian taxonomy (Kepmen 244/M/2024) for admin UI."""
+    for base in ("data", "DATA"):
+        path = PROJECT_ROOT / base / "spektrum_keahlian" / "spektrum_keahlian.json"
+        if path.exists():
+            return json.loads(path.read_text(encoding="utf-8"))
+    return {"bidang": []}
+
+
 def _resolve_results_dir(school_id: int, department_id: int) -> Path:
     dirs = _dept_dirs(school_id, department_id)
     dept_results = dirs["results"]
@@ -899,9 +908,10 @@ def admin_schools(request: Request):
         ORDER BY d.id DESC
         """
     )
+    spektrum = _load_spektrum()
     return templates.TemplateResponse(
         "admin/schools.html",
-        {"request": request, "schools": schools, "departments": departments, "user": _user(request)},
+        {"request": request, "schools": schools, "departments": departments, "spektrum": spektrum, "user": _user(request)},
     )
 
 
@@ -918,11 +928,14 @@ def admin_create_department(
     school_id: int = Form(...),
     department_name: str = Form(...),
     vocational_field: str = Form(...),
+    spektrum_code: Optional[str] = Form(None),
 ):
     _require_role(request, "admin")
+    vf = vocational_field.strip()
+    sc = spektrum_code.strip() if spektrum_code and str(spektrum_code).strip() else None
     dept_id = exec_sql(
-        "INSERT INTO departments(school_id, name, vocational_field) VALUES(?, ?, ?)",
-        (school_id, department_name.strip(), vocational_field.strip()),
+        "INSERT INTO departments(school_id, name, vocational_field, spektrum_code) VALUES(?, ?, ?, ?)",
+        (school_id, department_name.strip(), vf, sc),
     )
     _dept_dirs(school_id, dept_id)
     return RedirectResponse("/dashboard/admin/schools", status_code=302)
@@ -1059,7 +1072,19 @@ def school_runs(request: Request, department_id: Optional[int] = None):
 
 def _run_worker(run_id: int, school_id: int, department_id: int, sample_size: int) -> None:
     try:
-        payload = run_department_pipeline(school_id=school_id, department_id=department_id, sample_size=sample_size)
+        dept = q_one(
+            "SELECT vocational_field, spektrum_code FROM departments WHERE id=? AND school_id=?",
+            (department_id, school_id),
+        )
+        vocational_field = dept["vocational_field"] if dept else None
+        spektrum_code = dept["spektrum_code"] if dept and "spektrum_code" in dept.keys() else None
+        payload = run_department_pipeline(
+            school_id=school_id,
+            department_id=department_id,
+            sample_size=sample_size,
+            vocational_field=vocational_field,
+            spektrum_code=spektrum_code,
+        )
         exec_sql(
             "UPDATE runs SET status=?, message=?, completed_at=CURRENT_TIMESTAMP WHERE id=?",
             ("completed", json.dumps(payload), run_id),
@@ -1073,7 +1098,18 @@ def _run_worker(run_id: int, school_id: int, department_id: int, sample_size: in
 
 def _run_phase2_worker(run_id: int, school_id: int, department_id: int) -> None:
     try:
-        payload = run_department_phase2(school_id=school_id, department_id=department_id)
+        dept = q_one(
+            "SELECT vocational_field, spektrum_code FROM departments WHERE id=? AND school_id=?",
+            (department_id, school_id),
+        )
+        vocational_field = dept["vocational_field"] if dept else None
+        spektrum_code = dept["spektrum_code"] if dept and "spektrum_code" in dept.keys() else None
+        payload = run_department_phase2(
+            school_id=school_id,
+            department_id=department_id,
+            vocational_field=vocational_field,
+            spektrum_code=spektrum_code,
+        )
         exec_sql(
             "UPDATE runs SET status=?, message=?, completed_at=CURRENT_TIMESTAMP WHERE id=?",
             ("completed", json.dumps(payload), run_id),

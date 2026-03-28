@@ -13,7 +13,7 @@
   </div>
   <div class="card">
     <h3>Create Department</h3>
-    <form method="post" action="/dashboard/admin/departments/create">
+    <form method="post" action="/dashboard/admin/departments/create" id="dept-form">
       <label>School</label>
       <select name="school_id" required>
         {% for s in schools %}
@@ -22,10 +22,36 @@
       </select>
       <label>Department name</label>
       <input name="department_name" placeholder="Culinary Department" required />
-      <label>Vocational field</label>
-      <input name="vocational_field" placeholder="culinary / fashion / automotive / it" required />
+      <label>Konsentrasi Keahlian (Spektrum Kepmen 244/M/2024)</label>
+      <select name="spektrum_code" id="spektrum_select">
+        <option value="">--- Custom (enter below) ---</option>
+        {% if spektrum and spektrum.bidang %}
+          {% for b in spektrum.bidang %}
+            {% for p in b.program %}
+              {% for k in p.konsentrasi %}
+                <option value="{{ k.code }}" data-name="{{ k.name }}">{{ k.code }} - {{ k.name }}</option>
+              {% endfor %}
+            {% endfor %}
+          {% endfor %}
+        {% endif %}
+      </select>
+      <label>Vocational field <span class="hint">(auto-filled from Spektrum, or type for custom)</span></label>
+      <input name="vocational_field" id="vocational_field" placeholder="e.g. Rekayasa Perangkat Lunak / culinary / automotive" required />
       <button type="submit">Create department</button>
     </form>
+    <script>
+      document.getElementById('spektrum_select').addEventListener('change', function() {
+        var opt = this.options[this.selectedIndex];
+        var vf = document.getElementById('vocational_field');
+        if (this.value && opt.dataset.name) {
+          vf.value = opt.dataset.name;
+          vf.readOnly = true;
+        } else {
+          vf.value = '';
+          vf.readOnly = false;
+        }
+      });
+    </script>
   </div>
 </section>
 
@@ -42,13 +68,14 @@
 <section class="card">
   <h3>Departments</h3>
   <table>
-    <tr><th>ID</th><th>School</th><th>Name</th><th>Field</th><th>Created</th></tr>
+    <tr><th>ID</th><th>School</th><th>Name</th><th>Field</th><th>Spektrum</th><th>Created</th></tr>
     {% for d in departments %}
       <tr>
         <td>{{ d.id }}</td>
         <td>{{ d.school_name }}</td>
         <td>{{ d.name }}</td>
         <td>{{ d.vocational_field }}</td>
+        <td>{{ d.spektrum_code or '-' }}</td>
         <td>{{ d.created_at }}</td>
       </tr>
     {% endfor %}

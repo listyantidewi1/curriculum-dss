@@ -87,6 +87,19 @@ def _normalize_skill_for_grouping(text: str) -> str:
     return t
 
 
+def _is_vague_hard_skill(skill: str, skill_type: str) -> bool:
+    """True if Hard skill with fewer than 2 words (e.g. 'design', 'develop', 'manage').
+    Such skills are too generic for curriculum priorities—'design' could mean
+    design software, design UI, design systems, etc."""
+    if not skill or not isinstance(skill, str):
+        return False
+    st = str(skill_type).strip().lower()
+    if st not in ("hard", "hard skill"):
+        return False
+    words = str(skill).strip().split()
+    return len(words) < 2
+
+
 def build_skill_demand(skills_df: pd.DataFrame) -> pd.DataFrame:
     """Aggregate per-skill demand statistics. Groups equivalent skills (case/punctuation variants)."""
     if skills_df.empty or "skill" not in skills_df.columns:
@@ -292,7 +305,7 @@ def evaluate_recommendations(recs: pd.DataFrame, top_n: int = 20) -> dict:
 
     ndcg = ndcg_at_k(relevance, top_n)
 
-    return {
+    result = {
         "status": "ok",
         "top_n": top_n,
         "labeled_items": n,
@@ -302,6 +315,15 @@ def evaluate_recommendations(recs: pd.DataFrame, top_n: int = 20) -> dict:
         "precision_at_n": round(precision, 4),
         "ndcg_at_n": round(ndcg, 4),
     }
+    # Load IRR if available (from import_recommendation_feedback in import_feedback.py)
+    irr_path = LABELS_DIR / "recommendations_irr.json"
+    if irr_path.exists():
+        try:
+            import json as _json
+            result["irr"] = _json.loads(irr_path.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+    return result
 
 
 def run_ablation(demand, trends, future_weights, coverage, top_n: int = 20) -> dict:
@@ -384,6 +406,25 @@ def run_weight_sensitivity(
     }
 
 
+def compute_demand_only_ranking(demand: pd.DataFrame, top_n: int = 20) -> pd.DataFrame:
+    """Demand-only frequency baseline ranking for P@20 floor comparison.
+
+    Uses only demand_freq (normalized) with weight=1.0. This is the simplest
+    possible baseline: rank skills by how often they appear in job postings.
+    A full formula P@20 that barely beats this baseline would indicate the
+    trend and future signals add little value.
+    """
+    if demand.empty:
+        return pd.DataFrame()
+    rec = demand.copy()
+    max_freq = rec["demand_freq"].max()
+    rec["demand_norm"] = rec["demand_freq"] / max_freq if max_freq > 0 else 0.0
+    rec["priority_score_baseline"] = rec["demand_norm"]
+    rec = rec.sort_values("priority_score_baseline", ascending=False).reset_index(drop=True)
+    rec.insert(0, "baseline_rank", range(1, len(rec) + 1))
+    return rec
+
+
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
@@ -401,6 +442,9 @@ def main():
                         help="Run weight sensitivity analysis (sweep demand/trend/future weights)")
     parser.add_argument("--evaluate", action="store_true",
                         help="Evaluate against expert labels in recommendations.csv")
+    parser.add_argument("--baseline", action="store_true",
+                        help="Generate demand-only frequency baseline ranking and compare "
+                             "P@20/NDCG@20 against full formula (floor comparison for RQ5)")
     args = parser.parse_args()
 
     out_dir = Path(args.output_dir)
@@ -417,6 +461,16 @@ def main():
 
     demand = build_skill_demand(skills_df)
     print(f"[INFO] Built demand table: {len(demand)} unique skills")
+
+    # Exclude vague single-word hard skills (e.g. "design", "develop") — too ambiguous for curriculum
+    vague_mask = demand.apply(
+        lambda r: _is_vague_hard_skill(str(r.get("skill", "")), str(r.get("skill_type", ""))),
+        axis=1,
+    )
+    if vague_mask.any():
+        n_vague = vague_mask.sum()
+        demand = demand[~vague_mask].reset_index(drop=True)
+        print(f"[INFO] Excluded {n_vague} vague single-word hard skills from curriculum priorities")
 
     if not trends.empty:
         print(f"[INFO] Loaded {len(trends)} trend records")
@@ -478,8 +532,58 @@ def main():
             if eval_result.get("status") == "ok":
                 print(f"\n[INFO] Evaluation: P@{args.top_n}={eval_result['precision_at_n']:.3f}, "
                       f"NDCG@{args.top_n}={eval_result['ndcg_at_n']:.3f}")
+                if "irr" in eval_result:
+                    irr = eval_result["irr"]
+                    print(f"  Recommendation IRR: kappa={irr.get('cohens_kappa', 'N/A')}")
             else:
                 print(f"[INFO] Evaluation: {eval_result.get('status', 'unknown')}")
+
+    if args.baseline:
+        print("\n[INFO] Computing demand-only frequency baseline...")
+        baseline_recs = compute_demand_only_ranking(demand, top_n=args.top_n)
+        full_set = set(recs.head(args.top_n)["skill"].tolist())
+        base_set = set(baseline_recs.head(args.top_n)["skill"].tolist()) if not baseline_recs.empty else set()
+        union_b = full_set | base_set
+        inter_b = full_set & base_set
+        jaccard_b = round(len(inter_b) / len(union_b), 4) if union_b else 1.0
+        baseline_report = {
+            "top_skills_baseline": sorted(base_set),
+            "jaccard_full_vs_baseline": jaccard_b,
+            "baseline_p_at_n": None,
+            "baseline_ndcg_at_n": None,
+            "full_p_at_n": report.get("evaluation", {}).get("precision_at_n"),
+            "full_ndcg_at_n": report.get("evaluation", {}).get("ndcg_at_n"),
+            "interpretation": (
+                f"Jaccard={jaccard_b:.3f} between full-formula and demand-only top-{args.top_n}. "
+                "Low Jaccard means trend+future signals meaningfully change the ranking."
+            ),
+        }
+        if args.evaluate and not baseline_recs.empty:
+            existing = out_dir / "recommendations.csv"
+            if existing.exists():
+                full_df = pd.read_csv(existing)
+                if "expert_priority" in full_df.columns:
+                    label_map = (
+                        full_df[["skill", "expert_priority"]]
+                        .drop_duplicates("skill")
+                        .set_index("skill")["expert_priority"]
+                        .to_dict()
+                    )
+                    baseline_top = baseline_recs.head(args.top_n).copy()
+                    baseline_top["expert_priority"] = baseline_top["skill"].map(label_map).fillna("")
+                    base_eval = evaluate_recommendations(baseline_top, top_n=args.top_n)
+                    if base_eval.get("status") == "ok":
+                        baseline_report["baseline_p_at_n"] = base_eval["precision_at_n"]
+                        baseline_report["baseline_ndcg_at_n"] = base_eval["ndcg_at_n"]
+                        print(f"  Baseline P@{args.top_n}={base_eval['precision_at_n']:.3f} "
+                              f"vs Full P@{args.top_n}="
+                              f"{baseline_report.get('full_p_at_n', 'N/A')}")
+        report["baseline_comparison"] = baseline_report
+        if not baseline_recs.empty:
+            baseline_path = out_dir / "recommendations_baseline.csv"
+            baseline_recs.head(args.top_n).to_csv(baseline_path, index=False, encoding="utf-8-sig")
+            print(f"[INFO] Saved baseline ranking to {baseline_path}")
+        print(f"[INFO] Full vs baseline Jaccard: {jaccard_b:.3f}")
 
     report_path = out_dir / "recommendations_report.json"
     report_path.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")

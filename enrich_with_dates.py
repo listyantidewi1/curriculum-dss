@@ -75,6 +75,12 @@ def main():
     if "job_id" not in jobs_meta.columns:
         raise ValueError("jobs_metadata.csv must contain 'job_id' column.")
 
+    # Deduplicate: jobs_metadata may have multiple rows per job_id; merge requires unique keys
+    n_before = len(jobs_meta)
+    jobs_meta = jobs_meta.drop_duplicates(subset=["job_id"], keep="first")
+    if len(jobs_meta) < n_before:
+        print(f"[INFO] Deduplicated jobs_metadata: {n_before} -> {len(jobs_meta)} rows (unique job_ids)")
+
     # Ensure job_id types match typical pipeline outputs
     jobs_meta["job_id"] = jobs_meta["job_id"].astype(str)
 

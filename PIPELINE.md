@@ -446,6 +446,15 @@ The dashboard (`dashboard/app.py`) provides:
 - **Ranking modes**: `model_only` (pipeline scores) or `human_adjusted` (incorporates expert feedback)
 - **Cross-school aggregation**: Same vocational field → pooled results; contributor metadata shown
 
+### Department-Scoped Flow and Spektrum
+
+When running via the dashboard (`pipeline_orchestrator.py`):
+
+- **Paths:** Each department has isolated `uploads/`, `preprocessing/`, `results/`, `feedback_store/` under `data/schools/{school_id}/departments/{department_id}/`.
+- **Spektrum-based domain selection:** If the department has a Spektrum Keahlian code (Kepmen 244/M/2024), `future_weight_mapping.py` filters `future_domains.csv` via `spektrum_mapping.csv` so only domains relevant to that vocational field are used.
+- **Artifact provenance:** `log_run_metadata.py` records `spektrum_code`, `future_domains_file`, and `spektrum_mapping_file` in `run_metadata.json` for reproducibility.
+- **Evaluation stratification:** `evaluate_extraction.py` and `evaluate_future_mapping.py` accept `--spektrum-code` and record it in their reports for per-Bidang analysis.
+
 ### Dashboard Paths
 
 - Per-department: `data/schools/{school_id}/departments/{department_id}/`

@@ -158,3 +158,6 @@ Each item is labeled with:
 - **Domain coverage**: `future_domains.csv` may not cover all vocational fields; mapping accuracy is limited to included domains.
 - **Generalizability**: Pipeline tuned for IT/Software/Game Dev context; results may not transfer to other sectors.
 - **LLM variability**: Competency generation is non-deterministic when temperature > 0; use `--temperature 0` for reproducibility.
+- **JobBERT domain**: JobBERT is trained primarily on (Western) job descriptions; generalization to Indonesian/SMK domains is untested.
+- **Spektrum coverage**: The `spektrum_mapping.csv` to `future_domains.csv` mapping is manually curated; non-IT Bidang (e.g., Agribisnis, Pariwisata) may have incomplete or fallback mappings.
+- **Cross-Bidang validity**: Gold-set representativeness and metric validity when evaluating across multiple Spektrum codes (Bidang) are not yet established.

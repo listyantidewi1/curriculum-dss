@@ -181,6 +181,105 @@ def _pairwise_comparisons(results: List[Dict]) -> List[Dict]:
     return pairs
 
 
+def _hybrid_vs_llmonly_test(
+    hybrid_n: int, hybrid_correct: int,
+    llmonly_n: int, llmonly_correct: int,
+) -> Dict:
+    """Primary RQ1 test: Hybrid vs LLM-only precision (one-tailed two-proportion z-test).
+
+    H0: precision_hybrid = precision_llmonly
+    H1: precision_hybrid > precision_llmonly
+
+    This is the primary RQ1 test.  The per-source binomial tests vs chance are
+    secondary.  Requires LLM-only gold set labels from a separate ablation run
+    (pipeline.py --extraction-mode llm_only).
+    """
+    if hybrid_n == 0 or llmonly_n == 0:
+        return {"status": "insufficient_data"}
+
+    p_hybrid = hybrid_correct / hybrid_n
+    p_llmonly = llmonly_correct / llmonly_n
+    p_pool = (hybrid_correct + llmonly_correct) / (hybrid_n + llmonly_n)
+
+    if p_pool <= 0 or p_pool >= 1:
+        return {"status": "degenerate"}
+
+    se = math.sqrt(p_pool * (1 - p_pool) * (1 / hybrid_n + 1 / llmonly_n))
+    z = (p_hybrid - p_llmonly) / se if se > 0 else 0.0
+    p_one_tailed = 1 - 0.5 * (1 + math.erf(z / math.sqrt(2)))
+
+    ci_hybrid = wilson_ci(p_hybrid, hybrid_n)
+    ci_llmonly = wilson_ci(p_llmonly, llmonly_n)
+
+    return {
+        "status": "ok",
+        "hypothesis": "H1: precision_hybrid > precision_llmonly (one-tailed)",
+        "hybrid_precision": round(p_hybrid, 4),
+        "hybrid_precision_ci_95": list(ci_hybrid),
+        "hybrid_n": hybrid_n,
+        "llmonly_precision": round(p_llmonly, 4),
+        "llmonly_precision_ci_95": list(ci_llmonly),
+        "llmonly_n": llmonly_n,
+        "precision_difference": round(p_hybrid - p_llmonly, 4),
+        "z_statistic": round(z, 4),
+        "p_value_one_tailed": round(float(p_one_tailed), 6),
+        "significant_at_005": bool(p_one_tailed < 0.05),
+        "interpretation": (
+            "Hybrid significantly outperforms LLM-only" if p_one_tailed < 0.05
+            else "No significant improvement of Hybrid over LLM-only"
+        ),
+    }
+
+
+def _bert_contribution_analysis(df: pd.DataFrame) -> Dict:
+    """Explain BERT's recall contribution when BERT standalone precision < 0.5.
+
+    When BERT precision is below chance, BERT may still contribute recall:
+    items that BERT found but LLM missed.  This function quantifies that
+    contribution to support the hybrid design rationale.
+
+    Requires columns: source, is_correct_bin.
+    """
+    if "source" not in df.columns:
+        return {"status": "no_source_column"}
+
+    bert_mask = df["source"].str.contains("BERT", case=False, na=False)
+    llm_mask = df["source"].str.contains("LLM", case=False, na=False)
+    bert_df = df[bert_mask].copy()
+
+    if bert_df.empty:
+        return {"status": "no_bert_items"}
+
+    # Items unique to BERT: source contains BERT but NOT LLM (i.e. not fused BERT+LLM)
+    bert_only_mask = bert_mask & ~llm_mask
+    bert_only_df = df[bert_only_mask].copy()
+
+    n_bert = len(bert_df)
+    n_bert_only = len(bert_only_df)
+    n_llm = int(llm_mask.sum())
+    pct_bert_only = round(n_bert_only / n_bert, 4) if n_bert > 0 else 0.0
+
+    bert_precision = float(bert_df["is_correct_bin"].mean()) if n_bert > 0 else 0.0
+    bert_only_precision = float(bert_only_df["is_correct_bin"].mean()) if n_bert_only > 0 else 0.0
+
+    return {
+        "status": "ok",
+        "n_bert_total": n_bert,
+        "n_bert_only_unique": n_bert_only,
+        "n_llm_total": n_llm,
+        "pct_bert_items_unique_to_bert": pct_bert_only,
+        "bert_overall_precision": round(bert_precision, 4),
+        "bert_only_precision": round(bert_only_precision, 4),
+        "interpretation": (
+            f"Of {n_bert} BERT-extracted items, {n_bert_only} ({pct_bert_only:.1%}) are "
+            f"unique to BERT (not found by LLM). These unique items have precision="
+            f"{bert_only_precision:.3f}. Even if BERT overall precision is below chance, "
+            f"these unique items represent potential recall contribution: skills the LLM "
+            f"would have missed entirely."
+        ),
+    }
+
+
 def _apply_multi_comparison_correction(results: List[Dict], alpha: float = 0.05) -> None:
     """Apply Bonferroni correction: alpha_adjusted = alpha / k for k tests vs chance."""
     by_source = [r for r in results if r.get("source") != "all"]
@@ -491,6 +590,12 @@ def main():
     parser.add_argument("--output_dir", type=str, default=str(config.OUTPUT_DIR))
     parser.add_argument("--labels_dir", type=str, default=str(LABELS_DIR))
     parser.add_argument("--output", type=str, default="extraction_evaluation_report.json")
+    parser.add_argument("--spektrum-code", type=str, default=None,
+                        help="Spektrum Keahlian code for provenance / per-Bidang stratification")
+    parser.add_argument("--llmonly-labels-dir", type=str, default=None,
+                        help="Path to DATA/labels for the LLM-only ablation run "
+                             "(pipeline.py --extraction-mode llm_only). Required for "
+                             "the primary RQ1 test (Hybrid vs LLM-only).")
     args = parser.parse_args()
 
     labels = Path(args.labels_dir)
@@ -513,9 +618,44 @@ def main():
         by_src = evaluate_by_source(skills_df)
         bloom_eval = evaluate_bloom_classification(skills_df)
         type_eval = evaluate_type_classification(skills_df)
+        # RQ1 primary test: Hybrid vs LLM-only (requires --llmonly-labels-dir)
+        rq1_primary = {"status": "no_llmonly_labels",
+                       "note": "Run with --llmonly-labels-dir to enable the primary RQ1 test."}
+        if args.llmonly_labels_dir:
+            lo_labels = Path(args.llmonly_labels_dir)
+            lo_path = lo_labels / "gold_skills_merged.csv"
+            if not lo_path.exists():
+                lo_path = lo_labels / "gold_skills.csv"
+            lo_df = _load_labeled(lo_path)
+            if not lo_df.empty:
+                hybrid_overall = next((r for r in by_src if r["source"] == "all"), None)
+                lo_metrics = compute_precision(lo_df["is_correct_bin"].tolist())
+                if hybrid_overall:
+                    rq1_primary = _hybrid_vs_llmonly_test(
+                        hybrid_overall["n"], hybrid_overall["n_correct"],
+                        lo_metrics["n"], lo_metrics["n_correct"],
+                    )
+                print(f"  RQ1 primary: Hybrid P={hybrid_overall['precision']:.3f} vs "
+                      f"LLM-only P={lo_metrics['precision']:.3f} "
+                      f"({rq1_primary.get('interpretation', '')})")
+            else:
+                print("[WARN] --llmonly-labels-dir specified but no labeled gold set found.")
+
+        # BERT contribution analysis (run when BERT precision < 0.5)
+        bert_contrib = {"status": "skipped"}
+        bert_source_row = next((r for r in by_src if r.get("source", "").upper() == "BERT"), None)
+        if bert_source_row and bert_source_row.get("precision", 1.0) < 0.5:
+            bert_contrib = _bert_contribution_analysis(skills_df)
+            if bert_contrib.get("status") == "ok":
+                print(f"  BERT contribution: {bert_contrib['n_bert_only_unique']} items unique "
+                      f"to BERT ({bert_contrib['pct_bert_items_unique_to_bert']:.1%}), "
+                      f"precision={bert_contrib['bert_only_precision']:.3f}")
+
         report["skills"] = {
+            "rq1_primary_hypothesis": rq1_primary,
             "by_source": by_src,
             "pairwise_comparisons": _pairwise_comparisons(by_src),
+            "bert_contribution_analysis": bert_contrib,
             "irr": irr,
             "bloom_validation": bloom_eval,
             "type_validation": type_eval,
@@ -555,6 +695,9 @@ def main():
             o = overall[0]
             print(f"  Knowledge overall: P={o['precision']:.3f} "
                   f"(95% CI {o['precision_ci_95']}), n={o['n']}")
+
+    if args.spektrum_code and str(args.spektrum_code).strip():
+        report["spektrum_code"] = str(args.spektrum_code).strip()
 
     out_path = out_dir / args.output
     out_path.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")

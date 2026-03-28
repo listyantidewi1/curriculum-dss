@@ -7,9 +7,11 @@ import argparse
 import re
 import json
 import time
+import threading
 import torch
 import logging
 import numpy as np
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import pandas as pd
 from collections import defaultdict
 from sentence_transformers import SentenceTransformer, util
@@ -257,6 +259,7 @@ class AdvancedPipelineConfig:
     # Knowledge: LLM-only in final output. BERT knowledge is passed to LLM as anti-hallucination
     # context but not fused (Direction A).
     LLM_ONLY_KNOWLEDGE = True
+    EXTRACTION_MODE = "hybrid"
 
     # Reproducibility (override via --seed)
     RANDOM_SEED = None  # Set from config.RANDOM_SEED or args.seed at runtime
@@ -280,6 +283,7 @@ class AdvancedPipelineConfig:
     # File paths (jobs_sentences.csv is output of preprocess when run on job_scraping/output/english_jobs.csv)
     INPUT_CSV = str(config.PIPELINE_INPUT_CSV)
     SAMPLE_SIZE = 10000
+    LLM_CONCURRENCY = 3  # Number of concurrent LLM calls (1 = sequential, 3–5 = faster)
     
     # Output files
     OUTPUT_FILES = {
@@ -1111,27 +1115,33 @@ class ContextAwareExtractor:
             full_text = text or "\n".join(sentences)
 
         # --- BERT: run per-sentence, aggregate & deduplicate ---
+        # Skipped when EXTRACTION_MODE == "llm_only" (LLM-only ablation for RQ1).
         all_bert_skills_raw: List[Dict] = []
         all_bert_knowledge: List[Dict] = []
-        for sent in sentences:
-            sent = sent.strip()
-            if not sent:
-                continue
-            raw_skills, raw_knowledge = self.model_manager.extract_with_bert(sent)
-            all_bert_skills_raw.extend(raw_skills)
-            all_bert_knowledge.extend(raw_knowledge)
+        if AdvancedPipelineConfig.EXTRACTION_MODE != "llm_only":
+            for sent in sentences:
+                sent = sent.strip()
+                if not sent:
+                    continue
+                raw_skills, raw_knowledge = self.model_manager.extract_with_bert(sent)
+                all_bert_skills_raw.extend(raw_skills)
+                all_bert_knowledge.extend(raw_knowledge)
 
-        # Deduplicate BERT outputs (boost confidence for repeated items)
-        all_bert_skills_raw = self._deduplicate_raw(all_bert_skills_raw, key='text')
-        all_bert_knowledge = self._deduplicate_raw(all_bert_knowledge, key='text')
+            # Deduplicate BERT outputs (boost confidence for repeated items)
+            all_bert_skills_raw = self._deduplicate_raw(all_bert_skills_raw, key='text')
+            all_bert_knowledge = self._deduplicate_raw(all_bert_knowledge, key='text')
 
-        # Remove parsing fragments (e.g., items starting with -, #, + or < 3 chars)
-        all_bert_skills_raw = self._filter_fragments(all_bert_skills_raw, key='text')
-        all_bert_knowledge = self._filter_fragments(all_bert_knowledge, key='text')
+            # Remove parsing fragments (e.g., items starting with -, #, + or < 3 chars)
+            all_bert_skills_raw = self._filter_fragments(all_bert_skills_raw, key='text')
+            all_bert_knowledge = self._filter_fragments(all_bert_knowledge, key='text')
 
         # --- LLM: run once on full posting (full context), with BERT knowledge as anti-hallucination ---
-        gpt_output = self.gpt_extractor.extract_skills_and_knowledge(full_text, all_bert_knowledge)
-        if not isinstance(gpt_output, dict):
+        # Skipped when EXTRACTION_MODE == "bert_only".
+        if AdvancedPipelineConfig.EXTRACTION_MODE != "bert_only":
+            gpt_output = self.gpt_extractor.extract_skills_and_knowledge(full_text, all_bert_knowledge)
+            if not isinstance(gpt_output, dict):
+                gpt_output = {"skills": [], "knowledge": []}
+        else:
             gpt_output = {"skills": [], "knowledge": []}
 
         # Normalize LLM output: LLM may return skills as strings or dicts; knowledge as strings
@@ -1965,6 +1975,7 @@ class AdvancedDataManager:
     
     def __init__(self, output_dir):
         self.output_dir = output_dir
+        self._save_lock = threading.Lock()
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
         
@@ -2135,65 +2146,62 @@ class AdvancedDataManager:
 
     
     def save_results(self, job_id: int, results: Dict, extraction_time: float = None) -> None:
+        """Save results for a job (thread-safe when using concurrent LLM)."""
         date_posted = results.get('date_posted')
+        with self._save_lock:
+            try:
+                # Save skills
+                if results.get('skills'):
+                    skills_df = pd.DataFrame([s.to_dict() for s in results['skills']])
+                    skills_df.insert(0, 'job_id', job_id)
+                    skills_df.insert(1, 'date_posted', date_posted)
+                    skills_df.to_csv(self.files['skills'], mode='a', header=False, index=False)
 
-        """Save results for a job."""
-        try:
-            # Save skills
-            if results.get('skills'):
-                skills_df = pd.DataFrame([s.to_dict() for s in results['skills']])
-                skills_df.insert(0, 'job_id', job_id)
-                skills_df.insert(1, 'date_posted', date_posted)
-                skills_df.to_csv(self.files['skills'], mode='a', header=False, index=False)
+                # Save knowledge
+                if results.get('knowledge'):
+                    knowledge_df = pd.DataFrame([k.to_dict() for k in results['knowledge']])
+                    knowledge_df.insert(0, 'job_id', job_id)
+                    knowledge_df.insert(1, 'date_posted', date_posted)
+                    knowledge_df.to_csv(self.files['knowledge'], mode='a', header=False, index=False)
 
-            
-            # Save knowledge
-            if results.get('knowledge'):
-                knowledge_df = pd.DataFrame([k.to_dict() for k in results['knowledge']])
-                knowledge_df.insert(0, 'job_id', job_id)
-                knowledge_df.insert(1, 'date_posted', date_posted)
-                knowledge_df.to_csv(self.files['knowledge'], mode='a', header=False, index=False)
+                # Save coverage metrics
+                coverage_metrics = results.get('coverage_analysis', {}).get('metrics', {})
+                if coverage_metrics:
+                    coverage_row = {
+                        'job_id': job_id,
+                        'date_posted': date_posted,
+                        'total_components': coverage_metrics.get('total_components', 0),
+                        'covered_components': coverage_metrics.get('covered_components', 0),
+                        'coverage_percentage': coverage_metrics.get('coverage_percentage', 0),
+                        'skill_coverage_pct': coverage_metrics.get('skill_coverage_pct', 0),
+                        'knowledge_coverage_pct': coverage_metrics.get('knowledge_coverage_pct', 0),
+                        'avg_skill_confidence': coverage_metrics.get('avg_skill_confidence', 0),
+                        'avg_knowledge_confidence': coverage_metrics.get('avg_knowledge_confidence', 0),
+                        'missing_components_count': len(results.get('coverage_analysis', {}).get('missing_components', []))
+                    }
+                    pd.DataFrame([coverage_row]).to_csv(self.files['coverage'], mode='a', header=False, index=False)
 
-            
-            # Save coverage metrics
-            coverage_metrics = results.get('coverage_analysis', {}).get('metrics', {})
-            if coverage_metrics:
-                coverage_row = {
-                    'job_id': job_id,
-                    'date_posted': date_posted,
-                    'total_components': coverage_metrics.get('total_components', 0),
-                    'covered_components': coverage_metrics.get('covered_components', 0),
-                    'coverage_percentage': coverage_metrics.get('coverage_percentage', 0),
-                    'skill_coverage_pct': coverage_metrics.get('skill_coverage_pct', 0),
-                    'knowledge_coverage_pct': coverage_metrics.get('knowledge_coverage_pct', 0),
-                    'avg_skill_confidence': coverage_metrics.get('avg_skill_confidence', 0),
-                    'avg_knowledge_confidence': coverage_metrics.get('avg_knowledge_confidence', 0),
-                    'missing_components_count': len(results.get('coverage_analysis', {}).get('missing_components', []))
-                }
-                pd.DataFrame([coverage_row]).to_csv(self.files['coverage'], mode='a', header=False, index=False)
-            
-            # Save comprehensive analysis
-            self._save_comprehensive_analysis(job_id, results, extraction_time)
-            
-            # Save model comparison
-            self._save_model_comparison(job_id, results)
-            
-            # Save detailed analysis as JSON
-            analysis_file = os.path.join(self.output_dir, f'job_{job_id}_analysis.json')
-            with open(analysis_file, 'w') as f:
-                json.dump({
-                    'job_id': job_id,
-                    'text': results.get('text', ''),
-                    'skills': [s.to_dict() for s in results.get('skills', [])],
-                    'knowledge': [k.to_dict() for k in results.get('knowledge', [])],
-                    'coverage_analysis': results.get('coverage_analysis', {}),
-                    'extraction_metrics': results.get('extraction_metrics', {})
-                }, f, indent=2, default=str)
-            
-            logger.debug(f"Saved results for job {job_id}")
-            
-        except Exception as e:
-            logger.error(f"Error saving results for job {job_id}: {e}")
+                # Save comprehensive analysis
+                self._save_comprehensive_analysis(job_id, results, extraction_time)
+
+                # Save model comparison
+                self._save_model_comparison(job_id, results)
+
+                # Save detailed analysis as JSON
+                analysis_file = os.path.join(self.output_dir, f'job_{job_id}_analysis.json')
+                with open(analysis_file, 'w') as f:
+                    json.dump({
+                        'job_id': job_id,
+                        'text': results.get('text', ''),
+                        'skills': [s.to_dict() for s in results.get('skills', [])],
+                        'knowledge': [k.to_dict() for k in results.get('knowledge', [])],
+                        'coverage_analysis': results.get('coverage_analysis', {}),
+                        'extraction_metrics': results.get('extraction_metrics', {})
+                    }, f, indent=2, default=str)
+
+                logger.debug(f"Saved results for job {job_id}")
+            except Exception as e:
+                logger.error(f"Error saving results for job {job_id}: {e}")
     
     def _save_comprehensive_analysis(self, job_id: int, results: Dict, extraction_time: float = None):
         """Save comprehensive analysis for a job."""
@@ -2706,13 +2714,16 @@ class AdvancedSkillExtractionPipeline:
                 },
             }, extraction_time
     
-    def run(self, sample_size: int = None) -> None:
+    def run(self, sample_size: int = None, llm_concurrency: int = None) -> None:
         """Run the complete advanced pipeline.
 
         Jobs are loaded and grouped by ``job_id``.  BERT NER runs on each
         sentence (short context), while the LLM receives the full concatenated
         posting for richer extraction.  Fusion and downstream analysis operate
         at the job level.
+
+        When llm_concurrency > 1, processes multiple jobs in parallel (threads)
+        to speed up LLM API calls; quality is unchanged.
         """
         logger.info("Starting Advanced Skill Extraction Pipeline...")
 
@@ -2723,7 +2734,11 @@ class AdvancedSkillExtractionPipeline:
             return
 
         total_jobs = len(jobs)
-        logger.info(f"Processing {total_jobs} unique jobs...")
+        concurrency = llm_concurrency if llm_concurrency is not None else AdvancedPipelineConfig.LLM_CONCURRENCY
+        if concurrency > 1:
+            logger.info(f"Processing {total_jobs} unique jobs (concurrent LLM workers: {concurrency})...")
+        else:
+            logger.info(f"Processing {total_jobs} unique jobs...")
 
         pipeline_stats = {
             'total_jobs': total_jobs,
@@ -2734,11 +2749,11 @@ class AdvancedSkillExtractionPipeline:
             'total_extraction_time': 0.0,
         }
 
-        for count, job in enumerate(jobs):
-            try:
-                if count > 0:
-                    time.sleep(0.5)
+        stats_lock = threading.Lock()
 
+        def process_one(job: dict, count: int) -> bool:
+            """Process a single job; return True on success."""
+            try:
                 job_id = job['job_id']
                 date_posted = job.get('date_posted')
                 sentences = job['sentences']
@@ -2753,19 +2768,34 @@ class AdvancedSkillExtractionPipeline:
 
                 self.data_manager.save_results(job_id, results, extraction_time)
 
-                pipeline_stats['total_extraction_time'] += extraction_time
-                pipeline_stats['total_skills'] += len(results.get('skills', []))
-                pipeline_stats['total_knowledge'] += len(results.get('knowledge', []))
-                cov = results.get('coverage_analysis', {}).get('metrics', {}).get('coverage_percentage', 0)
-                pipeline_stats['total_coverage'] += cov
-                pipeline_stats['total_agreement'] += results.get('extraction_metrics', {}).get('model_agreement', 0)
+                with stats_lock:
+                    pipeline_stats['total_extraction_time'] += extraction_time
+                    pipeline_stats['total_skills'] += len(results.get('skills', []))
+                    pipeline_stats['total_knowledge'] += len(results.get('knowledge', []))
+                    cov = results.get('coverage_analysis', {}).get('metrics', {}).get('coverage_percentage', 0)
+                    pipeline_stats['total_coverage'] += cov
+                    pipeline_stats['total_agreement'] += results.get('extraction_metrics', {}).get('model_agreement', 0)
 
                 if (count + 1) % 10 == 0:
                     logger.info(f"Processed {count + 1}/{total_jobs} jobs")
-
+                return True
             except Exception as e:
                 logger.error(f"Failed to process job {job.get('job_id', count)}: {e}")
-                continue
+                return False
+
+        if concurrency > 1:
+            with ThreadPoolExecutor(max_workers=concurrency) as executor:
+                futures = {
+                    executor.submit(process_one, job, count): (job, count)
+                    for count, job in enumerate(jobs)
+                }
+                for future in as_completed(futures):
+                    future.result()
+        else:
+            for count, job in enumerate(jobs):
+                if count > 0:
+                    time.sleep(0.5)
+                process_one(job, count)
 
         n = pipeline_stats['total_jobs'] or 1
         pipeline_stats['avg_skills_per_job'] = pipeline_stats['total_skills'] / n
@@ -2830,9 +2860,26 @@ def main():
             help="Use LLM exclusively for knowledge output (default: True)",
         )
         parser.add_argument(
+            "--extraction-mode",
+            type=str,
+            choices=["hybrid", "llm_only", "bert_only"],
+            default="hybrid",
+            help=(
+                "Extraction mode: hybrid (BERT+LLM fusion, default), "
+                "llm_only (LLM on full doc, no BERT — RQ1 ablation), "
+                "bert_only (BERT per-sentence, no LLM)."
+            ),
+        )
+        parser.add_argument(
             "--bert-knowledge",
             action="store_true",
             help="Fuse BERT knowledge into output (hybrid mode, for backward compatibility)",
+        )
+        parser.add_argument(
+            "--llm_concurrency",
+            type=int,
+            default=None,
+            help=f"Parallel LLM workers (default: {AdvancedPipelineConfig.LLM_CONCURRENCY}); use 1 for sequential",
         )
         args = parser.parse_args()
 
@@ -2841,6 +2888,7 @@ def main():
         AdvancedPipelineConfig.SAMPLE_SIZE = args.sample_size
         AdvancedPipelineConfig.RANDOM_SEED = args.seed
         AdvancedPipelineConfig.LLM_ONLY_KNOWLEDGE = not args.bert_knowledge
+        AdvancedPipelineConfig.EXTRACTION_MODE = args.extraction_mode
 
         # Create pipeline instance
         pipeline = AdvancedSkillExtractionPipeline()
@@ -2849,7 +2897,7 @@ def main():
         pipeline.initialize(output_dir=args.output_dir)
         
         # Run pipeline
-        pipeline.run(sample_size=args.sample_size)
+        pipeline.run(sample_size=args.sample_size, llm_concurrency=args.llm_concurrency)
         
     except KeyboardInterrupt:
         logger.info("Pipeline interrupted by user")

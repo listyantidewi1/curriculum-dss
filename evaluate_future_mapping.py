@@ -218,6 +218,8 @@ def main():
     parser.add_argument("--output", type=str, default="future_mapping_evaluation_report.json")
     parser.add_argument("--margin_threshold", type=float, default=0.05,
                         help="Margin threshold for high-margin accuracy subset (default: 0.05)")
+    parser.add_argument("--spektrum-code", type=str, default=None,
+                        help="Spektrum Keahlian code for provenance / per-Bidang stratification")
     args = parser.parse_args()
 
     out_dir = Path(args.output_dir)
@@ -248,6 +250,9 @@ def main():
                 print(f"  Top-1 (high-margin): {report.get('top1_accuracy_high_margin', 0):.3f}")
                 print(f"  None/unclear rate: {report['none_unclear_rate']:.3f}")
                 print(f"  Mean margin: {report['mean_margin']:.3f}")
+
+    if args.spektrum_code and str(args.spektrum_code).strip():
+        report["spektrum_code"] = str(args.spektrum_code).strip()
 
     out_path = out_dir / args.output
     out_path.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")

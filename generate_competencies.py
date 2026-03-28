@@ -13,6 +13,10 @@ for legacy sequential chunking.
 
 Output:
     competency_proposals.json  (list of JSON objects with competencies)
+
+Use --llm_concurrency N (default: 5) for parallel LLM calls across batches.
+Same inputs, model, temperature; only wall-clock time improves. Results
+are merged in batch_id order to preserve reproducibility.
 """
 
 import argparse
@@ -20,9 +24,10 @@ import json
 import os
 import re
 from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import time
 from pathlib import Path
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Tuple
 
 import pandas as pd
 from openai import OpenAI
@@ -360,6 +365,8 @@ def build_prompt(
     skill_future_weights: Optional[Dict[str, Dict]] = None,
     skill_time_trends: Optional[Dict[str, Dict]] = None,
     skill_bloom_map: Optional[Dict[str, str]] = None,
+    curriculum_context: str = "",
+    vocational_domain: str = "",
 ) -> str:
     # Annotate skills with Bloom, future_weight, and/or empirical trend when available
     def format_skill(s: str) -> str:
@@ -411,7 +418,7 @@ Here are examples of HIGH-QUALITY competencies (use similar style and structure)
     future_weighting_block = ""
     if skill_future_weights or skill_time_trends:
         future_weighting_block = """
-8. FUTURE WEIGHTING (important): Skills may be annotated with:
+10. FUTURE WEIGHTING (important): Skills may be annotated with:
    - future_weight, domain, forecast_trend: from domain forecasts (Strong_Growth, Moderate_Growth, Decline).
    - empirical_trend: from actual job posting frequency over time (Emerging, Declining).
    - PRIORITIZE competencies that cover skills with HIGH future_weight and/or empirical_trend=Emerging.
@@ -420,12 +427,25 @@ Here are examples of HIGH-QUALITY competencies (use similar style and structure)
    - Do not create competencies that focus primarily on declining skills.
 
 """
+    domain_line = (
+        f" in the {vocational_domain} domain"
+        if vocational_domain
+        else " in the Software & Game Development domain"
+    )
+    curriculum_block = ""
+    if curriculum_context and curriculum_context.strip():
+        curriculum_block = f"""
+
+Existing curriculum components (align where relevant):
+{curriculum_context}
+"""
 
     return f"""
 You are an expert in competency-based education and vocational curriculum design.
 
 You are given a list of VERIFIED job skills (mostly hard skills) extracted from
-real job postings in the Software & Game Development domain.
+real job postings{domain_line}.
+{curriculum_block}
 
 Your task is to group related skills and generate COMPETENCY STATEMENTS that are
 suitable for use in an upper-secondary / vocational curriculum (e.g., Indonesian SMK).
@@ -442,6 +462,7 @@ Please follow these rules:
      include how (measurable, operational criteria).
      Example: "Design scalable, high-performance software components by breaking down complex
      requirements into smaller, manageable subsystems and choosing appropriate technologies."
+     Focus on learner-demonstrable outcomes, not business impact.
    - "related_skills": list of skill phrases from the input that this competency covers.
      Do NOT add any skill to related_skills that was not in the input list above.
      Only reference skills that appear in the list. Paraphrasing or inventing skills is not allowed.
@@ -454,7 +475,15 @@ Please follow these rules:
    distinct themes; fewer is fine when they cluster strongly.
 6. Avoid creating competencies that strongly overlap with others in this batch; prefer distinct themes.
 7. Prefer higher-level, integrative competencies, not trivial one-skill items.
-8. Give slightly higher priority and more detail to skills and themes that appear
+8. CURRICULUM LANGUAGE: Write competencies as if for a Ministry of Education curriculum document.
+   Use learning-outcome language (what the learner can demonstrate or produce).
+   AVOID HR/job-description phrasing: "actionable insights", "strategic decisions", "inform
+   stakeholders", "drive value", "business impact", "competitive advantage", "meet business needs".
+   USE INSTEAD: "identify patterns", "communicate findings", "apply methods", "demonstrate
+   understanding", "present recommendations", "evaluate alternatives", "create artifacts".
+   PRESERVE all substantive technical and cognitive requirements (methods, tools, processes).
+   Competencies must be ASSESSABLE (e.g., by test, project, or portfolio).
+9. Give slightly higher priority and more detail to skills and themes that appear
    in future-critical domains (AI, data, cloud, security, human–AI collaboration),
    if such context is provided.
 {future_weighting_block}
@@ -511,6 +540,8 @@ def call_llm_for_competencies(client: OpenAI,
                               skill_future_weights: Optional[Dict[str, Dict]] = None,
                               skill_time_trends: Optional[Dict[str, Dict]] = None,
                               skill_bloom_map: Optional[Dict[str, str]] = None,
+                              curriculum_context: str = "",
+                              vocational_domain: str = "",
                               temperature: float = 0.0) -> Dict:
     prompt = build_prompt(
         skills,
@@ -519,13 +550,17 @@ def call_llm_for_competencies(client: OpenAI,
         skill_future_weights=skill_future_weights,
         skill_time_trends=skill_time_trends,
         skill_bloom_map=skill_bloom_map,
+        curriculum_context=curriculum_context,
+        vocational_domain=vocational_domain,
     )
 
     messages = [
         {
             "role": "system",
             "content": (
-                "You are a precise curriculum designer. "
+                "You are a precise curriculum designer drafting competencies for Ministry of Education curriculum documents. "
+                "Use learning-outcome language (what learners can demonstrate). "
+                "Avoid HR or job-description phrasing. "
                 "Always respond with VALID JSON only. "
                 "Do NOT include any markdown fences or commentary."
             ),
@@ -697,6 +732,24 @@ def main():
         default=None,
         help="Path to future_domains.csv (default: PROJECT_ROOT/future_domains.csv)",
     )
+    parser.add_argument(
+        "--curriculum",
+        type=str,
+        default=None,
+        help="Path to curriculum file (CSV/JSON) for domain-specific prompts. Uses curriculum_loader.",
+    )
+    parser.add_argument(
+        "--domain",
+        type=str,
+        default=None,
+        help="Vocational domain/field (e.g., RPL, Pengembangan Gim, Akuntansi) to tailor prompt.",
+    )
+    parser.add_argument(
+        "--llm_concurrency",
+        type=int,
+        default=5,
+        help="Parallel LLM workers for competency generation (1=sequential, default: 5)",
+    )
 
     args = parser.parse_args()
     args.deduplicate = not args.no_deduplicate
@@ -715,6 +768,33 @@ def main():
         print("[INFO] Future context loaded and will be injected into LLM prompt.")
     else:
         print("[INFO] No future context available; generating competencies from skills only.")
+
+    # Load curriculum for domain-specific context (if provided)
+    curriculum_context = ""
+    if args.curriculum:
+        curr_path = Path(args.curriculum)
+        if curr_path.exists():
+            try:
+                from curriculum_loader import load_curriculum_file
+                components = load_curriculum_file(curr_path)
+                if components:
+                    lines = []
+                    for c in components[:20]:  # Limit to avoid token overflow
+                        comp_name = c.get("component_name", "") or c.get("component_id", "")
+                        bloom = c.get("bloom_level", "")
+                        phrases = c.get("phrases", [])
+                        phrases_str = ", ".join(str(p) for p in (phrases[:5] if isinstance(phrases, list) else []))
+                        lines.append(f"  - {comp_name} (Bloom: {bloom}): {phrases_str}")
+                    curriculum_context = "\n".join(lines)
+                    print(f"[INFO] Loaded {len(components)} curriculum components from {curr_path.name}")
+            except Exception as e:
+                print(f"[WARN] Could not load curriculum from {args.curriculum}: {e}")
+        else:
+            print(f"[WARN] Curriculum file not found: {args.curriculum}")
+
+    vocational_domain = (args.domain or "").strip() or None
+    if vocational_domain:
+        print(f"[INFO] Vocational domain for prompts: {vocational_domain}")
 
     # Load human-verified skill set (for tagging in comprehensive mode)
     human_verified_skills: set = set()
@@ -930,46 +1010,133 @@ def main():
         print(f"[INFO] Domain-based batching: {len(batches)} batches, "
               f"domains: {list(domain_counts.keys())[:10]}...")
 
-        for domain, chunk in batches:
-            print(f"[INFO] Calling LLM for batch {batch_id} (domain={domain}, {len(chunk)} skills)...")
-            data = call_llm_for_competencies(
-                client,
-                chunk,
-                args.model,
-                future_context=future_context,
-                few_shot_examples=few_shot or [],
-                skill_future_weights=skill_future_weights or None,
-                skill_time_trends=skill_time_trends or None,
-                skill_bloom_map=skill_bloom_map or None,
-                temperature=args.temperature,
-            )
-            comps = data.get("competencies", [])
-            for c in comps:
-                c.setdefault("batch_id", batch_id)
-                c.setdefault("batch_domain", domain)
-            all_competencies.extend(comps)
-            batch_id += 1
+        concurrency = getattr(args, "llm_concurrency", 5) or 5
+        if concurrency > 1:
+            print(f"[INFO] Using {concurrency} concurrent LLM workers for competency generation")
+            batch_tasks = [
+                (bid, domain, chunk)
+                for bid, (domain, chunk) in enumerate(batches, start=1)
+            ]
+
+            def _process_batch(task: Tuple[int, str, List[str]]) -> Tuple[int, Optional[str], List[Dict]]:
+                bid, domain, chunk = task
+                print(f"[INFO] Calling LLM for batch {bid} (domain={domain}, {len(chunk)} skills)...")
+                data = call_llm_for_competencies(
+                    client,
+                    chunk,
+                    args.model,
+                    future_context=future_context,
+                    few_shot_examples=few_shot or [],
+                    skill_future_weights=skill_future_weights or None,
+                    skill_time_trends=skill_time_trends or None,
+                    skill_bloom_map=skill_bloom_map or None,
+                    curriculum_context=curriculum_context,
+                    vocational_domain=vocational_domain or "",
+                    temperature=args.temperature,
+                )
+                comps = data.get("competencies", [])
+                for c in comps:
+                    c.setdefault("batch_id", bid)
+                    c.setdefault("batch_domain", domain)
+                return (bid, domain, comps)
+
+            with ThreadPoolExecutor(max_workers=concurrency) as executor:
+                futures = {executor.submit(_process_batch, t): t for t in batch_tasks}
+                results_by_id = {}
+                for future in as_completed(futures):
+                    bid, domain, comps = future.result()
+                    results_by_id[bid] = comps
+            for bid in sorted(results_by_id):
+                all_competencies.extend(results_by_id[bid])
+        else:
+            for domain, chunk in batches:
+                print(f"[INFO] Calling LLM for batch {batch_id} (domain={domain}, {len(chunk)} skills)...")
+                data = call_llm_for_competencies(
+                    client,
+                    chunk,
+                    args.model,
+                    future_context=future_context,
+                    few_shot_examples=few_shot or [],
+                    skill_future_weights=skill_future_weights or None,
+                    skill_time_trends=skill_time_trends or None,
+                    skill_bloom_map=skill_bloom_map or None,
+                    curriculum_context=curriculum_context,
+                    vocational_domain=vocational_domain or "",
+                    temperature=args.temperature,
+                )
+                comps = data.get("competencies", [])
+                for c in comps:
+                    c.setdefault("batch_id", batch_id)
+                    c.setdefault("batch_domain", domain)
+                all_competencies.extend(comps)
+                batch_id += 1
     else:
         # Legacy sequential chunking
-        for i in range(0, len(skills_sorted), args.max_skills_per_call):
-            chunk = skills_sorted[i : i + args.max_skills_per_call]
-            print(f"[INFO] Calling LLM for batch {batch_id} ({len(chunk)} skills)...")
-            data = call_llm_for_competencies(
-                client,
-                chunk,
-                args.model,
-                future_context=future_context,
-                few_shot_examples=few_shot or [],
-                skill_future_weights=skill_future_weights or None,
-                skill_time_trends=skill_time_trends or None,
-                skill_bloom_map=skill_bloom_map or None,
-                temperature=args.temperature,
-            )
-            comps = data.get("competencies", [])
-            for c in comps:
-                c.setdefault("batch_id", batch_id)
-            all_competencies.extend(comps)
-            batch_id += 1
+        concurrency = getattr(args, "llm_concurrency", 5) or 5
+        if concurrency > 1:
+            print(f"[INFO] Using {concurrency} concurrent LLM workers for competency generation")
+            legacy_batches = [
+                (bid, chunk)
+                for bid, chunk in enumerate(
+                    [
+                        skills_sorted[i : i + args.max_skills_per_call]
+                        for i in range(0, len(skills_sorted), args.max_skills_per_call)
+                    ],
+                    start=1,
+                )
+            ]
+
+            def _process_legacy_batch(task: Tuple[int, List[str]]) -> Tuple[int, List[Dict]]:
+                bid, chunk = task
+                print(f"[INFO] Calling LLM for batch {bid} ({len(chunk)} skills)...")
+                data = call_llm_for_competencies(
+                    client,
+                    chunk,
+                    args.model,
+                    future_context=future_context,
+                    few_shot_examples=few_shot or [],
+                    skill_future_weights=skill_future_weights or None,
+                    skill_time_trends=skill_time_trends or None,
+                    skill_bloom_map=skill_bloom_map or None,
+                    curriculum_context=curriculum_context,
+                    vocational_domain=vocational_domain or "",
+                    temperature=args.temperature,
+                )
+                comps = data.get("competencies", [])
+                for c in comps:
+                    c.setdefault("batch_id", bid)
+                return (bid, comps)
+
+            with ThreadPoolExecutor(max_workers=concurrency) as executor:
+                futures = {executor.submit(_process_legacy_batch, t): t for t in legacy_batches}
+                results_by_id = {}
+                for future in as_completed(futures):
+                    bid, comps = future.result()
+                    results_by_id[bid] = comps
+            for bid in sorted(results_by_id):
+                all_competencies.extend(results_by_id[bid])
+        else:
+            for i in range(0, len(skills_sorted), args.max_skills_per_call):
+                chunk = skills_sorted[i : i + args.max_skills_per_call]
+                print(f"[INFO] Calling LLM for batch {batch_id} ({len(chunk)} skills)...")
+                data = call_llm_for_competencies(
+                    client,
+                    chunk,
+                    args.model,
+                    future_context=future_context,
+                    few_shot_examples=few_shot or [],
+                    skill_future_weights=skill_future_weights or None,
+                    skill_time_trends=skill_time_trends or None,
+                    skill_bloom_map=skill_bloom_map or None,
+                    curriculum_context=curriculum_context,
+                    vocational_domain=vocational_domain or "",
+                    temperature=args.temperature,
+                )
+                comps = data.get("competencies", [])
+                for c in comps:
+                    c.setdefault("batch_id", batch_id)
+                all_competencies.extend(comps)
+                batch_id += 1
 
     # Tag competencies with human verification status (comprehensive mode)
     if args.comprehensive and human_verified_skills:

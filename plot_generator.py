@@ -579,13 +579,27 @@ GENERIC_MODIFIERS = {
 }
 
 SOFT_PATTERNS_IN_HARD = [
+    # Original patterns
     "analytical skill", "analytical skills", "analytical",
     "problem solving", "problem-solving", "solving skills",
     "attention to detail", "detail oriented", "detail-oriented",
     "critical thinking", "team player",
-    "detail oriented", "detail-oriented","discipline employees",
-    "leadership skill", "leadership skills", "collaborate closely",
-    "critical thinking", "team player", "continuous improvement","discipline"
+    "discipline employees", "leadership skill", "leadership skills",
+    "collaborate closely", "continuous improvement", "discipline",
+    # Communication & interpersonal
+    "communicate effectively", "communicate with", "communicate ideas",
+    "communicate clearly", "respectfully with others", "respectfully with employees",
+    "work closely with", "work collaboratively", "cooperatively with",
+    "exhibit trustworthiness", "entrepreneurial spirit",
+    # Customer service & support
+    "ensure exceptional customer service", "customer service",
+    "provide administrative support", "provide technical support",
+    "provide customer", "adhere to company",
+    # Behavioral / work ethic
+    "work safely", "exercise sound judgment", "assessing responses",
+    "best practices", "move fast",
+    # Generic issue resolution (often soft; "troubleshoot" kept for technical cases)
+    "resolve issues", "resolve problems", "gather requirements", "manage projects",
 ]
 
 def is_softish(text: str) -> bool:
@@ -635,9 +649,9 @@ def plot_top_skill_knowledge_clusters(adv_skills: pd.DataFrame,
                                       fig_dir: Path,
                                       top_n: int = 40):
     # Top HARD skills (by frequency, weighted by confidence)
-# Top HARD skills (by frequency, weighted by confidence)
+    # Use type=="Hard" only; "Both" often captures borderline soft skills that dilute the plot
     if not adv_skills.empty:
-        hard = adv_skills.loc[adv_skills["type"].isin(["Hard", "Both"])].copy()
+        hard = adv_skills.loc[adv_skills["type"] == "Hard"].copy()
         # filter out '/', degrees, languages, 1-word verbs, generic nouns
         hard = hard.loc[hard["skill"].apply(valid_hard_skill_for_plot)]
         # also remove soft-ish phrases that leaked into hard skills

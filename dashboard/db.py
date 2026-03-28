@@ -96,6 +96,13 @@ def init_db() -> None:
         """
     )
 
+    # Migration: Add Spektrum fields (Kepmen 244/M/2024) - backward compatible
+    cur.execute("PRAGMA table_info(departments)")
+    cols = {row[1] for row in cur.fetchall()}
+    if "spektrum_code" not in cols:
+        cur.execute("ALTER TABLE departments ADD COLUMN spektrum_code TEXT")
+    conn.commit()
+
     # Seed admin user once.
     cur.execute("SELECT id FROM users WHERE role='admin' LIMIT 1")
     if cur.fetchone() is None:

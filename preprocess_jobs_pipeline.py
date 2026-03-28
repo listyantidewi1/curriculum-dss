@@ -202,15 +202,12 @@ def main():
     sents_df["sentence_clean"] = sents_df["sentence_raw"].apply(clean_sentence)
 
     # -----------------------------
-    # Language detection
-    # -----------------------------
-    print("[INFO] Detecting language...")
-    sents_df["lang"] = sents_df["sentence_clean"].apply(detect_language)
-
-    # -----------------------------
-    # Translation (optional)
+    # Language detection & Translation (optional)
     # -----------------------------
     if args.translate:
+        print("[INFO] Detecting language...")
+        sents_df["lang"] = sents_df["sentence_clean"].apply(detect_language)
+
         translator = Translator(args.translation_model)
         sents_df["sentence_en"] = sents_df["sentence_clean"]
 
