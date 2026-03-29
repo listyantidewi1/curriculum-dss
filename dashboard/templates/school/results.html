@@ -2,7 +2,116 @@
 {% block content %}
 <h2>Department Results</h2>
 {% if banner %}<p class="banner">{{ banner }}</p>{% endif %}
-<p class="hint"><a href="/dashboard/school/methodology">How it works</a> — understand how scores and rankings are computed. Items marked <code>not_verified</code> have not been reviewed; they may still be valid.</p>
+<p class="hint">
+  <a href="/dashboard/school/methodology">How it works</a> — understand how scores and rankings are computed.
+  Items marked <code>not_verified</code> have not been reviewed; they may still be valid.
+  &nbsp;|&nbsp;
+  <a href="/dashboard/school/report?department_id={{ selected_department_id }}">📄 Download printable report</a>
+</p>
+
+{# ============================================================ #}
+{# Item 9: Trend Sparklines                                      #}
+{# ============================================================ #}
+<section class="card">
+  <h3>Skill Demand Trends (Last 12 Months)</h3>
+  <p class="hint">Monthly demand frequency for top skills. Hover a bar for exact count.</p>
+  <div id="sparkline-container" style="display:flex;flex-wrap:wrap;gap:16px;min-height:60px;">
+    <span style="color:#aaa;font-size:12px;">Loading trend data…</span>
+  </div>
+</section>
+
+<script>
+(function(){
+  var deptId = {{ selected_department_id | default("null") }};
+  var url = "/dashboard/api/sparklines?top_n=12" + (deptId ? "&department_id=" + deptId : "");
+  fetch(url, {credentials:"same-origin"})
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      var container = document.getElementById("sparkline-container");
+      container.innerHTML = "";
+      if (!data.skills || data.skills.length === 0){
+        container.innerHTML = "<span style='color:#aaa;font-size:12px'>No trend data available yet. Run Phase 1 first.</span>";
+        return;
+      }
+      data.skills.forEach(function(s){
+        var card = document.createElement("div");
+        card.style.cssText = "background:#f8f9ff;border:1px solid #dde4f0;border-radius:6px;padding:8px 12px;min-width:140px;max-width:160px;";
+        var label = document.createElement("div");
+        label.style.cssText = "font-size:11px;font-weight:600;color:#2d3561;margin-bottom:4px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;";
+        label.textContent = s.skill;
+        label.title = s.skill;
+        card.appendChild(label);
+
+        if (s.counts && s.counts.length > 0){
+          var maxVal = Math.max.apply(null, s.counts) || 1;
+          var bar_h = 28, bar_w = 8, bar_gap = 2;
+          var svg = document.createElementNS("http://www.w3.org/2000/svg","svg");
+          var total_w = s.counts.length * (bar_w + bar_gap);
+          svg.setAttribute("width", total_w);
+          svg.setAttribute("height", bar_h + 2);
+          svg.style.display = "block";
+          s.counts.forEach(function(v, i){
+            var h = Math.max(2, Math.round((v / maxVal) * bar_h));
+            var rect = document.createElementNS("http://www.w3.org/2000/svg","rect");
+            rect.setAttribute("x", i*(bar_w+bar_gap));
+            rect.setAttribute("y", bar_h - h);
+            rect.setAttribute("width", bar_w);
+            rect.setAttribute("height", h);
+            rect.setAttribute("fill", i === s.counts.length-1 ? "#4a90d9" : "#b8cfe8");
+            rect.setAttribute("rx", "2");
+            var title = document.createElementNS("http://www.w3.org/2000/svg","title");
+            title.textContent = (s.months[i] || ("M"+(i+1))) + ": " + v + " jobs";
+            rect.appendChild(title);
+            svg.appendChild(rect);
+          });
+          card.appendChild(svg);
+          // Trend badge
+          if (s.trend_label){
+            var badge = document.createElement("span");
+            badge.style.cssText = "font-size:10px;border-radius:3px;padding:1px 5px;margin-top:3px;display:inline-block;";
+            var tl = s.trend_label.toLowerCase();
+            badge.textContent = s.trend_label;
+            badge.style.background = tl.indexOf("emerg")>=0?"#d4edda":tl.indexOf("declin")>=0?"#f8d7da":"#e2e3e5";
+            badge.style.color = tl.indexOf("emerg")>=0?"#155724":tl.indexOf("declin")>=0?"#721c24":"#383d41";
+            card.appendChild(badge);
+          }
+        } else {
+          var noData = document.createElement("div");
+          noData.style.cssText = "font-size:10px;color:#aaa;";
+          noData.textContent = "No monthly data";
+          card.appendChild(noData);
+        }
+
+        // Item 3: Explainability — click to show score breakdown
+        var explainBtn = document.createElement("button");
+        explainBtn.textContent = "Why?";
+        explainBtn.style.cssText = "font-size:10px;background:#eef2ff;border:none;border-radius:3px;padding:2px 7px;margin-top:4px;cursor:pointer;color:#2d3561;";
+        explainBtn.onclick = function(){
+          var eurl = "/dashboard/api/explain_score?skill=" + encodeURIComponent(s.skill) + (deptId ? "&department_id="+deptId : "");
+          fetch(eurl, {credentials:"same-origin"})
+            .then(function(r){ return r.json(); })
+            .then(function(d){
+              if(d.error){ alert("Score breakdown not available: " + d.error); return; }
+              var sc = d.score_components || {};
+              var msg = "Score breakdown for: " + d.skill + "\n\n";
+              msg += "Priority Score: " + (d.priority_score||0).toFixed(3) + "\n";
+              msg += "─────────────────────────\n";
+              if(sc.demand) msg += "Demand (×0.40): " + sc.demand.value.toFixed(3) + " → +" + sc.demand.contribution.toFixed(3) + " ("+sc.demand.raw_freq+" jobs)\n";
+              if(sc.trend) msg += "Trend  (×0.30): " + sc.trend.value.toFixed(3) + " → +" + sc.trend.contribution.toFixed(3) + " ("+sc.trend.trend_label+")\n";
+              if(sc.future) msg += "Future (×0.30): " + sc.future.value.toFixed(3) + " → +" + sc.future.contribution.toFixed(3) + " ("+sc.future.domain+")\n";
+              msg += "─────────────────────────\n";
+              msg += "Bloom: " + (d.bloom_level||"—") + " | Type: " + (d.skill_type||"—") + " | Status: " + (d.verification||"—");
+              alert(msg);
+            });
+        };
+        card.appendChild(document.createElement("br"));
+        card.appendChild(explainBtn);
+        container.appendChild(card);
+      });
+    })
+    .catch(function(){ document.getElementById("sparkline-container").innerHTML = "<span style='color:#aaa;font-size:12px'>Trend data unavailable.</span>"; });
+})();
+</script>
 
 <section class="card">
   <form method="get" action="/dashboard/school/results">

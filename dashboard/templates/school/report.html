@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Curriculum Gap Report — {{ dept.name }}</title>
+  <style>
+    /* ------------------------------------------------------------------ */
+    /* Screen styles                                                         */
+    /* ------------------------------------------------------------------ */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Segoe UI", Arial, sans-serif; font-size: 13px; color: #1a1a2e; background: #f5f7fa; }
+
+    .toolbar {
+      background: #2d3561; color: #fff; padding: 10px 24px;
+      display: flex; align-items: center; gap: 16px; position: sticky; top: 0; z-index: 100;
+    }
+    .toolbar h1 { font-size: 15px; font-weight: 600; flex: 1; }
+    .toolbar a, .toolbar button {
+      background: #fff; color: #2d3561; border: none; padding: 6px 16px;
+      border-radius: 4px; font-size: 13px; cursor: pointer; text-decoration: none; font-weight: 600;
+    }
+    .toolbar button:hover, .toolbar a:hover { background: #e8f0fe; }
+
+    .page { max-width: 900px; margin: 24px auto; background: #fff; border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08); padding: 40px 48px; }
+
+    .report-header { border-bottom: 2px solid #2d3561; padding-bottom: 16px; margin-bottom: 28px; }
+    .report-header h2 { font-size: 22px; color: #2d3561; }
+    .report-header .meta { color: #666; font-size: 12px; margin-top: 6px; }
+    .report-header .meta span { margin-right: 20px; }
+
+    h3 { font-size: 15px; color: #2d3561; margin: 28px 0 10px; border-left: 4px solid #4a90d9; padding-left: 10px; }
+    h4 { font-size: 13px; color: #444; margin: 16px 0 6px; }
+
+    table { width: 100%; border-collapse: collapse; margin-bottom: 12px; font-size: 12px; }
+    th { background: #f0f4ff; color: #2d3561; padding: 8px 10px; text-align: left;
+         border-bottom: 2px solid #c9d8f0; font-weight: 600; }
+    td { padding: 7px 10px; border-bottom: 1px solid #eee; vertical-align: top; }
+    tr:hover td { background: #f8f9ff; }
+
+    .badge { display: inline-block; border-radius: 3px; padding: 1px 7px; font-size: 11px; font-weight: 600; }
+    .badge-emerging { background: #d4edda; color: #155724; }
+    .badge-declining { background: #f8d7da; color: #721c24; }
+    .badge-stable   { background: #e2e3e5; color: #383d41; }
+    .badge-verified { background: #cfe2ff; color: #084298; }
+    .badge-invalid  { background: #f8d7da; color: #721c24; }
+
+    .score-bar { display: inline-block; height: 8px; background: #4a90d9; border-radius: 4px; vertical-align: middle; margin-right: 6px; }
+
+    .competency-card { border: 1px solid #dde4f0; border-radius: 6px; padding: 12px 16px; margin-bottom: 10px; }
+    .competency-card .domain-tag { font-size: 11px; color: #4a90d9; font-weight: 600; margin-bottom: 4px; }
+    .competency-card ul { list-style: disc; padding-left: 18px; margin: 6px 0; }
+    .competency-card li { margin-bottom: 3px; }
+
+    .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+    .summary-card { background: #f0f4ff; border-radius: 6px; padding: 14px 18px; text-align: center; }
+    .summary-card .num { font-size: 28px; font-weight: 700; color: #2d3561; }
+    .summary-card .lbl { font-size: 11px; color: #666; margin-top: 2px; }
+
+    .provenance { font-size: 10px; color: #999; margin-top: 4px; font-style: italic; }
+    .section-note { font-size: 11px; color: #888; margin-bottom: 8px; }
+
+    /* ------------------------------------------------------------------ */
+    /* Print styles                                                          */
+    /* ------------------------------------------------------------------ */
+    @media print {
+      body { background: #fff; font-size: 11px; }
+      .toolbar { display: none !important; }
+      .page { box-shadow: none; border-radius: 0; padding: 0; max-width: 100%; margin: 0; }
+      h3 { page-break-after: avoid; }
+      table { page-break-inside: auto; }
+      tr { page-break-inside: avoid; }
+      .competency-card { page-break-inside: avoid; }
+      @page { margin: 20mm; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="toolbar">
+  <h1>Curriculum Gap Report — {{ dept.name or "Department" }}</h1>
+  <a href="/dashboard/school/results?department_id={{ selected_dept_id }}">← Back to Dashboard</a>
+  <button onclick="window.print()">🖨 Print / Save as PDF</button>
+</div>
+
+<div class="page">
+
+  <!-- ================================================================ -->
+  <!-- Header                                                             -->
+  <!-- ================================================================ -->
+  <div class="report-header">
+    <h2>Curriculum Gap &amp; Skill Priority Report</h2>
+    <div class="meta">
+      <span><strong>School:</strong> {{ dept.school_name or "—" }}</span>
+      <span><strong>Department:</strong> {{ dept.name or "—" }}</span>
+      <span><strong>Field:</strong> {{ dept.vocational_field or "—" }}</span>
+      <span><strong>Generated:</strong> {{ report_date }}</span>
+      {% if run_meta.git_hash %}<span><strong>Pipeline commit:</strong> {{ run_meta.git_hash[:8] }}</span>{% endif %}
+      {% if run_meta.prompt_versioning and run_meta.prompt_versioning.combined_prompt_hash %}
+      <span><strong>Prompt hash:</strong> {{ run_meta.prompt_versioning.combined_prompt_hash }}</span>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- ================================================================ -->
+  <!-- Summary                                                            -->
+  <!-- ================================================================ -->
+  <div class="summary-grid">
+    <div class="summary-card">
+      <div class="num">{{ recs|length }}</div>
+      <div class="lbl">Priority Skill Gaps</div>
+    </div>
+    <div class="summary-card">
+      <div class="num">{{ knowledge|length }}</div>
+      <div class="lbl">Knowledge Gaps</div>
+    </div>
+    <div class="summary-card">
+      <div class="num">{{ competencies|length }}</div>
+      <div class="lbl">Competency Proposals</div>
+    </div>
+  </div>
+
+  <p class="section-note">
+    Priority score = 0.40 × demand + 0.30 × trend + 0.30 × future alignment.
+    Data source: {{ run_meta.input_dataset.rows | default("N/A") }} job postings over 12 months.
+    Seed: {{ run_meta.random_seed | default(42) }}.
+  </p>
+
+  <!-- ================================================================ -->
+  <!-- Top Skill Gaps                                                     -->
+  <!-- ================================================================ -->
+  <h3>Top {{ top_n }} Priority Skill Gaps</h3>
+  <p class="section-note">Skills demanded by industry but under-represented in curriculum.</p>
+
+  {% if recs %}
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Skill</th>
+        <th>Priority</th>
+        <th>Demand</th>
+        <th>Trend</th>
+        <th>Future Domain</th>
+        <th>Type</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in recs %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td><strong>{{ r.skill or r.canonical_skill or "—" }}</strong>
+          {% if r._why_provenance %}
+          <div class="provenance">{{ r._why_provenance }}</div>
+          {% endif %}
+        </td>
+        <td>
+          <span class="score-bar" style="width:{{ ((r.priority_score or r._model_score or 0)|float * 60)|int }}px"></span>
+          {{ "%.3f"|format((r.priority_score or r._model_score or 0)|float) }}
+        </td>
+        <td>{{ r.demand_freq | default("—") }}</td>
+        <td>
+          {% set tl = r.trend_label | default("Stable") %}
+          <span class="badge badge-{{ tl | lower }}">{{ tl }}</span>
+        </td>
+        <td>{{ r.future_domain or r.best_future_domain or "—" }}</td>
+        <td>{{ r.type or r.skill_type or "—" }}</td>
+        <td>
+          {% set vs = r.verification_status | default("not_verified") %}
+          {% if vs == "verified" %}<span class="badge badge-verified">Verified</span>
+          {% elif vs == "invalid" %}<span class="badge badge-invalid">Invalid</span>
+          {% else %}<span style="color:#999;font-size:11px">Unreviewed</span>{% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="section-note">No recommendations found. Run Phase 1 pipeline first.</p>
+  {% endif %}
+
+  <!-- ================================================================ -->
+  <!-- Top Knowledge Gaps                                                 -->
+  <!-- ================================================================ -->
+  <h3>Top {{ top_n }} Knowledge Gaps</h3>
+  <p class="section-note">Knowledge areas extracted from job postings (LLM-only, full-context).</p>
+
+  {% if knowledge %}
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Knowledge Area</th>
+        <th>Score</th>
+        <th>Occurrences</th>
+        <th>Future Domain</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for k in knowledge %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td><strong>{{ k.knowledge or "—" }}</strong></td>
+        <td>{{ "%.3f"|format((k.knowledge_score or k.confidence_score or 0)|float) }}</td>
+        <td>{{ k.occurrence_count or k.occurrences or "—" }}</td>
+        <td>{{ k.best_future_domain or "—" }}</td>
+        <td>
+          {% set ks = k.verification_status | default("not_verified") %}
+          {% if ks == "verified" %}<span class="badge badge-verified">Verified</span>
+          {% elif ks == "invalid" %}<span class="badge badge-invalid">Invalid</span>
+          {% else %}<span style="color:#999;font-size:11px">Unreviewed</span>{% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="section-note">No knowledge data found.</p>
+  {% endif %}
+
+  <!-- ================================================================ -->
+  <!-- Competency Proposals                                               -->
+  <!-- ================================================================ -->
+  <h3>Competency Proposals</h3>
+  <p class="section-note">
+    LLM-generated competencies structured by Bloom's taxonomy level, grouped by future-work domain.
+    Ready for use in KOSP (Kurikulum Operasional Satuan Pendidikan) development.
+  </p>
+
+  {% if competencies %}
+    {% for c in competencies %}
+    <div class="competency-card">
+      <div class="domain-tag">{{ c.future_domain or c.domain or "General" }} · Bloom: {{ c.bloom_level or c.bloom or "—" }}</div>
+      <strong>{{ c.title or c.competency_title or ("Competency " ~ loop.index) }}</strong>
+      {% if c.description %}
+      <p style="margin:4px 0;color:#555;">{{ c.description }}</p>
+      {% endif %}
+      {% if c.learning_objectives %}
+      <h4>Learning Objectives:</h4>
+      <ul>
+        {% for obj in c.learning_objectives %}
+        <li>{{ obj }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% if c.related_skills %}
+      <p class="provenance">Related skills: {{ c.related_skills | join(", ") if c.related_skills is iterable else c.related_skills }}</p>
+      {% endif %}
+    </div>
+    {% endfor %}
+  {% else %}
+  <p class="section-note">No competency proposals found. Run generate_competencies.py first.</p>
+  {% endif %}
+
+  <!-- ================================================================ -->
+  <!-- Methodology Note                                                   -->
+  <!-- ================================================================ -->
+  <h3>Methodology &amp; Reproducibility</h3>
+  <table style="font-size:11px;">
+    <tr><th style="width:180px">Parameter</th><th>Value</th></tr>
+    <tr><td>Pipeline version (git)</td><td>{{ run_meta.git_hash | default("N/A") }}</td></tr>
+    <tr><td>Random seed</td><td>{{ run_meta.random_seed | default(42) }}</td></tr>
+    <tr><td>Sample size</td><td>{{ run_meta.config_parameters.sample_size | default("N/A") }}</td></tr>
+    <tr><td>JobBERT model</td><td>{{ run_meta.models.jobbert | default("N/A") }}</td></tr>
+    <tr><td>SBERT model</td><td>{{ run_meta.models.sbert | default("N/A") }}</td></tr>
+    <tr><td>LLM model</td><td>{{ run_meta.models.llm | default("N/A") }}</td></tr>
+    <tr><td>LLM prompt hash</td><td>{{ run_meta.prompt_versioning.combined_prompt_hash | default("N/A") }}</td></tr>
+    <tr><td>Input dataset SHA256</td><td>{{ run_meta.input_dataset.sha256[:16] | default("N/A") if run_meta.input_dataset else "N/A" }}</td></tr>
+    <tr><td>Priority formula</td><td>0.40 × demand + 0.30 × trend + 0.30 × future (coverage weight = 0.00)</td></tr>
+    <tr><td>FDR correction</td><td>Benjamini-Hochberg, α = 0.05</td></tr>
+    <tr><td>Run timestamp</td><td>{{ run_meta.timestamp | default("N/A") }}</td></tr>
+  </table>
+
+  <p style="margin-top:28px;font-size:10px;color:#aaa;text-align:center;">
+    Generated by Future-Aware Hybrid Skill Extraction Pipeline ·
+    For curriculum design use only · {{ report_date }}
+  </p>
+
+</div>
+
+<!-- Sparkline chart (screen-only) is loaded via the results page; this report is print-first. -->
+
+</body>
+</html>

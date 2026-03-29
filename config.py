@@ -35,7 +35,9 @@ OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # ---- JOB SCRAPING DATA (default pipeline source) ----
 # Raw job postings from job_scraping (12 months of data); input to preprocess
-JOBS_SCRAPING_CSV = PROJECT_ROOT / "job_scraping" / "output" / "english_jobs.csv"
+JOBS_SCRAPING_CSV    = PROJECT_ROOT / "job_scraping" / "output" / "english_jobs.csv"
+# Item 5: Indonesian-language job postings (place scraped data here; auto-translated via --include-indonesian)
+JOBS_SCRAPING_CSV_ID = PROJECT_ROOT / "job_scraping" / "output" / "indonesian_jobs.csv"
 # Preprocess output dir; pipeline reads jobs_sentences.csv from here
 PREPROCESS_OUTPUT_DIR = PROJECT_ROOT / "DATA" / "preprocessing" / "data_prepared"
 PIPELINE_INPUT_CSV = PREPROCESS_OUTPUT_DIR / "jobs_sentences.csv"

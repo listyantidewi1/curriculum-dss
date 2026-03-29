@@ -199,12 +199,37 @@ def _build_evaluate_future_mapping_cmd(results_dir: Path, spektrum_code: Optiona
     return cmd
 
 
+# Item 8: Checkpoint/resume — maps a step script name to the output file it produces.
+# If resume=True and the marker file exists, the step is skipped.
+_STEP_CHECKPOINTS: dict = {
+    "pipeline.py":                    "advanced_skills.csv",
+    "verify_skills.py":               "verified_skills.csv",
+    "enrich_with_dates.py":           "advanced_skills_with_dates.csv",
+    "skill_time_trend_analysis.py":   "skill_time_trends.csv",
+    "generate_competencies.py":       "competency_proposals.json",
+    "recommendations.py":             "recommendations.csv",
+    "evaluate_extraction.py":         "extraction_evaluation_report.json",
+    "plot_scientific_analysis.py":    "figures/scientific_calibration_curve.png",
+}
+
+
+def _checkpoint_done(step: List[str], results_dir: Path) -> bool:
+    """Return True if this step's output marker already exists."""
+    for token in step:
+        script = Path(token).name
+        marker = _STEP_CHECKPOINTS.get(script)
+        if marker:
+            return (results_dir / marker).exists()
+    return False
+
+
 def run_department_pipeline(
     school_id: int,
     department_id: int,
     sample_size: int = 1000,
     vocational_field: Optional[str] = None,
     spektrum_code: Optional[str] = None,
+    resume: bool = False,
 ) -> dict:
     """
     Run a department-scoped Phase-1 style pipeline.
@@ -353,6 +378,10 @@ def run_department_pipeline(
 
     # Optional curriculum upload is currently tracked for metadata; integration can be added later.
     for step in steps:
+        # Item 8: Skip completed steps when resume=True
+        if resume and _checkpoint_done(step, paths.results):
+            print(f"[RESUME] Skipping (checkpoint exists): {Path(step[1]).name}")
+            continue
         # merge_gold_labels may fail if no gold labels exist; run non-fatal
         if "merge_gold_labels.py" in str(step):
             try:
@@ -379,6 +408,7 @@ def run_department_phase2(
     department_id: int,
     vocational_field: Optional[str] = None,
     spektrum_code: Optional[str] = None,
+    resume: bool = False,
 ) -> dict:
     """
     Run Phase 2 (post-review) pipeline for a department.

@@ -1775,6 +1775,215 @@ def school_review_load_more(request: Request, department_id: int = Form(...)):
     return RedirectResponse(f"/dashboard/school/review?department_id={department_id}", status_code=302)
 
 
+# ---------------------------------------------------------------------------
+# Item 9: Trend Sparklines API  — GET /dashboard/api/sparklines
+# ---------------------------------------------------------------------------
+
+@app.get("/dashboard/api/sparklines")
+def api_sparklines(request: Request, department_id: Optional[int] = None, top_n: int = 15):
+    """Return monthly frequency data for top skills (for sparkline rendering)."""
+    user = _require_role(request, "school")
+    departments = _school_departments(user)
+    selected = department_id or (departments[0]["id"] if departments else None)
+    if selected is None:
+        return {"skills": []}
+
+    result_dir = _resolve_results_dir(user["school_id"], selected)
+
+    # Load skills with dates
+    skills_data: List[dict] = []
+    for fname in ["advanced_skills_with_dates.csv", "advanced_skills_normalized.csv"]:
+        p = result_dir / fname
+        if p.exists():
+            try:
+                df = pd.read_csv(p)
+                if "skill" in df.columns and "job_date" in df.columns:
+                    df["job_date"] = pd.to_datetime(df["job_date"], errors="coerce")
+                    df = df.dropna(subset=["job_date"])
+                    df["_month"] = df["job_date"].dt.to_period("M").astype(str)
+                    skill_col = "canonical_skill" if "canonical_skill" in df.columns else "skill"
+                    # Top skills by count
+                    top_skills = df[skill_col].value_counts().head(top_n).index.tolist()
+                    for sk in top_skills:
+                        monthly = (
+                            df[df[skill_col] == sk]
+                            .groupby("_month").size()
+                            .reset_index(name="freq")
+                            .sort_values("_month")
+                        )
+                        skills_data.append({
+                            "skill": sk,
+                            "months": monthly["_month"].tolist(),
+                            "counts": monthly["freq"].tolist(),
+                        })
+                    break
+            except Exception:
+                pass
+
+    # Fallback: use trends CSV (slope data only, no sparkline)
+    if not skills_data:
+        trends_path = result_dir / "skill_time_trends.csv"
+        if trends_path.exists():
+            try:
+                tdf = pd.read_csv(trends_path).head(top_n)
+                for _, row in tdf.iterrows():
+                    slope = float(row.get("slope", 0))
+                    skills_data.append({
+                        "skill": str(row.get("skill", "")),
+                        "months": [],
+                        "counts": [],
+                        "slope": round(slope, 4),
+                        "trend_label": str(row.get("trend_label", "Stable")),
+                    })
+            except Exception:
+                pass
+
+    return {"skills": skills_data}
+
+
+# ---------------------------------------------------------------------------
+# Item 2: Printable PDF Report  — GET /dashboard/school/report
+# ---------------------------------------------------------------------------
+
+@app.get("/dashboard/school/report", response_class=HTMLResponse)
+def school_report(
+    request: Request,
+    department_id: Optional[int] = None,
+    top_n: int = 20,
+):
+    """Render a printer-optimised report page for download / Save as PDF."""
+    user = _require_role(request, "school")
+    departments = _school_departments(user)
+    selected = department_id or (departments[0]["id"] if departments else None)
+    if selected is None:
+        raise HTTPException(status_code=400, detail="No department available")
+
+    dept = q_one(
+        "SELECT d.*, s.name AS school_name FROM departments d JOIN schools s ON s.id=d.school_id WHERE d.id=?",
+        (selected,),
+    )
+    result_dir = _resolve_results_dir(user["school_id"], selected)
+    feedback_dir = _resolve_feedback_dir(user["school_id"], selected, result_dir)
+
+    status_maps = _review_status_maps(result_dir, feedback_dir)
+    fw_map = _knowledge_future_weight_map(result_dir)
+    assessments: Dict[str, dict] = {}
+
+    # Load recommendations
+    recs_raw = _load_table(result_dir / "recommendations.csv", limit=top_n * 2)
+    recs = _prioritize_recommendations(
+        recs_raw, status_maps["skills"], top_n=top_n, ranking_mode="human_adjusted"
+    )
+
+    # Load knowledge
+    knowledge_raw = _load_table(result_dir / "advanced_knowledge.csv", limit=500)
+    knowledge = _prioritize_knowledge_rows(
+        _aggregate_knowledge_rows(knowledge_raw, fw_map), top_n=top_n
+    )
+
+    # Load competencies
+    comp_raw = _load_table(result_dir / "competency_proposals.json", limit=top_n * 2)
+    competencies = _prioritize_competencies(
+        comp_raw, recs, assessments, top_n=top_n
+    )
+
+    # Load run metadata for provenance
+    run_meta: dict = {}
+    meta_path = result_dir / "run_metadata.json"
+    if meta_path.exists():
+        try:
+            run_meta = json.loads(meta_path.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+
+    return templates.TemplateResponse(
+        "school/report.html",
+        {
+            "request": request,
+            "user": user,
+            "dept": dict(dept) if dept else {},
+            "departments": departments,
+            "selected_dept_id": selected,
+            "recs": recs,
+            "knowledge": knowledge,
+            "competencies": competencies,
+            "run_meta": run_meta,
+            "top_n": top_n,
+            "report_date": __import__("datetime").date.today().isoformat(),
+        },
+    )
+
+
+# ---------------------------------------------------------------------------
+# Item 3: Explainability API  — GET /dashboard/api/explain_score
+# Returns the score breakdown for a single recommendation row.
+# ---------------------------------------------------------------------------
+
+@app.get("/dashboard/api/explain_score")
+def api_explain_score(
+    request: Request,
+    skill: str,
+    department_id: Optional[int] = None,
+):
+    """Return demand/trend/future score breakdown for a skill."""
+    user = _require_role(request, "school")
+    departments = _school_departments(user)
+    selected = department_id or (departments[0]["id"] if departments else None)
+    if selected is None:
+        return {"error": "no department"}
+
+    result_dir = _resolve_results_dir(user["school_id"], selected)
+
+    # Load recommendations and find the skill
+    recs_path = result_dir / "recommendations.csv"
+    if not recs_path.exists():
+        return {"error": "recommendations.csv not found"}
+
+    try:
+        df = pd.read_csv(recs_path)
+        match = df[df["skill"].str.lower() == skill.strip().lower()]
+        if match.empty:
+            return {"error": "skill not found", "skill": skill}
+        row = match.iloc[0].to_dict()
+
+        # Build explainability payload
+        breakdown = {
+            "skill": str(row.get("skill", skill)),
+            "priority_score": round(_to_float(row.get("priority_score", 0)), 4),
+            "score_components": {
+                "demand": {
+                    "value": round(_to_float(row.get("demand_norm", row.get("demand_freq", 0))), 4),
+                    "weight": 0.40,
+                    "contribution": round(_to_float(row.get("demand_norm", 0)) * 0.40, 4),
+                    "raw_freq": int(_to_float(row.get("demand_freq", 0))),
+                    "label": "How often this skill appears in job postings",
+                },
+                "trend": {
+                    "value": round(_to_float(row.get("trend_score_norm", row.get("slope", 0))), 4),
+                    "weight": 0.30,
+                    "contribution": round(_to_float(row.get("trend_score_norm", 0)) * 0.30, 4),
+                    "trend_label": str(row.get("trend_label", "Stable")),
+                    "q_value": round(_to_float(row.get("trend_q_value", 1.0)), 4),
+                    "label": "Whether demand is growing or declining over time",
+                },
+                "future": {
+                    "value": round(_to_float(row.get("future_weight", 0)), 4),
+                    "weight": 0.30,
+                    "contribution": round(_to_float(row.get("future_weight", 0)) * 0.30, 4),
+                    "domain": str(row.get("future_domain", row.get("best_future_domain", "—"))),
+                    "mapping_margin": round(_to_float(row.get("mapping_margin", 0)), 4),
+                    "label": "Alignment with WEF/O*NET future-of-work domains",
+                },
+            },
+            "verification": str(row.get("verification_level", "not_verified")),
+            "bloom_level": str(row.get("bloom", "—")),
+            "skill_type": str(row.get("type", "—")),
+        }
+        return breakdown
+    except Exception as exc:
+        return {"error": str(exc)}
+
+
 @app.get("/dashboard/file/{path:path}")
 def serve_project_file(path: str):
     safe = (PROJECT_ROOT / path).resolve()

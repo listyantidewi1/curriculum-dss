@@ -21,11 +21,59 @@ import hashlib
 import json
 import os
 import platform
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
 import config
+
+
+def collect_prompt_hashes() -> dict:
+    """Item 10: Hash all LLM prompt strings in pipeline.py for version tracking.
+
+    Scans pipeline.py for string literals assigned to variables whose names
+    suggest they are prompts (system_prompt, user_prompt, prompt, instruction).
+    Returns a combined hash + per-prompt fingerprints so any prompt change is
+    immediately detectable in run_metadata.json.
+    """
+    pipeline_path = Path(config.PROJECT_ROOT) / "pipeline.py"
+    if not pipeline_path.exists():
+        return {"status": "pipeline.py_not_found"}
+
+    src = pipeline_path.read_text(encoding="utf-8", errors="replace")
+    pipeline_sha = hashlib.sha256(src.encode("utf-8")).hexdigest()
+
+    prompt_re = re.compile(
+        r'(?:system_prompt|user_prompt|system|prompt|instruction)\s*[=:]\s*'
+        r'(?:f?"""(.*?)"""|f?\'\'\'(.*?)\'\'\'|f?"(.*?)"|f?\'(.*?)\')',
+        re.DOTALL | re.IGNORECASE,
+    )
+    prompts: dict = {}
+    for m in prompt_re.finditer(src):
+        raw = next((g for g in m.groups() if g is not None), "")
+        raw = raw.strip()
+        if len(raw) < 30:
+            continue
+        key = f"prompt_{len(prompts) + 1:02d}"
+        h = hashlib.sha256(raw.encode("utf-8")).hexdigest()
+        prompts[key] = {
+            "sha256_prefix": h[:16],
+            "char_length": len(raw),
+            "preview": raw[:80].replace("\n", " "),
+        }
+
+    combined = hashlib.sha256(
+        "|".join(v["sha256_prefix"] for v in prompts.values()).encode()
+    ).hexdigest()
+
+    return {
+        "status": "ok",
+        "pipeline_py_sha256": pipeline_sha[:16],
+        "n_prompts_found": len(prompts),
+        "combined_prompt_hash": combined[:16],
+        "prompts": prompts,
+    }
 
 
 def file_hash(path: Path, algo: str = "sha256") -> str:
@@ -123,6 +171,12 @@ def main():
         metadata["models"]["llm_temperature"] = 0
     except Exception:
         pass
+
+    # Item 10: Prompt versioning
+    try:
+        metadata["prompt_versioning"] = collect_prompt_hashes()
+    except Exception as e:
+        metadata["prompt_versioning"] = {"status": f"error: {e}"}
 
     out_path = out_dir / "run_metadata.json"
     out_path.write_text(json.dumps(metadata, indent=2, ensure_ascii=False), encoding="utf-8")

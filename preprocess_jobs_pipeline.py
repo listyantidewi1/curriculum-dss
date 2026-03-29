@@ -161,6 +161,26 @@ def main():
 
     df["job_date"] = pd.to_datetime(df.get("date_posted", pd.NaT))
 
+    # --------------------------------------------------
+    # Item 7: Job-level deduplication (before splitting)
+    # --------------------------------------------------
+    # Fingerprint each job by (title, company, normalised-description hash).
+    # This removes re-posted jobs that inflate demand counts and trend slopes.
+    if args.dedupe:
+        import hashlib, re as _re
+        def _job_fingerprint(row) -> str:
+            title = str(row.get("title", "")).strip().lower()
+            company = str(row.get("company", "")).strip().lower()
+            desc_norm = _re.sub(r"\s+", " ", str(row.get("description", "")).lower().strip())[:500]
+            raw = f"{title}||{company}||{desc_norm}"
+            return hashlib.md5(raw.encode("utf-8")).hexdigest()
+
+        before_jobs = len(df)
+        df["_fp"] = df.apply(_job_fingerprint, axis=1)
+        df = df.drop_duplicates(subset=["_fp"]).drop(columns=["_fp"])
+        after_jobs = len(df)
+        print(f"[INFO] Job-level dedup: {before_jobs} → {after_jobs} jobs (removed {before_jobs - after_jobs} duplicates)")
+
     # -----------------------------
     # Save job metadata
     # -----------------------------

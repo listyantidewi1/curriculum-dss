@@ -326,6 +326,46 @@ def evaluate_recommendations(recs: pd.DataFrame, top_n: int = 20) -> dict:
     return result
 
 
+def run_coverage_ablation(demand, trends, future_weights, coverage, top_n: int = 20) -> dict:
+    """Item 6: Coverage ablation — compare rankings with vs without coverage weight.
+
+    Tests whether including curriculum coverage in the priority formula
+    materially changes the top-N recommendations.  If Jaccard overlap is high
+    (> 0.80) the 0.0 coverage weight design choice is empirically supported.
+    """
+    configs = {
+        "no_coverage":   {"w_demand": 0.40, "w_trend": 0.30, "w_future": 0.30, "w_coverage": 0.00, "use_coverage": False},
+        "coverage_0.10": {"w_demand": 0.36, "w_trend": 0.27, "w_future": 0.27, "w_coverage": 0.10, "use_coverage": True},
+        "coverage_0.20": {"w_demand": 0.32, "w_trend": 0.24, "w_future": 0.24, "w_coverage": 0.20, "use_coverage": True},
+        "coverage_0.30": {"w_demand": 0.28, "w_trend": 0.21, "w_future": 0.21, "w_coverage": 0.30, "use_coverage": True},
+    }
+    results: dict = {}
+    for name, cfg in configs.items():
+        recs = compute_priority_scores(demand, trends, future_weights, coverage, **cfg)
+        top_skills = recs.head(top_n)["skill"].tolist() if not recs.empty else []
+        results[name] = {"top_skills": top_skills, "n_total": len(recs)}
+
+    baseline_set = set(results["no_coverage"]["top_skills"])
+    for name in results:
+        variant_set = set(results[name]["top_skills"])
+        union = baseline_set | variant_set
+        inter = baseline_set & variant_set
+        results[name]["jaccard_vs_no_coverage"] = round(len(inter) / len(union), 4) if union else 1.0
+
+    # High Jaccard (>0.80) validates the 0.0 coverage weight design choice.
+    j_010 = results["coverage_0.10"]["jaccard_vs_no_coverage"]
+    results["_interpretation"] = {
+        "conclusion": (
+            "Coverage weight design justified (Jaccard>0.80 at 0.10 weight)"
+            if j_010 > 0.80 else
+            "Coverage weight changes recommendations — consider including"
+        ),
+        "jaccard_at_coverage_010": j_010,
+        "note": "Weights in coverage configs are redistributed proportionally from baseline",
+    }
+    return results
+
+
 def run_ablation(demand, trends, future_weights, coverage, top_n: int = 20) -> dict:
     """Run ablation study: remove one signal at a time."""
     variants = {
@@ -445,6 +485,9 @@ def main():
     parser.add_argument("--baseline", action="store_true",
                         help="Generate demand-only frequency baseline ranking and compare "
                              "P@20/NDCG@20 against full formula (floor comparison for RQ5)")
+    parser.add_argument("--coverage-ablation", action="store_true",
+                        help="Item 6: Run coverage weight ablation (0, 0.10, 0.20, 0.30) and "
+                             "report Jaccard overlap to empirically validate the 0.0 default")
     args = parser.parse_args()
 
     out_dir = Path(args.output_dir)
@@ -584,6 +627,20 @@ def main():
             baseline_recs.head(args.top_n).to_csv(baseline_path, index=False, encoding="utf-8-sig")
             print(f"[INFO] Saved baseline ranking to {baseline_path}")
         print(f"[INFO] Full vs baseline Jaccard: {jaccard_b:.3f}")
+
+    # Item 6: Coverage ablation
+    if args.coverage_ablation:
+        print("\n[INFO] Running coverage weight ablation (Item 6)…")
+        cov_result = run_coverage_ablation(demand, trends, future_weights, coverage, top_n=args.top_n)
+        report["coverage_ablation"] = cov_result
+        j = cov_result.get("coverage_0.10", {}).get("jaccard_vs_no_coverage", "N/A")
+        print(f"  Jaccard(no_coverage vs coverage@0.10): {j}")
+        print(f"  Conclusion: {cov_result.get('_interpretation', {}).get('conclusion', '')}")
+        ablation_path = out_dir / "coverage_ablation_report.json"
+        ablation_path.write_text(
+            json.dumps(cov_result, indent=2, ensure_ascii=False), encoding="utf-8"
+        )
+        print(f"  Saved → {ablation_path}")
 
     report_path = out_dir / "recommendations_report.json"
     report_path.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")
