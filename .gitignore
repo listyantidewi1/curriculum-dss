@@ -161,10 +161,11 @@ images/
 future_domains_dummy.csv
 __A Hybrid NLP Pipeline for Skill Extraction and Vocational Curriculum Alignment_ Bridging Job Marke.docx
 
-# Microsoft Word documents in docs/ (drafts, proposals, etc. — kept local only)
+# Microsoft Word and PDF documents in docs/ (drafts, proposals, etc. — kept local only)
 docs/*.docx
 docs/~$*.docx
 **/~$*.docx
+docs/*.pdf
 
 # Scratch scripts (not part of pipeline)
 evaluate_model.py
