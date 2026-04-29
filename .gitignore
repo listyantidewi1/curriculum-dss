@@ -1,43 +1,166 @@
-baseline_versions/
-models/
+# ============================================================
+# Python
+# ============================================================
 __pycache__/
-checkpoints/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+wheels/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+# Testing / type checking / linting caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# ============================================================
+# IDE / editors
+# ============================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.claude/
+
+# ============================================================
+# OS metadata files
+# ============================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# ============================================================
+# Secrets and credentials  (NEVER commit these)
+# ============================================================
+.env
+.env.*
+!.env.example
+*.key
+*.pem
 api_keys/
-__A Hybrid NLP Pipeline for Skill Extraction and Vocational Curriculum Alignment_ Bridging Job Marke.docx
-DATA/master_skkni
-# Per-job analysis JSON files (can be numerous; regenerate from pipeline)
-results/job_*_analysis.json
-evaluate_model.py
-save_fixed_model.py
-images/
-results_run1
-results_run2
-results_run3
-results_run4
-results_run5
-results_run6
-results_aggregated
-results.old
-run.bat
-run_phase_2.bat
-future_domains_dummy.csv
-.gitignore
-DATA/preprocessing/model_cache
-DATA/preprocessing/model_cache/models--sentence-transformers--paraphrase-multilingual-MiniLM-L12-v2
+**/api_keys.json
+**/credentials.json
+**/secrets.json
+**/service_account*.json
+
+# ============================================================
+# Model weights and checkpoints  (large binary files)
+# These are reproducible from training scripts; do not bloat
+# the repo with them.
+# ============================================================
+models/
+checkpoints/
+baseline_versions/
+*.safetensors
+*.ckpt
+*.h5
+*.hdf5
+*.onnx
+*.pt
+*.pth
+
+# Hugging Face / Sentence-Transformer caches
+**/hf_cache/
+**/.cache/huggingface/
+DATA/preprocessing/model_cache/
+
+# ============================================================
+# Pipeline INPUT data  (raw and preprocessed corpus)
+# Re-create from job_scraping/scrape_*.py + preprocess_jobs_pipeline.py
+# ============================================================
+# Raw scraped jobs (often >100 MB)
+job_scraping/output/
+
+# Preprocessed corpus (regeneratable; multi-GB possible)
+DATA/preprocessing/data_prepared/
+DATA/preprocessing/jobs_*.csv
 DATA/preprocessing/jobs_akkasi_style_dataset.csv
 DATA/preprocessing/jobs_english_only_dataset.csv
 DATA/preprocessing/jobs_rpl_id_raw_2.csv
-DATA/preprocessing/data_prepared
+
+# Legacy SkillSpan dumps and SKKNI master copy
 DATA/dev.json
 DATA/test.json
 DATA/train.json
-DATA/preprocessing/data_prepared/jobs_sentences.csv
-DATA/preprocessing/data_prepared/job_sentences_for_pipeline.csv
-DATA/preprocessing/data_prepared/job_sentences_full.csv
+DATA/master_skkni/
+
+# ============================================================
+# Pipeline OUTPUT  (regeneratable; bloats repo)
+# ============================================================
+# Per-job analysis JSON (numerous; regenerated)
+results/job_*_analysis.json
+
+# Multi-run experiments
+results_run*/
+results_aggregated/
+results.old/
+
+# Ablation runs
+results/hybrid/
+results/llm_only/
+
+# Last-LLM-response debugging dump
 last_competency_raw_response.txt
-selected_skill_samples_display_json_only.html
-selected_skill_samples_full_records.html
+
+# Generated HTML inspection files (regeneratable)
+selected_skill_samples_*.html
 competency_proposals_selected_samples.html
-dashboard/dashboard.db
+
+# ============================================================
+# Dashboard runtime / generated content
+# ============================================================
+# SQLite databases (per-environment)
+*.db
+*.sqlite
+*.sqlite3
+
+# Department-scoped uploads/results (school-side workspace)
 data/schools/
-job_scraping/output/
+
+# ============================================================
+# Logs and temporary files
+# ============================================================
+*.log
+*.tmp
+*.bak
+*.orig
+
+# ============================================================
+# Project-specific files
+# ============================================================
+# Legacy / archived
+images/
+future_domains_dummy.csv
+__A Hybrid NLP Pipeline for Skill Extraction and Vocational Curriculum Alignment_ Bridging Job Marke.docx
+
+# Scratch scripts (not part of pipeline)
+evaluate_model.py
+save_fixed_model.py
