@@ -1,0 +1,94 @@
+{% extends "public/base.html" %}
+{% set active_nav = "coverage" %}
+{% block content %}
+<section class="section container">
+  <h2>Curriculum coverage analysis</h2>
+  <p class="sub">
+    Upload your school's curriculum (CSV or JSON). We compare it against the latest
+    competencies and recommended skills, and tell you what's covered and what's missing.
+    Anonymous &mdash; nothing leaves your browser unless you choose to save the analysis
+    {% if not user %}(<a href="/signup">create a free account</a> first to save){% endif %}.
+  </p>
+
+  {% if error %}<div class="alert">{{ error }}</div>{% endif %}
+
+  <form class="upload-form" method="post" action="/coverage" enctype="multipart/form-data">
+    <label>
+      Curriculum file (CSV or JSON)
+      <input type="file" name="file" accept=".csv,.json,.jsonl" required>
+    </label>
+    {% if user %}
+    <label>
+      Save this analysis as (optional)
+      <input type="text" name="save_name" placeholder="e.g. SMK Negeri 12 RPL — 2026 draft">
+    </label>
+    {% endif %}
+    <p class="muted" style="font-size:13px;">
+      Format hints: CSV with a column named <code>phrase</code>, <code>objective</code>,
+      <code>content</code>, or <code>topic</code>. JSON: any nested object whose values include
+      curriculum text. <a href="/about#curriculum-format">More details</a>.
+    </p>
+    <button type="submit" class="btn">Analyze coverage</button>
+  </form>
+
+  {% if report %}
+  <hr>
+  <div class="coverage-headline">{{ report.coverage_pct }}% coverage</div>
+  <p class="sub" style="text-align:center;">
+    {{ report.n_competencies_covered }} of {{ report.n_competencies_total }} competencies are
+    represented in your curriculum.
+    {% if saved_id %}<br><span class="flag-good">✓ Saved as analysis #{{ saved_id }}.</span>{% endif %}
+  </p>
+
+  <div class="stat-row">
+    <div class="stat"><div class="num">{{ report.n_curriculum_phrases }}</div><div class="lbl">phrases parsed from curriculum</div></div>
+    <div class="stat"><div class="num">{{ report.n_competencies_covered }}</div><div class="lbl">covered competencies</div></div>
+    <div class="stat"><div class="num">{{ report.n_competencies_uncovered }}</div><div class="lbl">uncovered competencies</div></div>
+    <div class="stat"><div class="num">{{ report.missing_high_priority_skills | length }}</div><div class="lbl">priority skills missing</div></div>
+  </div>
+
+  {% if report.missing_high_priority_skills %}
+  <div class="detail-section">
+    <h3>Top priority hard skills NOT in your curriculum</h3>
+    <table class="coverage-table">
+      <tr><th>Skill</th><th>Future domain</th><th>Priority</th></tr>
+      {% for s in report.missing_high_priority_skills %}
+      <tr>
+        <td>{{ s.skill }}</td>
+        <td>{{ s.future_domain }}</td>
+        <td>{% if s.priority_score is not none %}{{ "%.3f" | format(s.priority_score) }}{% else %}—{% endif %}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  {% endif %}
+
+  {% if report.uncovered_competencies %}
+  <div class="detail-section">
+    <h3>Competencies your curriculum doesn't cover</h3>
+    <table class="coverage-table">
+      <tr><th>Title</th><th>KKNI</th><th>Future domain</th></tr>
+      {% for c in report.uncovered_competencies[:30] %}
+      <tr>
+        <td><a href="/competencies/{{ c.id }}">{{ c.title }}</a></td>
+        <td>{% if c.kkni_level %}{{ c.kkni_level }}{% endif %}</td>
+        <td>{{ c.future_domain }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  {% endif %}
+
+  {% if report.covered_competencies %}
+  <details>
+    <summary>Competencies your curriculum already covers ({{ report.covered_competencies | length }})</summary>
+    <ul>
+      {% for c in report.covered_competencies %}
+        <li><span class="flag-good">✓</span> <a href="/competencies/{{ c.id }}">{{ c.title }}</a> {% if c.kkni_level %}<small class="muted">— KKNI {{ c.kkni_level }}</small>{% endif %}</li>
+      {% endfor %}
+    </ul>
+  </details>
+  {% endif %}
+  {% endif %}
+</section>
+{% endblock %}

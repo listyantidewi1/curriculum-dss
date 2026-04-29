@@ -2,6 +2,28 @@
 
 This document describes the current pipeline architecture, data flow, and usage as of the latest implementation.
 
+## System Purpose
+
+The pipeline is a **competency recommendation system** for vocational
+curriculum design. The end product is a JSON+report combination that lists,
+for a school's vocational field:
+
+1. **Top-N curriculum-gap skills** (ranked by demand × empirical trend × future relevance).
+2. **Hard-skill competency statements**, each with:
+   - title, description, related (hard) skills, Bloom level, future relevance,
+   - `soft_skills_required` — 3–6 soft skills the learner needs, and
+   - `soft_skills_description` — one sentence explaining how those soft skills support the competency.
+
+Skill / knowledge extraction, future-domain mapping, FDR trend analysis, and
+expert review are all **infrastructure** that feed the competency layer.
+
+After the 2026 reframe:
+- **LLM-first extraction**: `--extraction-mode llm_only` is the default. BERT is preserved as an ablation path (`--extraction-mode hybrid` or `bert_only`).
+- **Hard-skill competencies only**: extracted Soft-typed skills are excluded from competency input by default and instead surface per-competency via the soft-skill fields above. Pass `--include-soft-in-competencies` to revert.
+- **Hard cap of 12 competencies per batch** with semantic-title and skill-Jaccard deduplication.
+- **Domain assignment stays SBERT-based** (`future_weight_mapping.py`); the LLM is **not** asked to classify domains.
+- **Future-aware feature is unchanged**.
+
 ### Environment
 
 - Python 3.x with dependencies (pandas, fastapi, uvicorn, transformers, etc.)
@@ -56,36 +78,43 @@ Regenerate with: `python scripts/create_sample_csvs.py`
 
 ### Creating Input Data
 
-**One-step run (job_scraping data):**
+**One-step run (job_scraping data, with deduplication):**
 ```bat
-python run_with_job_scraping.py
+python run_with_job_scraping.py --dedupe
 ```
-Runs preprocess on `job_scraping/output/english_jobs.csv` then pipeline.
+Runs preprocess on `job_scraping/output/english_jobs.csv` then pipeline. `--dedupe` removes near-duplicate job postings before sentence splitting.
+
+**With Indonesian postings:**
+```bat
+python run_with_job_scraping.py --include-indonesian --dedupe
+```
+Merges `indonesian_jobs.csv` with English data; auto-enables `--translate --dedupe`.
 
 **Manual preprocess:** If you have raw job postings (e.g. from `job_scraping/scrape_english_jobs.py`):
 
 ```bat
-python preprocess_jobs_pipeline.py --input job_scraping/output/english_jobs.csv
+python preprocess_jobs_pipeline.py --input job_scraping/output/english_jobs.csv --dedupe
 ```
 
-Default `--input` is `config.JOBS_SCRAPING_CSV`. This produces:
+Default `--input` is `config.JOBS_SCRAPING_CSV`. `--dedupe` applies MD5 fingerprint deduplication at job level before sentence splitting. This produces:
 - `jobs_metadata.csv` (job_id, job_date)
 - `jobs_sentences.csv` (job_id, job_date, sentence_text)
 - `job_sentences_for_pipeline.csv`, `job_sentences_full.csv`
 
 ---
 
-## 2b. Extraction Design (Direction A)
+## 2b. Extraction Design (LLM-first; BERT for ablation)
 
 | Aspect | Design |
 |--------|--------|
-| **BERT** | Runs per sentence (128-token limit); aggregates skills and knowledge across sentences. |
-| **LLM** | Runs on full job description so it does not miss cross-sentence or document-level context. |
-| **BERT knowledge → LLM** | Passed as "Context (Tools detected by JobBERT)" for anti-hallucination grounding. Per-job scoping only. |
-| **Knowledge output** | LLM-only (default). BERT knowledge is not fused into the final list. Use `--bert-knowledge` for hybrid mode. |
-| **Skills output** | BERT+LLM fusion (unchanged). |
+| **Default mode** | `--extraction-mode llm_only`. The LLM extracts skills + knowledge in one call per job and classifies type (Hard/Soft) and Bloom in the same call. |
+| **Domain classification** | Always post-extraction via `future_weight_mapping.py` (SBERT cosine to `future_domains.csv`). The LLM is not asked to classify domain. |
+| **Bloom classification** | LLM produces a Bloom guess; pipeline overrides with `BloomClassifier` (SBERT-exemplar with LLM fallback) for consistency. |
+| **Hybrid ablation** | `--extraction-mode hybrid` runs JobBERT per-sentence and fuses with the LLM output (legacy behavior). Used for RQ1 ablation. |
+| **BERT-only mode** | `--extraction-mode bert_only` is preserved for diagnostics. |
+| **Knowledge output** | LLM-only (default). BERT knowledge is not fused. Use `--bert-knowledge` to enable BERT-knowledge fusion in hybrid mode. |
 
-Config: `AdvancedPipelineConfig.LLM_ONLY_KNOWLEDGE = True` (default).
+Config: `AdvancedPipelineConfig.EXTRACTION_MODE = "llm_only"`, `LLM_ONLY_KNOWLEDGE = True` (defaults).
 
 ---
 
@@ -101,10 +130,10 @@ Config: `AdvancedPipelineConfig.LLM_ONLY_KNOWLEDGE = True` (default).
 
 ### Step-by-Step
 
-| Step | Script | Input | Output |
-|------|--------|-------|--------|
-| 1 | `log_run_metadata.py` | config, dataset | run_metadata.json |
-| 2 | `pipeline.py` | jobs_sentences.csv | advanced_skills.csv, advanced_knowledge.csv, comprehensive_analysis.csv, model_comparison.csv, coverage_report.csv |
+| Step | Script / Action | Input | Output |
+|------|----------------|-------|--------|
+| 1 | `run_with_job_scraping.py --dedupe` (preprocess + pipeline, hybrid BERT+LLM) | english_jobs.csv | advanced_skills.csv, advanced_knowledge.csv, comprehensive_analysis.csv, model_comparison.csv, coverage_report.csv; run_metadata.json (with prompt_versioning) |
+| 2 | `run_with_job_scraping.py --extraction-mode llm_only --dedupe --output_dir results/llm_only` | english_jobs.csv | results/llm_only/ — LLM-only ablation run for RQ1 |
 | 3 | `plot_generator.py` | model_comparison, coverage_report, future_weights, etc. | Plots in results/figures/ |
 | 4 | `verify_skills.py` | advanced_skills.csv | verified_skills.csv |
 | 5 | `future_weight_mapping.py` | advanced_knowledge.csv | future_skill_weights_dummy.csv |
@@ -112,15 +141,16 @@ Config: `AdvancedPipelineConfig.LLM_ONLY_KNOWLEDGE = True` (default).
 | 7 | `enrich_with_dates.py` | advanced_skills.csv, jobs_metadata.csv | advanced_skills_with_dates.csv, etc. |
 | 8 | `skill_time_trend_analysis.py --only_hard --stability` | advanced_skills_with_dates.csv | skill_time_trends.csv (FDR q-values), trend_stability_report.json |
 | 9 | `generate_competencies.py` | verified_skills.csv, future_skill_weights.csv, skill_time_trends.csv, future_domains.csv | competency_proposals.json (domain-based batching by default) |
-| 10 | `recommendations.py --ablation --sensitivity` | all outputs above | recommendations.csv, recommendations_report.json, weight_sensitivity_report.json |
+| 10 | `recommendations.py --ablation --sensitivity --coverage-ablation` | all outputs above | recommendations.csv, recommendations_report.json, weight_sensitivity_report.json, coverage_ablation_report.json |
 | 11 | `export_gold_set.py` | verified_skills, advanced_knowledge, future_weights | DATA/labels/gold_*.csv (with is_overlap for IRR) |
 | 12 | `export_for_review.py` | comprehensive_analysis, verified_skills, advanced_knowledge | expert_review_*.csv |
 | 13 | `export_competencies_for_review.py` | competency_proposals.json | expert_review_competencies.csv |
+| 14 | `export_recommendations_for_review.py` | recommendations.csv | DATA/labels/recommendations_for_review.csv (for RQ5 IRR priority labeling) |
 | — | **Gold Labeling UI** | `gold_labeling_ui.app` (port 8001) | DATA/labels/gold_labels/*.csv |
-| 14 | `merge_gold_labels.py` | DATA/labels/gold_labels/*.csv | DATA/labels/gold_*_merged.csv |
-| 15 | `evaluate_extraction.py` | DATA/labels/gold_*.csv | extraction_evaluation_report.json |
-| 16 | `evaluate_future_mapping.py` | gold_future_domain.csv, future_skill_weights.csv | future_mapping_evaluation_report.json |
-| 17 | `plot_scientific_analysis.py` | evaluation reports, trends, calibration | Scientific plots in results/figures/ |
+| 15 | `merge_gold_labels.py` | DATA/labels/gold_labels/*.csv | DATA/labels/gold_*_merged.csv |
+| 16 | `evaluate_extraction.py --llmonly-labels-dir results/llm_only/DATA/labels` | DATA/labels/gold_*.csv + LLM-only labels | extraction_evaluation_report.json (RQ1: Hybrid vs LLM-only + BERT contribution) |
+| 17 | `evaluate_future_mapping.py` | gold_future_domain.csv, future_skill_weights.csv | future_mapping_evaluation_report.json |
+| 18 | `plot_scientific_analysis.py` | evaluation reports, trends, calibration | Scientific plots in results/figures/ |
 | — | **Expert Review UI** | `review_ui.app` (port 8000) | feedback_store/*.csv |
 
 **Note:** Competency generation and recommendations run *after* future-weight mapping and FDR-controlled trend analysis so outputs incorporate both domain forecasts and empirical emerging/declining signals.
@@ -142,7 +172,8 @@ Config: `AdvancedPipelineConfig.LLM_ONLY_KNOWLEDGE = True` (default).
 | `competency_proposals.json` | LLM-generated competencies |
 | `recommendations.csv` | Ranked curriculum gap recommendations |
 | `recommendations_report.json` | Top-N, ablation deltas, evaluation metrics |
-| `run_metadata.json` | Reproducibility: dataset hash, model versions, seeds |
+| `coverage_ablation_report.json` | Jaccard vs no-coverage baseline for w_coverage sweeps |
+| `run_metadata.json` | Reproducibility: dataset hash, model versions, seeds, prompt_versioning (SHA-256 hashes) |
 | `expert_review_skills.csv` | Sampled skills for review (500 default) |
 | `expert_review_knowledge.csv` | Sampled knowledge for review (200 default) |
 | `expert_review_competencies.csv` | Sampled competencies for review (100 default) |
@@ -269,14 +300,16 @@ Phase 2 has **17 steps** across 5 stages. Run after expert review is complete.
 | 7 | `generate_competencies.py --comprehensive` | advanced_skills_human_filtered.csv | competency_proposals.json |
 | 8 | `export_competencies_for_review.py` | competency_proposals.json | expert_review_competencies.csv |
 | 9 | `skill_time_trend_analysis.py --only_hard --stability` | advanced_skills_with_dates.csv | skill_time_trends.csv, trend_stability_report.json |
-| 10 | `recommendations.py --ablation --sensitivity --evaluate` | all outputs | recommendations.csv, recommendations_report.json, weight_sensitivity_report.json |
+| 10 | `recommendations.py --ablation --sensitivity --evaluate --baseline --coverage-ablation` | all outputs | recommendations.csv, recommendations_report.json, weight_sensitivity_report.json, coverage_ablation_report.json, recommendations_baseline.csv |
 | 11 | `plot_generator.py` | model_comparison, coverage_report, future_weights, etc. | Plots in results/figures/ (updated) |
-| 12 | `evaluate_extraction.py` | DATA/labels/gold_*.csv | extraction_evaluation_report.json (Bloom + type validation) |
+| 12 | `evaluate_extraction.py --llmonly-labels-dir results/llm_only/DATA/labels` | DATA/labels/gold_*.csv | extraction_evaluation_report.json (RQ1: Hybrid vs LLM-only + BERT contribution) |
 | 13 | `evaluate_future_mapping.py` | gold_future_domain.csv, future_skill_weights.csv | future_mapping_evaluation_report.json (with MRR) |
 | 14 | `evaluate_competency_generation.py` | competency_proposals, competency_assessments | competency_evaluation_report.json |
 | 15 | `plot_scientific_analysis.py` | evaluation reports, trends, calibration | Scientific plots in results/figures/ |
-| 16 | `log_run_metadata.py` | config, dataset | run_metadata.json (updated) |
+| 16 | `log_run_metadata.py` | config, dataset | run_metadata.json (updated with prompt_versioning) |
 | 17 | `scripts/weight_sensitivity_extraction.py` | gold_skills.csv, pipeline config | weight_sensitivity_extraction_report.json |
+| 17b | `skill_trend_holdout_validation.py` | advanced_skills_with_dates.csv | holdout_validation_report.json (RQ3: direction accuracy, slope correlation) |
+| 18 | `export_recommendations_for_review.py` | recommendations.csv | DATA/labels/recommendations_for_review.csv (RQ5 IRR refresh) |
 
 ### Merge Rules (Multi-Reviewer)
 
@@ -377,7 +410,8 @@ evaluate_future_mapping.py → future_mapping_evaluation_report.json
 | `PROJECT_ROOT` | config.py | Project root path |
 | `OUTPUT_DIR` | config.py | results/ — pipeline outputs |
 | `MULTITASK_MODEL_DIR` | config.py | JobBERT model weights |
-| `JOBS_SCRAPING_CSV` | config.py | job_scraping/output/english_jobs.csv — default preprocess input |
+| `JOBS_SCRAPING_CSV` | config.py | job_scraping/output/english_jobs.csv — default preprocess input (English) |
+| `JOBS_SCRAPING_CSV_ID` | config.py | job_scraping/output/indonesian_jobs.csv — optional Indonesian postings |
 | `PREPROCESS_OUTPUT_DIR` | config.py | DATA/preprocessing/data_prepared |
 | `PIPELINE_INPUT_CSV` | config.py | DATA/preprocessing/data_prepared/jobs_sentences.csv |
 | `INPUT_CSV` | pipeline.py (AdvancedPipelineConfig) | From config.PIPELINE_INPUT_CSV |
@@ -400,12 +434,14 @@ evaluate_future_mapping.py → future_mapping_evaluation_report.json
 | `pipeline.py` | Hybrid JobBERT+LLM extraction |
 | `plot_generator.py` | Visual analytics |
 | `verify_skills.py` | Assign verification tiers (calibrated or percentile-based) |
+| `skill_normalizer.py` | SBERT skill normalization — canonical forms via greedy cosine clustering (threshold 0.82) |
 | `future_weight_mapping.py` | Map skills/knowledge to future domains (with mapping margin) |
 | `generate_competencies.py` | LLM competency generation (domain-based batching by default) |
 | `domain_batching.py` | Domain grouping, normalized lookup, on-the-fly assignment, batch merge |
 | `enrich_with_dates.py` | Add job_date from jobs_metadata |
 | `skill_time_trend_analysis.py` | FDR-controlled emerging/declining trends + stability analysis |
-| `recommendations.py` | Ranked curriculum recommendations + ablation study |
+| `skill_trend_holdout_validation.py` | Longitudinal holdout validation: train/test split by month, direction accuracy, slope correlation |
+| `recommendations.py` | Ranked curriculum recommendations + ablation + coverage ablation study |
 
 ### Review & Feedback
 | Script | Purpose |
@@ -429,10 +465,11 @@ evaluate_future_mapping.py → future_mapping_evaluation_report.json
 ### Data Preparation & Aggregation
 | Script | Purpose |
 |--------|---------|
-| `run_with_job_scraping.py` | One-step: preprocess (english_jobs.csv) + pipeline |
-| `preprocess_jobs_pipeline.py` | Raw jobs → jobs_sentences.csv, jobs_metadata.csv (default input: job_scraping/output/english_jobs.csv) |
+| `run_with_job_scraping.py` | One-step: preprocess + pipeline; supports `--dedupe`, `--include-indonesian`, `--extraction-mode` |
+| `preprocess_jobs_pipeline.py` | Raw jobs → jobs_sentences.csv, jobs_metadata.csv; `--dedupe` for MD5-fingerprint deduplication |
 | `aggregate_results.py` | Aggregate CSVs + JSON reports across runs + cross-run summary |
-| `pipeline_orchestrator.py` | Run pipeline for dashboard departments (path overrides) |
+| `pipeline_orchestrator.py` | Dashboard: department-scoped pipeline with checkpoint/resume support (`resume=True`) |
+| `log_run_metadata.py` | Record run metadata including LLM prompt versioning (SHA-256 fingerprints) |
 
 ---
 
@@ -445,6 +482,9 @@ The dashboard (`dashboard/app.py`) provides:
 - **Multi-reviewer**: Multiple users per school; feedback stored per `reviewer_id` (email)
 - **Ranking modes**: `model_only` (pipeline scores) or `human_adjusted` (incorporates expert feedback)
 - **Cross-school aggregation**: Same vocational field → pooled results; contributor metadata shown
+- **Printable report** (`/dashboard/school/report`): PDF-quality HTML with skill gaps table, knowledge gaps, competency proposals, and reproducibility metadata; `window.print()` for PDF export
+- **Trend sparklines** (`/dashboard/api/sparklines`): SVG bar charts showing monthly demand frequency per skill, rendered client-side on the Results page
+- **Score explainability** (`/dashboard/api/explain_score`): Per-skill breakdown of demand/trend/future contributions with raw values and weights
 
 ### Department-Scoped Flow and Spektrum
 
@@ -493,6 +533,11 @@ For multiple experimental runs:
 | Pipeline input not found | Run preprocess first. jobs_sentences.csv at config.PIPELINE_INPUT_CSV; columns: job_id, sentence_text |
 | Competencies from unverified skills | Expected in comprehensive mode; check all_skills_human_verified in JSON |
 | No FDR-significant trends | Ensure 12–24 months of job data and adequate sample size. Run `skill_time_trend_analysis.py --stability` for Jaccard overlap across runs. Vary `min_jobs` to assess sensitivity. |
+| Holdout validation fails | Requires `advanced_skills_with_dates.csv`; run `enrich_with_dates.py` first |
+| Sparklines empty in dashboard | Requires `advanced_skills_with_dates.csv` in department results; run enrich step |
+| Coverage ablation report missing | Pass `--coverage-ablation` to `recommendations.py` |
+| Interrupted pipeline run | Set `resume=True` in `pipeline_orchestrator.py` to skip completed steps |
+| Duplicate job postings in output | Pass `--dedupe` to `run_with_job_scraping.py` or `preprocess_jobs_pipeline.py` |
 
 ---
 
@@ -591,4 +636,17 @@ For multiple experimental runs:
 
 ---
 
-*Last updated: LLM-only knowledge (Direction A), job_scraping default data source, competency anti-hallucination, extraction design documentation.*
+### 10 Pipeline Improvements (2025)
+
+1. **Skill normalization** — `skill_normalizer.py`: SBERT greedy clustering (threshold 0.82); canonical = most-frequent, tiebreak = shortest string; adds `canonical_skill` column.
+2. **PDF report** — `dashboard/templates/school/report.html`: Printable HTML at `/dashboard/school/report` with skill gaps, knowledge gaps, competency cards, reproducibility table; `window.print()` for PDF.
+3. **Score explainability** — `/dashboard/api/explain_score`: Per-skill demand/trend/future breakdown with raw values and weights; "Why?" button on Results page.
+4. **Longitudinal holdout validation** — `skill_trend_holdout_validation.py`: Train/test split by month (last N months held out); measures direction_accuracy, precision_emerging_significant, slope_correlation (RQ3).
+5. **Indonesian postings** — `--include-indonesian` flag in `run_with_job_scraping.py`: Merges `indonesian_jobs.csv` with English data; auto-enables `--translate --dedupe`.
+6. **Coverage ablation** — `recommendations.py --coverage-ablation`: Sweeps w_coverage = 0.0/0.10/0.20/0.30; reports Jaccard overlap to empirically validate 0.0 default; saves `coverage_ablation_report.json`.
+7. **Job deduplication** — `--dedupe` flag in `preprocess_jobs_pipeline.py`: MD5 fingerprint of (title + company + first 500 chars of description) at job level before sentence splitting.
+8. **Checkpoint/resume** — `pipeline_orchestrator.py` with `resume=True`: `_STEP_CHECKPOINTS` dict maps script → output marker; skips steps whose output exists.
+9. **Trend sparklines** — `/dashboard/api/sparklines`: Monthly frequency per skill as JSON; SVG bar charts rendered client-side on Results page.
+10. **LLM prompt versioning** — `log_run_metadata.py` `collect_prompt_hashes()`: Regex scan of pipeline.py for prompt strings; SHA-256 fingerprints stored under `prompt_versioning` in `run_metadata.json`.
+
+*Last updated: 10 pipeline improvements (skill normalization, PDF report, explainability, holdout validation, Indonesian postings, coverage ablation, deduplication, checkpoint/resume, sparklines, prompt versioning).*

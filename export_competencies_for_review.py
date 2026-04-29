@@ -150,6 +150,9 @@ def build_competency_review_table(
         related_skills_json = json.dumps(related, ensure_ascii=False)
         related_with_bloom = _format_related_skills_with_bloom(related, skill_bloom_map)
         skill_focus = _derive_skill_focus(related, skill_type_map)
+        soft_required = c.get("soft_skills_required", []) or []
+        if not isinstance(soft_required, list):
+            soft_required = []
         rows.append({
             "competency_id": f"{comp_id}_b{batch_id}" if batch_id else comp_id,
             "batch_id": batch_id,
@@ -158,6 +161,11 @@ def build_competency_review_table(
             "related_skills": related_skills_json,
             "related_skills_with_bloom": related_with_bloom,
             "skill_focus": skill_focus,
+            "soft_skills_required": "; ".join(str(s).strip() for s in soft_required if str(s).strip()),
+            "soft_skills_description": str(c.get("soft_skills_description", "")).strip(),
+            "kkni_level": c.get("kkni_level", ""),
+            "kkni_floor": c.get("kkni_floor", ""),
+            "kkni_descriptor": str(c.get("kkni_descriptor", "")).strip(),
             "future_relevance": c.get("future_relevance", ""),
             "all_skills_human_verified": c.get("all_skills_human_verified", ""),
         })

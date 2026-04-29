@@ -182,10 +182,35 @@ def main():
         print(f"[INFO] Job-level dedup: {before_jobs} → {after_jobs} jobs (removed {before_jobs - after_jobs} duplicates)")
 
     # -----------------------------
+    # Education-level extraction (KKNI)
+    # Adds min_education_kkni and education_labels per job before saving metadata.
+    # See education_level_extractor.py and kkni.py.
+    # -----------------------------
+    try:
+        from education_level_extractor import annotate_dataframe as _edu_annotate
+        text_cols = [c for c in ("description", "requirements") if c in df.columns]
+        if text_cols:
+            _edu_annotate(df, text_columns=text_cols)
+            n_known = int(df["min_education_kkni"].notna().sum())
+            print(f"[INFO] Education-level extraction: {n_known}/{len(df)} jobs tagged with KKNI level")
+        else:
+            df["min_education_kkni"] = None
+            df["education_labels"] = ""
+    except ImportError:
+        print("[WARN] education_level_extractor not available; skipping KKNI annotation")
+        df["min_education_kkni"] = None
+        df["education_labels"] = ""
+
+    # -----------------------------
     # Save job metadata
     # -----------------------------
-    metadata_cols = [c for c in ["job_id", "title", "company", "location", "site", "job_url", "job_date"] if c in df.columns]
-    metadata = df[metadata_cols].drop_duplicates()
+    metadata_cols = [
+        c for c in [
+            "job_id", "title", "company", "location", "site", "job_url",
+            "job_date", "min_education_kkni", "education_labels",
+        ] if c in df.columns
+    ]
+    metadata = df[metadata_cols].drop_duplicates(subset=["job_id"] if "job_id" in metadata_cols else None)
     metadata.to_csv(out_dir / "jobs_metadata.csv", index=False, encoding="utf-8-sig")
     print(f"[INFO] Saved jobs_metadata.csv", flush=True)
 

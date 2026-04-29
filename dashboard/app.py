@@ -29,12 +29,20 @@ APP_ROOT = Path(__file__).resolve().parent
 PROJECT_ROOT = APP_ROOT.parent
 templates = Jinja2Templates(directory=str(APP_ROOT / "templates"))
 
-app = FastAPI(title="Admin & School Dashboard")
+app = FastAPI(title="Competency Recommender & Admin Dashboard")
 app.state.secret_key = os.environ.get("DASHBOARD_SECRET_KEY", "dev-only-insecure-key")
 if app.state.secret_key == "dev-only-insecure-key":
     print("[WARN] Using default session secret. Set DASHBOARD_SECRET_KEY env var for production.")
 app.add_middleware(SessionMiddleware, secret_key=app.state.secret_key)
 app.mount("/dashboard/static", StaticFiles(directory=str(APP_ROOT / "static")), name="dashboard_static")
+# Phase 4: serve the public surface's static assets at /static.
+_PUBLIC_STATIC = APP_ROOT / "static_public"
+if _PUBLIC_STATIC.exists():
+    app.mount("/static", StaticFiles(directory=str(_PUBLIC_STATIC)), name="public_static")
+
+# Phase 3: mount the public API router (read-only, anonymous-friendly).
+from dashboard.api_public import router as public_api_router  # noqa: E402
+app.include_router(public_api_router)
 
 
 def _user(request: Request) -> Optional[dict]:
@@ -78,12 +86,30 @@ def _phase2_available(school_id: int, department_id: int) -> bool:
     return (dirs["results"] / "expert_review_skills.csv").exists()
 
 
+# Phase 5: lock the system to Software & Game Development only.
+# In Kepmen 244/M/2024 these collapse into Bidang 4 ("Teknologi Informasi"),
+# Program 4.2 ("Teknik Komputer dan Informatika"). The legacy Kepmen 130/2017
+# split them into RPL and Pengembangan Gim — both are still surfaced via the
+# vocational_field field if the admin sets it explicitly.
+LOCKED_BIDANG_CODES = {"4"}
+
+
 def _load_spektrum() -> dict:
-    """Load Spektrum Keahlian taxonomy (Kepmen 244/M/2024) for admin UI."""
+    """Load Spektrum Keahlian taxonomy (Kepmen 244/M/2024) for admin UI.
+
+    Filtered to LOCKED_BIDANG_CODES so the admin only sees Software/Game-Dev
+    relevant programs. Returns the same structure (`{"bidang": [...]}`) so
+    existing templates work unchanged.
+    """
     for base in ("data", "DATA"):
         path = PROJECT_ROOT / base / "spektrum_keahlian" / "spektrum_keahlian.json"
         if path.exists():
-            return json.loads(path.read_text(encoding="utf-8"))
+            data = json.loads(path.read_text(encoding="utf-8"))
+            bidang = [
+                b for b in (data.get("bidang") or [])
+                if str(b.get("code", "")) in LOCKED_BIDANG_CODES
+            ]
+            return {"bidang": bidang, "structure": data.get("structure")}
     return {"bidang": []}
 
 
@@ -854,10 +880,339 @@ def _startup() -> None:
     init_db()
 
 
-@app.get("/")
-def root_redirect():
-    return RedirectResponse("/dashboard/login", status_code=302)
+# --------------------------------------------------------------------------- #
+# Phase 4: Public surface — anonymous landing, browse, detail, coverage, about.
+# --------------------------------------------------------------------------- #
 
+def _published_meta_for_template():
+    """Compact dict the public templates inject into the footer / hero stats."""
+    from dashboard.publish import get_active_published_run
+    run = get_active_published_run() or {}
+    return {
+        "version_label": run.get("version_label") or "",
+        "vocational_field": run.get("vocational_field") or "",
+        "spektrum_code": run.get("spektrum_code") or "",
+        "n_competencies": int(run.get("n_competencies") or 0),
+        "n_skills": int(run.get("n_skills") or 0),
+        "published_at": run.get("published_at") or "",
+        "notes": run.get("notes") or "",
+    }
+
+
+@app.get("/", response_class=HTMLResponse)
+def public_landing(request: Request):
+    import kkni
+    return templates.TemplateResponse(request, "public/landing.html",
+        {
+            "request": request,
+            "user": _user(request),
+            "published": _published_meta_for_template(),
+            "stages": kkni.STAGE_TO_KKNI,
+        },
+    )
+
+
+@app.get("/competencies", response_class=HTMLResponse)
+def public_browse(
+    request: Request,
+    stage: str = "",
+    kkni_level: Optional[int] = None,
+    domain: str = "",
+    q: str = "",
+    offset: int = 0,
+    limit: int = 30,
+):
+    import kkni
+    from dashboard.api_public import list_competencies, _load_published_data
+    from dashboard.publish import active_results_dir
+    payload = list_competencies(
+        stage=stage or None,
+        kkni_level=kkni_level,
+        domain=domain or None,
+        q=q or None,
+        limit=limit,
+        offset=offset,
+    )
+    # Build the available-domains dropdown from the published data.
+    data = _load_published_data(active_results_dir())
+    available_domains = sorted({
+        (c.get("batch_domain") or c.get("future_domain") or "").strip()
+        for c in data["competencies"]
+        if c.get("batch_domain") or c.get("future_domain")
+    } - {""})
+    return templates.TemplateResponse(request, "public/browse.html",
+        {
+            "request": request,
+            "user": _user(request),
+            "published": _published_meta_for_template(),
+            "stages": kkni.STAGE_TO_KKNI,
+            "items": payload["items"],
+            "total": payload["total"],
+            "offset": offset,
+            "limit": limit,
+            "stage": stage,
+            "kkni_level": kkni_level,
+            "domain": domain,
+            "q": q,
+            "available_domains": available_domains,
+        },
+    )
+
+
+@app.get("/competencies/{competency_id}", response_class=HTMLResponse)
+def public_detail(request: Request, competency_id: str):
+    from dashboard.api_public import get_competency
+    try:
+        c = get_competency(competency_id)
+    except HTTPException as e:
+        if e.status_code == 404:
+            return templates.TemplateResponse(request, "public/landing.html",
+                {
+                    "request": request,
+                    "user": _user(request),
+                    "published": _published_meta_for_template(),
+                    "stages": __import__("kkni").STAGE_TO_KKNI,
+                    "page_title": "Not found",
+                },
+                status_code=404,
+            )
+        raise
+    return templates.TemplateResponse(request, "public/detail.html",
+        {
+            "request": request,
+            "user": _user(request),
+            "published": _published_meta_for_template(),
+            "c": c,
+        },
+    )
+
+
+@app.get("/coverage", response_class=HTMLResponse)
+def public_coverage_page(request: Request):
+    return templates.TemplateResponse(request, "public/coverage.html",
+        {
+            "request": request,
+            "user": _user(request),
+            "published": _published_meta_for_template(),
+            "report": None,
+            "saved_id": None,
+            "error": "",
+        },
+    )
+
+
+@app.post("/coverage", response_class=HTMLResponse)
+async def public_coverage_submit(
+    request: Request,
+    file: UploadFile = File(...),
+    save_name: str = Form(""),
+):
+    from dashboard.api_public import _parse_curriculum, _coverage_report, _load_published_data
+    from dashboard.publish import active_results_dir, get_active_published_run
+    raw = await file.read()
+    if not raw:
+        return templates.TemplateResponse(request, "public/coverage.html",
+            {
+                "request": request,
+                "user": _user(request),
+                "published": _published_meta_for_template(),
+                "report": None,
+                "saved_id": None,
+                "error": "Please upload a non-empty file.",
+            },
+        )
+    try:
+        phrases = _parse_curriculum(raw, file.filename or "")
+    except HTTPException as e:
+        return templates.TemplateResponse(request, "public/coverage.html",
+            {
+                "request": request,
+                "user": _user(request),
+                "published": _published_meta_for_template(),
+                "report": None,
+                "saved_id": None,
+                "error": e.detail,
+            },
+        )
+    if not phrases:
+        return templates.TemplateResponse(request, "public/coverage.html",
+            {
+                "request": request,
+                "user": _user(request),
+                "published": _published_meta_for_template(),
+                "report": None,
+                "saved_id": None,
+                "error": "No curriculum phrases were extracted. See /about for the format.",
+            },
+        )
+
+    report = _coverage_report(phrases, _load_published_data(active_results_dir()))
+    saved_id = None
+    user = _user(request)
+    if user and save_name.strip():
+        active_run = get_active_published_run()
+        run_id = active_run["id"] if active_run else None
+        saved_id = exec_sql(
+            """
+            INSERT INTO coverage_analyses(user_id, name, curriculum_blob, report_blob, published_run_id)
+            VALUES(?, ?, ?, ?, ?)
+            """,
+            (
+                int(user.get("id")),
+                save_name.strip()[:200],
+                json.dumps(phrases, ensure_ascii=False),
+                json.dumps(report, ensure_ascii=False),
+                run_id,
+            ),
+        )
+    return templates.TemplateResponse(request, "public/coverage.html",
+        {
+            "request": request,
+            "user": user,
+            "published": _published_meta_for_template(),
+            "report": report,
+            "saved_id": saved_id,
+            "error": "",
+        },
+    )
+
+
+@app.get("/about", response_class=HTMLResponse)
+def public_about(request: Request):
+    import kkni as _kkni
+    return templates.TemplateResponse(request, "public/about.html",
+        {
+            "request": request,
+            "user": _user(request),
+            "published": _published_meta_for_template(),
+            "kkni_levels": _kkni.KKNI_LEVELS,
+        },
+    )
+
+
+@app.get("/me/coverage", response_class=HTMLResponse)
+def my_coverage_list(request: Request):
+    user = _user(request)
+    if not user:
+        return RedirectResponse("/dashboard/login?next=/me/coverage", status_code=302)
+    rows = q_all(
+        "SELECT id, name, created_at, report_blob FROM coverage_analyses "
+        "WHERE user_id=? ORDER BY id DESC",
+        (int(user["id"]),),
+    )
+    items = []
+    for r in rows:
+        rec = {"id": r["id"], "name": r["name"], "created_at": r["created_at"], "coverage_pct": None}
+        try:
+            rep = json.loads(r["report_blob"] or "{}")
+            rec["coverage_pct"] = rep.get("coverage_pct")
+        except (json.JSONDecodeError, TypeError):
+            pass
+        items.append(rec)
+    return templates.TemplateResponse(request, "public/my_coverage.html",
+        {
+            "request": request,
+            "user": user,
+            "published": _published_meta_for_template(),
+            "items": items,
+        },
+    )
+
+
+@app.get("/me/coverage/{analysis_id}", response_class=HTMLResponse)
+def my_coverage_view(request: Request, analysis_id: int):
+    user = _user(request)
+    if not user:
+        return RedirectResponse(f"/dashboard/login?next=/me/coverage/{analysis_id}", status_code=302)
+    row = q_one(
+        "SELECT * FROM coverage_analyses WHERE id=? AND user_id=?",
+        (analysis_id, int(user["id"])),
+    )
+    if not row:
+        raise HTTPException(status_code=404, detail="Analysis not found")
+    try:
+        report = json.loads(row["report_blob"] or "{}")
+    except (json.JSONDecodeError, TypeError):
+        report = {}
+    return templates.TemplateResponse(request, "public/coverage.html",
+        {
+            "request": request,
+            "user": user,
+            "published": _published_meta_for_template(),
+            "report": report,
+            "saved_id": row["id"],
+            "error": "",
+            "saved_name": row["name"],
+        },
+    )
+
+
+# --------------------------------------------------------------------------- #
+# Phase 5: Light signup for public users.
+# --------------------------------------------------------------------------- #
+
+@app.get("/signup", response_class=HTMLResponse)
+def signup_page(request: Request):
+    return templates.TemplateResponse(request, "public/signup.html",
+        {
+            "request": request,
+            "user": _user(request),
+            "published": _published_meta_for_template(),
+            "error": "",
+            "email": "",
+            "display_name": "",
+        },
+    )
+
+
+@app.post("/signup", response_class=HTMLResponse)
+def signup_submit(
+    request: Request,
+    email: str = Form(...),
+    password: str = Form(...),
+    display_name: str = Form(""),
+):
+    email = email.strip().lower()
+    if not email or "@" not in email or len(password) < 8:
+        return templates.TemplateResponse(request, "public/signup.html",
+            {
+                "request": request,
+                "user": None,
+                "published": _published_meta_for_template(),
+                "error": "Provide a valid email and a password of at least 8 characters.",
+                "email": email,
+                "display_name": display_name,
+            },
+        )
+    existing = q_one("SELECT id FROM users WHERE email=?", (email,))
+    if existing:
+        return templates.TemplateResponse(request, "public/signup.html",
+            {
+                "request": request,
+                "user": None,
+                "published": _published_meta_for_template(),
+                "error": "That email is already registered. Try logging in instead.",
+                "email": email,
+                "display_name": display_name,
+            },
+        )
+    new_id = exec_sql(
+        "INSERT INTO users(email, password_hash, role, display_name) VALUES(?, ?, 'public', ?)",
+        (email, hash_password(password), display_name.strip() or None),
+    )
+    request.session["user"] = {
+        "id": new_id,
+        "email": email,
+        "role": "public",
+        "school_id": None,
+        "display_name": display_name.strip() or None,
+    }
+    return RedirectResponse("/coverage", status_code=302)
+
+
+# --------------------------------------------------------------------------- #
+# Login + dashboard hub (admin/school redirects retained, public goes home).
+# --------------------------------------------------------------------------- #
 
 @app.get("/dashboard", response_class=HTMLResponse)
 def dashboard_home(request: Request):
@@ -865,29 +1220,50 @@ def dashboard_home(request: Request):
     if user:
         if user.get("role") == "admin":
             return RedirectResponse("/dashboard/admin/schools", status_code=302)
-        return RedirectResponse("/dashboard/school/runs", status_code=302)
+        if user.get("role") == "public":
+            return RedirectResponse("/", status_code=302)
+        # legacy 'school' role — redirect to public site for now
+        return RedirectResponse("/", status_code=302)
     return RedirectResponse("/dashboard/login", status_code=302)
 
 
 @app.get("/dashboard/login", response_class=HTMLResponse)
-def login_page(request: Request):
-    return templates.TemplateResponse("login.html", {"request": request, "error": ""})
+def login_page(request: Request, next: str = "", error: str = ""):
+    return templates.TemplateResponse(request, "login.html",
+        {"request": request, "error": error, "next": next},
+    )
 
 
 @app.post("/dashboard/login", response_class=HTMLResponse)
-def login_submit(request: Request, email: str = Form(...), password: str = Form(...)):
-    row = q_one("SELECT id, email, role, school_id, password_hash FROM users WHERE email=?", (email.strip(),))
+def login_submit(
+    request: Request,
+    email: str = Form(...),
+    password: str = Form(...),
+    next: str = Form(""),
+):
+    row = q_one(
+        "SELECT id, email, role, school_id, password_hash, display_name FROM users WHERE email=?",
+        (email.strip().lower(),),
+    )
     if not row or not verify_password(password, row["password_hash"]):
-        return templates.TemplateResponse(
-            "login.html", {"request": request, "error": "Invalid credentials"}
+        return templates.TemplateResponse(request, "login.html", {"request": request, "error": "Invalid credentials", "next": next}
         )
     request.session["user"] = {
         "id": row["id"],
         "email": row["email"],
         "role": row["role"],
         "school_id": row["school_id"],
+        "display_name": row["display_name"],
     }
-    return RedirectResponse("/dashboard", status_code=302)
+    # Role-based redirect with optional ?next override.
+    if next and next.startswith("/"):
+        return RedirectResponse(next, status_code=302)
+    if row["role"] == "admin":
+        return RedirectResponse("/dashboard/admin/schools", status_code=302)
+    if row["role"] == "public":
+        return RedirectResponse("/", status_code=302)
+    # legacy 'school' role
+    return RedirectResponse("/", status_code=302)
 
 
 @app.get("/dashboard/logout")
@@ -909,8 +1285,7 @@ def admin_schools(request: Request):
         """
     )
     spektrum = _load_spektrum()
-    return templates.TemplateResponse(
-        "admin/schools.html",
+    return templates.TemplateResponse(request, "admin/schools.html",
         {"request": request, "schools": schools, "departments": departments, "spektrum": spektrum, "user": _user(request)},
     )
 
@@ -953,8 +1328,7 @@ def admin_users(request: Request):
         """
     )
     schools = q_all("SELECT * FROM schools ORDER BY name")
-    return templates.TemplateResponse(
-        "admin/users.html",
+    return templates.TemplateResponse(request, "admin/users.html",
         {"request": request, "users": users, "schools": schools, "user": _user(request)},
     )
 
@@ -1015,10 +1389,63 @@ def admin_runs(request: Request):
                     "pct_agreement": vals.get("pct_agreement", 0),
                 }
             )
-    return templates.TemplateResponse(
-        "admin/runs.html",
+    return templates.TemplateResponse(request, "admin/runs.html",
         {"request": request, "runs": runs, "irr_rows": irr_rows, "user": _user(request)},
     )
+
+
+# --------------------------------------------------------------------------- #
+# Phase 2: Admin "publish a canonical run" — backs the public surface.
+# --------------------------------------------------------------------------- #
+
+@app.get("/dashboard/admin/publish", response_class=HTMLResponse)
+def admin_publish_page(request: Request):
+    _require_role(request, "admin")
+    from dashboard.publish import list_published_runs, get_active_published_run, collect_publish_stats
+    runs = list_published_runs(limit=25)
+    active = get_active_published_run()
+    # Preview the project-level results dir so admin sees what would be published.
+    project_results = PROJECT_ROOT / "results"
+    preview_stats = collect_publish_stats(project_results) if project_results.exists() else {"n_competencies": 0, "n_skills": 0}
+    return templates.TemplateResponse(request, "admin/publish.html",
+        {
+            "request": request,
+            "user": _user(request),
+            "runs": runs,
+            "active": active,
+            "project_results": str(project_results),
+            "project_results_exists": project_results.exists(),
+            "preview_stats": preview_stats,
+        },
+    )
+
+
+@app.post("/dashboard/admin/publish")
+def admin_publish_submit(
+    request: Request,
+    version_label: str = Form(...),
+    results_dir: str = Form(""),
+    spektrum_code: str = Form(""),
+    vocational_field: str = Form(""),
+    notes: str = Form(""),
+):
+    user = _require_role(request, "admin")
+    from dashboard.publish import publish_results_dir
+    from dashboard.api_public import invalidate_cache
+    src = Path(results_dir).resolve() if results_dir.strip() else (PROJECT_ROOT / "results")
+    try:
+        new_id = publish_results_dir(
+            results_dir=src,
+            version_label=version_label.strip() or src.name,
+            user_id=user.get("id"),
+            spektrum_code=spektrum_code.strip() or None,
+            vocational_field=vocational_field.strip() or None,
+            notes=notes.strip() or None,
+        )
+    except FileNotFoundError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    invalidate_cache()
+    return RedirectResponse(f"/dashboard/admin/publish?ok={new_id}", status_code=303)
 
 
 def _school_departments(user: dict) -> List:
@@ -1030,8 +1457,7 @@ def school_runs(request: Request, department_id: Optional[int] = None):
     user = _require_role(request, "school")
     departments = _school_departments(user)
     if not departments:
-        return templates.TemplateResponse(
-            "school/runs.html",
+        return templates.TemplateResponse(request, "school/runs.html",
             {
                 "request": request,
                 "runs": [],
@@ -1055,8 +1481,7 @@ def school_runs(request: Request, department_id: Optional[int] = None):
         runs.append(row)
     phase2_available = _phase2_available(user["school_id"], selected)
     has_running = any(str(r.get("status", "")).lower() == "running" for r in runs)
-    return templates.TemplateResponse(
-        "school/runs.html",
+    return templates.TemplateResponse(request, "school/runs.html",
         {
             "request": request,
             "runs": runs,
@@ -1189,8 +1614,7 @@ def school_upload_page(
         success_banner = f"Jobs CSV uploaded successfully. {rows or 0} rows loaded." if rows is not None else "Jobs CSV uploaded successfully."
     elif uploaded == "curriculum":
         success_banner = "Curriculum file uploaded successfully."
-    return templates.TemplateResponse(
-        "school/upload.html",
+    return templates.TemplateResponse(request, "school/upload.html",
         {
             "request": request,
             "departments": departments,
@@ -1467,8 +1891,7 @@ def school_results(
                     "pct_agreement": vals.get("pct_agreement", 0),
                 }
             )
-    return templates.TemplateResponse(
-        "school/results.html",
+    return templates.TemplateResponse(request, "school/results.html",
         {
             "request": request,
             "departments": departments,
@@ -1523,8 +1946,7 @@ def school_insights(request: Request, department_id: Optional[int] = None):
     banner = ""
     if result_dir == DEFAULT_RESULTS:
         banner = "Showing default demo insights. Run your department pipeline to replace these with your own."
-    return templates.TemplateResponse(
-        "school/insights.html",
+    return templates.TemplateResponse(request, "school/insights.html",
         {
             "request": request,
             "departments": departments,
@@ -1541,8 +1963,7 @@ def school_methodology(request: Request):
     """How it works / transparency page for explainable AI."""
     user = _require_role(request, "school")
     explanations = _explanations()
-    return templates.TemplateResponse(
-        "school/methodology.html",
+    return templates.TemplateResponse(request, "school/methodology.html",
         {
             "request": request,
             "explanations": explanations,
@@ -1585,8 +2006,7 @@ def school_review(request: Request, department_id: Optional[int] = None):
         comp_df, comp_fb, "competency_id", reviewer_id, ["human_quality", "human_relevant", "human_skill_focus", "human_notes"]
     )
 
-    return templates.TemplateResponse(
-        "school/review.html",
+    return templates.TemplateResponse(request, "school/review.html",
         {
             "request": request,
             "departments": departments,
@@ -1896,8 +2316,7 @@ def school_report(
         except Exception:
             pass
 
-    return templates.TemplateResponse(
-        "school/report.html",
+    return templates.TemplateResponse(request, "school/report.html",
         {
             "request": request,
             "user": user,

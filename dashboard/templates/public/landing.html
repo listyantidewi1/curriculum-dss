@@ -1,0 +1,68 @@
+{% extends "public/base.html" %}
+{% set active_nav = "home" %}
+{% block content %}
+<section class="hero">
+  <div class="container">
+    <h1>What should learners actually be able to do?</h1>
+    <p class="lead">
+      A KKNI-aligned competency recommender for software and game development education
+      in Indonesia. Every competency below is grounded in real job postings, ranked by demand,
+      empirical trend, and future-of-work signals. Browse by education level, or upload your
+      curriculum to see what's already covered and what's missing.
+    </p>
+    <div class="ctas">
+      <a class="btn" href="/competencies">Browse competencies</a>
+      <a class="btn secondary" href="/coverage">Analyze my curriculum</a>
+      <a class="btn muted" href="/about">How it works</a>
+    </div>
+  </div>
+</section>
+
+<section class="section container">
+  <h2>What's inside</h2>
+  <div class="stat-row">
+    <div class="stat">
+      <div class="num">{{ published.n_competencies or 0 }}</div>
+      <div class="lbl">competencies</div>
+    </div>
+    <div class="stat">
+      <div class="num">{{ published.n_skills or 0 }}</div>
+      <div class="lbl">hard skills indexed</div>
+    </div>
+    <div class="stat">
+      <div class="num">9</div>
+      <div class="lbl">KKNI levels supported</div>
+    </div>
+    <div class="stat">
+      <div class="num">SE / GD</div>
+      <div class="lbl">software &amp; game dev</div>
+    </div>
+  </div>
+</section>
+
+<section class="section container">
+  <h2>Pick your education level</h2>
+  <p class="sub">
+    The chips below filter competencies by KKNI qualification level — Indonesia's official
+    framework that maps degrees and vocational stages onto a 1–9 scale.
+  </p>
+  <div class="stage-chips">
+    {% for stage_key, lvls in stages.items() %}
+      <a href="/competencies?stage={{ stage_key }}" class="stage-chip">
+        <strong>{{ stage_key }}</strong>
+        <span class="kkni-sub">KKNI {{ lvls | join(", ") }}</span>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section container">
+  <h2>For curriculum reformers</h2>
+  <p class="sub">
+    Upload your school's curriculum (CSV or JSON) and instantly see how it lines up with
+    market-driven competencies. No login required for a one-shot analysis. Sign up to save
+    multiple analyses and track changes over time.
+  </p>
+  <a class="btn" href="/coverage">Run a coverage analysis</a>
+</section>
+{% endblock %}

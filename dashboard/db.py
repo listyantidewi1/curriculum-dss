@@ -55,8 +55,9 @@ def init_db() -> None:
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             email TEXT NOT NULL UNIQUE,
             password_hash TEXT NOT NULL,
-            role TEXT NOT NULL CHECK(role IN ('admin', 'school')),
+            role TEXT NOT NULL CHECK(role IN ('admin', 'school', 'public')),
             school_id INTEGER,
+            display_name TEXT,
             created_at TEXT DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (school_id) REFERENCES schools(id)
         );
@@ -93,6 +94,36 @@ def init_db() -> None:
             FOREIGN KEY (department_id) REFERENCES departments(id),
             FOREIGN KEY (run_id) REFERENCES runs(id)
         );
+
+        -- Phase 2: snapshot of a canonical run published to the public surface.
+        -- The public dashboard always reads from the latest is_active row.
+        CREATE TABLE IF NOT EXISTS published_runs (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            version_label TEXT NOT NULL,
+            results_dir TEXT NOT NULL,
+            spektrum_code TEXT,
+            vocational_field TEXT,
+            notes TEXT,
+            n_competencies INTEGER DEFAULT 0,
+            n_skills INTEGER DEFAULT 0,
+            published_at TEXT DEFAULT CURRENT_TIMESTAMP,
+            published_by INTEGER,
+            is_active INTEGER NOT NULL DEFAULT 0,
+            FOREIGN KEY (published_by) REFERENCES users(id)
+        );
+
+        -- Phase 5: saved curriculum-coverage analyses for logged-in public users.
+        CREATE TABLE IF NOT EXISTS coverage_analyses (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            name TEXT NOT NULL,
+            curriculum_blob TEXT NOT NULL,
+            report_blob TEXT NOT NULL,
+            published_run_id INTEGER,
+            created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (user_id) REFERENCES users(id),
+            FOREIGN KEY (published_run_id) REFERENCES published_runs(id)
+        );
         """
     )
 
@@ -101,6 +132,40 @@ def init_db() -> None:
     cols = {row[1] for row in cur.fetchall()}
     if "spektrum_code" not in cols:
         cur.execute("ALTER TABLE departments ADD COLUMN spektrum_code TEXT")
+
+    # Migration: Add display_name to users (Phase 5 — public-user friendly label)
+    cur.execute("PRAGMA table_info(users)")
+    user_cols = {row[1] for row in cur.fetchall()}
+    if "display_name" not in user_cols:
+        cur.execute("ALTER TABLE users ADD COLUMN display_name TEXT")
+
+    # Migration: Relax users.role CHECK to allow 'public' on existing databases.
+    # SQLite cannot ALTER a CHECK constraint, so we rebuild the table only when
+    # the existing constraint forbids 'public'.
+    cur.execute("SELECT sql FROM sqlite_master WHERE type='table' AND name='users'")
+    row = cur.fetchone()
+    table_sql = row[0] if row else ""
+    if table_sql and "'public'" not in table_sql:
+        cur.executescript(
+            """
+            CREATE TABLE users_new (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                email TEXT NOT NULL UNIQUE,
+                password_hash TEXT NOT NULL,
+                role TEXT NOT NULL CHECK(role IN ('admin', 'school', 'public')),
+                school_id INTEGER,
+                display_name TEXT,
+                created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (school_id) REFERENCES schools(id)
+            );
+            INSERT INTO users_new(id, email, password_hash, role, school_id, display_name, created_at)
+                SELECT id, email, password_hash, role, school_id,
+                       COALESCE(display_name, NULL), created_at
+                FROM users;
+            DROP TABLE users;
+            ALTER TABLE users_new RENAME TO users;
+            """
+        )
     conn.commit()
 
     # Seed admin user once.

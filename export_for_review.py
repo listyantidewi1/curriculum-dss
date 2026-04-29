@@ -389,13 +389,26 @@ def main():
     jobs_df.to_csv(jobs_path, index=False, encoding="utf-8-sig")
     print(f"[INFO] Saved job-level review table to {jobs_path}")
 
-    # Build job_id -> raw_text map for context
-    job_text_map = dict(
-        zip(
-            comp["job_id"].astype(str),
-            comp["raw_text"].astype(str).fillna(""),
-        )
-    )
+    # Build job_id -> full job text map for context.
+    # Prefer the detailed per-job analysis JSON (job_{job_id}_analysis.json) which
+    # contains the untruncated 'text' field; fall back to the CSV 'raw_text'
+    # (which may be truncated for CSV readability).
+    job_text_map = {}
+    for _, row in comp.iterrows():
+        jid = str(row.get("job_id", ""))
+        raw = str(row.get("raw_text", "") or "")
+        analysis_path = Path(out_dir) / f"job_{jid}_analysis.json"
+        full_text = raw
+        if analysis_path.exists():
+            try:
+                import json
+
+                with open(analysis_path, "r", encoding="utf-8") as jf:
+                    data = json.load(jf)
+                    full_text = str(data.get("text", "") or raw)
+            except Exception:
+                full_text = raw
+        job_text_map[jid] = full_text
 
     print("[INFO] Loading best available skills table (verified or advanced)...")
     skills_raw = load_best_skills_table(out_dir)

@@ -259,7 +259,10 @@ class AdvancedPipelineConfig:
     # Knowledge: LLM-only in final output. BERT knowledge is passed to LLM as anti-hallucination
     # context but not fused (Direction A).
     LLM_ONLY_KNOWLEDGE = True
-    EXTRACTION_MODE = "hybrid"
+    # Default is llm_only after the 2026 reframe to a competency recommendation
+    # system: BERT contributes little to downstream competency quality and is
+    # retained only as an ablation path (--extraction-mode hybrid).
+    EXTRACTION_MODE = "llm_only"
 
     # Reproducibility (override via --seed)
     RANDOM_SEED = None  # Set from config.RANDOM_SEED or args.seed at runtime
@@ -282,7 +285,7 @@ class AdvancedPipelineConfig:
 
     # File paths (jobs_sentences.csv is output of preprocess when run on job_scraping/output/english_jobs.csv)
     INPUT_CSV = str(config.PIPELINE_INPUT_CSV)
-    SAMPLE_SIZE = 10000
+    SAMPLE_SIZE = 1000
     LLM_CONCURRENCY = 3  # Number of concurrent LLM calls (1 = sequential, 3–5 = faster)
     
     # Output files
@@ -2863,11 +2866,11 @@ def main():
             "--extraction-mode",
             type=str,
             choices=["hybrid", "llm_only", "bert_only"],
-            default="hybrid",
+            default="llm_only",
             help=(
-                "Extraction mode: hybrid (BERT+LLM fusion, default), "
-                "llm_only (LLM on full doc, no BERT — RQ1 ablation), "
-                "bert_only (BERT per-sentence, no LLM)."
+                "Extraction mode: llm_only (LLM on full doc, default — primary mode), "
+                "hybrid (BERT+LLM fusion, RQ1 ablation), "
+                "bert_only (BERT per-sentence, no LLM — diagnostic only)."
             ),
         )
         parser.add_argument(

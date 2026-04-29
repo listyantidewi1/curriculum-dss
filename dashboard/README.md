@@ -1,6 +1,13 @@
-# Dashboard — Admin & School
+# Dashboard — Public Surface + Admin
 
-FastAPI dashboard for production use: admin management, school workflows, and in-dashboard expert review.
+FastAPI app exposing two surfaces:
+
+1. **Public** at `/` — anonymous competency browser (stage chips, KKNI levels) and curriculum coverage analyzer.
+2. **Admin** at `/dashboard/admin/*` — data ops: schools, users, pipeline runs, **publish a canonical run**.
+
+The legacy `/dashboard/school/*` routes are retained for accounts created before the 2026 reframe but no new school accounts can be created.
+
+For the full URL map, data flow, and publish architecture see **[../docs/PUBLIC_UI.md](../docs/PUBLIC_UI.md)**.
 
 ---
 
@@ -9,9 +16,9 @@ FastAPI dashboard for production use: admin management, school workflows, and in
 **Before dashboard simulation:** Run the pipeline from project root:
 
 ```bat
-run.bat              REM Phase 1: 14 steps
+run.bat              REM Phase 1: 18 steps (extraction → trends → recommendations → gold labeling → expert review)
 REM [Optional] Expert review via: uvicorn review_ui.app:app --reload
-run_phase_2.bat      REM Phase 2: 13 steps (after review)
+run_phase_2.bat      REM Phase 2: 18 steps (feedback → re-generation → holdout validation → evaluation)
 ```
 
 Then start the dashboard:
@@ -44,10 +51,20 @@ Open `http://127.0.0.1:8000/dashboard/login`
 | Page | Purpose |
 |------|---------|
 | Upload | Job postings (CSV), curriculum (CSV/JSON) per department. Sample files: `DATA/samples/jobs_sample.csv`, `DATA/samples/curriculum_sample.csv` |
-| Runs | Trigger pipeline run; view status |
-| Results | Skills, knowledge, competencies (ranked); aggregation toggle |
+| Runs | Trigger pipeline run; view status; supports checkpoint/resume (interrupted runs skip completed steps) |
+| Results | Skills, knowledge, competencies (ranked); aggregation toggle; **trend sparklines** per skill; **"Why?"** score explainability per skill |
+| Report | **Printable PDF-quality report**: skill gaps table, knowledge gaps, competency proposals, reproducibility metadata. `Print / Save as PDF` button |
 | Review | In-dashboard review (skills, knowledge, competencies) with sub-tabs |
 | Insights | Plots with descriptions; click to enlarge |
+| How it works | Methodology page |
+
+### New Dashboard Routes
+
+| Route | Description |
+|-------|-------------|
+| `GET /dashboard/school/report` | Printable curriculum gap report (HTML, optimized for print/PDF) |
+| `GET /dashboard/api/sparklines` | Monthly demand frequency per top-N skills as JSON; used by Results page SVG charts |
+| `GET /dashboard/api/explain_score` | Score component breakdown for a single skill: demand, trend, future — values, weights, contributions |
 
 ---
 
@@ -105,6 +122,22 @@ pandas
 ```
 
 Install: `pip install -r dashboard/requirements.txt`
+
+---
+
+## Checkpoint / Resume
+
+When a department pipeline run is interrupted, re-triggering the run will skip steps whose output files already exist (`pipeline_orchestrator.py` with `resume=True`). Checkpointed steps include:
+
+| Step | Output marker |
+|------|---------------|
+| `pipeline.py` | `advanced_skills.csv` |
+| `verify_skills.py` | `verified_skills.csv` |
+| `enrich_with_dates.py` | `advanced_skills_with_dates.csv` |
+| `skill_time_trend_analysis.py` | `skill_time_trends.csv` |
+| `generate_competencies.py` | `competency_proposals.json` |
+| `recommendations.py` | `recommendations.csv` |
+| `evaluate_extraction.py` | `extraction_evaluation_report.json` |
 
 ---
 

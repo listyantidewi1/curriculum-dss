@@ -1,0 +1,48 @@
+{
+  "timestamp": "2026-04-29T16:17:06.481168+00:00",
+  "python_version": "3.13.2",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "project_root": "D:\\Projects\\skill-extraction",
+  "output_dir": "D:\\Projects\\skill-extraction\\results",
+  "random_seed": 42,
+  "pipeline_sample_seed": 42,
+  "git_hash": "8ad275266242bd169bf8c6520c6cbdec54f6a2ce",
+  "input_dataset": {
+    "path": "D:\\Projects\\skill-extraction\\DATA\\preprocessing\\data_prepared\\jobs_sentences.csv",
+    "exists": true,
+    "rows": 759259,
+    "sha256": "e2f74b81f1fed80430571c468efc616f5abfb223cebb3f74c7060a879bf7d652"
+  },
+  "models": {
+    "jobbert": "jjzha/jobbert-base-cased",
+    "jobbert_checkpoint": "D:\\Projects\\skill-extraction\\baseline_versions\\jobbert_crf\\outputs\\multitask_model",
+    "sbert": "all-MiniLM-L6-v2",
+    "llm": "",
+    "llm_base_url": "",
+    "llm_temperature": null
+  },
+  "config_parameters": {
+    "output_dir": "D:\\Projects\\skill-extraction\\results"
+  },
+  "spektrum_code": null,
+  "future_domains_file": null,
+  "spektrum_mapping_file": null,
+  "prompt_versioning": {
+    "status": "ok",
+    "pipeline_py_sha256": "41891b45cd875c70",
+    "n_prompts_found": 2,
+    "combined_prompt_hash": "e25f1e455a201c0e",
+    "prompts": {
+      "prompt_01": {
+        "sha256_prefix": "55038310ef803d92",
+        "char_length": 3417,
+        "preview": "You are an expert in job market analysis, skill extraction, and educational taxo"
+      },
+      "prompt_02": {
+        "sha256_prefix": "d8c36d2246d9013c",
+        "char_length": 205,
+        "preview": "Job Description: \"{text}\"             Context (Tools detected by BERT): [{knowle"
+      }
+    }
+  }
+}

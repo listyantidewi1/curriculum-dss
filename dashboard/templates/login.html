@@ -3,23 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dashboard Login</title>
+  <title>Login</title>
+  <link rel="stylesheet" href="/static/style.css" />
   <link rel="stylesheet" href="/dashboard/static/style.css" />
 </head>
 <body>
-  <main class="container narrow">
-    <h2>Login</h2>
-    <p class="hint">Default admin: <code>admin@local</code> / <code>admin123</code></p>
-    {% if error %}
-      <p class="error">{{ error }}</p>
-    {% endif %}
-    <form method="post" action="/dashboard/login" class="card">
-      <label>Email</label>
-      <input name="email" type="email" required />
-      <label>Password</label>
-      <input name="password" type="password" required />
-      <button type="submit">Sign in</button>
+  <header class="public-topbar">
+    <div class="row">
+      <a href="/" class="brand">Competency Recommender <small>Software &amp; Game Dev</small></a>
+    </div>
+  </header>
+  <main class="container" style="max-width: 480px; padding-top: 32px;">
+    <h2>Log in</h2>
+    <p class="muted">
+      Public users, sign in to save curriculum coverage analyses. Admins, sign in to publish runs.
+    </p>
+    {% if error %}<div class="alert">{{ error }}</div>{% endif %}
+    <form method="post" action="/dashboard/login" class="upload-form">
+      {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+      <label>Email
+        <input name="email" type="email" required autofocus />
+      </label>
+      <label>Password
+        <input name="password" type="password" required />
+      </label>
+      <button type="submit" class="btn">Sign in</button>
     </form>
+    <p class="muted" style="margin-top:24px;">
+      No account? <a href="/signup">Create one</a> &mdash; takes a few seconds.
+    </p>
+    <p class="muted" style="font-size:12px; margin-top:24px;">
+      Default admin (dev): <code>admin@local</code> / <code>admin123</code>
+    </p>
   </main>
 </body>
 </html>

@@ -1,8 +1,11 @@
 # Research Questions and Evaluation Framework
 
 This document defines the research questions, success metrics, and evaluation
-protocol for the Future-Aware Hybrid Skill Extraction pipeline as a
-**curriculum recommendation system** for vocational high schools.
+protocol for the Future-Aware Competency Recommendation System for vocational
+high schools. After the 2026 reframe the system's deliverable is **hard-skill
+competency statements with attached soft-skill requirements**, not raw skill
+lists. Skill/knowledge extraction is the infrastructure that feeds the
+competency layer.
 
 **Related**: [CALCULATIONS.md](CALCULATIONS.md) — formulas; [SCIENTIFIC_METHODOLOGY.md](SCIENTIFIC_METHODOLOGY.md) — full scientific methods with worked examples.
 
@@ -16,20 +19,42 @@ The pipeline is a **curriculum gap / reform tool**, not a compliance tool. It su
 
 ## Research Questions
 
-### RQ1 — Extraction Quality
-**Does hybrid extraction (JobBERT + LLM) outperform each component alone on
-skill and knowledge correctness?**
+### RQ1 — Extraction Quality (LLM-only primary; hybrid as ablation)
+**Does LLM-only extraction produce sufficient quality for downstream competency
+recommendation, and does adding BERT (hybrid) materially improve precision?**
 
-*Note: Skills use BERT+LLM fusion; knowledge output is LLM-only (Direction A). BERT knowledge is passed to LLM as anti-hallucination context but not fused into the final list.*
+After the 2026 reframe, **LLM-only is the primary extraction mode**; hybrid is
+the ablation. The question becomes whether BERT contributes a measurable
+precision lift over LLM-only — if not, the simpler LLM-only path stands.
 
 | Metric | Definition | Target |
 |--------|-----------|--------|
-| Precision | correct extractions / all extractions | > 0.70 |
+| Precision (LLM-only) | correct extractions / all extractions | > 0.70 |
+| Hybrid lift | precision(hybrid) − precision(LLM-only) | reported (effect size + Wilson CI) |
 
 *Note: Recall and F1 are not estimable with this gold-set design (stratified sample of outputs, not exhaustive corpus annotations). See [SCIENTIFIC_METHODOLOGY.md §10](SCIENTIFIC_METHODOLOGY.md).*
 
-Evaluation: compare **BERT-only**, **LLM-only**, and **Hybrid** on the gold set
-(`DATA/labels/gold_skills.csv`, `DATA/labels/gold_knowledge.csv`).
+Evaluation: compare **LLM-only** (primary) and **Hybrid** (ablation) on the
+gold set (`DATA/labels/gold_skills.csv`, `DATA/labels/gold_knowledge.csv`).
+The hybrid run is performed in `results/hybrid/` (`run.bat` step 2);
+`evaluate_extraction.py --llmonly-labels-dir results/hybrid/DATA/labels`
+performs the comparison.
+
+### RQ1b — Competency Generation Quality
+**Do generated competencies meet curriculum-design quality bars, given the
+hard-skills-only input and the soft-skill enrichment?**
+
+| Metric | Definition | Target |
+|--------|-----------|--------|
+| Total competency count | post-dedup count for the corpus | report (target: materially lower than legacy 8–20-per-batch baseline) |
+| Per-batch count | mean / max competencies per batch | mean ≤ 8, max ≤ 12 (hard cap) |
+| Cohesion | mean within-batch SBERT pairwise similarity of `related_skills` | report (higher is better; baseline is the legacy "Uncertain"-includes-everything run) |
+| Soft-skill grounding | fraction of `soft_skills_required` items found in extracted Soft-typed skills | report |
+| Expert quality (1–5) | mean human_quality from review UI | ≥ 3.5 |
+| Expert relevance | fraction marked human_relevant=yes | ≥ 0.80 |
+
+Evaluation: `evaluate_competency_generation.py` on `competency_assessments.json`
+plus a cohesion script over the per-batch SBERT embeddings of `related_skills`.
 
 ### RQ2 — Scoring Calibration
 **Do pipeline scoring signals (confidence, agreement, density) predict human
@@ -52,8 +77,10 @@ posting time series?**
 | FDR-controlled discoveries | skills with q < 0.05 | report count |
 | Stability (Jaccard) | overlap of top-20 emerging across 3+ runs | > 0.60 |
 | Sensitivity | consistent labels across min_jobs settings | report |
+| Direction accuracy (holdout) | % correct Emerging/Declining/Stable in held-out months | > 0.60 |
+| Slope correlation (holdout) | Pearson r between train-period slope and test-period slope | > 0.50 |
 
-Evaluation: Benjamini-Hochberg FDR; stability across seeds and min_jobs.
+Evaluation: Benjamini-Hochberg FDR; stability across seeds and min_jobs; **longitudinal holdout** (`skill_trend_holdout_validation.py`) splits data into train/test by month (last N months held out), trains FDR model on train portion, measures predictive accuracy on test months.
 
 ### RQ4 — Future-Domain Mapping
 **Does embedding-based domain mapping align with expert judgments?**
@@ -127,7 +154,19 @@ Each item is labeled with:
 | No trend | demand + future_weight |
 | No future | demand + trend |
 | With coverage | demand + trend + future_weight + coverage_gap (optional) |
-| Demand only | demand only |
+| Demand only | demand only (demand-only floor baseline) |
+
+### Coverage ablation
+Tests the sensitivity of the top-20 recommendation list to non-zero coverage weights:
+
+| w_coverage | Weight rebalancing |
+|------------|-------------------|
+| 0.0 | demand 0.40, trend 0.30, future 0.30 (default) |
+| 0.10 | demand, trend, future each reduced proportionally |
+| 0.20 | demand, trend, future each reduced proportionally |
+| 0.30 | demand, trend, future each reduced proportionally |
+
+Metric: Jaccard overlap vs no-coverage baseline. If Jaccard > 0.80 for all w_coverage values, coverage weight design is empirically justified. Results saved to `coverage_ablation_report.json`.
 
 ### Stability
 - 3-5 runs with different random seeds
@@ -161,3 +200,5 @@ Each item is labeled with:
 - **JobBERT domain**: JobBERT is trained primarily on (Western) job descriptions; generalization to Indonesian/SMK domains is untested.
 - **Spektrum coverage**: The `spektrum_mapping.csv` to `future_domains.csv` mapping is manually curated; non-IT Bidang (e.g., Agribisnis, Pariwisata) may have incomplete or fallback mappings.
 - **Cross-Bidang validity**: Gold-set representativeness and metric validity when evaluating across multiple Spektrum codes (Bidang) are not yet established.
+- **Skill normalization threshold**: SBERT cosine similarity threshold (0.82) for canonical skill grouping is not empirically validated; too aggressive may merge distinct skills.
+- **Holdout validity**: Longitudinal holdout assumes non-seasonal trends; seasonal job-posting patterns could inflate or deflate direction accuracy.

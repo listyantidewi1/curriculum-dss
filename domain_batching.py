@@ -106,18 +106,71 @@ def assign_domain_for_skill(
     )
 
 
+UNRELATED_DOMAINS = {"Uncertain", "Unmapped"}
+_SUBCLUSTER_THRESHOLD = 15  # only sub-cluster if more than this many skills land in Uncertain/Unmapped
+_SUBCLUSTER_TARGET_SIZE = 10  # each sub-cluster aims for ~this many skills
+
+
+def subcluster_unrelated_skills(
+    skills: List[str],
+    embedder,
+    target_size: int = _SUBCLUSTER_TARGET_SIZE,
+) -> List[List[str]]:
+    """Cluster a list of unrelated skills (Uncertain/Unmapped) into thematic sub-groups.
+
+    Uses SBERT embeddings + agglomerative clustering. Returns a list of sub-groups
+    (each a list of skill strings). Falls back to a single group containing all
+    skills if clustering is unavailable or fails.
+    """
+    if not skills or embedder is None or len(skills) <= _SUBCLUSTER_THRESHOLD:
+        return [list(skills)]
+    try:
+        from sklearn.cluster import AgglomerativeClustering
+    except Exception:
+        # sklearn not installed — graceful no-op.
+        return [list(skills)]
+    try:
+        emb = embedder.encode(
+            [str(s).strip() for s in skills],
+            convert_to_numpy=True,
+            normalize_embeddings=True,
+        )
+        n_clusters = max(2, len(skills) // target_size)
+        n_clusters = min(n_clusters, len(skills))
+        clusterer = AgglomerativeClustering(
+            n_clusters=n_clusters,
+            metric="cosine",
+            linkage="average",
+        )
+        labels = clusterer.fit_predict(emb)
+        groups: Dict[int, List[str]] = {}
+        for s, lbl in zip(skills, labels):
+            groups.setdefault(int(lbl), []).append(s)
+        # Return groups in size-descending order so larger themes are processed first.
+        return [g for _, g in sorted(groups.items(), key=lambda kv: -len(kv[1]))]
+    except Exception as e:
+        print(f"[WARN] Sub-clustering of unrelated skills failed ({e}); using a single group.")
+        return [list(skills)]
+
+
 def build_domain_batches(
     skills_sorted: List[str],
     skill_to_domain: Dict[str, str],
     skill_to_domain_data: Dict[str, Dict],
     max_per_batch: int,
     domain_order: str = "mean_future_weight",
+    embedder=None,
 ) -> List[Tuple[str, List[str]]]:
     """
     Group skills by domain and chunk within each domain.
     Returns list of (domain_name, [skills]) tuples.
     Preserves sort order within each domain.
+
     domain_order: "mean_future_weight" (desc) or "trend_first" (Strong_Growth first).
+
+    embedder: optional SBERT model. When provided, the "Uncertain" and "Unmapped"
+    pseudo-domains are sub-clustered into thematic sub-groups (so unrelated skills
+    do not end up in the same LLM call, which used to produce inaccurate competencies).
     """
     from collections import defaultdict
 
@@ -162,9 +215,23 @@ def build_domain_batches(
     result: List[Tuple[str, List[str]]] = []
     for domain in sorted_domains:
         skills = domain_to_skills[domain]
-        for i in range(0, len(skills), max_per_batch):
-            chunk = skills[i : i + max_per_batch]
-            result.append((domain, chunk))
+        # For Uncertain / Unmapped, sub-cluster first so each LLM call sees a thematic group.
+        if domain in UNRELATED_DOMAINS and embedder is not None:
+            sub_groups = subcluster_unrelated_skills(skills, embedder)
+            for k, sub in enumerate(sub_groups):
+                label = f"{domain} (cluster {k+1})" if len(sub_groups) > 1 else domain
+                for i in range(0, len(sub), max_per_batch):
+                    chunk = sub[i : i + max_per_batch]
+                    result.append((label, chunk))
+            if len(sub_groups) > 1:
+                print(
+                    f"[INFO] Sub-clustered {len(skills)} '{domain}' skills "
+                    f"into {len(sub_groups)} thematic sub-groups."
+                )
+        else:
+            for i in range(0, len(skills), max_per_batch):
+                chunk = skills[i : i + max_per_batch]
+                result.append((domain, chunk))
     return result
 
 

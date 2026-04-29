@@ -1,0 +1,27 @@
+{
+  "status": "ok",
+  "rq3_holdout_target_met": false,
+  "total_months": 12,
+  "train_months": 9,
+  "test_months": 3,
+  "n_skills_evaluated": 1,
+  "n_emerging_predicted": 0,
+  "n_declining_predicted": 0,
+  "emerging_direction_accuracy": null,
+  "declining_direction_accuracy": null,
+  "precision_emerging_significant_test": null,
+  "train_test_slope_correlation": null,
+  "train_test_slope_correlation_p": null,
+  "thresholds": {
+    "fdr_alpha": 0.05,
+    "min_slope": 0.05,
+    "test_months_held_out": 3
+  },
+  "interpretation": {
+    "emerging_direction_accuracy": "Fraction of skills predicted Emerging (FDR q<0.05, slope≥0.05) where mean TEST frequency > last TRAIN month frequency. Target: > 0.60",
+    "slope_correlation": "Pearson r between TRAIN regression slope and actual TEST frequency delta. Measures whether the pipeline's growth estimate is calibrated. Target: > 0.30",
+    "precision_emerging_significant_test": "Fraction of Emerging predictions with a statistically significant positive slope in the TEST window (p < 0.10)."
+  },
+  "top_validated_emerging": [],
+  "top_validated_declining": []
+}

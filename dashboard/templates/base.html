@@ -21,7 +21,12 @@
       <a href="/dashboard/admin/schools">Schools</a>
       <a href="/dashboard/admin/users">Users</a>
       <a href="/dashboard/admin/runs">Runs</a>
+      <a href="/dashboard/admin/publish">Publish</a>
+      <a href="/" target="_blank">Public site &rarr;</a>
     {% elif user and user.role == "school" %}
+      {# Legacy school role retained for old accounts; routes still work but
+         new users sign up as 'public' and use the public surface at /. #}
+      <a href="/" target="_blank">Public site &rarr;</a>
       <a href="/dashboard/school/upload">Upload</a>
       <a href="/dashboard/school/runs">Runs</a>
       <a href="/dashboard/school/results">Results</a>

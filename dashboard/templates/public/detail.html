@@ -1,0 +1,76 @@
+{% extends "public/base.html" %}
+{% set active_nav = "browse" %}
+{% block content %}
+<div class="container">
+  <p class="detail-back" style="padding-top:16px;"><a href="/competencies">&larr; Back to all competencies</a></p>
+</div>
+
+<header class="detail-header">
+  <div class="container">
+    <div class="meta" style="font-size:13px; color:var(--muted); display:flex; gap:8px; flex-wrap:wrap;">
+      {% if c.kkni_level %}<span class="kkni-pill" style="background:var(--kkni); color:white; padding:2px 10px; border-radius:999px;">KKNI {{ c.kkni_level }}</span>{% endif %}
+      {% if c.future_domain %}<span class="domain-pill" style="background:var(--accent-soft); color:var(--accent); padding:2px 10px; border-radius:999px;">{{ c.future_domain }}</span>{% endif %}
+      {% if c.kkni_floor and c.kkni_floor != c.kkni_level %}
+        <span class="muted">Bloom-derived floor: KKNI {{ c.kkni_floor }}</span>
+      {% endif %}
+    </div>
+    <h1>{{ c.title }}</h1>
+    <p class="muted" style="font-size:16px;">{{ c.description }}</p>
+  </div>
+</header>
+
+<section class="container">
+  {% if c.kkni_descriptor %}
+  <div class="detail-section">
+    <h3>What this KKNI level means</h3>
+    <p>{{ c.kkni_descriptor }}</p>
+  </div>
+  {% endif %}
+
+  {% if c.future_relevance %}
+  <div class="detail-section">
+    <h3>Why this matters for the future of work</h3>
+    <p>{{ c.future_relevance }}</p>
+  </div>
+  {% endif %}
+
+  <div class="detail-section">
+    <h3>Related hard skills ({{ c.related_skills | length }})</h3>
+    {% if c.related_skills %}
+      <div class="skill-chips">
+        {% for s in c.related_skills %}<span>{{ s }}</span>{% endfor %}
+      </div>
+    {% else %}
+      <p class="muted">None recorded.</p>
+    {% endif %}
+  </div>
+
+  <div class="detail-section">
+    <h3>Soft skills required</h3>
+    {% if c.soft_skills_required %}
+      <div class="skill-chips soft-chips">
+        {% for s in c.soft_skills_required %}<span>{{ s }}</span>{% endfor %}
+      </div>
+    {% endif %}
+    {% if c.soft_skills_description %}
+      <p style="margin-top:12px;">{{ c.soft_skills_description }}</p>
+    {% endif %}
+  </div>
+
+  {% if c.education_demand %}
+  <div class="detail-section">
+    <h3>Education demand from job postings</h3>
+    <p class="muted">For this competency's related skills, how many job postings require each KKNI level.</p>
+    <table class="coverage-table">
+      <tr><th>KKNI level</th><th>Job postings</th></tr>
+      {% for lvl, n in c.education_demand.items() | sort %}
+      <tr>
+        <td>KKNI {{ lvl }}</td>
+        <td>{{ n }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

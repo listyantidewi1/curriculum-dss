@@ -52,17 +52,35 @@ The **[SCIENTIFIC_METHODOLOGY.md](../SCIENTIFIC_METHODOLOGY.md)** document cover
 - **BERT knowledge** passed to LLM as anti-hallucination context; **knowledge output LLM-only**
 - See [PIPELINE.md](../PIPELINE.md) §2b and [SCIENTIFIC_METHODOLOGY.md](../SCIENTIFIC_METHODOLOGY.md) §16a
 
+## New Capabilities (2025 Improvements)
+
+| Feature | Script / Route | Description |
+|---------|---------------|-------------|
+| Skill normalization | `skill_normalizer.py` | SBERT greedy clustering; canonical = most-frequent variant |
+| Longitudinal holdout | `skill_trend_holdout_validation.py` | Train/test split by month; direction accuracy + slope correlation (RQ3) |
+| Job deduplication | `preprocess_jobs_pipeline.py --dedupe` | MD5 fingerprint deduplication at job level before sentence splitting |
+| Indonesian postings | `run_with_job_scraping.py --include-indonesian` | Merge Indonesian + English CSVs; auto-translate |
+| Coverage ablation | `recommendations.py --coverage-ablation` | Sweep w_coverage 0–0.30; Jaccard overlap report |
+| Checkpoint/resume | `pipeline_orchestrator.py` (resume=True) | Skip steps whose output files already exist |
+| LLM prompt versioning | `log_run_metadata.py` | SHA-256 fingerprints of all prompt strings in pipeline.py |
+| Printable report | `/dashboard/school/report` | PDF-quality HTML with skill gaps, knowledge, competencies, methodology |
+| Trend sparklines | `/dashboard/api/sparklines` | Monthly demand frequency per skill as SVG bar charts |
+| Score explainability | `/dashboard/api/explain_score` | Per-skill breakdown: demand/trend/future contributions |
+
 ## Scripts (Key Scientific Logic)
 
 | Script | Scientific / Logic |
 |--------|--------------------|
-| `run_with_job_scraping.py` | One-step: preprocess (english_jobs.csv) + pipeline |
-| `evaluate_extraction.py` | Binomial test, effect sizes, Wilson CI, pairwise z-test, BH |
+| `run_with_job_scraping.py` | One-step: preprocess (english_jobs.csv) + pipeline; `--dedupe`, `--include-indonesian`, `--extraction-mode` |
+| `evaluate_extraction.py` | Binomial test, effect sizes, Wilson CI, pairwise z-test, BH; `--llmonly-labels-dir` for RQ1 |
 | `import_feedback.py` | Majority vote, Cohen's Kappa, Fleiss' Kappa |
 | `future_weight_mapping.py` | Future weight formula, normalization, grouping |
 | `generate_competencies.py` | Domain-based batching, anti-hallucination (prompt + related_skills filter) |
 | `domain_batching.py` | Domain grouping, on-the-fly domain assignment, batch merge by domain similarity |
-| `recommendations.py` | Priority score, weight sensitivity |
+| `skill_normalizer.py` | SBERT cosine clustering for canonical skill forms |
+| `skill_trend_holdout_validation.py` | Longitudinal holdout: train/test split, direction accuracy, Pearson slope correlation |
+| `recommendations.py` | Priority score, weight sensitivity, coverage ablation |
 | `skill_time_trend_analysis.py` | FDR (Benjamini-Hochberg), trend labels |
 | `validate_parameters.py` | AUC-ROC, Brier, calibration, Youden |
+| `log_run_metadata.py` | Run metadata + LLM prompt versioning (SHA-256) |
 | `scripts/power_analysis_gold_set.py` | Power for one-proportion binomial |

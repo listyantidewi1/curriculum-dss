@@ -1,0 +1,107 @@
+{% extends "public/base.html" %}
+{% set active_nav = "about" %}
+{% block content %}
+<section class="section container">
+  <h2>How this works</h2>
+  <p class="sub">
+    The Competency Recommender pipeline turns real Indonesian software-and-game-development
+    job postings into actionable curriculum recommendations, aligned with KKNI
+    (Indonesia's national qualifications framework, Perpres 8/2012).
+  </p>
+
+  <div class="detail-section">
+    <h3>1. Where the data comes from</h3>
+    <p>
+      Job postings are scraped continuously from public job boards. Postings are
+      deduplicated, language-detected, translated where needed, and split into
+      sentence-level units while keeping the source <code>job_id</code> and
+      <code>job_date</code> attached to every sentence.
+    </p>
+  </div>
+
+  <div class="detail-section">
+    <h3>2. How skills and knowledge are extracted</h3>
+    <p>
+      An LLM reads each posting end-to-end and produces a structured JSON list of
+      hard skills, soft skills, and knowledge items. JobBERT (a fine-tuned span tagger)
+      is retained as an ablation path but is no longer the default. Each skill carries
+      a Bloom level (Remember &rarr; Create) and a confidence score.
+    </p>
+  </div>
+
+  <div class="detail-section">
+    <h3>3. How competencies are generated</h3>
+    <p>
+      Hard skills are clustered by future-of-work domain (sourced from WEF, O*NET, and
+      McKinsey reports) and grouped into thematic batches. The LLM converts each batch
+      into 8&ndash;12 competency statements. Each competency carries:
+    </p>
+    <ul>
+      <li>A Bloom level (highest among related skills)</li>
+      <li>A KKNI level 1&ndash;9, derived deterministically from Bloom + LLM judgment within a clamped band</li>
+      <li>A list of <em>soft skills required</em> grounded in extracted soft skills + LLM expansion</li>
+    </ul>
+  </div>
+
+  <div class="detail-section">
+    <h3>4. KKNI alignment</h3>
+    <p>
+      <strong>Kerangka Kualifikasi Nasional Indonesia</strong> (KKNI) defines 9 qualification
+      levels mapping education stages to competency depth:
+    </p>
+    <table class="coverage-table">
+      <tr><th>KKNI</th><th>Stages</th><th>What the learner can do</th></tr>
+      {% for lvl in range(1, 10) %}
+      <tr>
+        <td><strong>{{ lvl }}</strong></td>
+        <td>{{ kkni_levels[lvl].stages | join(", ") }}</td>
+        <td>{{ kkni_levels[lvl].descriptor }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <div class="detail-section" id="curriculum-format">
+    <h3>5. Curriculum upload format</h3>
+    <p>The coverage analyzer accepts:</p>
+    <ul>
+      <li>
+        <strong>CSV</strong> with a column named one of:
+        <code>phrase</code>, <code>phrases</code>, <code>objective</code>, <code>objectives</code>,
+        <code>content</code>, <code>topic</code>, <code>name</code>, <code>title</code>,
+        <code>description</code>. Multiple values may be comma- or semicolon-separated within a cell.
+      </li>
+      <li>
+        <strong>JSON / JSONL</strong> &mdash; any nested object. We walk the tree and collect string
+        values whose key matches the same field names above.
+      </li>
+    </ul>
+    <p class="muted">
+      Tip: even a flat list of subject names like <code>["Algoritma","Basis Data","Jaringan"]</code>
+      works &mdash; we'll do fuzzy matching against competency titles and related-skill lists.
+    </p>
+  </div>
+
+  <div class="detail-section">
+    <h3>6. Limitations</h3>
+    <ul>
+      <li>The current corpus is English-language only, used for prototyping. Indonesian-language postings
+      are queued for a follow-up pass.</li>
+      <li>Coverage analysis uses substring + normalized-token matching, not deep semantic matching, so
+      a curriculum entry like "OOP" may miss a competency phrased as "Object-Oriented Programming".</li>
+      <li>KKNI levels are constrained to a Bloom-derived floor band (floor or floor+1) to avoid LLM
+      over-reach. Edge cases involving high-craft Create-level competencies at low education stages
+      may need expert review.</li>
+    </ul>
+  </div>
+
+  <div class="detail-section">
+    <h3>7. Data freshness</h3>
+    <p>
+      The competencies you see come from the latest <em>published</em> pipeline run. The active run is
+      <strong>{{ published.version_label or "unknown" }}</strong>{% if published.published_at %}, published {{ published.published_at }}{% endif %}.
+      New runs are published by the system administrator after expert review.
+    </p>
+  </div>
+</section>
+{% endblock %}

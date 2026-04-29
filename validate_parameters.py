@@ -126,7 +126,12 @@ def compute_auc_roc(y_true: np.ndarray, y_score: np.ndarray):
     fpr = np.concatenate([[0], fps / total_neg])
     thresholds = y_score[threshold_idxs]
 
-    auc = float(np.trapz(tpr, fpr))
+    # NumPy 2.x removed the alias `trapz`; prefer `trapz` if available
+    # but fall back to `trapezoid` for newer NumPy versions.
+    if hasattr(np, "trapz"):
+        auc = float(np.trapz(tpr, fpr))
+    else:
+        auc = float(np.trapezoid(tpr, fpr))
     return auc, fpr.tolist(), tpr.tolist(), thresholds.tolist()
 
 

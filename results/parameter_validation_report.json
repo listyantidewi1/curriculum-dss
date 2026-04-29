@@ -1,0 +1,168 @@
+{
+  "status": "ok",
+  "total_reviewed": 13,
+  "validations": [
+    {
+      "column": "confidence_score",
+      "n": 13,
+      "n_valid": 12,
+      "n_invalid": 1,
+      "auc_roc": 0.75,
+      "pearson_corr": 0.2478,
+      "brier_score": 0.1346,
+      "calibration": {
+        "n_bins": 10,
+        "bin_centers": [
+          0.55,
+          0.65,
+          0.75
+        ],
+        "observed_freq": [
+          1.0,
+          0.8889,
+          1.0
+        ],
+        "predicted_mean": [
+          0.561,
+          0.6594,
+          0.7087
+        ],
+        "bin_counts": [
+          1,
+          9,
+          3
+        ],
+        "max_calibration_error": 0.439
+      },
+      "cross_validated_auc": {
+        "status": "insufficient_data",
+        "n": 13
+      },
+      "optimal_threshold_full_data": {
+        "threshold": 0.664,
+        "tpr": 0.75,
+        "fpr": 0.0,
+        "youden_j": 0.75
+      },
+      "cv_threshold": {
+        "status": "insufficient_data",
+        "n": 13
+      },
+      "confusion_at_optimal": {
+        "threshold": 0.664,
+        "tp": 9,
+        "fp": 0,
+        "fn": 3,
+        "tn": 1,
+        "precision": 1.0,
+        "recall": 0.75,
+        "f1": 0.8571
+      },
+      "confusion_at_cv_threshold": {}
+    },
+    {
+      "column": "semantic_density",
+      "n": 13,
+      "n_valid": 12,
+      "n_invalid": 1,
+      "auc_roc": 0.4167,
+      "pearson_corr": -0.1548,
+      "brier_score": 0.0889,
+      "calibration": {
+        "n_bins": 10,
+        "bin_centers": [
+          0.75,
+          0.85
+        ],
+        "observed_freq": [
+          1.0,
+          0.875
+        ],
+        "predicted_mean": [
+          0.764,
+          0.8462
+        ],
+        "bin_counts": [
+          5,
+          8
+        ],
+        "max_calibration_error": 0.236
+      },
+      "cross_validated_auc": {
+        "status": "insufficient_data",
+        "n": 13
+      },
+      "optimal_threshold_full_data": {
+        "threshold": 0.85,
+        "tpr": 0.4166666666666667,
+        "fpr": 0.0,
+        "youden_j": 0.4166666666666667
+      },
+      "cv_threshold": {
+        "status": "insufficient_data",
+        "n": 13
+      },
+      "confusion_at_optimal": {
+        "threshold": 0.85,
+        "tp": 5,
+        "fp": 0,
+        "fn": 7,
+        "tn": 1,
+        "precision": 1.0,
+        "recall": 0.4167,
+        "f1": 0.5882
+      },
+      "confusion_at_cv_threshold": {}
+    },
+    {
+      "column": "context_agreement",
+      "n": 13,
+      "n_valid": 12,
+      "n_invalid": 1,
+      "auc_roc": 0.5,
+      "pearson_corr": 0.0,
+      "brier_score": 0.0715,
+      "calibration": {
+        "n_bins": 10,
+        "bin_centers": [
+          0.95
+        ],
+        "observed_freq": [
+          0.9231
+        ],
+        "predicted_mean": [
+          0.9
+        ],
+        "bin_counts": [
+          13
+        ],
+        "max_calibration_error": 0.0231
+      },
+      "cross_validated_auc": {
+        "status": "insufficient_data",
+        "n": 13
+      },
+      "optimal_threshold_full_data": {
+        "threshold": 0.9,
+        "tpr": 1.0,
+        "fpr": 1.0,
+        "youden_j": 0.0
+      },
+      "cv_threshold": {
+        "status": "insufficient_data",
+        "n": 13
+      },
+      "confusion_at_optimal": {
+        "threshold": 0.9,
+        "tp": 12,
+        "fp": 1,
+        "fn": 0,
+        "tn": 0,
+        "precision": 0.9231,
+        "recall": 1.0,
+        "f1": 0.96
+      },
+      "confusion_at_cv_threshold": {}
+    }
+  ]
+}

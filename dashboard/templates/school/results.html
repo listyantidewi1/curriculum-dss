@@ -351,6 +351,9 @@
         <details class="why-details"><summary>Why this item?</summary><p class="hint">{{ c.get("_why_provenance") }}</p></details>
         {% endif %}
         <p><strong>Future relevance:</strong> {{ c.get("future_relevance", "-") }}</p>
+        {% if c.get("kkni_level") %}
+        <p><strong>KKNI level:</strong> {{ c.get("kkni_level") }}{% if c.get("kkni_descriptor") %} <span class="hint">— {{ c.get("kkni_descriptor") }}</span>{% endif %}</p>
+        {% endif %}
         <p><strong>Batch:</strong> {{ c.get("batch_id", "-") }}</p>
         <div class="chips">
           <strong>Related skills:</strong><br/>
@@ -358,6 +361,17 @@
             <span class="chip">{{ s }}</span>
           {% endfor %}
         </div>
+        {% if c.get("soft_skills_required") or c.get("soft_skills_description") %}
+        <div class="chips">
+          <strong>Soft skills required:</strong><br/>
+          {% for s in c.get("soft_skills_required", []) %}
+            <span class="chip chip-knowledge">{{ s }}</span>
+          {% endfor %}
+          {% if c.get("soft_skills_description") %}
+          <p class="hint" style="margin-top:4px;">{{ c.get("soft_skills_description") }}</p>
+          {% endif %}
+        </div>
+        {% endif %}
         <div class="chips">
           <strong>Related knowledge:</strong><br/>
           {% if c.get("related_knowledge") %}

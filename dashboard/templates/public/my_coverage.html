@@ -1,0 +1,28 @@
+{% extends "public/base.html" %}
+{% set active_nav = "coverage" %}
+{% block content %}
+<section class="section container">
+  <h2>My saved coverage analyses</h2>
+  {% if items %}
+  <table class="coverage-table">
+    <tr>
+      <th>Name</th>
+      <th>Created</th>
+      <th>Coverage</th>
+      <th></th>
+    </tr>
+    {% for it in items %}
+    <tr>
+      <td>{{ it.name }}</td>
+      <td class="muted">{{ it.created_at }}</td>
+      <td>{% if it.coverage_pct is not none %}<strong>{{ it.coverage_pct }}%</strong>{% else %}—{% endif %}</td>
+      <td><a href="/me/coverage/{{ it.id }}">View &rarr;</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p class="muted">You haven't saved any analyses yet.</p>
+  <p><a class="btn" href="/coverage">Start a new analysis</a></p>
+  {% endif %}
+</section>
+{% endblock %}

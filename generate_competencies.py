@@ -34,10 +34,78 @@ from openai import OpenAI
 
 import config  # uses config.OUTPUT_DIR
 from pipeline import AdvancedPipelineConfig
+import kkni
 
 COMPETENCY_REQUIRED_FIELDS = {"id", "title", "description", "related_skills", "future_relevance"}
+# Soft-skills fields are required after the 2026 reframe but treated as soft-required
+# during a transition period: missing values trigger a warning, not a drop.
+COMPETENCY_SOFT_SKILLS_FIELDS = {"soft_skills_required", "soft_skills_description"}
+# Hard cap on competencies per batch. The prompt asks for at most this many; if the
+# LLM ignores it, we keep the most-anchored ones (largest related_skills list).
+COMPETENCIES_PER_BATCH_CAP = 12
 MAX_RETRIES = 2
 RETRY_BACKOFF_BASE = 2  # seconds
+
+
+def _filter_to_hard_skills(df, include_soft: bool):
+    """Restrict competency input to Hard / Both skill types.
+
+    No-op if include_soft is True or if the type column is absent. Soft-typed
+    rows are excluded so each competency is anchored to hard-skill content;
+    soft-skill requirements are surfaced per-competency via soft_skills_required
+    (see _load_top_soft_skills).
+    """
+    if include_soft:
+        return df
+    if "type" not in df.columns:
+        print("[WARN] Skill 'type' column missing; cannot filter to hard skills. Using all rows.")
+        return df
+    types = df["type"].astype(str).str.strip().str.lower()
+    keep = types.isin({"hard", "both"})
+    n_before = len(df)
+    df_filt = df[keep].copy()
+    n_dropped = n_before - len(df_filt)
+    if n_dropped > 0:
+        print(
+            f"[INFO] Filtered competency input to hard/both skills: "
+            f"kept {len(df_filt)}, dropped {n_dropped} soft-typed rows "
+            f"(soft skills surface per-competency via soft_skills_required)."
+        )
+    return df_filt
+
+
+def _load_top_soft_skills(output_dir, top_n: int = 30):
+    """Return the top-N most frequent Soft-typed skills extracted from the data.
+
+    Used as prompt context when generating competencies so the LLM can draw
+    from observed soft-skill demand. Falls back to an empty list if the source
+    file or 'type' column is missing — the LLM is then free to invent.
+    """
+    from pathlib import Path as _P
+    out_dir = _P(output_dir)
+    candidate_files = [
+        out_dir / "advanced_skills_human_filtered.csv",
+        out_dir / "advanced_skills.csv",
+    ]
+    src = next((p for p in candidate_files if p.exists()), None)
+    if src is None:
+        print("[INFO] No advanced_skills*.csv found for soft-skills context; LLM will infer soft skills.")
+        return []
+    try:
+        sdf = pd.read_csv(src)
+    except Exception as e:
+        print(f"[WARN] Could not read {src.name} for soft-skills context: {e}")
+        return []
+    if "type" not in sdf.columns or "skill" not in sdf.columns:
+        return []
+    soft_mask = sdf["type"].astype(str).str.strip().str.lower() == "soft"
+    soft_df = sdf[soft_mask]
+    if soft_df.empty:
+        return []
+    counts = soft_df.groupby("skill").size().sort_values(ascending=False)
+    top = counts.head(top_n).index.tolist()
+    print(f"[INFO] Loaded top {len(top)} extracted soft skills as competency prompt context (from {src.name}).")
+    return [str(s).strip() for s in top if str(s).strip()]
 
 
 def load_skill_time_trends(
@@ -237,6 +305,47 @@ def _jaccard_skills(a_skills: List[str], b_skills: List[str]) -> float:
     return inter / union if union else 0.0
 
 
+def _finalize_kkni(comp: Dict, skill_bloom_map: Optional[Dict[str, str]]) -> None:
+    """Compute the deterministic KKNI floor from related_skills' Bloom levels,
+    clamp the LLM-proposed kkni_level to [floor, floor+1], and write back the
+    canonical KKNI fields. In-place. Idempotent."""
+    if not isinstance(comp, dict):
+        return
+    related = comp.get("related_skills") or []
+    bloom_levels = []
+    if skill_bloom_map:
+        for s in related:
+            key = str(s).strip()
+            if not key:
+                continue
+            b = skill_bloom_map.get(key) or skill_bloom_map.get(key.lower())
+            if b:
+                bloom_levels.append(str(b).strip())
+    floor = kkni.kkni_floor_for_competency(bloom_levels)
+    proposed = comp.get("kkni_level")
+    final_level = kkni.clamp_llm_kkni(proposed, floor)
+    comp["kkni_level"] = final_level
+    comp["kkni_floor"] = floor
+    comp["kkni_descriptor"] = kkni.kkni_descriptor(final_level)
+
+
+def _absorb_soft_skills(target: Dict, source: Dict) -> None:
+    """Merge source's soft_skills_required (set union) and soft_skills_description
+    (keep target's if present, else use source's) into target — in place."""
+    t_soft = list(target.get("soft_skills_required") or [])
+    s_soft = list(source.get("soft_skills_required") or [])
+    seen = set()
+    merged: List[str] = []
+    for s in t_soft + s_soft:
+        key = str(s).strip().lower()
+        if key and key not in seen:
+            seen.add(key)
+            merged.append(str(s).strip())
+    target["soft_skills_required"] = merged
+    if not str(target.get("soft_skills_description") or "").strip():
+        target["soft_skills_description"] = str(source.get("soft_skills_description") or "").strip()
+
+
 def _merge_by_skills_overlap(
     comps: List[Dict], threshold: float = 0.5
 ) -> List[Dict]:
@@ -244,6 +353,7 @@ def _merge_by_skills_overlap(
     Merge competencies with high Jaccard overlap in related_skills.
     Greedy: process by occurrence_count desc; merge into first match.
     Preserves importance: occurrence_count is summed when merging.
+    Soft-skill fields are absorbed (set union for the list, first non-empty for the description).
     """
     if not comps or threshold <= 0:
         return comps
@@ -271,6 +381,7 @@ def _merge_by_skills_overlap(
                 r["occurrence_count"] = int(r.get("occurrence_count", 1)) + occ
                 combined = r_skills | skills
                 r["related_skills"] = sorted(combined)
+                _absorb_soft_skills(r, c)
                 merged = True
                 break
         if not merged:
@@ -278,12 +389,100 @@ def _merge_by_skills_overlap(
     return result
 
 
+def _merge_by_semantic_title(
+    comps: List[Dict],
+    embedder,
+    title_threshold: float = 0.85,
+    skills_jaccard_threshold: float = 0.40,
+) -> List[Dict]:
+    """Merge competencies whose titles are semantically near-duplicates AND share
+    enough related skills. Catches synonymous competencies (e.g. "Data Analysis"
+    vs "Analyze Data") that exact normalized-title matching misses.
+
+    Two competencies merge when:
+        SBERT cosine(title_a, title_b) >= title_threshold
+        AND Jaccard(related_skills_a, related_skills_b) >= skills_jaccard_threshold
+    """
+    if not comps or embedder is None or len(comps) < 2:
+        return comps
+    titles = [str(c.get("title", "")).strip() for c in comps]
+    if not all(titles):
+        return comps  # don't bother on incomplete data
+    try:
+        import numpy as np
+        emb = embedder.encode(titles, convert_to_numpy=True, normalize_embeddings=True)
+    except Exception as e:
+        print(f"[WARN] Semantic title dedup skipped ({e}).")
+        return comps
+
+    n = len(comps)
+    parent = list(range(n))
+
+    def find(x: int) -> int:
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+
+    def union(x: int, y: int):
+        px, py = find(x), find(y)
+        if px != py:
+            parent[max(px, py)] = min(px, py)  # keep earliest as canonical
+
+    for i in range(n):
+        for j in range(i + 1, n):
+            sim = float(np.dot(emb[i], emb[j]))
+            if sim < title_threshold:
+                continue
+            jac = _jaccard_skills(comps[i].get("related_skills") or [], comps[j].get("related_skills") or [])
+            if jac >= skills_jaccard_threshold:
+                union(i, j)
+
+    clusters: Dict[int, List[int]] = {}
+    for i in range(n):
+        clusters.setdefault(find(i), []).append(i)
+
+    result: List[Dict] = []
+    n_merged = 0
+    for root, members in clusters.items():
+        members.sort()
+        canonical = comps[members[0]].copy()
+        if len(members) == 1:
+            result.append(canonical)
+            continue
+        n_merged += len(members) - 1
+        related: set = set(str(s).strip() for s in (canonical.get("related_skills") or []) if str(s).strip())
+        occ = int(canonical.get("occurrence_count", 1))
+        for idx in members[1:]:
+            other = comps[idx]
+            for s in other.get("related_skills") or []:
+                if str(s).strip():
+                    related.add(str(s).strip())
+            occ += int(other.get("occurrence_count", 1))
+            _absorb_soft_skills(canonical, other)
+        canonical["related_skills"] = sorted(related)
+        canonical["occurrence_count"] = occ
+        result.append(canonical)
+    if n_merged:
+        print(f"[INFO] Semantic-title dedup merged {n_merged} near-duplicate competencies.")
+    return result
+
+
 def _deduplicate_competencies(
-    comps: List[Dict], merge_overlap_threshold: float = 0.0
+    comps: List[Dict],
+    merge_overlap_threshold: float = 0.0,
+    semantic_embedder=None,
+    semantic_title_threshold: float = 0.85,
+    semantic_skills_jaccard: float = 0.40,
 ) -> List[Dict]:
     """
-    Group competencies by normalized title. For each group: keep canonical (first),
-    set occurrence_count = group size. Then optionally merge by related_skills overlap.
+    Three-stage dedup:
+      1. Normalized-title exact match (cheap).
+      2. Semantic title near-duplicate match (SBERT cosine ≥ semantic_title_threshold
+         AND skills Jaccard ≥ semantic_skills_jaccard) — only when semantic_embedder
+         is provided.
+      3. Optional related_skills Jaccard overlap merge (merge_overlap_threshold > 0).
+    Soft-skill fields are absorbed (set union for the list, first non-empty for the description).
     """
     if not comps:
         return comps
@@ -305,8 +504,17 @@ def _deduplicate_competencies(
             for g in group:
                 for s in g.get("related_skills") or []:
                     related.add(str(s).strip())
+                _absorb_soft_skills(canonical, g)
             canonical["related_skills"] = sorted(related)
         out.append(canonical)
+
+    if semantic_embedder is not None:
+        out = _merge_by_semantic_title(
+            out,
+            semantic_embedder,
+            title_threshold=semantic_title_threshold,
+            skills_jaccard_threshold=semantic_skills_jaccard,
+        )
 
     if merge_overlap_threshold > 0:
         out = _merge_by_skills_overlap(out, threshold=merge_overlap_threshold)
@@ -367,6 +575,7 @@ def build_prompt(
     skill_bloom_map: Optional[Dict[str, str]] = None,
     curriculum_context: str = "",
     vocational_domain: str = "",
+    top_soft_skills: Optional[List[str]] = None,
 ) -> str:
     # Annotate skills with Bloom, future_weight, and/or empirical trend when available
     def format_skill(s: str) -> str:
@@ -440,14 +649,31 @@ Existing curriculum components (align where relevant):
 {curriculum_context}
 """
 
+    soft_skills_block = ""
+    if top_soft_skills:
+        soft_list = ", ".join(top_soft_skills)
+        soft_skills_block = f"""
+
+Top soft skills observed in the same job postings (use these as primary candidates
+when filling soft_skills_required; you MAY add others if obviously required):
+{soft_list}
+"""
+
+    # KKNI reference. The LLM is asked to choose a kkni_level constrained
+    # to a Bloom-derived floor (computed per competency, post-hoc). Showing
+    # the full 1-9 table here gives it the context it needs.
+    kkni_block = "\n" + kkni.kkni_reference_for_prompt() + "\n"
+
     return f"""
 You are an expert in competency-based education and vocational curriculum design.
 
-You are given a list of VERIFIED job skills (mostly hard skills) extracted from
-real job postings{domain_line}.
-{curriculum_block}
+You are given a list of VERIFIED HARD job skills extracted from real job
+postings{domain_line}. Each competency you produce is a HARD-SKILL competency;
+soft skills are surfaced separately, per competency, via the soft_skills_required
+and soft_skills_description fields.
+{curriculum_block}{soft_skills_block}
 
-Your task is to group related skills and generate COMPETENCY STATEMENTS that are
+Your task is to group related hard skills and generate COMPETENCY STATEMENTS that are
 suitable for use in an upper-secondary / vocational curriculum (e.g., Indonesian SMK).
 
 Please follow these rules:
@@ -463,16 +689,34 @@ Please follow these rules:
      Example: "Design scalable, high-performance software components by breaking down complex
      requirements into smaller, manageable subsystems and choosing appropriate technologies."
      Focus on learner-demonstrable outcomes, not business impact.
-   - "related_skills": list of skill phrases from the input that this competency covers.
+   - "related_skills": list of HARD-skill phrases from the input that this competency covers.
      Do NOT add any skill to related_skills that was not in the input list above.
      Only reference skills that appear in the list. Paraphrasing or inventing skills is not allowed.
    - "future_relevance": a short note (1–2 sentences) on why this competency
      matters for the future of work (based on the context if available).
+   - "soft_skills_required": a list of 3 to 6 soft-skill phrases that a learner needs to
+     perform this competency effectively (e.g. ["Communication", "Teamwork", "Critical Thinking"]).
+     PREFER soft skills from the "Top soft skills observed" list above when they fit; you may
+     add others if they are obviously required for this competency. Do not duplicate hard skills here.
+   - "soft_skills_description": ONE concise sentence (≤ 30 words) that explains how those soft
+     skills support performance of this competency. This sentence is shown verbatim in the
+     school-facing curriculum report, so write it in plain, human-readable language.
+   - "kkni_level": INTEGER 1-9 indicating the appropriate KKNI qualification level for this
+     competency. Use the KKNI reference table below. The level you pick MUST be consistent
+     with the highest Bloom level among the related_skills:
+       Remember/Understand → KKNI 1-2 (operator level, SMP/SMA);
+       Apply              → KKNI 3-4 (skilled operator / junior teknisi, SMK/D1/D2);
+       Analyze            → KKNI 5-6 (teknisi analis, D3/D4/S1);
+       Evaluate           → KKNI 6-7 (senior analis / profesi);
+       Create             → KKNI 7-9 (ahli / magister / doktor).
+     Pick the level that best fits the integrative scope of the competency. The post-validator
+     will clamp out-of-band values, so stay within the band shown for the highest Bloom.
 4. BLOOM ALIGNMENT: For each competency, use the HIGHEST Bloom taxonomy level among its
    related skills (e.g. if skills have Apply, Understand, Analyze, write at Analyze level).
    Bloom order: Remember < Understand < Apply < Analyze < Evaluate < Create.
-5. Aim for 8–20 competencies per batch. Produce more only if skills clearly fall into many
-   distinct themes; fewer is fine when they cluster strongly.
+5. COMPETENCY COUNT: Produce AT MOST 12 competencies per batch. Coalesce overlapping
+   themes into a single broader competency rather than splitting them. Quality over
+   quantity — fewer well-anchored competencies are better than many shallow ones.
 6. Avoid creating competencies that strongly overlap with others in this batch; prefer distinct themes.
 7. Prefer higher-level, integrative competencies, not trivial one-skill items.
 8. CURRICULUM LANGUAGE: Write competencies as if for a Ministry of Education curriculum document.
@@ -489,8 +733,9 @@ Please follow these rules:
 {future_weighting_block}
 {few_shot_block}
 {future_block}
+{kkni_block}
 
-Here are the verified skills:
+Here are the verified hard skills:
 
 {bullet_list}
 """
@@ -501,12 +746,31 @@ Here are the verified skills:
 # ----------------------------------------------------------------------
 
 def _validate_competency(c: dict) -> bool:
-    """Check that a competency dict has all required fields."""
-    return (
+    """Check that a competency dict has all required fields.
+
+    Soft-skill fields (soft_skills_required, soft_skills_description) are
+    soft-required: missing values are normalized to empty list / empty
+    string in-place rather than failing validation. This keeps older
+    cached results loadable while we transition the schema.
+    """
+    if not (
         isinstance(c, dict)
         and all(k in c for k in COMPETENCY_REQUIRED_FIELDS)
         and isinstance(c.get("related_skills"), list)
-    )
+    ):
+        return False
+    # Normalize soft-skill fields if missing or wrong type — do not drop the competency.
+    if "soft_skills_required" not in c or not isinstance(c.get("soft_skills_required"), list):
+        c["soft_skills_required"] = []
+    else:
+        c["soft_skills_required"] = [str(s).strip() for s in c["soft_skills_required"] if str(s).strip()]
+    if "soft_skills_description" not in c or not isinstance(c.get("soft_skills_description"), str):
+        c["soft_skills_description"] = ""
+    # KKNI level is normalized post-clamp by _finalize_kkni; here we only ensure
+    # the key exists so older cached competencies remain loadable.
+    if "kkni_level" not in c:
+        c["kkni_level"] = None
+    return True
 
 
 def _parse_llm_json(content: str) -> Optional[Dict]:
@@ -542,6 +806,7 @@ def call_llm_for_competencies(client: OpenAI,
                               skill_bloom_map: Optional[Dict[str, str]] = None,
                               curriculum_context: str = "",
                               vocational_domain: str = "",
+                              top_soft_skills: Optional[List[str]] = None,
                               temperature: float = 0.0) -> Dict:
     prompt = build_prompt(
         skills,
@@ -552,6 +817,7 @@ def call_llm_for_competencies(client: OpenAI,
         skill_bloom_map=skill_bloom_map,
         curriculum_context=curriculum_context,
         vocational_domain=vocational_domain,
+        top_soft_skills=top_soft_skills,
     )
 
     messages = [
@@ -596,6 +862,26 @@ def call_llm_for_competencies(client: OpenAI,
                         print(f"[WARN] Filtered {len(rs) - len(filtered)} non-input skills "
                               f"from competency {c.get('id', '?')}")
                     c["related_skills"] = filtered
+
+                # KKNI: clamp LLM-proposed kkni_level to [floor, floor+1] where
+                # floor is derived from the highest Bloom in related_skills.
+                for c in valid:
+                    _finalize_kkni(c, skill_bloom_map)
+
+                # Hard cap: at most COMPETENCIES_PER_BATCH_CAP per batch.
+                # If the LLM ignored rule 5 and produced more, keep the most-anchored
+                # ones (largest related_skills list = best supported by input).
+                if len(valid) > COMPETENCIES_PER_BATCH_CAP:
+                    before = len(valid)
+                    valid = sorted(
+                        valid,
+                        key=lambda c: len(c.get("related_skills") or []),
+                        reverse=True,
+                    )[:COMPETENCIES_PER_BATCH_CAP]
+                    print(
+                        f"[WARN] Batch produced {before} competencies; "
+                        f"capping to {COMPETENCIES_PER_BATCH_CAP} (kept the most-anchored)."
+                    )
                 data["competencies"] = valid
                 return data
 
@@ -750,6 +1036,20 @@ def main():
         default=5,
         help="Parallel LLM workers for competency generation (1=sequential, default: 5)",
     )
+    parser.add_argument(
+        "--include-soft-in-competencies",
+        action="store_true",
+        help="Include Soft-typed skills in competency input (legacy behavior). "
+             "Default after 2026 reframe is hard-only: soft skills are surfaced per-competency "
+             "via the soft_skills_required field instead of becoming competencies themselves.",
+    )
+    parser.add_argument(
+        "--soft-skills-context-top-n",
+        type=int,
+        default=30,
+        help="Number of top extracted Soft skills to include as prompt context for the LLM "
+             "to draw from when filling soft_skills_required (default: 30).",
+    )
 
     args = parser.parse_args()
     args.deduplicate = not args.no_deduplicate
@@ -818,6 +1118,7 @@ def main():
         df = pd.read_csv(human_path)
         if "skill" not in df.columns:
             raise ValueError("human_verified_skills.csv must contain 'skill' column")
+        df = _filter_to_hard_skills(df, args.include_soft_in_competencies)
         grp = df.groupby("skill").size().reset_index()
         grp.columns = ["skill", "freq"]
         skills_sorted = grp.sort_values("freq", ascending=False)["skill"].tolist()
@@ -834,6 +1135,7 @@ def main():
         df = pd.read_csv(comp_path)
         if "skill" not in df.columns:
             raise ValueError(f"{comp_path.name} must contain 'skill' column")
+        df = _filter_to_hard_skills(df, args.include_soft_in_competencies)
         grp = df.groupby("skill").size().reset_index()
         grp.columns = ["skill", "freq"]
         skills_sorted = grp.sort_values("freq", ascending=False)["skill"].tolist()
@@ -848,6 +1150,13 @@ def main():
         df_v = df[df["is_verified"] == True].copy()
         if df_v.empty:
             raise RuntimeError("No verified skills found (is_verified == True).")
+        df_v = _filter_to_hard_skills(df_v, args.include_soft_in_competencies)
+        if df_v.empty:
+            raise RuntimeError(
+                "No hard/both skills remaining after filtering. "
+                "Pass --include-soft-in-competencies to include soft skills, "
+                "or check that the type column has Hard/Both values."
+            )
         grp = df_v.groupby("skill").size().reset_index()
         grp.columns = ["skill", "freq"]
         skills_sorted = grp.sort_values("freq", ascending=False)["skill"].tolist()
@@ -889,6 +1198,10 @@ def main():
     skill_time_trends = load_skill_time_trends(out_dir)
     if skill_time_trends:
         print(f"[INFO] Loaded empirical trends for {len(skill_time_trends)} skills")
+
+    # Load top extracted soft skills as competency-prompt context
+    # (LLM may pick from these for soft_skills_required, but is allowed to add others).
+    top_soft_skills = _load_top_soft_skills(out_dir, top_n=args.soft_skills_context_top_n)
 
     # Reorder skills: future_weight first, then empirical Emerging > Stable > Declining.
     # Downrank single-word hard skills (vague) so they appear later.
@@ -992,6 +1305,7 @@ def main():
             skill_to_domain_data,
             args.max_skills_per_call,
             domain_order=args.domain_order,
+            embedder=embedder,
         )
 
         if args.merge_small_domain_batches and embedder is not None and not domains_df.empty:
@@ -1032,6 +1346,7 @@ def main():
                     skill_bloom_map=skill_bloom_map or None,
                     curriculum_context=curriculum_context,
                     vocational_domain=vocational_domain or "",
+                    top_soft_skills=top_soft_skills,
                     temperature=args.temperature,
                 )
                 comps = data.get("competencies", [])
@@ -1062,6 +1377,7 @@ def main():
                     skill_bloom_map=skill_bloom_map or None,
                     curriculum_context=curriculum_context,
                     vocational_domain=vocational_domain or "",
+                    top_soft_skills=top_soft_skills,
                     temperature=args.temperature,
                 )
                 comps = data.get("competencies", [])
@@ -1100,6 +1416,7 @@ def main():
                     skill_bloom_map=skill_bloom_map or None,
                     curriculum_context=curriculum_context,
                     vocational_domain=vocational_domain or "",
+                    top_soft_skills=top_soft_skills,
                     temperature=args.temperature,
                 )
                 comps = data.get("competencies", [])
@@ -1130,6 +1447,7 @@ def main():
                     skill_bloom_map=skill_bloom_map or None,
                     curriculum_context=curriculum_context,
                     vocational_domain=vocational_domain or "",
+                    top_soft_skills=top_soft_skills,
                     temperature=args.temperature,
                 )
                 comps = data.get("competencies", [])
@@ -1159,7 +1477,9 @@ def main():
     if args.deduplicate and all_competencies:
         thresh = args.merge_overlap_threshold
         all_competencies = _deduplicate_competencies(
-            all_competencies, merge_overlap_threshold=thresh
+            all_competencies,
+            merge_overlap_threshold=thresh,
+            semantic_embedder=embedder,
         )
         print(f"[INFO] Competencies after grouping: {len(all_competencies)}")
     else:

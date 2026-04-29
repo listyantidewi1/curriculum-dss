@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Publish a Canonical Run</h2>
+<p class="hint">
+  Snapshots a results directory as the canonical run that powers the public-facing
+  competency recommender at <a href="/">/</a>. Only the latest <strong>is_active</strong>
+  row is read by the public site. Publishing a new run automatically deactivates the
+  previous one.
+</p>
+
+{% if request.query_params.get("ok") %}
+<p class="success">Published successfully (run id={{ request.query_params.get("ok") }}).</p>
+{% endif %}
+
+<section class="card">
+  <h3>Active published run</h3>
+  {% if active %}
+    <table>
+      <tr><th>Version</th><td>{{ active.version_label }}</td></tr>
+      <tr><th>Results dir</th><td><code>{{ active.results_dir }}</code></td></tr>
+      <tr><th>Vocational field</th><td>{{ active.vocational_field or "—" }}</td></tr>
+      <tr><th>Spektrum code</th><td>{{ active.spektrum_code or "—" }}</td></tr>
+      <tr><th>Competencies</th><td>{{ active.n_competencies }}</td></tr>
+      <tr><th>Skills</th><td>{{ active.n_skills }}</td></tr>
+      <tr><th>Published at</th><td>{{ active.published_at }}</td></tr>
+      <tr><th>Notes</th><td>{{ active.notes or "—" }}</td></tr>
+    </table>
+  {% else %}
+    <p class="hint">No run has been published yet. The public surface will fall back to
+    the project-level <code>results/</code> directory until you publish.</p>
+  {% endif %}
+</section>
+
+<section class="card">
+  <h3>Publish project-level results/</h3>
+  {% if project_results_exists %}
+  <p>
+    Source: <code>{{ project_results }}</code><br>
+    Will publish: <strong>{{ preview_stats.n_competencies }}</strong> competencies,
+    <strong>{{ preview_stats.n_skills }}</strong> skills.
+  </p>
+  <form method="post" action="/dashboard/admin/publish">
+    <p>
+      <label>Version label *<br>
+        <input name="version_label" required placeholder="e.g. 2026.04.30 IT-SE-GD"></label>
+    </p>
+    <p>
+      <label>Results dir (leave blank for project-level results/)<br>
+        <input name="results_dir" placeholder="{{ project_results }}" size="80"></label>
+    </p>
+    <p>
+      <label>Vocational field<br>
+        <input name="vocational_field" placeholder="Software Engineering" size="40"></label>
+    </p>
+    <p>
+      <label>Spektrum code (optional)<br>
+        <input name="spektrum_code" placeholder="e.g. RPL, GIM" size="20"></label>
+    </p>
+    <p>
+      <label>Notes<br>
+        <textarea name="notes" rows="3" cols="60" placeholder="What changed in this publish?"></textarea></label>
+    </p>
+    <p>
+      <button type="submit">Publish &amp; activate</button>
+    </p>
+  </form>
+  {% else %}
+  <p class="error">Project-level <code>{{ project_results }}</code> does not exist. Run the pipeline first.</p>
+  {% endif %}
+</section>
+
+<section class="card">
+  <h3>Publish history</h3>
+  {% if runs %}
+  <table>
+    <tr>
+      <th>ID</th><th>Version</th><th>Field</th><th>Spektrum</th>
+      <th>Competencies</th><th>Skills</th><th>Published</th><th>Active</th>
+    </tr>
+    {% for r in runs %}
+    <tr>
+      <td>{{ r.id }}</td>
+      <td>{{ r.version_label }}</td>
+      <td>{{ r.vocational_field or "—" }}</td>
+      <td>{{ r.spektrum_code or "—" }}</td>
+      <td>{{ r.n_competencies }}</td>
+      <td>{{ r.n_skills }}</td>
+      <td>{{ r.published_at }}</td>
+      <td>{% if r.is_active %}<strong>active</strong>{% else %}—{% endif %}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p class="hint">No prior publishes.</p>
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "public/base.html" %}
+{% set active_nav = "" %}
+{% block content %}
+<section class="section container">
+  <h2>Create an account</h2>
+  <p class="sub">
+    A free account lets you save curriculum coverage analyses and revisit them later.
+    No personal data beyond your email is collected.
+  </p>
+
+  {% if error %}<div class="alert">{{ error }}</div>{% endif %}
+
+  <form class="upload-form" method="post" action="/signup" style="max-width: 480px;">
+    <label>Email
+      <input type="email" name="email" required value="{{ email or '' }}">
+    </label>
+    <label>Display name (optional)
+      <input type="text" name="display_name" value="{{ display_name or '' }}">
+    </label>
+    <label>Password (8+ chars)
+      <input type="password" name="password" required minlength="8">
+    </label>
+    <button type="submit" class="btn">Sign up</button>
+  </form>
+
+  <p class="muted" style="margin-top:24px;">
+    Already have an account? <a href="/dashboard/login">Log in</a>.
+  </p>
+</section>
+{% endblock %}

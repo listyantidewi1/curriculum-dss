@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ page_title or "Competency Recommender" }}</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <header class="public-topbar">
+    <div class="row">
+      <a href="/" class="brand">
+        Competency Recommender
+        <small>Software &amp; Game Dev — KKNI-aligned</small>
+      </a>
+      <nav>
+        <a href="/" class="{% if active_nav == 'home' %}active{% endif %}">Home</a>
+        <a href="/competencies" class="{% if active_nav == 'browse' %}active{% endif %}">Browse</a>
+        <a href="/coverage" class="{% if active_nav == 'coverage' %}active{% endif %}">Coverage</a>
+        <a href="/about" class="{% if active_nav == 'about' %}active{% endif %}">About</a>
+      </nav>
+      <div class="auth-actions">
+        {% if user %}
+          <span class="muted">{{ user.email }}</span>
+          {% if user.role == "admin" %}
+            <a href="/dashboard/admin/schools" class="btn secondary" style="padding:6px 12px;">Admin</a>
+          {% elif user.role == "public" %}
+            <a href="/me/coverage" class="btn secondary" style="padding:6px 12px;">My analyses</a>
+          {% endif %}
+          <a href="/dashboard/logout" class="muted">Logout</a>
+        {% else %}
+          <a href="/dashboard/login" class="muted">Login</a>
+          <a href="/signup" class="btn secondary" style="padding:6px 12px;">Sign up</a>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="public-footer">
+    <div class="row">
+      <div>
+        Built on top of {{ published.version_label or "—" }}.
+        {% if published.published_at %}Published {{ published.published_at }}.{% endif %}
+      </div>
+      <div>
+        <a href="/about">Methodology</a> ·
+        <a href="https://github.com/anthropics/claude-code/issues" target="_blank" rel="noopener">Report an issue</a>
+      </div>
+    </div>
+  </footer>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>

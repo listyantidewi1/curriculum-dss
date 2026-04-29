@@ -45,7 +45,7 @@ def main():
     parser = argparse.ArgumentParser(
         description="Run preprocess + pipeline using job_scraping output"
     )
-    parser.add_argument("--sample_size", type=int, default=10000)
+    parser.add_argument("--sample_size", type=int, default=500)
     parser.add_argument("--output_dir", type=str, default=str(config.OUTPUT_DIR))
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument(
@@ -62,8 +62,8 @@ def main():
         help="Item 5: Merge job_scraping/output/indonesian_jobs.csv before preprocessing (auto-enables --translate --dedupe)",
     )
     parser.add_argument(
-        "--extraction-mode", choices=["hybrid", "llm_only", "bert_only"], default="hybrid",
-        help="Extraction mode for pipeline.py (default: hybrid)",
+        "--extraction-mode", choices=["hybrid", "llm_only", "bert_only"], default="llm_only",
+        help="Extraction mode for pipeline.py (default: llm_only — primary mode after 2026 reframe; hybrid retained as RQ1 ablation)",
     )
     args = parser.parse_args()
 
@@ -139,8 +139,7 @@ def main():
         pipeline_cmd.append("--bert-knowledge")
     if args.llm_concurrency is not None:
         pipeline_cmd.extend(["--llm_concurrency", str(args.llm_concurrency)])
-    if args.extraction_mode != "hybrid":
-        pipeline_cmd.extend(["--extraction-mode", args.extraction_mode])
+    pipeline_cmd.extend(["--extraction-mode", args.extraction_mode])
 
     print(f"[3/3] Pipeline: {pipeline_input} -> {args.output_dir}")
     r = subprocess.run(pipeline_cmd, cwd=str(project_root))

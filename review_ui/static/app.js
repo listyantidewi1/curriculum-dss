@@ -16,8 +16,12 @@ function apiUrl(path) {
 }
 
 function showPanel(name) {
-  document.querySelectorAll(".panel").forEach((p) => p.classList.remove("active"));
-  document.querySelectorAll(".tab").forEach((t) => t.classList.remove("active"));
+  document
+    .querySelectorAll(".panel")
+    .forEach((p) => p.classList.remove("active"));
+  document
+    .querySelectorAll(".tab")
+    .forEach((t) => t.classList.remove("active"));
   document.getElementById(`${name}-panel`).classList.add("active");
   document.querySelector(`.tab[data-tab="${name}"]`).classList.add("active");
 }
@@ -48,14 +52,36 @@ function escapeHtml(s) {
   return d.innerHTML;
 }
 
+// Delegate Show more / Show less clicks to a single handler so all panels
+// (skills, knowledge) behave consistently and avoid duplicate handlers.
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".toggle-job-text");
+  if (!btn) return;
+  const ctx = btn.closest(".job-context");
+  if (!ctx) return;
+  const expanded = ctx.classList.toggle("expanded");
+  btn.textContent = expanded ? "Show less" : "Show more";
+  btn.setAttribute("aria-expanded", expanded);
+});
+
 function isSkillReviewed(item) {
-  return !!(item.human_valid || item.human_type || item.human_bloom || item.human_notes);
+  return !!(
+    item.human_valid ||
+    item.human_type ||
+    item.human_bloom ||
+    item.human_notes
+  );
 }
 function isKnowledgeReviewed(item) {
   return !!(item.human_valid || item.human_notes);
 }
 function isCompetencyReviewed(item) {
-  return !!(item.human_quality || item.human_relevant || item.human_skill_focus || item.human_notes);
+  return !!(
+    item.human_quality ||
+    item.human_relevant ||
+    item.human_skill_focus ||
+    item.human_notes
+  );
 }
 
 // --- Debounced auto-save ---
@@ -74,24 +100,38 @@ function showSaveIndicator(card, success) {
   }
   dot.textContent = success ? "Saved" : "Error";
   dot.style.color = success ? "#16a34a" : "#dc2626";
-  setTimeout(() => { dot.textContent = ""; }, 2000);
+  setTimeout(() => {
+    dot.textContent = "";
+  }, 2000);
 }
 
 // --- Skills ---
 let skillsData = [];
 
 async function autoSaveSkill(reviewId, card) {
-  const hv = card.querySelector(`select[data-field="human_valid"]`)?.value || "";
+  const hv =
+    card.querySelector(`select[data-field="human_valid"]`)?.value || "";
   const ht = card.querySelector(`select[data-field="human_type"]`)?.value || "";
-  const hb = card.querySelector(`select[data-field="human_bloom"]`)?.value || "";
-  const hn = card.querySelector(`textarea[data-field="human_notes"]`)?.value || "";
+  const hb =
+    card.querySelector(`select[data-field="human_bloom"]`)?.value || "";
+  const hn =
+    card.querySelector(`textarea[data-field="human_notes"]`)?.value || "";
   try {
     await postJson(`${API}/save_skill_feedback`, {
-      review_id: reviewId, human_valid: hv, human_type: ht, human_bloom: hb, human_notes: hn,
+      review_id: reviewId,
+      human_valid: hv,
+      human_type: ht,
+      human_bloom: hb,
+      human_notes: hn,
       reviewer_id: getReviewerId(),
     });
     const item = skillsData.find((x) => x.review_id === reviewId);
-    if (item) { item.human_valid = hv; item.human_type = ht; item.human_bloom = hb; item.human_notes = hn; }
+    if (item) {
+      item.human_valid = hv;
+      item.human_type = ht;
+      item.human_bloom = hb;
+      item.human_notes = hn;
+    }
     updateSkillProgress();
     card.classList.toggle("reviewed", !!(hv || hb || hn));
     showSaveIndicator(card, true);
@@ -104,8 +144,11 @@ async function autoSaveSkill(reviewId, card) {
 
 function updateSkillProgress() {
   const reviewed = skillsData.filter(isSkillReviewed).length;
-  const pct = skillsData.length ? Math.round(reviewed / skillsData.length * 100) : 0;
-  document.getElementById("skills-progress").textContent = `${reviewed} / ${skillsData.length} (${pct}%)`;
+  const pct = skillsData.length
+    ? Math.round((reviewed / skillsData.length) * 100)
+    : 0;
+  document.getElementById("skills-progress").textContent =
+    `${reviewed} / ${skillsData.length} (${pct}%)`;
   const bar = document.getElementById("skills-bar");
   if (bar) bar.style.width = pct + "%";
 }
@@ -113,11 +156,27 @@ function updateSkillProgress() {
 function renderSkills() {
   const list = document.getElementById("skills-list");
   list.innerHTML = "";
-  const items = showUnreviewedOnly ? skillsData.filter((i) => !isSkillReviewed(i)) : skillsData;
+  const items = showUnreviewedOnly
+    ? skillsData.filter((i) => !isSkillReviewed(i))
+    : skillsData;
   items.forEach((item) => {
     const reviewed = isSkillReviewed(item);
     const card = document.createElement("div");
     card.className = "card" + (reviewed ? " reviewed" : "");
+
+    // Build job context HTML with collapsible preview if text is long
+    let jobHtml = "";
+    if (item.job_text) {
+      const text = item.job_text || "";
+      if (text.length > 800) {
+        jobHtml = `<div class="job-context"><strong>Job context:</strong><blockquote><span class="job-preview">${escapeHtml(
+          text.slice(0, 800),
+        )}</span><span class="ellipsis">…</span><span class="job-full">${escapeHtml(text)}</span><button type="button" class="toggle-job-text" aria-expanded="false">Show more</button></blockquote></div>`;
+      } else {
+        jobHtml = `<div class="job-context"><strong>Job context:</strong><blockquote>${escapeHtml(text)}</blockquote></div>`;
+      }
+    }
+
     card.innerHTML = `
       <div class="card-header">
         <div class="label">Skill</div>
@@ -129,7 +188,7 @@ function renderSkills() {
         <span class="meta-tag">Confidence: ${item.confidence_score || "—"}</span>
         <span class="meta-tag">Source: ${escapeHtml(item.source || "—")}</span>
       </div>
-      ${item.job_text ? `<div class="job-context"><strong>Job context:</strong><blockquote>${escapeHtml((item.job_text || "").slice(0, 800))}${(item.job_text || "").length > 800 ? "…" : ""}</blockquote></div>` : ""}
+      ${jobHtml}
       <div class="row">
         <div class="col">
           <div class="label">Valid?</div>
@@ -168,14 +227,21 @@ function renderSkills() {
       <span class="hint-inline">Changes auto-save. Click to save immediately.</span>
     `;
     const rid = item.review_id;
-    card.querySelector(".save-now")?.addEventListener("click", () => autoSaveSkill(rid, card));
+    card
+      .querySelector(".save-now")
+      ?.addEventListener("click", () => autoSaveSkill(rid, card));
     card.querySelectorAll("select").forEach((sel) => {
-      sel.addEventListener("change", () => debouncedSave(`skill-${rid}`, () => autoSaveSkill(rid, card), 300));
+      sel.addEventListener("change", () =>
+        debouncedSave(`skill-${rid}`, () => autoSaveSkill(rid, card), 300),
+      );
     });
     card.querySelectorAll("textarea").forEach((ta) => {
-      ta.addEventListener("input", () => debouncedSave(`skill-${rid}`, () => autoSaveSkill(rid, card)));
+      ta.addEventListener("input", () =>
+        debouncedSave(`skill-${rid}`, () => autoSaveSkill(rid, card)),
+      );
     });
     list.appendChild(card);
+    // Toggle handling is done via delegated listener (see above).
   });
   updateSkillProgress();
 }
@@ -184,15 +250,22 @@ function renderSkills() {
 let knowledgeData = [];
 
 async function autoSaveKnowledge(reviewId, card) {
-  const hv = card.querySelector(`select[data-field="human_valid"]`)?.value || "";
-  const hn = card.querySelector(`textarea[data-field="human_notes"]`)?.value || "";
+  const hv =
+    card.querySelector(`select[data-field="human_valid"]`)?.value || "";
+  const hn =
+    card.querySelector(`textarea[data-field="human_notes"]`)?.value || "";
   try {
     await postJson(`${API}/save_knowledge_feedback`, {
-      review_id: reviewId, human_valid: hv, human_notes: hn,
+      review_id: reviewId,
+      human_valid: hv,
+      human_notes: hn,
       reviewer_id: getReviewerId(),
     });
     const item = knowledgeData.find((x) => x.review_id === reviewId);
-    if (item) { item.human_valid = hv; item.human_notes = hn; }
+    if (item) {
+      item.human_valid = hv;
+      item.human_notes = hn;
+    }
     updateKnowledgeProgress();
     card.classList.toggle("reviewed", !!(hv || hn));
     showSaveIndicator(card, true);
@@ -204,8 +277,11 @@ async function autoSaveKnowledge(reviewId, card) {
 
 function updateKnowledgeProgress() {
   const reviewed = knowledgeData.filter(isKnowledgeReviewed).length;
-  const pct = knowledgeData.length ? Math.round(reviewed / knowledgeData.length * 100) : 0;
-  document.getElementById("knowledge-progress").textContent = `${reviewed} / ${knowledgeData.length} (${pct}%)`;
+  const pct = knowledgeData.length
+    ? Math.round((reviewed / knowledgeData.length) * 100)
+    : 0;
+  document.getElementById("knowledge-progress").textContent =
+    `${reviewed} / ${knowledgeData.length} (${pct}%)`;
   const bar = document.getElementById("knowledge-bar");
   if (bar) bar.style.width = pct + "%";
 }
@@ -213,7 +289,9 @@ function updateKnowledgeProgress() {
 function renderKnowledge() {
   const list = document.getElementById("knowledge-list");
   list.innerHTML = "";
-  const items = showUnreviewedOnly ? knowledgeData.filter((i) => !isKnowledgeReviewed(i)) : knowledgeData;
+  const items = showUnreviewedOnly
+    ? knowledgeData.filter((i) => !isKnowledgeReviewed(i))
+    : knowledgeData;
   items.forEach((item) => {
     const reviewed = isKnowledgeReviewed(item);
     const card = document.createElement("div");
@@ -230,7 +308,20 @@ function renderKnowledge() {
         <span class="meta-tag">Trend: ${escapeHtml(item.trend_label || "—")}</span>
         <span class="meta-tag">Weight: ${item.future_weight != null && item.future_weight !== "" ? Number(item.future_weight).toFixed(3) : "—"}</span>
       </div>
-      ${item.job_text ? `<div class="job-context"><strong>Job context:</strong><blockquote>${escapeHtml((item.job_text || "").slice(0, 800))}${(item.job_text || "").length > 800 ? "…" : ""}</blockquote></div>` : ""}
+      ${(() => {
+        let jh = "";
+        if (item.job_text) {
+          const t = item.job_text || "";
+          if (t.length > 800) {
+            jh = `<div class="job-context"><strong>Job context:</strong><blockquote><span class="job-preview">${escapeHtml(
+              t.slice(0, 800),
+            )}</span><span class="ellipsis">…</span><span class="job-full">${escapeHtml(t)}</span><button type="button" class="toggle-job-text" aria-expanded="false">Show more</button></blockquote></div>`;
+          } else {
+            jh = `<div class="job-context"><strong>Job context:</strong><blockquote>${escapeHtml(t)}</blockquote></div>`;
+          }
+        }
+        return jh;
+      })()}
       <div class="row">
         <div class="col">
           <div class="label">Valid?</div>
@@ -247,12 +338,18 @@ function renderKnowledge() {
       <span class="hint-inline">Changes auto-save. Click to save immediately.</span>
     `;
     const rid = item.review_id;
-    card.querySelector(".save-now")?.addEventListener("click", () => autoSaveKnowledge(rid, card));
+    card
+      .querySelector(".save-now")
+      ?.addEventListener("click", () => autoSaveKnowledge(rid, card));
     card.querySelectorAll("select").forEach((sel) => {
-      sel.addEventListener("change", () => debouncedSave(`know-${rid}`, () => autoSaveKnowledge(rid, card), 300));
+      sel.addEventListener("change", () =>
+        debouncedSave(`know-${rid}`, () => autoSaveKnowledge(rid, card), 300),
+      );
     });
     card.querySelectorAll("textarea").forEach((ta) => {
-      ta.addEventListener("input", () => debouncedSave(`know-${rid}`, () => autoSaveKnowledge(rid, card)));
+      ta.addEventListener("input", () =>
+        debouncedSave(`know-${rid}`, () => autoSaveKnowledge(rid, card)),
+      );
     });
     list.appendChild(card);
   });
@@ -263,17 +360,30 @@ function renderKnowledge() {
 let competenciesData = [];
 
 async function autoSaveCompetency(compId, card) {
-  const hq = card.querySelector(`select[data-field="human_quality"]`)?.value || "";
-  const hr = card.querySelector(`select[data-field="human_relevant"]`)?.value || "";
-  const hsf = card.querySelector(`select[data-field="human_skill_focus"]`)?.value || "";
-  const hn = card.querySelector(`textarea[data-field="human_notes"]`)?.value || "";
+  const hq =
+    card.querySelector(`select[data-field="human_quality"]`)?.value || "";
+  const hr =
+    card.querySelector(`select[data-field="human_relevant"]`)?.value || "";
+  const hsf =
+    card.querySelector(`select[data-field="human_skill_focus"]`)?.value || "";
+  const hn =
+    card.querySelector(`textarea[data-field="human_notes"]`)?.value || "";
   try {
     await postJson(`${API}/save_competency_feedback`, {
-      competency_id: compId, human_quality: hq, human_relevant: hr, human_skill_focus: hsf, human_notes: hn,
+      competency_id: compId,
+      human_quality: hq,
+      human_relevant: hr,
+      human_skill_focus: hsf,
+      human_notes: hn,
       reviewer_id: getReviewerId(),
     });
     const item = competenciesData.find((x) => x.competency_id === compId);
-    if (item) { item.human_quality = hq; item.human_relevant = hr; item.human_skill_focus = hsf; item.human_notes = hn; }
+    if (item) {
+      item.human_quality = hq;
+      item.human_relevant = hr;
+      item.human_skill_focus = hsf;
+      item.human_notes = hn;
+    }
     updateCompetencyProgress();
     card.classList.toggle("reviewed", !!(hq || hr || hsf || hn));
     showSaveIndicator(card, true);
@@ -285,8 +395,11 @@ async function autoSaveCompetency(compId, card) {
 
 function updateCompetencyProgress() {
   const reviewed = competenciesData.filter(isCompetencyReviewed).length;
-  const pct = competenciesData.length ? Math.round(reviewed / competenciesData.length * 100) : 0;
-  document.getElementById("competencies-progress").textContent = `${reviewed} / ${competenciesData.length} (${pct}%)`;
+  const pct = competenciesData.length
+    ? Math.round((reviewed / competenciesData.length) * 100)
+    : 0;
+  document.getElementById("competencies-progress").textContent =
+    `${reviewed} / ${competenciesData.length} (${pct}%)`;
   const bar = document.getElementById("competencies-bar");
   if (bar) bar.style.width = pct + "%";
 }
@@ -294,7 +407,9 @@ function updateCompetencyProgress() {
 function renderCompetencies() {
   const list = document.getElementById("competencies-list");
   list.innerHTML = "";
-  const items = showUnreviewedOnly ? competenciesData.filter((i) => !isCompetencyReviewed(i)) : competenciesData;
+  const items = showUnreviewedOnly
+    ? competenciesData.filter((i) => !isCompetencyReviewed(i))
+    : competenciesData;
   items.forEach((item) => {
     const reviewed = isCompetencyReviewed(item);
     const card = document.createElement("div");
@@ -303,10 +418,10 @@ function renderCompetencies() {
     const hasStatus = hv !== "" && hv != null && hv !== undefined;
     const isVerified = hasStatus && String(hv).toLowerCase() === "true";
     const verifiedTag = hasStatus
-      ? (isVerified
-          ? '<span class="meta-tag verified">Skills verified</span>'
-          : '<span class="meta-tag unverified">Skills not yet verified</span>')
-      : '';
+      ? isVerified
+        ? '<span class="meta-tag verified">Skills verified</span>'
+        : '<span class="meta-tag unverified">Skills not yet verified</span>'
+      : "";
     card.innerHTML = `
       <div class="card-header">
         <div class="label">Title</div>
@@ -318,12 +433,17 @@ function renderCompetencies() {
       <div class="card-meta">
         <span class="meta-tag">Competency ID: ${escapeHtml(item.competency_id || "—")}</span>
         <span class="meta-tag">Batch: ${escapeHtml(item.batch_id != null ? String(item.batch_id) : "—")}</span>
+        ${item.kkni_level ? `<span class="meta-tag">KKNI ${escapeHtml(String(item.kkni_level))}</span>` : ""}
         <span class="meta-tag">Future relevance: ${escapeHtml((item.future_relevance || "").slice(0, 80))}${(item.future_relevance || "").length > 80 ? "…" : ""}</span>
       </div>
       <div class="label">Related skills (Bloom level per skill)</div>
       <div class="value small mono">${escapeHtml(item.related_skills_with_bloom || item.related_skills || "")}</div>
+      ${item.soft_skills_required ? `<div class="label">Soft skills required</div>
+      <div class="value small">${escapeHtml(item.soft_skills_required)}</div>` : ""}
+      ${item.soft_skills_description ? `<div class="label">Soft skills (how they apply)</div>
+      <div class="value small">${escapeHtml(item.soft_skills_description)}</div>` : ""}
       <div class="card-meta">
-        ${(item.skill_focus || "") ? `<span class="meta-tag">Skill focus (derived): ${escapeHtml(item.skill_focus)}</span>` : ""}
+        ${item.skill_focus || "" ? `<span class="meta-tag">Skill focus (derived): ${escapeHtml(item.skill_focus)}</span>` : ""}
       </div>
       <div class="row">
         <div class="col">
@@ -364,12 +484,18 @@ function renderCompetencies() {
       <span class="hint-inline">Changes auto-save. Click to save immediately.</span>
     `;
     const cid = item.competency_id;
-    card.querySelector(".save-now")?.addEventListener("click", () => autoSaveCompetency(cid, card));
+    card
+      .querySelector(".save-now")
+      ?.addEventListener("click", () => autoSaveCompetency(cid, card));
     card.querySelectorAll("select").forEach((sel) => {
-      sel.addEventListener("change", () => debouncedSave(`comp-${cid}`, () => autoSaveCompetency(cid, card), 300));
+      sel.addEventListener("change", () =>
+        debouncedSave(`comp-${cid}`, () => autoSaveCompetency(cid, card), 300),
+      );
     });
     card.querySelectorAll("textarea").forEach((ta) => {
-      ta.addEventListener("input", () => debouncedSave(`comp-${cid}`, () => autoSaveCompetency(cid, card)));
+      ta.addEventListener("input", () =>
+        debouncedSave(`comp-${cid}`, () => autoSaveCompetency(cid, card)),
+      );
     });
     list.appendChild(card);
   });
@@ -417,7 +543,11 @@ async function load() {
     skillsData = skillsRes.items || [];
     knowledgeData = knowledgeRes.items || [];
     competenciesData = compRes.items || [];
-    const rid = skillsRes.reviewer_id || knowledgeRes.reviewer_id || compRes.reviewer_id || getReviewerId();
+    const rid =
+      skillsRes.reviewer_id ||
+      knowledgeRes.reviewer_id ||
+      compRes.reviewer_id ||
+      getReviewerId();
     const el = document.getElementById("reviewer-display");
     if (el) el.textContent = rid;
     if (skillsData.length === 0 && skillsRes.hint) {

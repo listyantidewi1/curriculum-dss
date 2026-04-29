@@ -1,0 +1,72 @@
+{% extends "public/base.html" %}
+{% set active_nav = "browse" %}
+{% block content %}
+<section class="section container">
+  <h2>Browse competencies</h2>
+  <p class="sub">
+    {{ total }} competencies match your filters. Click any card for the full description,
+    related hard skills, and the soft-skill profile.
+  </p>
+
+  <div class="stage-chips">
+    <a href="/competencies" class="stage-chip {% if not stage and not kkni_level %}active{% endif %}">
+      <strong>All</strong>
+      <span class="kkni-sub">KKNI 1–9</span>
+    </a>
+    {% for stage_key, lvls in stages.items() %}
+      <a href="/competencies?stage={{ stage_key }}{% if domain %}&domain={{ domain }}{% endif %}{% if q %}&q={{ q }}{% endif %}"
+         class="stage-chip {% if stage == stage_key %}active{% endif %}">
+        <strong>{{ stage_key }}</strong>
+        <span class="kkni-sub">KKNI {{ lvls | join(", ") }}</span>
+      </a>
+    {% endfor %}
+  </div>
+
+  <form method="get" action="/competencies" class="filter-bar">
+    {% if stage %}<input type="hidden" name="stage" value="{{ stage }}">{% endif %}
+    <input type="text" name="q" placeholder="Search title or description..." value="{{ q or '' }}">
+    <select name="domain">
+      <option value="">All future domains</option>
+      {% for d in available_domains %}
+        <option value="{{ d }}" {% if d == domain %}selected{% endif %}>{{ d }}</option>
+      {% endfor %}
+    </select>
+    <button class="btn" type="submit">Filter</button>
+  </form>
+
+  {% if items %}
+    <div class="card-grid">
+      {% for c in items %}
+        <a href="/competencies/{{ c.id }}{% if c.batch_id %}_b{{ c.batch_id }}{% endif %}" style="text-decoration:none; color:inherit;">
+          <div class="card">
+            <div class="meta">
+              {% if c.kkni_level %}<span class="kkni-pill">KKNI {{ c.kkni_level }}</span>{% endif %}
+              {% if c.future_domain %}<span class="domain-pill">{{ c.future_domain }}</span>{% endif %}
+              <span class="muted">{{ c.n_related_skills }} related skills</span>
+            </div>
+            <h3>{{ c.title }}</h3>
+            <p>{{ c.description | truncate(180) }}</p>
+            {% if c.soft_skills_required %}
+              <div class="softs">
+                {% for s in c.soft_skills_required[:4] %}<span>{{ s }}</span>{% endfor %}
+                {% if c.soft_skills_required | length > 4 %}<span>+{{ c.soft_skills_required | length - 4 }}</span>{% endif %}
+              </div>
+            {% endif %}
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+
+    {% if total > limit %}
+      <p style="margin-top:24px; text-align:center;">
+        Showing {{ items | length }} of {{ total }}.
+        {% if offset + limit < total %}
+          <a href="/competencies?offset={{ offset + limit }}{% if stage %}&stage={{ stage }}{% endif %}{% if domain %}&domain={{ domain }}{% endif %}{% if q %}&q={{ q }}{% endif %}">Next page &rarr;</a>
+        {% endif %}
+      </p>
+    {% endif %}
+  {% else %}
+    <div class="notice">No competencies match those filters. Try clearing the search or picking a different education level.</div>
+  {% endif %}
+</section>
+{% endblock %}

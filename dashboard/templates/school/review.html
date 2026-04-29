@@ -66,7 +66,19 @@
           | Job: {{ row.get("job_id", "-") }}
         </p>
         {% if row.get("job_text") %}
-        <div class="job-context"><strong>Job context:</strong><br/><blockquote>{{ row.get("job_text", "")[:800] }}{% if row.get("job_text", "")|length > 800 %}…{% endif %}</blockquote></div>
+        {% set _jt = row.get("job_text", "") %}
+        <div class="job-context">
+          <strong>Job context:</strong><br/>
+          <blockquote>
+            {% if _jt|length > 800 %}
+              <span class="job-preview">{{ _jt[:800] }}</span><span class="ellipsis">…</span>
+              <span class="job-full">{{ _jt }}</span>
+              <button type="button" class="toggle-job-text" aria-expanded="false">Show more</button>
+            {% else %}
+              {{ _jt }}
+            {% endif %}
+          </blockquote>
+        </div>
         {% endif %}
         <label>Valid? {% if explanations and explanations.human_valid %}<span class="explain-wrap"><span class="explain-icon">?</span><span class="explain-popover">{{ explanations.human_valid.what }}</span></span>{% endif %}</label>
         <select name="human_valid">
@@ -133,7 +145,19 @@
           Similarity: {{ row.get("similarity", "-") }}
         </p>
         {% if row.get("job_text") %}
-        <div class="job-context"><strong>Job context:</strong><br/><blockquote>{{ row.get("job_text", "")[:800] }}{% if row.get("job_text", "")|length > 800 %}…{% endif %}</blockquote></div>
+        {% set _jt = row.get("job_text", "") %}
+        <div class="job-context">
+          <strong>Job context:</strong><br/>
+          <blockquote>
+            {% if _jt|length > 800 %}
+              <span class="job-preview">{{ _jt[:800] }}</span><span class="ellipsis">…</span>
+              <span class="job-full">{{ _jt }}</span>
+              <button type="button" class="toggle-job-text" aria-expanded="false">Show more</button>
+            {% else %}
+              {{ _jt }}
+            {% endif %}
+          </blockquote>
+        </div>
         {% endif %}
         <label>Valid? {% if explanations and explanations.human_valid %}<span class="explain-wrap"><span class="explain-icon">?</span><span class="explain-popover">{{ explanations.human_valid.what }}</span></span>{% endif %}</label>
         <select name="human_valid">
@@ -368,6 +392,18 @@
   });
 
   unreviewedToggle?.addEventListener("change", applyFilter);
+  // Job context expand/collapse toggle (delegated)
+  document.addEventListener('click', (e) => {
+    if (!e.target || !e.target.classList) return;
+    if (e.target.classList.contains('toggle-job-text')) {
+      const btn = e.target;
+      const ctx = btn.closest('.job-context');
+      if (!ctx) return;
+      const expanded = ctx.classList.toggle('expanded');
+      btn.textContent = expanded ? 'Show less' : 'Show more';
+      btn.setAttribute('aria-expanded', expanded);
+    }
+  });
   applyFilter();
   updateProgress();
 })();
