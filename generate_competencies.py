@@ -255,13 +255,15 @@ def build_future_context(output_dir: Path,
 
 def load_openrouter_client() -> OpenAI:
     base_url = "https://openrouter.ai/api/v1"
+    # base_url = "https://lb.jatevo.ai/v1"
 
     # 1) env var, if available
     api_key = os.getenv("OPENROUTER_API_KEY")
 
     # 2) fallback: api_keys/OpenRouter.txt
     if not api_key:
-        key_path = Path("api_keys") / "OpenRouter.txt"
+        # key_path = Path("api_keys") / "OpenRouter.txt"
+        key_path = Path("api_keys") / "jatevo.txt"
         try:
             with open(key_path, "r", encoding="utf-8") as f:
                 api_key = f.read().strip()
@@ -936,7 +938,13 @@ def main():
         type=str,
         default="deepseek/deepseek-v3.2",
         help="Model name on OpenRouter (default: deepseek/deepseek-v3.2)",
-    )
+    )    
+    # parser.add_argument(
+    #     "--model",
+    #     type=str,
+    #     default="gpt-5.5",
+    #     help="Model name on Jatevo (default: gpt-5.5)",
+    # )
     parser.add_argument(
         "--max_skills_per_call",
         type=int,
