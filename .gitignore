@@ -44,7 +44,8 @@ htmlcov/
 *.swo
 *~
 .claude/
-
+.cursor/
+.kiro/
 # ============================================================
 # OS metadata files
 # ============================================================
@@ -122,6 +123,7 @@ results/job_*_analysis.json
 results_run*/
 results_aggregated/
 results.old/
+results.old*/
 
 # Ablation runs
 results/hybrid/
