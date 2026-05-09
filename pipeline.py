@@ -136,23 +136,26 @@ class SkillItem:
     """Structured representation of a skill."""
     text: str
     type: SkillType
-    bloom: BloomLevel
     confidence_score: float  # Continuous 0.0-1.0
     confidence_tier: ConfidenceTier
     source: str  # "BERT", "LLM", "BERT+LLM", "Hybrid"
     semantic_density: float = 1.0  # How information-dense the skill is
     context_agreement: float = 1.0  # Agreement with context
-    
+    # Bloom field kept for legacy code-path compatibility but never used after
+    # pipeline-redesign-v2 (Req 1). Always BloomLevel.NA in new runs; not
+    # exported to advanced_skills.csv anymore.
+    bloom: BloomLevel = BloomLevel.NA
+
     def to_dict(self):
         # Ensure all numeric values are Python floats before rounding
         confidence = ensure_float(self.confidence_score)
         density = ensure_float(self.semantic_density)
         agreement = ensure_float(self.context_agreement)
-        
+
         return {
             "skill": self.text,
             "type": self.type.value,
-            "bloom": self.bloom.value,
+            # "bloom" intentionally omitted — Bloom removed in pipeline-redesign-v2 (Req 1, AC3)
             "confidence_score": round(confidence, 3),
             "confidence_tier": self.confidence_tier.value,
             "source": self.source,
@@ -190,10 +193,12 @@ class AdvancedPipelineConfig:
     
     # LLM model (OpenRouter: deepseek, gpt-5, gemini, claude, etc.)
     LLM_MODEL = "deepseek/deepseek-v3.2"
+    # LLM_MODEL = "gpt-5.5"
     
     # OpenAI API (replace with your actual key)
     OPENAI_API_KEY = None
     OPENAI_BASE_URL = "https://openrouter.ai/api/v1"
+    # OPENAI_BASE_URL = "https://lb.jatevo.ai/v1"
     
     # Base Thresholds (will be adjusted dynamically)
     BASE_SIMILARITY_THRESHOLD = 0.55
@@ -357,6 +362,7 @@ class ModelManager:
         # 2) If not set, read from api_keys/OpenRouter.txt
         if not api_key:
             key_path = os.path.join("api_keys", "OpenRouter.txt")  # works on Win & Linux
+            # key_path = os.path.join("api_keys", "jatevo.txt")  # works on Win & Linux
             try:
                 with open(key_path, "r", encoding="utf-8") as f:
                     api_key = f.read().strip()
@@ -792,140 +798,13 @@ class AdvancedTaxonomyManager:
 
 
 # ============================================================
-# 4b. HYBRID BLOOM CLASSIFIER (SBERT + LLM)
+# 4b. (REMOVED) Bloom Classifier
+# Bloom taxonomy classification was removed in pipeline-redesign-v2.
+# Bloom-level decisions are returned to curriculum stakeholders.
+# See .kiro/specs/pipeline-redesign-v2/requirements.md (Req 1).
 # ============================================================
 
-class BloomClassifier:
-    """Two-stage Bloom classifier: SBERT exemplar matching + LLM fallback."""
 
-    BLOOM_EXEMPLARS = {
-        'Remember': [
-            "identify key terms in the documentation",
-            "list programming languages used",
-            "recall software version numbers",
-            "recognize common error codes",
-            "name database management systems",
-            "define API endpoints",
-        ],
-        'Understand': [
-            "explain how the authentication system works",
-            "describe the software architecture",
-            "summarize project requirements",
-            "interpret error messages and logs",
-            "classify different types of security threats",
-            "discuss trade-offs between approaches",
-        ],
-        'Apply': [
-            "use Python for data processing",
-            "implement REST API endpoints",
-            "deploy applications to cloud servers",
-            "configure CI/CD pipelines",
-            "execute database queries",
-            "manage project timelines",
-        ],
-        'Analyze': [
-            "analyze system performance bottlenecks",
-            "debug complex multi-threaded applications",
-            "compare alternative software architectures",
-            "investigate root causes of production failures",
-            "examine code for security vulnerabilities",
-            "diagnose network connectivity issues",
-        ],
-        'Evaluate': [
-            "evaluate the effectiveness of testing strategies",
-            "assess code quality through peer review",
-            "recommend technology stack improvements",
-            "validate compliance with security standards",
-            "prioritize feature requests based on impact",
-            "judge the scalability of proposed solutions",
-        ],
-        'Create': [
-            "design a microservices architecture",
-            "develop a machine learning pipeline",
-            "build a real-time data streaming platform",
-            "architect a distributed computing system",
-            "create automated testing frameworks",
-            "engineer a scalable cloud infrastructure",
-        ],
-    }
-
-    SBERT_HIGH_CONFIDENCE = 0.65
-    SBERT_AMBIGUOUS_LOW = 0.45
-
-    def __init__(self, embedder: SentenceTransformer = None,
-                 openai_client=None, model_name: str = None):
-        self.embedder = embedder
-        self.openai_client = openai_client
-        self.model_name = model_name or AdvancedPipelineConfig.LLM_MODEL
-        self._exemplar_embeddings = {}
-        self._bloom_levels = list(self.BLOOM_EXEMPLARS.keys())
-
-        if self.embedder is not None:
-            self._precompute_exemplar_embeddings()
-
-    def _precompute_exemplar_embeddings(self):
-        for level, exemplars in self.BLOOM_EXEMPLARS.items():
-            self._exemplar_embeddings[level] = self.embedder.encode(
-                exemplars, convert_to_tensor=True, normalize_embeddings=True
-            )
-
-    def classify(self, skill_text: str, context: str = "",
-                 skill_type: SkillType = SkillType.HARD) -> Tuple[BloomLevel, float]:
-        if skill_type == SkillType.SOFT:
-            return BloomLevel.NA, 1.0
-
-        # Stage 1: SBERT exemplar matching
-        if self.embedder is not None and self._exemplar_embeddings:
-            best_level, best_sim = self._sbert_classify(skill_text)
-            if best_sim >= self.SBERT_HIGH_CONFIDENCE:
-                return BloomLevel(best_level), float(best_sim)
-            if best_sim >= self.SBERT_AMBIGUOUS_LOW and self.openai_client:
-                llm_level = self._llm_classify(skill_text, context)
-                if llm_level:
-                    confidence = 0.7 * best_sim + 0.3 * 0.85
-                    return BloomLevel(llm_level), float(confidence)
-            if best_sim >= self.SBERT_AMBIGUOUS_LOW:
-                return BloomLevel(best_level), float(best_sim)
-
-        # Fallback to keyword matching
-        return AdvancedTaxonomyManager.get_bloom_with_confidence(skill_text, skill_type)
-
-    def _sbert_classify(self, skill_text: str) -> Tuple[str, float]:
-        skill_emb = self.embedder.encode(
-            [skill_text], convert_to_tensor=True, normalize_embeddings=True
-        )
-        best_level = 'Apply'
-        best_avg_sim = 0.0
-        for level in self._bloom_levels:
-            sims = util.cos_sim(skill_emb, self._exemplar_embeddings[level])[0]
-            avg_sim = float(sims.mean().item())
-            if avg_sim > best_avg_sim:
-                best_avg_sim = avg_sim
-                best_level = level
-        return best_level, best_avg_sim
-
-    def _llm_classify(self, skill_text: str, context: str = "") -> Optional[str]:
-        ctx_block = f' extracted from: "{context[:200]}"' if context else ""
-        prompt = (
-            f'Given the skill "{skill_text}"{ctx_block}, '
-            f'classify its Bloom\'s Taxonomy level. '
-            f'Respond with ONLY one of: Remember, Understand, Apply, Analyze, Evaluate, Create'
-        )
-        try:
-            resp = self.openai_client.chat.completions.create(
-                model=self.model_name,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0,
-                max_tokens=20,
-            )
-            answer = resp.choices[0].message.content.strip()
-            valid = {'Remember', 'Understand', 'Apply', 'Analyze', 'Evaluate', 'Create'}
-            for v in valid:
-                if v.lower() in answer.lower():
-                    return v
-        except Exception as e:
-            logger.debug(f"BloomClassifier LLM fallback failed: {e}")
-        return None
 
 
 # ============================================================
@@ -1083,11 +962,8 @@ class ContextAwareExtractor:
         self.model_manager = model_manager
         self.gpt_extractor = gpt_extractor
         self.embedder = model_manager.embedder
-        self.bloom_classifier = BloomClassifier(
-            embedder=model_manager.embedder,
-            openai_client=model_manager.openai_client,
-            model_name=AdvancedPipelineConfig.LLM_MODEL,
-        )
+        # Bloom classifier removed in pipeline-redesign-v2 (Req 1).
+        # Bloom-level decisions are now left to curriculum stakeholders.
         
     def extract_with_context_awareness(
         self,
@@ -1299,29 +1175,21 @@ class ContextAwareExtractor:
                 text, context=[context]
             )
             
-            # Get Bloom level with hybrid classifier (SBERT + LLM fallback)
-            bloom_level, bloom_confidence = self.bloom_classifier.classify(
-                text, context=context, skill_type=skill_type
-            )
-            
+            # Bloom classification removed in pipeline-redesign-v2 (Req 1).
+
             # Calculate overall confidence using named config weights
             base_confidence = (
                 raw_confidence * AdvancedPipelineConfig.BERT_RAW_CONFIDENCE_WEIGHT
                 + type_confidence * AdvancedPipelineConfig.BERT_TYPE_CONFIDENCE_WEIGHT
             )
-            adjusted_confidence = base_confidence * (
-                AdvancedPipelineConfig.BERT_BLOOM_FACTOR_BASE
-                + bloom_confidence * (1.0 - AdvancedPipelineConfig.BERT_BLOOM_FACTOR_BASE)
-            )
-            final_confidence = adjusted_confidence * (
+            final_confidence = base_confidence * (
                 AdvancedPipelineConfig.BERT_DENSITY_FACTOR_BASE
                 + semantic_density * (1.0 - AdvancedPipelineConfig.BERT_DENSITY_FACTOR_BASE)
             )
-            
+
             skill_item = SkillItem(
                 text=text,
                 type=skill_type,
-                bloom=bloom_level,
                 confidence_score=final_confidence,
                 confidence_tier=AdvancedTaxonomyManager.get_confidence_tier(final_confidence),
                 source="BERT",
@@ -1351,11 +1219,8 @@ class ContextAwareExtractor:
                 text, gpt_type, context=[context]
             )
             
-            # Use hybrid Bloom classifier instead of trusting LLM label
-            bloom_level, bloom_confidence = self.bloom_classifier.classify(
-                text, context=context, skill_type=skill_type
-            )
-            
+            # Bloom classification removed in pipeline-redesign-v2 (Req 1).
+
             # Calculate overall confidence using named config weights
             base_confidence = AdvancedPipelineConfig.LLM_BASE_CONFIDENCE
             adjusted_confidence = base_confidence * (
@@ -1363,18 +1228,13 @@ class ContextAwareExtractor:
                 + type_confidence * (1.0 - AdvancedPipelineConfig.LLM_TYPE_FACTOR_BASE)
             )
             final_confidence = adjusted_confidence * (
-                AdvancedPipelineConfig.LLM_BLOOM_FACTOR_BASE
-                + bloom_confidence * (1.0 - AdvancedPipelineConfig.LLM_BLOOM_FACTOR_BASE)
-            )
-            final_confidence *= (
                 AdvancedPipelineConfig.LLM_DENSITY_FACTOR_BASE
                 + semantic_density * (1.0 - AdvancedPipelineConfig.LLM_DENSITY_FACTOR_BASE)
             )
-            
+
             skill_item = SkillItem(
                 text=text,
                 type=skill_type,
-                bloom=bloom_level,
                 confidence_score=final_confidence,
                 confidence_tier=AdvancedTaxonomyManager.get_confidence_tier(final_confidence),
                 source="LLM",
@@ -1488,44 +1348,14 @@ class ContextAwareExtractor:
         return adjusted
     
     def _check_bloom_consistency(self, skills: List[SkillItem], context: str) -> List[SkillItem]:
-        """Check if Bloom levels are consistent with skill context."""
-        adjusted = []
-        
-        for skill in skills:
-            if skill.bloom == BloomLevel.NA:
-                adjusted.append(skill)
-                continue
-            
-            # Check if bloom level makes sense for the skill text
-            expected_bloom, confidence = AdvancedTaxonomyManager.get_bloom_with_confidence(
-                skill.text, skill.type
-            )
-            
-            if expected_bloom == skill.bloom:
-                # Consistent - boost confidence
-                new_confidence = min(1.0, ensure_float(skill.confidence_score) * (1.0 + confidence * 0.1))
-            else:
-                # Inconsistent - reduce confidence
-                bloom_order = ['Remember', 'Understand', 'Apply', 'Analyze', 'Evaluate', 'Create']
-                expected_idx = bloom_order.index(expected_bloom.value) if expected_bloom.value in bloom_order else 2
-                actual_idx = bloom_order.index(skill.bloom.value) if skill.bloom.value in bloom_order else 2
-                bloom_distance = abs(expected_idx - actual_idx)
-                penalty = 1.0 - (bloom_distance * 0.1)
-                new_confidence = ensure_float(skill.confidence_score) * penalty
-            
-            adjusted_skill = SkillItem(
-                text=skill.text,
-                type=skill.type,
-                bloom=skill.bloom,  # Keep original for now
-                confidence_score=new_confidence,
-                confidence_tier=AdvancedTaxonomyManager.get_confidence_tier(new_confidence),
-                source=skill.source,
-                semantic_density=skill.semantic_density,
-                context_agreement=skill.context_agreement
-            )
-            adjusted.append(adjusted_skill)
-        
-        return adjusted
+        """Bloom consistency check is a no-op after pipeline-redesign-v2 (Req 1).
+
+        Bloom-level decisions are returned to curriculum stakeholders, so the
+        pipeline no longer adjusts confidence based on Bloom-level agreement.
+        Method retained as a pass-through for backward compatibility with
+        callers that still invoke it.
+        """
+        return list(skills)
 
 # ============================================================
 # 7. ADVANCED FUSION ENGINE
@@ -1998,7 +1828,7 @@ class AdvancedDataManager:
     def _initialize_files(self):
         """Create empty files with headers."""
         # Skills CSV
-        skills_columns = ['job_id', 'date_posted', 'skill', 'type', 'bloom',
+        skills_columns = ['job_id', 'date_posted', 'skill', 'type',
                         'confidence_score', 'confidence_tier', 'source',
                         'semantic_density', 'context_agreement']
         
