@@ -352,7 +352,7 @@ t = re.sub(r"\s+", " ", t).strip()
 
 | Item Type | Group Key | Canonical Form | Aggregation |
 |-----------|-----------|----------------|-------------|
-| Skills | normalize(skill) | Most frequent raw | demand_freq = sum; type/bloom = mode |
+| Skills | normalize(skill) | Most frequent raw | demand_freq = sum; type = mode (bloom column removed in pipeline-redesign-v2 Phase 1.3) |
 | Knowledge | normalize(knowledge) | Most frequent raw | freq = sum; mean_confidence = mean |
 | Competencies | normalize(title) | First in group | occurrence_count = size of group |
 
@@ -787,11 +787,11 @@ robustness results.
 |-----------|-------|-----------|
 | `BERT_RAW_CONFIDENCE_WEIGHT` | 0.7 | CRF emission probability is the primary signal; dominant weight reflects that NER models are trained end-to-end. |
 | `BERT_TYPE_CONFIDENCE_WEIGHT` | 0.3 | Hard/soft type classification provides secondary signal; lower weight because type errors should not dominate. |
-| `BERT_BLOOM_FACTOR_BASE` | 0.5 | Floor factor: even uncertain Bloom classification should not halve confidence. 0.5 prevents excessive penalty while allowing meaningful modulation. |
+| ~~`BERT_BLOOM_FACTOR_BASE`~~ | — | **Removed in pipeline-redesign-v2 Phase 1.3** along with the Bloom classifier. |
 | `BERT_DENSITY_FACTOR_BASE` | 0.8 | Semantic density is a secondary quality signal. High floor (0.8) ensures simple-but-valid skills are not penalised excessively. |
 | `BERT_STANDALONE_PENALTY` | 0.8 | BERT-only extractions (no LLM confirmation) receive a 20% discount; the penalty is moderate because BERT is a strong baseline. |
 
-**Design principle:** BERT confidence = `(0.7 × raw_conf + 0.3 × type_conf) × bloom_factor × density_factor`, where factors have high floors so secondary signals modulate but do not dominate.
+**Design principle:** BERT confidence = `(0.7 × raw_conf + 0.3 × type_conf) × density_factor`, where factors have high floors so secondary signals modulate but do not dominate. (The `bloom_factor` term was removed in pipeline-redesign-v2 Phase 1.3 along with the BloomClassifier.)
 
 ### B. LLM Confidence Weights
 
@@ -799,7 +799,7 @@ robustness results.
 |-----------|-------|-----------|
 | `LLM_BASE_CONFIDENCE` | 0.8 | LLM outputs are generally reliable but not calibrated; 0.8 is a conservative starting point. |
 | `LLM_TYPE_FACTOR_BASE` | 0.6 | LLM type classification is less reliable than BERT's; lower floor than BERT. |
-| `LLM_BLOOM_FACTOR_BASE` | 0.7 | LLM Bloom assignment is moderately reliable; floor higher than BERT because LLM reasons about complexity. |
+| ~~`LLM_BLOOM_FACTOR_BASE`~~ | — | **Removed in pipeline-redesign-v2 Phase 1.3** along with the Bloom classifier. |
 | `LLM_DENSITY_FACTOR_BASE` | 0.8 | Same rationale as BERT: density should not dominate. |
 
 ### C. Fusion Weights (Skills Only; Knowledge is LLM-Only)
@@ -810,7 +810,7 @@ robustness results.
 |-----------|-------|-----------|
 | `FUSION_MATCH_BONUS_WEIGHT` | 0.2 | When BERT and LLM agree, confidence receives a 20% boost relative to cosine similarity. Conservative to avoid over-inflating. |
 | `FUSION_TYPE_DISAGREEMENT` | 0.8 | When BERT and LLM disagree on type (hard vs soft), apply a 20% penalty. Not severe because type disagreement is common for dual-nature skills. |
-| `FUSION_BLOOM_CONFIDENCE_SCALE` | 0.7 | Scale factor for Bloom confidence in fusion. Reflects that Bloom classification contributes to but should not dominate overall confidence. |
+| ~~`FUSION_BLOOM_CONFIDENCE_SCALE`~~ | — | **Removed in pipeline-redesign-v2 Phase 1.3** along with Bloom-level fusion logic. |
 | `AGREEMENT_EXACT_THRESHOLD` | 0.85 | Cosine similarity above 0.85 is treated as exact semantic match. Based on SBERT literature where 0.8+ indicates paraphrase-level similarity. |
 | `AGREEMENT_PARTIAL_THRESHOLD` | 0.5 | Below 0.5, skills are considered unrelated. This is the standard SBERT "unrelated" boundary. |
 

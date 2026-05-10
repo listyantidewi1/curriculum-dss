@@ -133,7 +133,7 @@ signal at a time (demand, trend, future_weight). Coverage is optional (`with_cov
 Each item is labeled with:
 - `is_correct`: yes/no (was this correctly extracted from the text?)
 - `type_label`: Hard/Soft/Both/Unknown (for skills)
-- `bloom_label`: Remember/.../Create/Unknown (for skills)
+- ~~`bloom_label`~~: removed in pipeline-redesign-v2 Phase 1.3 (Req 1); Bloom-level decisions are returned to curriculum stakeholders
 - `true_domain_id`: best future domain (for mapping validation)
 
 ---

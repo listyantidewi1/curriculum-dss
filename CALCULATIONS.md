@@ -107,7 +107,7 @@ Applied in: `future_weight_mapping.py`, `recommendations.py`, `generate_competen
 
 | Item type | Group key | Canonical form | Aggregation |
 |-----------|-----------|----------------|-------------|
-| Skills | normalize(skill) | Most frequent raw form | demand_freq = sum; type/bloom = mode |
+| Skills | normalize(skill) | Most frequent raw form | demand_freq = sum; type = mode (bloom column removed in pipeline-redesign-v2 Phase 1.3) |
 | Knowledge | normalize(knowledge) | Most frequent raw form | freq = sum; mean_confidence = mean |
 | Competencies | normalize(title) | First in group | occurrence_count = group size |
 
@@ -140,7 +140,7 @@ def _majority(votes: list) -> str:
 | Field | Valid Values | Use |
 |-------|--------------|-----|
 | human_valid | valid, invalid | Skill/knowledge validity |
-| human_bloom | Remember, Understand, Apply, Analyze, Evaluate, Create, N/A | Bloom correction |
+| ~~human_bloom~~ | — | **Removed in pipeline-redesign-v2 Phase 1.3.** Bloom corrections no longer collected from reviewers. |
 | human_type | Hard, Soft, Both | Skill type correction |
 | human_quality | 1–5, poor, fair, good, excellent | Competency quality |
 | human_relevant | yes, no, partial | Competency relevance |
@@ -391,4 +391,4 @@ value for the current run.
 | `skill_time_trend_analysis.py` | `config.RANDOM_SEED` | Stability analysis base seed |
 | `plot_generator.py` | `config.RANDOM_SEED` | KMeans clustering |
 
-*Last updated: Scientific rigor review — seed consolidation, CV threshold, labeling protocol, Bloom/type validation.*
+*Last updated: pipeline-redesign-v2 (May 2026) — Bloom validation removed; type validation retained; sentence-level provenance plus Skill-LLM extractor in Phase 1.5.*

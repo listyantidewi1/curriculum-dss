@@ -2,15 +2,39 @@
 
 Central index for all project documentation.
 
+> **pipeline-redesign-v2 in progress (May 2026).** See
+> [`../README.md`](../README.md) "Project Status" table and the spec at
+> [`../.kiro/specs/pipeline-redesign-v2/requirements.md`](../.kiro/specs/pipeline-redesign-v2/requirements.md)
+> for the canonical view of what's done, in progress, and queued.
+
 ## Core Documents
 
 | Document | Description |
 |----------|-------------|
-| [../README.md](../README.md) | Project overview, quick start, repository structure |
+| [../README.md](../README.md) | Project overview, v2 status, quick start, repository structure |
 | [../PIPELINE.md](../PIPELINE.md) | Pipeline architecture, phases, data flow, steps, extraction design (Direction A), troubleshooting |
+| [PIPELINE_DIAGRAM.md](PIPELINE_DIAGRAM.md) | Planned v2 architecture (Mermaid + AI-image prompt) |
 | [../CALCULATIONS.md](../CALCULATIONS.md) | Formulas: priority score, future weight, ranking, voting, FDR |
 | [../SCIENTIFIC_METHODOLOGY.md](../SCIENTIFIC_METHODOLOGY.md) | **Full scientific documentation** with worked examples |
 | [../RESEARCH_QUESTIONS.md](../RESEARCH_QUESTIONS.md) | RQ1–RQ5, metrics, gold set design, power analysis, limitations |
+
+## Indonesian-Language Docs
+
+| Document | Audience |
+|----------|----------|
+| [RINGKASAN_KONTRIBUTOR.md](RINGKASAN_KONTRIBUTOR.md) | Onboarding for new contributors (technical) |
+| [PENJELASAN_UMUM.md](PENJELASAN_UMUM.md) | General-public explainer (non-technical: educators, policymakers, students) |
+| [KAJIAN_AKADEMIK.md](KAJIAN_AKADEMIK.md) | Academic reflection for promotor / dissertation discussion |
+
+## Pipeline-redesign-v2 Per-Package Docs
+
+| Document | Description |
+|----------|-------------|
+| [../baseline_versions/jjzha_replicate/AUDIT.md](../baseline_versions/jjzha_replicate/AUDIT.md) | Phase 1.4 audit: jjzha JobBERT vs our baselines |
+| [../baseline_versions/jjzha_replicate/REPLICATION_REPORT.md](../baseline_versions/jjzha_replicate/REPLICATION_REPORT.md) | Phase 1.4 close-out: F1 matrix, decision to pivot |
+| [../baseline_versions/skill_llm/AUDIT.md](../baseline_versions/skill_llm/AUDIT.md) | Phase 1.5 audit: Skill-LLM design + verb-preservation invariant |
+| [../baseline_versions/skill_llm/README.md](../baseline_versions/skill_llm/README.md) | Phase 1.5 run book: training + eval, decision rules, integration plan |
+| [../baseline_versions/skill_llm/kaggle/README.md](../baseline_versions/skill_llm/kaggle/README.md) | Kaggle-specific setup for the Skill-LLM training run (free GPU) |
 
 ## Scientific Methodology (Summary)
 
