@@ -113,15 +113,6 @@ class SkillType(Enum):
     HARD = "Hard"
     SOFT = "Soft"
 
-class BloomLevel(Enum):
-    REMEMBER = "Remember"
-    UNDERSTAND = "Understand"
-    APPLY = "Apply"
-    ANALYZE = "Analyze"
-    EVALUATE = "Evaluate"
-    CREATE = "Create"
-    NA = "N/A"
-
 class ConfidenceTier(Enum):
     VERY_HIGH = "Very High"  # 0.9-1.0
     HIGH = "High"            # 0.8-0.9
@@ -141,10 +132,6 @@ class SkillItem:
     source: str  # "BERT", "LLM", "BERT+LLM", "Hybrid"
     semantic_density: float = 1.0  # How information-dense the skill is
     context_agreement: float = 1.0  # Agreement with context
-    # Bloom field kept for legacy code-path compatibility but never used after
-    # pipeline-redesign-v2 (Req 1). Always BloomLevel.NA in new runs; not
-    # exported to advanced_skills.csv anymore.
-    bloom: BloomLevel = BloomLevel.NA
 
     def to_dict(self):
         # Ensure all numeric values are Python floats before rounding
@@ -155,7 +142,6 @@ class SkillItem:
         return {
             "skill": self.text,
             "type": self.type.value,
-            # "bloom" intentionally omitted — Bloom removed in pipeline-redesign-v2 (Req 1, AC3)
             "confidence_score": round(confidence, 3),
             "confidence_tier": self.confidence_tier.value,
             "source": self.source,
@@ -222,14 +208,7 @@ class AdvancedPipelineConfig:
             'hard': {'similarity': 0.05, 'match': 0.05},  # Hard skills get stricter thresholds
             'soft': {'similarity': -0.05, 'match': -0.05}  # Soft skills get more lenient
         },
-        'bloom_complexity': {
-            'Remember': -0.03,
-            'Understand': -0.02,
-            'Apply': 0.0,
-            'Analyze': 0.02,
-            'Evaluate': 0.03,
-            'Create': 0.05
-        },
+        # bloom_complexity removed in pipeline-redesign-v2 (Req 1)
         'semantic_density': {
             'low': -0.02,     # Simple skills
             'medium': 0.0,    # Average
@@ -258,7 +237,6 @@ class AdvancedPipelineConfig:
     # --- Confidence scoring weights (BERT skills) ---
     BERT_RAW_CONFIDENCE_WEIGHT = 0.7    # CRF emission probability contribution
     BERT_TYPE_CONFIDENCE_WEIGHT = 0.3   # Hard/soft type classification contribution
-    BERT_BLOOM_FACTOR_BASE = 0.5        # Minimum Bloom confidence factor (floor)
     BERT_DENSITY_FACTOR_BASE = 0.8      # Minimum semantic-density factor (floor)
     BERT_STANDALONE_PENALTY = 0.8       # Penalty when BERT skill has no LLM match
     # Knowledge: LLM-only in final output. BERT knowledge is passed to LLM as anti-hallucination
@@ -275,13 +253,11 @@ class AdvancedPipelineConfig:
     # --- Confidence scoring weights (LLM skills) ---
     LLM_BASE_CONFIDENCE = 0.8           # Base confidence for LLM extractions
     LLM_TYPE_FACTOR_BASE = 0.6          # Minimum type-confidence factor
-    LLM_BLOOM_FACTOR_BASE = 0.7         # Minimum Bloom factor for LLM
     LLM_DENSITY_FACTOR_BASE = 0.8       # Minimum density factor for LLM
 
     # --- Fusion weights ---
     FUSION_MATCH_BONUS_WEIGHT = 0.2     # How much match score boosts confidence
     FUSION_TYPE_DISAGREEMENT = 0.8      # Multiplier when BERT/LLM types disagree
-    FUSION_BLOOM_CONFIDENCE_SCALE = 0.7 # Scale for Bloom confidence in fusion
 
     # --- Agreement thresholds ---
     AGREEMENT_EXACT_THRESHOLD = 0.85    # Cosine sim for exact model agreement
@@ -507,82 +483,9 @@ class ModelManager:
 class AdvancedTaxonomyManager:
     """Enhanced taxonomy manager with dynamic adjustments."""
     
-    # Comprehensive taxonomies
-    BLOOMS_TAXONOMY = {
-        'Remember': [
-            'identify', 'define', 'know', 'label', 'list', 'match', 'name', 'recall',
-            'recognize', 'reproduce', 'state', 'memorize', 'quote', 'repeat',
-            'retrieve', 'duplicate', 'acquire', 'recite', 'enumerate', 'record',
-            'find', 'locate', 'cite', 'recollect', 'bookmark', 'search', 'google',
-            'access', 'browse', 'capture', 'note', 'mark', 'highlight', 'point out'
-        ],
-        'Understand': [
-            'describe', 'comprehend', 'explain', 'summarize', 'summarise',
-            'interpret', 'paraphrase', 'classify', 'discuss', 'express',
-            'indicate', 'report', 'restate', 'translate', 'exemplify',
-            'infer', 'clarify', 'extend', 'generalize', 'map',
-            'articulate', 'elaborate', 'characterize', 'detail', 'outline',
-            'review', 'present', 'illustrate', 'rephrase', 'give examples',
-            'summarize key points', 'describe in own words', 'relate ideas',
-            'simplify', 'comment', 'annotate', 'associate', 'categorize',
-            'tag', 'convert', 'decode', 'visualize'
-        ],
-        'Apply': [
-            'apply', 'use', 'execute', 'implement', 'solve', 'demonstrate',
-            'operate', 'calculate', 'complete', 'show', 'employ', 'practice',
-            'utilize', 'run', 'administer', 'carry out', 'make use of',
-            'select method', 'test implementation', 'use in a new situation',
-            'manage', 'operate', 'adapt', 'change', 'experiment', 'explore',
-            'perform', 'simulate', 'compute', 'discover', 'manipulate',
-            'modify', 'prepare', 'relate', 'deploy', 'upload', 'share',
-            'edit', 'install', 'configure', 'backup', 'code', 'compile',
-            'connect', 'decrypt', 'document', 'encrypt', 'iterate',
-            'provision', 'recover', 'restore', 'script', 'troubleshoot',
-            'maintain', 'execute script', 'schedule', 'sketch',
-            'organize steps', 'implement procedure', 'follow instructions'
-        ],
-        'Analyze': [
-            'analyze', 'compare', 'contrast', 'deconstruct', 'attribute',
-            'differentiate', 'discriminate', 'distinguish', 'separate',
-            'organize', 'structure', 'outline', 'break down', 'examine',
-            'inspect', 'investigate', 'question', 'test', 'diagram',
-            'dissect', 'detect', 'survey', 'trace', 'correlate',
-            'interpret data', 'discover patterns', 'identify relationships',
-            'identify causes', 'diagnose', 'root cause', 'extrapolate',
-            'infer', 'identify', 'debug', 'monitor', 'audit', 'benchmark',
-            'profile', 'decompile', 'disassemble', 'reverse-engineer',
-            'log', 'query', 'analyze logs', 'analyze performance',
-            'ensure', 'maintain'
-        ],
-        'Evaluate': [
-            'evaluate', 'assess', 'judge', 'critique', 'criticize', 'appraise',
-            'argue', 'defend', 'justify', 'conclude', 'decide', 'persuade',
-            'prioritize', 'rank', 'rate', 'recommend', 'choose', 'support',
-            'validate', 'verify', 'value', 'weigh', 'consider', 'debate',
-            'check', 'measure', 'score', 'grade', 'estimate impact',
-            'determine effectiveness', 'review', 'approve', 'reject',
-            'review code', 'comment on code', 'inspect', 'predict',
-            'test', 'optimize', 'tune', 'balance', 'benchmark alternatives',
-            'compare alternatives', 'analyze trade-offs', 'risk assess',
-            'sanity check', 'playtest'
-        ],
-        'Create': [
-            'create', 'design', 'develop', 'construct', 'produce', 'plan',
-            'invent', 'formulate', 'compose', 'generate', 'devise', 'hypothesize',
-            'originate', 'assemble', 'compile', 'integrate', 'rearrange',
-            'reconstruct', 'reorganize', 'revise', 'rewrite', 'synthesize',
-            'write', 'brainstorm', 'ideate', 'conceive', 'build', 'program',
-            'architect', 'engineer', 'prototype', 'model', 'orchestrate',
-            'containerize', 'virtualize', 'automate', 'initialize',
-            'instantiate', 'launch', 'animate', 'blog', 'storyboard',
-            'draft', 'author', 'publish', 'refactor', 'redesign',
-            'reengineer', 'extend functionality', 'innovate', 'improve',
-            'enhance', 'customize', 'configure solution', 'design pattern',
-            'develop strategy', 'propose approach', 'test concept',
-            'theorize', 'solutioning'
-        ]
-    }
-    
+    # BLOOMS_TAXONOMY removed in pipeline-redesign-v2 (Req 1) — Bloom-level
+    # decisions are returned to curriculum stakeholders.
+
     # Enhanced keyword sets with weights
     STRICT_SOFT_KEYWORDS = {
         "communication": 1.0, "team": 0.9, "interpersonal": 1.0, "empathy": 1.0,
@@ -646,18 +549,19 @@ class AdvancedTaxonomyManager:
         return min(density * 1.5, 1.0)  # Scale up slightly
     
     @classmethod
-    def get_dynamic_threshold(cls, skill_type: SkillType, bloom_level: BloomLevel, 
+    def get_dynamic_threshold(cls, skill_type: SkillType,
                              semantic_density: float) -> Dict[str, float]:
-        """Calculate dynamic thresholds based on skill characteristics."""
-        
+        """Calculate dynamic thresholds based on skill characteristics.
+
+        Bloom complexity adjustments were removed in pipeline-redesign-v2 (Req 1);
+        thresholds are now driven by skill type and semantic density only.
+        """
+
         # Get base adjustments
         type_factor = AdvancedPipelineConfig.DYNAMIC_FACTORS['skill_type'][
             'hard' if skill_type == SkillType.HARD else 'soft'
         ]
-        bloom_factor = AdvancedPipelineConfig.DYNAMIC_FACTORS['bloom_complexity'].get(
-            bloom_level.value, 0.0
-        )
-        
+
         # Determine density category
         if semantic_density < 0.4:
             density_cat = 'low'
@@ -665,24 +569,22 @@ class AdvancedTaxonomyManager:
             density_cat = 'medium'
         else:
             density_cat = 'high'
-        
+
         density_factor = AdvancedPipelineConfig.DYNAMIC_FACTORS['semantic_density'][density_cat]
-        
+
         # Calculate adjusted thresholds
         similarity_threshold = (
-            AdvancedPipelineConfig.BASE_SIMILARITY_THRESHOLD + 
-            type_factor['similarity'] + 
-            bloom_factor + 
+            AdvancedPipelineConfig.BASE_SIMILARITY_THRESHOLD +
+            type_factor['similarity'] +
             density_factor
         )
-        
+
         skill_match_threshold = (
-            AdvancedPipelineConfig.BASE_SKILL_MATCH_THRESHOLD + 
-            type_factor['match'] + 
-            bloom_factor * 0.5 + 
+            AdvancedPipelineConfig.BASE_SKILL_MATCH_THRESHOLD +
+            type_factor['match'] +
             density_factor * 0.5
         )
-        
+
         return {
             'similarity': max(0.3, min(0.9, similarity_threshold)),
             'skill_match': max(0.5, min(0.95, skill_match_threshold)),
@@ -739,35 +641,7 @@ class AdvancedTaxonomyManager:
         return SkillType.HARD, 0.6
     
     @classmethod
-    def get_bloom_with_confidence(cls, text: str, skill_type: SkillType) -> Tuple[BloomLevel, float]:
-        """Get Bloom level with confidence score."""
-        if skill_type == SkillType.SOFT:
-            return BloomLevel.NA, 1.0
-        
-        text_lower = text.lower()
-        matches = []
-        
-        for bloom_level, keywords in cls.BLOOMS_TAXONOMY.items():
-            for keyword in keywords:
-                # Check for exact word match (higher confidence)
-                if f' {keyword} ' in f' {text_lower} ':
-                    matches.append((bloom_level, 0.9))
-                # Check for substring match (lower confidence)
-                elif keyword in text_lower:
-                    matches.append((bloom_level, 0.6))
-        
-        if matches:
-            # Sort by Bloom level (higher is better) and confidence
-            bloom_order = ['Remember', 'Understand', 'Apply', 'Analyze', 'Evaluate', 'Create']
-            matches.sort(key=lambda x: (bloom_order.index(x[0]), x[1]), reverse=True)
-            bloom_str, confidence = matches[0]
-            return BloomLevel(bloom_str), confidence
-        
-        # Default to Apply with moderate confidence
-        return BloomLevel.APPLY, 0.5
-    
-    @classmethod
-    def calculate_partial_match_confidence(cls, text1: str, text2: str, 
+    def calculate_partial_match_confidence(cls, text1: str, text2: str,
                                          match_type: str = 'substring') -> float:
         """Calculate confidence for partial matches."""
         text1_lower = text1.lower()
@@ -853,54 +727,41 @@ class LLMExtractor:
         - Must be action-oriented (verbs + context).
         - REJECT single-word skills (e.g. "design", "propose", "manage") — they are too vague.
           Skills MUST include verb + object/context (e.g. "design software", "propose solutions").
-        - Structure:  
-            { "skill": "verb + object/context",  
-            "type": "Hard" | "Soft",  
-            "bloom": "Remember" | "Apply" | "Understand" | "Analyze" | "Evaluate" | "Create" | "N/A" }
+        - Structure:
+            { "skill": "verb + object/context",
+              "type": "Hard" | "Soft" }
 
         4. **Hard vs Soft skills**:
             - HARD SKILL:
                 * technical, measurable, domain-specific
                 * requires tools, technologies, frameworks, or specialized knowledge
                 * examples: "analyze data", "manage CI/CD pipeline", "write C++", "use Python", "operate CNC machine", "implement APIs", "design database schema"
-                * must receive an appropriate Bloom level
             - SOFT SKILL:
                 * ANY non-technical skill involving cognitive, interpersonal, behavioral,
                     personal management, communication, or strategic thinking abilities
                 * does NOT require a specific technical tool or domain expertise
                 * examples: "communicate ideas", "collaborate with team", "solve problems",
                     "manage time", "adapt to change", "think critically", "lead a team"
-                * bloom = "N/A"
 
         5. **Knowledge extraction**:
         - Knowledge is **NOT a skill**.
         - Knowledge is NOT educational degree (degree, bachelor, master, PhD, doctoral, diploma).
         - Knowledge items MUST be nouns representing tools, technologies, platforms, or theoretical concepts.
-        - Output format: list of strings. Example:  
+        - Output format: list of strings. Example:
             ["Python", "Docker", "Agile methodology"]
-
-        6. **Bloom Taxonomy Mapping**:
-        - Only HARD skills get Bloom levels.
-        - Must be inferable from the verb/action:  
-            • Apply → implement, build, use  
-            • Understand → explain, describe, interpret 
-            - Remember → identify, list, recall 
-            • Analyze → troubleshoot, break down, examine  
-            • Evaluate → assess, validate, prioritize  
-            • Create → design, develop, architect
 
         ========================
         ### CONTEXT INTEGRATION
         ========================
-        7. Use "Context (Tools detected by JobBERT)" ONLY as a hint to infer skills or knowledge.  
+        6. Use "Context (Tools detected by JobBERT)" ONLY as a hint to infer skills or knowledge.
         Do NOT fabricate new skills, knowledges, or tools not present in job text or context.
 
         ========================
         ### OUTPUT VALIDATION
         ========================
-        8. No duplicates.  
-        9. No hallucinations.  
-        10. No commentary, only JSON.
+        7. No duplicates.
+        8. No hallucinations.
+        9. No commentary, only JSON.
         """
         
         user_prompt = f"""
@@ -1038,9 +899,7 @@ class ContextAwareExtractor:
         bert_skills = self._adjust_confidence_with_agreement(bert_skills, agreement_scores, 'bert')
         gpt_skills = self._adjust_confidence_with_agreement(gpt_skills, agreement_scores, 'gpt')
 
-        # Check Bloom consistency
-        bert_skills = self._check_bloom_consistency(bert_skills, full_text)
-        gpt_skills = self._check_bloom_consistency(gpt_skills, full_text)
+        # _check_bloom_consistency removed in pipeline-redesign-v2 (Req 1)
 
         gpt_knowledge = self._filter_fragments(gpt_knowledge_raw, key='text')
 
@@ -1336,7 +1195,6 @@ class ContextAwareExtractor:
             adjusted_skill = SkillItem(
                 text=skill.text,
                 type=skill.type,
-                bloom=skill.bloom,
                 confidence_score=new_confidence,
                 confidence_tier=AdvancedTaxonomyManager.get_confidence_tier(new_confidence),
                 source=skill.source,
@@ -1347,16 +1205,6 @@ class ContextAwareExtractor:
         
         return adjusted
     
-    def _check_bloom_consistency(self, skills: List[SkillItem], context: str) -> List[SkillItem]:
-        """Bloom consistency check is a no-op after pipeline-redesign-v2 (Req 1).
-
-        Bloom-level decisions are returned to curriculum stakeholders, so the
-        pipeline no longer adjusts confidence based on Bloom-level agreement.
-        Method retained as a pass-through for backward compatibility with
-        callers that still invoke it.
-        """
-        return list(skills)
-
 # ============================================================
 # 7. ADVANCED FUSION ENGINE
 # ============================================================
@@ -1404,7 +1252,7 @@ class AdvancedFusionEngine:
                     
                     # Get dynamic threshold for this skill
                     thresholds = AdvancedTaxonomyManager.get_dynamic_threshold(
-                        bert_skill.type, bert_skill.bloom, bert_skill.semantic_density
+                        bert_skill.type, bert_skill.semantic_density
                     )
                     
                     if similarity > thresholds['skill_match']:
@@ -1451,7 +1299,6 @@ class AdvancedFusionEngine:
                 fused_skill = SkillItem(
                     text=bert_skill.text,
                     type=bert_skill.type,
-                    bloom=bert_skill.bloom,
                     confidence_score=adjusted_confidence,
                     confidence_tier=AdvancedTaxonomyManager.get_confidence_tier(adjusted_confidence),
                     source="BERT (standalone)",
@@ -1483,23 +1330,9 @@ class AdvancedFusionEngine:
                 fused_type = bert_skill.type
             else:
                 fused_type = gpt_skill.type
-        
-        # Decide Bloom level
-        if fused_type == SkillType.SOFT:
-            fused_bloom = BloomLevel.NA
-        else:
-            # For hard skills, prefer the higher Bloom level with confidence adjustment
-            bloom_order = ['Remember', 'Understand', 'Apply', 'Analyze', 'Evaluate', 'Create']
-            bert_bloom_value = bloom_order.index(bert_skill.bloom.value) if bert_skill.bloom.value in bloom_order else -1
-            gpt_bloom_value = bloom_order.index(gpt_skill.bloom.value) if gpt_skill.bloom.value in bloom_order else -1
-            
-            if bert_bloom_value > gpt_bloom_value:
-                fused_bloom = bert_skill.bloom
-                bloom_confidence = ensure_float(bert_skill.confidence_score) * AdvancedPipelineConfig.FUSION_BLOOM_CONFIDENCE_SCALE
-            else:
-                fused_bloom = gpt_skill.bloom
-                bloom_confidence = ensure_float(gpt_skill.confidence_score) * AdvancedPipelineConfig.FUSION_BLOOM_CONFIDENCE_SCALE
-        
+
+        # Bloom-level fusion removed in pipeline-redesign-v2 (Req 1).
+
         # Calculate fused confidence
         base_confidence = (ensure_float(bert_skill.confidence_score) + ensure_float(gpt_skill.confidence_score)) / 2
         match_bonus = match_score * AdvancedPipelineConfig.FUSION_MATCH_BONUS_WEIGHT
@@ -1519,7 +1352,6 @@ class AdvancedFusionEngine:
         return SkillItem(
             text=fused_text,
             type=fused_type,
-            bloom=fused_bloom,
             confidence_score=fused_confidence,
             confidence_tier=AdvancedTaxonomyManager.get_confidence_tier(fused_confidence),
             source="BERT+LLM",
@@ -1742,7 +1574,7 @@ class AdvancedCoverageCalculator:
                     if item_type == 'skill':
                         skill = items[idx]
                         thresholds = AdvancedTaxonomyManager.get_dynamic_threshold(
-                            skill.type, skill.bloom, skill.semantic_density
+                            skill.type, skill.semantic_density
                         )
                         threshold_factor = similarity_float / thresholds['similarity'] if thresholds['similarity'] > 0 else 1.0
                     else:
@@ -1787,7 +1619,6 @@ class AdvancedCoverageCalculator:
             "Consider adding more specific skills in this area",
             "Include more technical knowledge items",
             "Add both theoretical and practical aspects",
-            "Cover multiple Bloom taxonomy levels",
             "Include both hard and soft skills"
         ]
         
@@ -1855,10 +1686,10 @@ class AdvancedDataManager:
             'gpt_skills_raw', 'gpt_skills_count', 'gpt_knowledge_raw', 'gpt_knowledge_count',
             # Hybrid outputs
             'final_skills', 'final_skills_count', 'final_knowledge', 'final_knowledge_count',
-            # Taxonomy and classification
-            'jobbert_hard_skills', 'jobbert_soft_skills', 'jobbert_bloom_distribution',
-            'gpt_hard_skills', 'gpt_soft_skills', 'gpt_bloom_distribution',
-            'final_hard_skills', 'final_soft_skills', 'final_bloom_distribution',
+            # Taxonomy and classification (Bloom distributions removed in pipeline-redesign-v2)
+            'jobbert_hard_skills', 'jobbert_soft_skills',
+            'gpt_hard_skills', 'gpt_soft_skills',
+            'final_hard_skills', 'final_soft_skills',
             # Confidence scores
             'jobbert_avg_confidence', 'gpt_avg_confidence', 'final_avg_confidence',
             'jobbert_confidence_distribution', 'gpt_confidence_distribution', 'final_confidence_distribution',
@@ -1870,18 +1701,17 @@ class AdvancedDataManager:
             # Fusion statistics
             'bert_only_skills', 'gpt_only_skills', 'fused_skills',
             'bert_only_knowledge', 'gpt_only_knowledge', 'fused_knowledge',
-            # Quality metrics
-            'avg_semantic_density', 'avg_context_agreement', 'bloom_consistency_score',
+            # Quality metrics (bloom_consistency_score removed in pipeline-redesign-v2)
+            'avg_semantic_density', 'avg_context_agreement',
             # Extraction time (if available)
             'extraction_time_seconds'
         ]
         pd.DataFrame(columns=comprehensive_columns).to_csv(self.files['comprehensive'], index=False)
         
-        # Model Comparison CSV
+        # Model Comparison CSV (bloom_* columns removed in pipeline-redesign-v2)
         comparison_columns = [
             'job_id', 'model', 'skill_count', 'hard_skill_count', 'soft_skill_count',
-            'knowledge_count', 'avg_confidence', 'bloom_remember', 'bloom_understand', 
-            'bloom_apply', 'bloom_analyze', 'bloom_evaluate', 'bloom_create', 'bloom_na',
+            'knowledge_count', 'avg_confidence',
             'coverage_pct', 'confidence_vh', 'confidence_h', 'confidence_mh', 'confidence_m',
             'confidence_ml', 'confidence_l', 'confidence_vl'
         ]
@@ -2053,16 +1883,6 @@ class AdvancedDataManager:
             def count_skills_by_type(skills, skill_type):
                 return len([s for s in skills if s.type.value == skill_type])
             
-            def get_bloom_distribution(skills):
-                distribution = {
-                    'Remember': 0, 'Understand': 0, 'Apply': 0, 
-                    'Analyze': 0, 'Evaluate': 0, 'Create': 0, 'N/A': 0
-                }
-                for skill in skills:
-                    bloom = skill.bloom.value
-                    distribution[bloom] = distribution.get(bloom, 0) + 1
-                return json.dumps(distribution)
-            
             def get_confidence_distribution(skills):
                 distribution = {
                     'Very High': 0, 'High': 0, 'Medium High': 0,
@@ -2104,18 +1924,7 @@ class AdvancedDataManager:
             # Quality metrics
             avg_semantic_density = np.mean([ensure_float(s.semantic_density) for s in final_skills]) if final_skills else 0.0
             avg_context_agreement = np.mean([ensure_float(s.context_agreement) for s in final_skills]) if final_skills else 0.0
-            
-            # Bloom consistency (check if Bloom levels make sense)
-            bloom_consistency_score = 0.0
-            if final_skills:
-                consistent_count = 0
-                for skill in final_skills:
-                    if skill.type.value == 'Soft' and skill.bloom.value == 'N/A':
-                        consistent_count += 1
-                    elif skill.type.value == 'Hard' and skill.bloom.value != 'N/A':
-                        consistent_count += 1
-                bloom_consistency_score = consistent_count / len(final_skills)
-            
+
             # Coverage data
             coverage_analysis = results.get('coverage_analysis', {})
             coverage_metrics = coverage_analysis.get('metrics', {})
@@ -2142,18 +1951,15 @@ class AdvancedDataManager:
                 'final_knowledge': json.dumps([k.text for k in final_knowledge]),
                 'final_knowledge_count': len(final_knowledge),
                 
-                # Taxonomy and classification
+                # Taxonomy and classification (Bloom distributions removed in pipeline-redesign-v2)
                 'jobbert_hard_skills': bert_hard_count,
                 'jobbert_soft_skills': bert_soft_count,
-                'jobbert_bloom_distribution': get_bloom_distribution(bert_skills),
-                
+
                 'gpt_hard_skills': gpt_hard_count,
                 'gpt_soft_skills': gpt_soft_count,
-                'gpt_bloom_distribution': get_bloom_distribution(gpt_skills),
-                
+
                 'final_hard_skills': final_hard_count,
                 'final_soft_skills': final_soft_count,
-                'final_bloom_distribution': get_bloom_distribution(final_skills),
                 
                 # Confidence scores
                 'jobbert_avg_confidence': get_avg_confidence(bert_skills),
@@ -2187,11 +1993,10 @@ class AdvancedDataManager:
                 'gpt_only_knowledge': llm_knowledge_only,
                 'fused_knowledge': fused_knowledge,
                 
-                # Quality metrics
+                # Quality metrics (bloom_consistency_score removed in pipeline-redesign-v2)
                 'avg_semantic_density': avg_semantic_density,
                 'avg_context_agreement': avg_context_agreement,
-                'bloom_consistency_score': bloom_consistency_score,
-                
+
                 # Extraction time
                 'extraction_time_seconds': extraction_time or 0.0
             }
@@ -2208,10 +2013,6 @@ class AdvancedDataManager:
             bert_skills = extraction_results.get('bert', [])
             gpt_skills = extraction_results.get('gpt', [])
             final_skills = results.get('skills', [])
-            
-            # Helper function to count Bloom levels
-            def count_bloom_level(skills, bloom_level):
-                return len([s for s in skills if s.bloom.value == bloom_level])
             
             # Helper function to count confidence tiers
             def count_confidence_tier(skills, tier):
@@ -2253,17 +2054,8 @@ class AdvancedDataManager:
                     'soft_skill_count': soft_count,
                     'knowledge_count': knowledge_count,
                     'avg_confidence': avg_conf,
-                    
-                    # Bloom distribution
-                    'bloom_remember': count_bloom_level(skills, 'Remember'),
-                    'bloom_understand': count_bloom_level(skills, 'Understand'),
-                    'bloom_apply': count_bloom_level(skills, 'Apply'),
-                    'bloom_analyze': count_bloom_level(skills, 'Analyze'),
-                    'bloom_evaluate': count_bloom_level(skills, 'Evaluate'),
-                    'bloom_create': count_bloom_level(skills, 'Create'),
-                    'bloom_na': count_bloom_level(skills, 'N/A'),
-                    
-                    # Coverage (only for hybrid)
+
+                    # Coverage (only for hybrid). Bloom distribution removed in pipeline-redesign-v2.
                     'coverage_pct': coverage_metrics.get('coverage_percentage', 0) if model_name == 'Hybrid' else 0,
                     
                     # Confidence distribution
@@ -2299,7 +2091,7 @@ class AdvancedDataManager:
                 f.write("Advanced Features Used:\n")
                 f.write("1. [✓] Dynamic Thresholds - Context-aware similarity matching\n")
                 f.write("2. [✓] Continuous Confidence - 7-tier confidence system\n")
-                f.write("3. [✓] Context Awareness - Model agreement & Bloom consistency\n")
+                f.write("3. [✓] Context Awareness - Model agreement\n")
                 f.write("4. [✓] Partial Match Handling - Substring & fuzzy matching\n")
                 f.write("5. [✓] Better Coverage - More BERT skills with adjusted confidence\n\n")
                 
@@ -2388,7 +2180,7 @@ class AdvancedSkillExtractionPipeline:
             logger.info("Advanced Features Loaded:")
             logger.info("1. Dynamic Thresholds - Adjust based on skill characteristics")
             logger.info("2. Continuous Confidence - 7-tier confidence system")
-            logger.info("3. Context Awareness - Model agreement, Bloom consistency")
+            logger.info("3. Context Awareness - Model agreement")
             logger.info("4. Partial Match Handling - Substring and fuzzy matching")
             logger.info("5. Better Coverage - More BERT skills with adjusted confidence")
             logger.info("6. Comprehensive Analysis - Complete CSV for visualization")
