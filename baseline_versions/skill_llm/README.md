@@ -110,11 +110,37 @@ The integration is a drop-in replacement for the BERT path in
    continues to work unchanged — Skill-LLM produces `SkillItem` instances
    the same way the BERT path does.
 
-The verb-led skill spans the new model emits feed `generate_competencies.py`
-unchanged — the existing prompt already expects verb-led skills (it asks the
-LLM to write competencies from action-oriented input).
+### How the hybrid handles ambiguous single-word spans
+
+The Skill-LLM extractor is permissive on purpose. When a job posting writes
+just "Python" (no verb), Skill-LLM can place it under either SKILL (lazy
+hard-skill writing) or KNOWLEDGE (canonical tech noun) depending on training
+fit. The extractor sees a span with no surrounding context; it can't fully
+disambiguate.
+
+The pipeline's existing **LLM-on-full-posting stage** (`pipeline.py:LLMExtractor`)
+sees the entire job description and produces its own SKILL / KNOWLEDGE split.
+The fusion engine reconciles the two:
+
+- If both extractors agree, the item is fused with high confidence.
+- If they disagree on category (e.g. Skill-LLM says "Python" is a SKILL, the
+  full-posting LLM says KNOWLEDGE), `_fuse_matched_skills` falls back to the
+  full-posting LLM's classification because it had more context.
+- If only one extractor saw the item, it survives as a standalone (with the
+  appropriate confidence penalty).
+
+This is exactly the design that makes the verb-preservation invariant a
+**soft constraint**, not a hard one. Skill-LLM should preserve verbs when they
+exist in the source ("designing UI/UX") because that's how it's trained. When
+the source itself has no verb ("Python"), the downstream LLM is the safety
+net that puts the item under the right key based on the surrounding sentence.
 
 ## What the verb-preservation diagnostic actually catches
+
+The diagnostic is a **smoke test on the extractor's training fidelity**, not a
+final-word quality gate. The pipeline's downstream LLM-on-full-posting stage
+(see "How the hybrid handles ambiguous single-word spans" above) is the real
+arbiter for ambiguous items.
 
 `eval.py` counts predicted SKILL spans shorter than `VERB_PRESERVATION_MIN_TOKENS`
 (2 tokens) and compares the rate to the training-set baseline written by
@@ -123,12 +149,14 @@ LLM to write competencies from action-oriented input).
 SkillSpan's training data has ~14% single-token SKILL spans because the SKILL
 category covers soft skills like `passion`, `empathetic`, `self-starter`,
 `team-player` — those are legitimate single-token skills, not noun leaks. So
-a hard 5% gate would always fail on a well-trained model.
+a hard 5% gate would always fail on a well-trained model. And single-token
+job-posting spans like `"Python"` are genuinely ambiguous — they could be a
+soft skill or a lazy hard-skill mention; the extractor cannot tell.
 
-The gate passes when the model's short-SKILL rate stays within
+The diagnostic passes when the model's short-SKILL rate stays within
 `VERB_FAILURE_TOLERANCE_DELTA = 0.10` of the training baseline. On SkillSpan
-that means up to ~24% short-SKILL is OK; 25%+ is suspicious. Failure modes
-that drive the rate up:
+that means up to ~24% short-SKILL is OK; 25%+ suggests the fine-tune is broken
+in some way. Failure modes that drive the rate up:
 
 - LoRA rank too low (< 32) — adapter can't represent the structured JSON well
   enough and falls back to whatever pre-training memorised.
@@ -136,6 +164,10 @@ that drive the rate up:
   the skill / knowledge distinction yet.
 - Bad chat template — if `apply_chat_template` is misconfigured, loss masking
   in `train.py:tokenise_record` may mask the JSON output too, training nothing.
+
+If the diagnostic fails, the model has *training fidelity* problems. If it
+passes, the model is faithful to SkillSpan and any residual single-token
+ambiguity gets resolved at fusion time.
 
 The `outputs/trained/raw_outputs_*.jsonl` files preserve every generated
 string, parsed or not, so post-mortem analysis is easy.

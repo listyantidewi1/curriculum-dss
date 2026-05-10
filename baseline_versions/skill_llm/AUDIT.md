@@ -44,6 +44,17 @@ spans are single-token for this reason. The diagnostic below accounts for this
 by gating on *drift from the training distribution* rather than an absolute
 threshold — see `prepare_data.py:write_training_stats` and `eval.py`.
 
+**Note on lazy hard skills:** A single-token job-posting span like `"Python"` is
+genuinely ambiguous — could be a soft-skill-shaped annotation, or could be lazy
+hard-skill writing (the employer dropped the verb). The extractor cannot
+distinguish these from the span alone. **It does not need to.** The pipeline's
+hybrid architecture already has a downstream LLM-on-full-posting stage with
+full surrounding context that can re-categorize ambiguous items — see the
+integration plan in `README.md`. The diagnostic below is therefore a **smoke
+test on the extractor's training fidelity**, not a final-word quality gate.
+Use it to detect a misfire in fine-tuning (model degrading into a noun-leaning
+extractor); the LLM downstream catches the residual ambiguity.
+
 This distinction is **load-bearing** for the downstream pipeline:
 
 - The competency generator turns SKILL items into measurable learning outcomes
