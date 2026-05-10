@@ -737,51 +737,73 @@ class LLMExtractor:
         ### GENERAL RULES
         ========================
         1. Output **ONLY** a valid JSON object with keys: `"skills"` and `"knowledge"`.
-        2. If the input text is **NOT in English**, ONLY extract knowledge
+        2. If the input text is **NOT in English**, ONLY extract knowledge.
 
         ========================
         ### EXTRACTION RULES
         ========================
-        3. **Skills extraction**:
-        - Must be action-oriented (verbs + context).
-        - REJECT single-word skills (e.g. "design", "propose", "manage") — they are too vague.
-          Skills MUST include verb + object/context (e.g. "design software", "propose solutions").
-        - Structure:
-            { "skill": "verb + object/context",
+        3. **Hard skills** (type="Hard"):
+        - Must be VERB-LED action phrases: verb + object/context.
+        - Examples: "designing UI/UX", "analyzing data", "managing CI/CD pipeline",
+          "writing C++", "implementing APIs", "operating CNC machine".
+        - DO NOT emit bare verbs ("design", "manage", "propose") — too vague.
+        - DO NOT emit bare tech / tool nouns ("Python", "AWS", "UI/UX", "SQL")
+          as Hard skills — those are KNOWLEDGE, not skills, even if the job
+          posting writes them alone (lazy hard-skill phrasing).
+          The verb is what makes something a skill rather than a tool.
+
+        4. **Soft skills** (type="Soft"):
+        - Cognitive, interpersonal, behavioral, personal-management, or
+          communication abilities. NOT tied to a specific tool or domain.
+        - Verb-led phrases are fine: "communicate ideas", "collaborate with team",
+          "lead a team", "manage time", "adapt to change", "think critically".
+        - Single-word noun or adjective forms are ALSO fine for soft skills:
+          "passion", "empathy", "leadership", "communication", "adaptability",
+          "self-starter", "team-player", "ownership", "grit".
+          (This is the one place where bare nouns/adjectives are valid skills.)
+
+        5. **Skill output structure**:
+            { "skill": "<verb + object/context (Hard) OR noun/adjective (Soft)>",
               "type": "Hard" | "Soft" }
 
-        4. **Hard vs Soft skills**:
-            - HARD SKILL:
-                * technical, measurable, domain-specific
-                * requires tools, technologies, frameworks, or specialized knowledge
-                * examples: "analyze data", "manage CI/CD pipeline", "write C++", "use Python", "operate CNC machine", "implement APIs", "design database schema"
-            - SOFT SKILL:
-                * ANY non-technical skill involving cognitive, interpersonal, behavioral,
-                    personal management, communication, or strategic thinking abilities
-                * does NOT require a specific technical tool or domain expertise
-                * examples: "communicate ideas", "collaborate with team", "solve problems",
-                    "manage time", "adapt to change", "think critically", "lead a team"
-
-        5. **Knowledge extraction**:
-        - Knowledge is **NOT a skill**.
-        - Knowledge is NOT educational degree (degree, bachelor, master, PhD, doctoral, diploma).
-        - Knowledge items MUST be nouns representing tools, technologies, platforms, or theoretical concepts.
+        6. **Knowledge extraction**:
+        - Knowledge items are NOUNS representing tools, technologies, platforms,
+          frameworks, or theoretical concepts.
+        - Knowledge is NOT a skill: no verbs.
+        - Knowledge is NOT educational degree (degree, bachelor, master, PhD,
+          doctoral, diploma).
+        - When a job posting writes a tool alone ("Python", "AWS"), it is
+          KNOWLEDGE — even if the employer was being lazy and meant "use Python".
+          The pipeline's downstream stages will pair this knowledge with any
+          surrounding verb-led skill ("develop in Python") if one exists.
         - Output format: list of strings. Example:
             ["Python", "Docker", "Agile methodology"]
 
         ========================
         ### CONTEXT INTEGRATION
         ========================
-        6. Use "Context (Tools detected by JobBERT)" ONLY as a hint to infer skills or knowledge.
-        Do NOT fabricate new skills, knowledges, or tools not present in job text or context.
+        7. Use "Context (Tools detected by JobBERT)" ONLY as a hint to infer
+        skills or knowledge. Do NOT fabricate new skills, knowledges, or tools
+        not present in job text or context.
 
         ========================
         ### OUTPUT VALIDATION
         ========================
-        7. No duplicates.
-        8. No hallucinations.
-        9. No commentary, only JSON.
+        8. No duplicates.
+        9. No hallucinations.
+        10. No commentary, only JSON.
         """
+        # NOTE: when the per-sentence Skill-LLM extractor (Phase 1.5) is wired
+        # into the pipeline, this LLM call's role shifts to ARBITRATION over
+        # Skill-LLM's per-sentence draft using full-posting context. At that
+        # point we will pass Skill-LLM's output into `user_prompt` below as an
+        # additional "Draft extraction (per-sentence model)" block, and add a
+        # rule that allows this LLM to OVERRIDE the per-sentence model's
+        # category assignment when the surrounding sentence contradicts it
+        # (e.g., per-sentence model labelled "Python" as Skill but the
+        # surrounding sentence is "5+ years Python experience" → KNOWLEDGE).
+        # Until Skill-LLM lands, this LLM is the primary extractor and the
+        # rules above suffice.
         
         user_prompt = f"""
             Job Description: "{text}"
