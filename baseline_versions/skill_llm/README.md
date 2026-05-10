@@ -22,12 +22,30 @@ KKNI labeler, which both lose information if the verb is stripped.
 
 ## Targets (revised from `requirements.md` Req 3)
 
-| Metric | Original target (`requirements.md` Req 3) | New target (literature-grounded) |
+| Metric | Original target (`requirements.md` Req 3) | New target (literature-grounded, paper's 8B backbone) |
 |---|---|---|
 | Skill F1 | ≥ 0.70 | **≥ 0.54** (matches Skill-LLM SOTA = 0.543) |
 | Knowledge F1 | ≥ 0.80 | **≥ 0.74** (matches Skill-LLM SOTA = 0.742) |
 | Total span F1 | — | **≥ 0.65** (matches Skill-LLM SOTA = 0.648) |
 | Verb-preservation gate | — | **model's short-SKILL rate ≤ training baseline + 0.10** (see AUDIT.md "CRITICAL INVARIANT") |
+
+### Backbone scaling — what to expect at smaller sizes
+
+The current `config.py` is set to `meta-llama/Llama-3.2-1B-Instruct`, ~12% of
+the paper's 8B backbone. The recipe transfers but the F1 numbers won't match
+the paper. Rough expectations (single-seed, no hyperparameter sweep):
+
+| Backbone | Skill F1 | Knowledge F1 | Notes |
+|---|---|---|---|
+| LLaMA 3.2 1B Instruct | ≈ 0.45 – 0.50 | ≈ 0.60 – 0.65 | between vanilla BERT and GLiNER |
+| LLaMA 3.2 3B Instruct | ≈ 0.50 – 0.54 | ≈ 0.68 – 0.72 | gets close to paper SOTA |
+| LLaMA 3.1 8B Instruct (paper) | ≈ 0.54 | ≈ 0.74 | reproduces Skill-LLM Table 2 |
+
+LLaMA 3.2 3B is the **best practical middle ground**: same Meta license tier as
+3.2 1B (so if you have access to one you should have access to the other),
+roughly halves the capacity gap, and trains in ~30–45 minutes on a single
+A100. To switch, change `BASE_MODEL_NAME` in [config.py](config.py) and bump
+`LORA_RANK` back to 48 or 64.
 
 ## Files
 

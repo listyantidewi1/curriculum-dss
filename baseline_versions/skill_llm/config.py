@@ -27,20 +27,37 @@ ADAPTER_DIR = PACKAGE_ROOT / "lora_adapter"
 
 # --- backbone --------------------------------------------------------------
 
-# Skill-LLM paper used "LLaMA 3 8B Instruct" (April 2024). LLaMA 3.1 is the same
-# architecture with 128k context and slightly better instruction following.
-BASE_MODEL_NAME = "meta-llama/Llama-3.1-8B-Instruct"
+# Skill-LLM paper used "LLaMA 3 8B Instruct" (April 2024). We're running on
+# LLaMA 3.2 1B Instruct because that's what the user has gated-access to — same
+# architecture family, just smaller. Expect ~10-15 F1 points below the paper's
+# 0.543 / 0.742 because of the capacity gap.
+#
+# To match the paper more closely (or land within 1-2 F1 of it), upgrade to one
+# of these — same license tier as 3.2 1B, no extra approval needed:
+#   meta-llama/Llama-3.2-3B-Instruct   (3x the size; ~0.50 / 0.70 expected)
+#   meta-llama/Llama-3.1-8B-Instruct   (paper's exact backbone; needs Meta-approved access)
+# Or these no-gating alternatives (no Meta auth needed):
+#   Qwen/Qwen2.5-7B-Instruct
+#   mistralai/Mistral-7B-Instruct-v0.3
+BASE_MODEL_NAME = "meta-llama/Llama-3.2-1B-Instruct"
 
-# 4-bit NF4 quantisation (bitsandbytes). Required to fit 8B on 24 GB GPUs.
+# 4-bit NF4 quantisation (bitsandbytes). Required to fit 8B on 24 GB GPUs;
+# unnecessary for 1B (which fits in bf16 on any GPU) but harmless and keeps
+# the training loop identical regardless of backbone choice.
 USE_4BIT = True
 BNB_4BIT_QUANT_TYPE = "nf4"
 BNB_4BIT_COMPUTE_DTYPE = "bfloat16"
 BNB_4BIT_USE_DOUBLE_QUANT = True
 
 # --- LoRA recipe (Skill-LLM paper §"Experimental Setup") --------------------
+#
+# Paper used rank 64 on an 8B backbone (LoRA params ≈ 0.06% of base). On a 1B
+# backbone, rank 32 keeps a comparable LoRA-to-base ratio (~0.16%); rank 64
+# would over-parameterise the adapter relative to model capacity. If you swap
+# back to 7B / 8B, restore rank 64.
 
-LORA_RANK = 64
-LORA_ALPHA = 128                    # 2 x rank, standard
+LORA_RANK = 32                      # was 64; scaled down for the 1B backbone
+LORA_ALPHA = 64                     # 2 x rank, standard
 LORA_DROPOUT = 0.05
 LORA_TARGET_MODULES = ["q_proj", "v_proj"]
 LORA_BIAS = "none"
