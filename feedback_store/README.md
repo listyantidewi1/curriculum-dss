@@ -1,6 +1,6 @@
 # Feedback Store
 
-Canonical storage for human-in-the-loop review feedback. Used by the pipeline for adaptation (Bloom overrides, human-verified filtering, competency few-shot examples).
+Canonical storage for human-in-the-loop review feedback. Used by the pipeline for adaptation (type overrides, human-verified filtering, competency few-shot examples). Bloom overrides were removed in pipeline-redesign-v2 Phase 1.3.
 
 ## Locations
 
@@ -15,13 +15,13 @@ Both use the same schema. `import_feedback.py` reads from a configurable path (d
 
 | File | Description |
 |------|--------------|
-| `skill_feedback.csv` | review_id, reviewer_id, human_valid, human_type, human_bloom, human_notes |
+| `skill_feedback.csv` | review_id, reviewer_id, human_valid, human_type, human_notes (human_bloom removed in Phase 1.3) |
 | `knowledge_feedback.csv` | review_id, reviewer_id, human_valid, human_notes |
 | `competency_feedback.csv` | competency_id, reviewer_id, human_quality, human_relevant, human_notes |
 | `human_verified_skills.csv` | Merged (majority vote); skills where human_valid=valid |
 | `human_verified_knowledge.csv` | Merged; knowledge where human_valid=valid |
 | `competency_assessments.json` | `{ competency_id: { quality, relevant, notes } }` |
-| `bloom_corrections.json` | `{ skill_text: correct_bloom }` for Bloom override |
+| ~~`bloom_corrections.json`~~ | **Removed in pipeline-redesign-v2 Phase 1.3.** |
 | `type_corrections.json` | `{ skill_text: Hard|Soft|Both }` |
 | `inter_rater_report.json` | Cohen's Kappa, agreement %, when ≥2 reviewers |
 | `calibrated_threshold.json` | From validate_parameters.py (AUC, Brier) |

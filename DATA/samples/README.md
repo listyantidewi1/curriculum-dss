@@ -23,5 +23,7 @@ python scripts/create_sample_csvs.py
 
 - **component_id**: Unique curriculum component ID
 - **component_name**: Human-readable name
-- **bloom_level**: understand, apply, analyze, create, etc.
+- ~~**bloom_level**~~: removed in pipeline-redesign-v2 Phase 1.3. The
+  curriculum loader now ignores this column when present, so legacy
+  CSVs that still carry it continue to load without error per Req 1.5.
 - **phrases**: Comma-separated learning phrases

@@ -50,7 +50,7 @@ Beberapa keputusan kritis di-elaborasi lebih lanjut setelah tabel.
 | 5 | Hard cap 12 kompetensi per *batch* | Pragmatic post-hoc enforcement | Prompt-only "aim for 8–20" yang LLM abaikan | Kontrol output vs natural LLM judgment |
 | 6 | Sub-clustering "Uncertain"/"Unmapped" via SBERT agglomerative | Keluhan promotor: skill tidak terkait dilumpukkan | *Drop* skill berkonfidensi rendah | Menjaga *recall* vs menambah kompleksitas |
 | 7 | *Three-stage deduplication* (normalized + semantic + Jaccard) | Literatur clustering | *Title-only matching* | Kompleksitas vs presisi dedup |
-| 8 | KKNI assignment hibrida (Bloom-floor + LLM clamp band) | Perpres 8/2012; Anderson & Krathwohl (2001) | LLM-only assignment; rule-only assignment | Reliabilitas rule-based vs nuansa LLM |
+| 8 | ~~KKNI assignment hibrida (Bloom-floor + LLM clamp band)~~ → **direvisi: SBERT post-hoc labeler (Phase 2.3)** | Perpres 8/2012 deskriptor resmi | LLM-only assignment; rule-only assignment | Reliabilitas SBERT match vs ground-truth ahli KKNI |
 | 9 | Ekstraksi level pendidikan dari teks lowongan | ILO (2022) job-posting analysis | Asumsikan satu level untuk seluruh korpus | Regex tidak menangkap variasi natural |
 | 10 | Bobot prioritas 0.40 demand + 0.30 trend + 0.30 future, w_coverage=0 | *Design intent* "curriculum reform tool"; coverage ablation report | Coverage masuk bobot prioritas | Reformasi kurikulum vs *compliance audit* |
 | 11 | *Public-first dashboard* (anonymous browse + light signup) | Pragmatik penyebarluasan; di luar literatur | Akses penuh hanya via login | Aksesibilitas vs analitik perilaku |
@@ -100,19 +100,51 @@ informasi dan kelelahan kognitif pembaca. Eksperimen sensitivitas
 terhadap *cap* (8 vs 12 vs 16) belum dilakukan dan disebutkan sebagai
 arah lanjutan di §4.3.
 
-### 1.4 Mengapa hibrida untuk KKNI assignment
+### 1.4 Mengapa SBERT post-hoc untuk KKNI assignment (revisi May 2026)
 
-Keputusan paling baru dan paling eksperimental adalah *hybrid* KKNI
-assignment di [kkni.py](kkni.py). Sistem menghitung *floor* deterministik
-dari level Bloom tertinggi (Apply→4, Analyze→5, Evaluate→6, Create→7),
-lalu meminta LLM memilih level KKNI dalam *band* [floor, floor+1].
-Output di luar *band* di-*clamp* kembali ke *floor*. Pendekatan ini
-menggabungkan reliabilitas aturan eksplisit dengan kemampuan LLM
-membedakan kompleksitas yang sulit dirumuskan sebagai aturan kaku.
-Trade-off yang diterima: *band* [floor, floor+1] adalah heuristik yang
-belum tervalidasi expert—diakui sebagai ancaman validitas internal
-(§3.1) dan rencana validasi via metode Delphi pada Tahap 6 Borg & Gall
-(§4.3).
+**Catatan revisi:** subseksi ini awalnya mendokumentasikan pendekatan
+*hybrid* (Bloom-floor + LLM clamp band) yang sempat diimplementasikan di
+[kkni.py](../kkni.py). Pendekatan tersebut **dihapus dalam
+pipeline-redesign-v2 Phase 1.3 (Mei 2026)** seiring dengan penghapusan
+klasifikasi Bloom dari pipeline secara menyeluruh per Req 1 (lihat
+[`.kiro/specs/pipeline-redesign-v2/requirements.md`](../.kiro/specs/pipeline-redesign-v2/requirements.md)).
+
+**Pendekatan asli (yang dihapus):** sistem menghitung *floor*
+deterministik dari level Bloom tertinggi di antara `related_skills`
+(Apply→4, Analyze→5, Evaluate→6, Create→7), lalu meminta LLM memilih
+level KKNI dalam *band* [floor, floor+1]. Output di luar *band*
+di-*clamp* kembali ke *floor*. Argumen pendukung: menggabungkan
+reliabilitas aturan eksplisit dengan kemampuan LLM membedakan
+kompleksitas yang sulit dirumuskan sebagai aturan kaku.
+
+**Mengapa direvisi.** Tiga alasan, dalam urutan kepentingan:
+
+1. **Bloom sebagai layer pipeline tidak konsisten dengan brief promotor.**
+   Promotor meminta agar keputusan Bloom diserahkan kepada pemangku
+   kepentingan kurikulum (SMK / dinas pendidikan), bukan dipaksakan oleh
+   pipeline ekstraksi. Bloom-floor sebagai jembatan deterministik
+   ke KKNI berarti pipeline tetap mengambil keputusan Bloom internal
+   yang kemudian *propagate* ke output—berlawanan dengan brief.
+2. **Heuristik [floor, floor+1] tidak tervalidasi.** Sebagaimana diakui
+   pada §3.1, *band* tersebut belum diuji terhadap penilaian ahli KKNI.
+   Pendekatan post-hoc SBERT yang baru menghindari heuristik ini
+   sepenuhnya: kompetensi dibandingkan langsung terhadap deskriptor
+   level KKNI 1–9 dari Perpres 8/2012, dengan skor cosine similarity
+   sebagai *evidence trail* yang bisa diaudit.
+3. **Separasi yang lebih bersih.** Dengan pendekatan baru, keputusan
+   "level kompetensi" sepenuhnya menjadi *retrieval problem* (cocokkan
+   teks kompetensi ke deskriptor level), bukan *chained reasoning*
+   (Bloom→KKNI band→LLM clamp). Ini lebih mudah dievaluasi secara
+   independen melalui `gold_kkni.csv` di Tahap 6.
+
+**Pendekatan baru (Phase 2.3, queued).** File `kkni_labeler.py` (akan
+ditulis): encode setiap deskriptor KKNI 1–9 dari Perpres 8/2012 sebagai
+vektor SBERT; encode `title + description` setiap kompetensi yang
+dihasilkan; assign level dengan cosine similarity tertinggi; record
+top-3 candidate levels untuk transparansi. Field hasil:
+`kkni_level`, `kkni_level_top3`, `kkni_descriptor`,
+`kkni_match_similarity`. Bersifat *informational*, tidak masuk ranking
+priority (Req 2.5).
 
 ---
 
@@ -132,7 +164,7 @@ disertasi terhadap posisi yang diambil sistem ini.
 | Tyler (1949); Taba (1962)—desain kurikulum | **Operasionalisasi** | Tahap pertama Taba ("diagnosis kebutuhan") direalisasikan langsung via endpoint `/coverage` |
 | Brown et al. (2001)—Wilson Score CI | **Adopsi** | Estimasi presisi pada data ekstraksi yang *sparse* |
 | Murphy (1973)—dekomposisi Brier | **Adopsi** | Evaluasi kalibrasi probabilitas modul *confidence scoring* |
-| Anderson & Krathwohl (2001)—taksonomi Bloom revisi | **Adopsi struktural** | Bloom level skill → KKNI floor (mapping deterministik di [kkni.py](kkni.py)) |
+| Anderson & Krathwohl (2001)—taksonomi Bloom revisi | ~~**Adopsi struktural**~~ → **Tidak dipakai (revisi v2)** | Awalnya digunakan untuk mapping Bloom→KKNI floor; dihapus dalam pipeline-redesign-v2 Phase 1.3. KKNI assignment kini melalui SBERT match terhadap deskriptor Perpres 8/2012 (Phase 2.3) tanpa perantara Bloom. |
 | Perpres 8/2012—KKNI | **Sumber kebenaran tunggal** | Seluruh kerangka jenjang kompetensi mengikuti deskriptor resmi KKNI 1–9 |
 
 ### 2.1 Identifikasi gap yang diisi
@@ -195,21 +227,22 @@ yang memungkinkan deteksi bila *prompt* berubah, tetapi tidak
 mendeteksi perubahan *internal* model.
 
 **Sensitivitas prompt engineering.**
-Kualitas hasil LLM sangat bergantung pada formulasi *prompt*.
-Eksperimen pra-pivot menunjukkan bahwa perubahan kecil pada *prompt*
-(misalnya menambahkan rule "BLOOM ALIGNMENT" di
-[generate_competencies.py:474–475](generate_competencies.py#L474-L475))
-dapat memengaruhi distribusi level Bloom secara signifikan. Belum
+Kualitas hasil LLM sangat bergantung pada formulasi *prompt*. Belum
 ada *ablation study* formal yang mengukur *delta* output relatif terhadap
-varian prompt.
+varian prompt. (Catatan revisi: rule "BLOOM ALIGNMENT" yang sempat ada
+di prompt `generate_competencies.py` dihapus dalam pipeline-redesign-v2
+Phase 1.3 bersama dengan seluruh logika Bloom.)
 
-**KKNI clamp band heuristik belum tervalidasi expert.**
-Pemilihan *band* [floor, floor+1] di [kkni.py:152](kkni.py#L152)
-adalah heuristik yang belum dievaluasi terhadap penilaian ahli KKNI.
-Apakah *band* ini cukup ketat (mencegah LLM melonjak terlalu jauh
-dari Bloom-level) atau justru terlalu kaku (membatasi LLM meng-*upgrade*
-kompetensi yang seharusnya lebih tinggi)? Validasi via metode Delphi
-direncanakan pada Tahap 6 Borg & Gall.
+**~~KKNI clamp band heuristik belum tervalidasi expert.~~ *(tidak lagi
+relevan setelah revisi v2)*.**
+Pemilihan *band* [floor, floor+1] yang dulu ada di `kkni.py` sebagai
+heuristik Bloom→KKNI dihapus dalam pipeline-redesign-v2 Phase 1.3 dan
+digantikan oleh SBERT post-hoc labeler (lihat §1.4 revisi). Ancaman
+validitas yang asli (band tidak tervalidasi expert) telah hilang
+karena pendekatan band itu sendiri tidak lagi ada. Ancaman baru yang
+relevan: kualitas SBERT match terhadap deskriptor Perpres 8/2012—akan
+divalidasi via metode Delphi pada Tahap 6 Borg & Gall melalui
+`gold_kkni.csv` (rencana Phase 2.5 evaluator).
 
 **Sub-clustering threshold belum dieksperimentasi.**
 [domain_batching.py:113](domain_batching.py#L113) mendefinisikan
