@@ -53,7 +53,6 @@ except ImportError:
 # Global constants
 # -------------------------------------------------------------------
 
-BLOOM_ORDER = ["Remember", "Understand", "Apply", "Analyze", "Evaluate", "Create", "N/A"]
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"  # keep in sync with pipeline if you change it
 
 FIG_DIR_NAME = "figures"
@@ -244,64 +243,16 @@ def plot_hybrid_improvement(model_comp: pd.DataFrame, fig_dir: Path):
 
 
 # -------------------------------------------------------------------
-# 3. Bloom taxonomy distribution (hard skills)
+# 3. Bloom taxonomy distribution — REMOVED in pipeline-redesign-v2
 # -------------------------------------------------------------------
 
 def plot_bloom_distribution(model_comp: pd.DataFrame, fig_dir: Path):
-    if model_comp.empty:
-        print("[WARN] model_comparison.csv is empty; skipping Bloom distribution plots.")
-        return
-
-    df = model_comp.copy()
-    df["model_norm"] = df["model"].apply(normalize_model_name)
-
-    bloom_cols = {
-        "bloom_remember": "Remember",
-        "bloom_understand": "Understand",
-        "bloom_apply": "Apply",
-        "bloom_analyze": "Analyze",
-        "bloom_evaluate": "Evaluate",
-        "bloom_create": "Create",
-        "bloom_na": "N/A",
-    }
-
-    agg = df.groupby("model_norm")[list(bloom_cols.keys())].sum().reset_index()
-
-    melted = agg.melt(
-        id_vars=["model_norm"],
-        value_vars=list(bloom_cols.keys()),
-        var_name="bloom_raw",
-        value_name="count",
-    )
-    melted["Bloom Level"] = melted["bloom_raw"].map(bloom_cols)
-    melted["Bloom Level"] = pd.Categorical(melted["Bloom Level"], categories=BLOOM_ORDER, ordered=True)
-    melted = melted.sort_values(["model_norm", "Bloom Level"])
-
-    plt.figure(figsize=(10, 6))
-    if sns:
-        ax = sns.barplot(
-            data=melted[melted["Bloom Level"] != "N/A"],
-            x="Bloom Level",
-            y="count",
-            hue="model_norm",
-        )
-    else:
-        for model_name, subset in melted[melted["Bloom Level"] != "N/A"].groupby("model_norm"):
-            plt.bar(subset["Bloom Level"], subset["count"], alpha=0.7, label=model_name)
-        ax = plt.gca()
-    ax.set_xlabel("Bloom Level (Hard Skills)")
-    ax.set_ylabel("Total Count (across all jobs)")
-    ax.set_title("Bloom Taxonomy Distribution for Hard Skills (JobBERT vs LLM vs Hybrid)")
-    plt.legend(title="Model")
-    plt.tight_layout()
-    plt.savefig(fig_dir / "bloom_distribution_hard_skills.png", dpi=300)
-    plt.close()
-
-    return agg
+    print("[INFO] Bloom plots removed in v2 redesign; skipping bloom_distribution_hard_skills.png.")
+    return None
 
 
 # -------------------------------------------------------------------
-# 4. Curriculum × Bloom heatmap (skills)
+# 4. Curriculum mapping (heatmap removed in pipeline-redesign-v2)
 # -------------------------------------------------------------------
 
 def build_curriculum_phrase_map():
@@ -331,7 +282,7 @@ def build_curriculum_phrase_map():
             if "description" in data:
                 phrases.append(str(data["description"]))
 
-            # Collect list-valued fields (Bloom phrases)
+            # Collect list-valued fields (curriculum phrase examples)
             for key, value in data.items():
                 if isinstance(value, list):
                     phrases.extend([str(v) for v in value])
@@ -353,7 +304,7 @@ def map_items_to_components(skills_df: pd.DataFrame,
 
     Returns:
         mapping_df: DataFrame with columns:
-            ['item_type', 'text', 'bloom', 'confidence_score',
+            ['item_type', 'text', 'confidence_score',
              'component_id', 'similarity']
     """
     comp_phrases = build_curriculum_phrase_map()
@@ -376,18 +327,16 @@ def map_items_to_components(skills_df: pd.DataFrame,
         text = str(row.get("skill", "")).strip()
         if not text:
             continue
-        bloom = row.get("bloom", "N/A")
         conf = float(row.get("confidence_score", 0.0))
-        rows.append(("skill", text, bloom, conf))
+        rows.append(("skill", text, conf))
 
-    # Prepare knowledge items (Bloom = 'N/A')
+    # Prepare knowledge items
     for _, row in knowledge_df.iterrows():
         text = str(row.get("knowledge", "")).strip()
         if not text:
             continue
-        bloom = "N/A"
         conf = float(row.get("confidence_score", 0.0))
-        rows.append(("knowledge", text, bloom, conf))
+        rows.append(("knowledge", text, conf))
 
     if not rows:
         print("[WARN] No skills/knowledge rows available for curriculum mapping.")
@@ -397,7 +346,7 @@ def map_items_to_components(skills_df: pd.DataFrame,
     embeddings = embedder.encode(texts, convert_to_tensor=True)
 
     mapping_records = []
-    for idx, (item_type, text, bloom, conf) in enumerate(rows):
+    for idx, (item_type, text, conf) in enumerate(rows):
         emb = embeddings[idx]
         best_comp = None
         best_sim = 0.0
@@ -413,7 +362,6 @@ def map_items_to_components(skills_df: pd.DataFrame,
             mapping_records.append({
                 "item_type": item_type,
                 "text": text,
-                "bloom": bloom,
                 "confidence_score": conf,
                 "component_id": best_comp,
                 "similarity": best_sim,
@@ -423,7 +371,6 @@ def map_items_to_components(skills_df: pd.DataFrame,
             mapping_records.append({
                 "item_type": item_type,
                 "text": text,
-                "bloom": bloom,
                 "confidence_score": conf,
                 "component_id": None,
                 "similarity": best_sim,
@@ -434,59 +381,8 @@ def map_items_to_components(skills_df: pd.DataFrame,
 
 
 def plot_curriculum_bloom_heatmap(mapping_df: pd.DataFrame, fig_dir: Path):
-    if mapping_df.empty:
-        print("[WARN] Mapping DF empty; skipping curriculum × Bloom heatmap.")
-        return
-
-    # Hard skills only, valid component, valid Bloom
-    mask = (
-        (mapping_df["item_type"] == "skill") &
-        mapping_df["component_id"].notna() &
-        (~mapping_df["bloom"].isna())
-    )
-    sub = mapping_df[mask].copy()
-    if sub.empty:
-        print("[WARN] No mapped hard skills for heatmap.")
-        return
-
-    sub["bloom"] = sub["bloom"].fillna("N/A")
-
-    # Aggregate: weighted by confidence_score
-    pivot = sub.pivot_table(
-        index="component_id",
-        columns="bloom",
-        values="confidence_score",
-        aggfunc="sum",
-        fill_value=0.0,
-    )
-
-    # Reindex columns to Bloom order (drop NA if it doesn't exist)
-    cols = [b for b in BLOOM_ORDER if b in pivot.columns]
-    pivot = pivot.reindex(columns=cols)
-
-    plt.figure(figsize=(12, max(6, len(pivot) * 0.4)))
-    if sns:
-        ax = sns.heatmap(
-            pivot,
-            annot=False,
-            cmap="viridis",
-            linewidths=0.5,
-        )
-    else:
-        ax = plt.gca()
-        im = ax.imshow(pivot.values, aspect="auto")
-        ax.set_xticks(np.arange(len(pivot.columns)))
-        ax.set_xticklabels(pivot.columns, rotation=45, ha="right")
-        ax.set_yticks(np.arange(len(pivot.index)))
-        ax.set_yticklabels(pivot.index)
-        plt.colorbar(im)
-
-    ax.set_xlabel("Bloom Level (Hard Skills)")
-    ax.set_ylabel("Curriculum Component ID")
-    ax.set_title("Curriculum × Bloom Heatmap (Weighted by Confidence)")
-    plt.tight_layout()
-    plt.savefig(fig_dir / "heatmap_curriculum_bloom_hard_skills.png", dpi=300)
-    plt.close()
+    print("[INFO] Bloom plots removed in v2 redesign; skipping heatmap_curriculum_bloom_hard_skills.png.")
+    return None
 
 
 # -------------------------------------------------------------------
@@ -1008,7 +904,6 @@ def plot_emerging_skills_coverage(
 
 def write_text_report(agg_model: pd.DataFrame,
                       hybrid_diffs: dict,
-                      bloom_agg: pd.DataFrame,
                       coverage_report: pd.DataFrame,
                       mapping_df: pd.DataFrame,
                       output_dir: Path):
@@ -1050,22 +945,9 @@ def write_text_report(agg_model: pd.DataFrame,
             lines.append("")
         lines.append("")
 
-    # Bloom distribution
-    if bloom_agg is not None and not bloom_agg.empty:
-        lines.append("3. Bloom Taxonomy Distribution (Hard Skills)")
-        lines.append("-------------------------------------------")
-        for _, row in bloom_agg.iterrows():
-            lines.append(f"- Model: {row['model_norm']}")
-            for col in bloom_agg.columns:
-                if col == "model_norm":
-                    continue
-                lines.append(f"    {col}: {int(row[col])}")
-            lines.append("")
-        lines.append("")
-
     # Coverage report
     if coverage_report is not None and not coverage_report.empty:
-        lines.append("4. Coverage Metrics (Hybrid)")
+        lines.append("3. Coverage Metrics (Hybrid)")
         lines.append("----------------------------")
         cov_mean = coverage_report["coverage_percentage"].mean()
         cov_med = coverage_report["coverage_percentage"].median()
@@ -1092,7 +974,7 @@ def write_text_report(agg_model: pd.DataFrame,
 
     # Curriculum demand summary
     if mapping_df is not None and not mapping_df.empty:
-        lines.append("5. Curriculum Demand Summary (from Mapping)")
+        lines.append("4. Curriculum Demand Summary (from Mapping)")
         lines.append("------------------------------------------")
         mapped = mapping_df[mapping_df["component_id"].notna()].copy()
         comp_counts = mapped["component_id"].value_counts()
@@ -1142,15 +1024,12 @@ def main():
     # 2. Hybrid improvements
     hybrid_diffs = plot_hybrid_improvement(model_comp, fig_dir)
 
-    # 3. Bloom taxonomy distribution
-    bloom_agg = plot_bloom_distribution(model_comp, fig_dir)
-
-    # 4. Curriculum × Bloom heatmap + mapping
+    # 3. Curriculum mapping (Bloom heatmap removed in v2 redesign)
     if not adv_skills.empty or not adv_knowledge.empty:
         print("[INFO] Building curriculum mappings (this may take some time)...")
         embedder = SentenceTransformer(EMBEDDING_MODEL)
 
-        # 🔧 Only map HARD skills (curriculum is ~99% hard skills)
+        # Only map HARD skills (curriculum is ~99% hard skills)
         hard_skills = adv_skills[adv_skills["type"].isin(["Hard", "Both"])].copy()
 
         mapping_df = map_items_to_components(
@@ -1161,7 +1040,6 @@ def main():
         )
         if mapping_df is None:
             mapping_df = pd.DataFrame()
-        plot_curriculum_bloom_heatmap(mapping_df, fig_dir)
     else:
         mapping_df = pd.DataFrame()
 
@@ -1186,7 +1064,6 @@ def main():
     write_text_report(
         agg_model=agg_model if agg_model is not None else pd.DataFrame(),
         hybrid_diffs=hybrid_diffs if hybrid_diffs is not None else {},
-        bloom_agg=bloom_agg if bloom_agg is not None else pd.DataFrame(),
         coverage_report=coverage_report if coverage_report is not None else pd.DataFrame(),
         mapping_df=mapping_df if mapping_df is not None else pd.DataFrame(),
         output_dir=output_dir,

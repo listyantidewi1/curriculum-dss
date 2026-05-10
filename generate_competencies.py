@@ -307,30 +307,6 @@ def _jaccard_skills(a_skills: List[str], b_skills: List[str]) -> float:
     return inter / union if union else 0.0
 
 
-def _finalize_kkni(comp: Dict, skill_bloom_map: Optional[Dict[str, str]]) -> None:
-    """Compute the deterministic KKNI floor from related_skills' Bloom levels,
-    clamp the LLM-proposed kkni_level to [floor, floor+1], and write back the
-    canonical KKNI fields. In-place. Idempotent."""
-    if not isinstance(comp, dict):
-        return
-    related = comp.get("related_skills") or []
-    bloom_levels = []
-    if skill_bloom_map:
-        for s in related:
-            key = str(s).strip()
-            if not key:
-                continue
-            b = skill_bloom_map.get(key) or skill_bloom_map.get(key.lower())
-            if b:
-                bloom_levels.append(str(b).strip())
-    floor = kkni.kkni_floor_for_competency(bloom_levels)
-    proposed = comp.get("kkni_level")
-    final_level = kkni.clamp_llm_kkni(proposed, floor)
-    comp["kkni_level"] = final_level
-    comp["kkni_floor"] = floor
-    comp["kkni_descriptor"] = kkni.kkni_descriptor(final_level)
-
-
 def _absorb_soft_skills(target: Dict, source: Dict) -> None:
     """Merge source's soft_skills_required (set union) and soft_skills_description
     (keep target's if present, else use source's) into target — in place."""
@@ -574,17 +550,14 @@ def build_prompt(
     few_shot_examples: Optional[List[Dict]] = None,
     skill_future_weights: Optional[Dict[str, Dict]] = None,
     skill_time_trends: Optional[Dict[str, Dict]] = None,
-    skill_bloom_map: Optional[Dict[str, str]] = None,
     curriculum_context: str = "",
     vocational_domain: str = "",
     top_soft_skills: Optional[List[str]] = None,
 ) -> str:
-    # Annotate skills with Bloom, future_weight, and/or empirical trend when available
+    # Annotate skills with future_weight and/or empirical trend when available
     def format_skill(s: str) -> str:
         s_stripped = s.strip()
         parts = []
-        if skill_bloom_map and s_stripped in skill_bloom_map:
-            parts.append(f"bloom={skill_bloom_map[s_stripped]}")
         w = get_skill_future_data(s_stripped, skill_future_weights or {})
         if w:
             fw = w.get("future_weight", 0)
@@ -629,7 +602,7 @@ Here are examples of HIGH-QUALITY competencies (use similar style and structure)
     future_weighting_block = ""
     if skill_future_weights or skill_time_trends:
         future_weighting_block = """
-10. FUTURE WEIGHTING (important): Skills may be annotated with:
+9. FUTURE WEIGHTING (important): Skills may be annotated with:
    - future_weight, domain, forecast_trend: from domain forecasts (Strong_Growth, Moderate_Growth, Decline).
    - empirical_trend: from actual job posting frequency over time (Emerging, Declining).
    - PRIORITIZE competencies that cover skills with HIGH future_weight and/or empirical_trend=Emerging.
@@ -661,9 +634,9 @@ when filling soft_skills_required; you MAY add others if obviously required):
 {soft_list}
 """
 
-    # KKNI reference. The LLM is asked to choose a kkni_level constrained
-    # to a Bloom-derived floor (computed per competency, post-hoc). Showing
-    # the full 1-9 table here gives it the context it needs.
+    # KKNI reference. The LLM is asked to choose a kkni_level appropriate
+    # for the integrative scope of the competency. A post-hoc SBERT labeler
+    # may overwrite this; the full 1-9 table is shown here for context only.
     kkni_block = "\n" + kkni.kkni_reference_for_prompt() + "\n"
 
     return f"""
@@ -686,7 +659,7 @@ Please follow these rules:
    - "id": a short identifier (e.g., "C1", "C2", ...).
    - "title": a concise competency title.
    - "description": ONE single sentence that is clear, measurable, and operational.
-     Start with a Bloom-level verb (Design, Analyze, Evaluate, Create, etc.); state the object/outcome;
+     Start with an action verb (Design, Analyze, Evaluate, Create, etc.); state the object/outcome;
      include how (measurable, operational criteria).
      Example: "Design scalable, high-performance software components by breaking down complex
      requirements into smaller, manageable subsystems and choosing appropriate technologies."
@@ -704,24 +677,16 @@ Please follow these rules:
      skills support performance of this competency. This sentence is shown verbatim in the
      school-facing curriculum report, so write it in plain, human-readable language.
    - "kkni_level": INTEGER 1-9 indicating the appropriate KKNI qualification level for this
-     competency. Use the KKNI reference table below. The level you pick MUST be consistent
-     with the highest Bloom level among the related_skills:
-       Remember/Understand → KKNI 1-2 (operator level, SMP/SMA);
-       Apply              → KKNI 3-4 (skilled operator / junior teknisi, SMK/D1/D2);
-       Analyze            → KKNI 5-6 (teknisi analis, D3/D4/S1);
-       Evaluate           → KKNI 6-7 (senior analis / profesi);
-       Create             → KKNI 7-9 (ahli / magister / doktor).
-     Pick the level that best fits the integrative scope of the competency. The post-validator
-     will clamp out-of-band values, so stay within the band shown for the highest Bloom.
-4. BLOOM ALIGNMENT: For each competency, use the HIGHEST Bloom taxonomy level among its
-   related skills (e.g. if skills have Apply, Understand, Analyze, write at Analyze level).
-   Bloom order: Remember < Understand < Apply < Analyze < Evaluate < Create.
-5. COMPETENCY COUNT: Produce AT MOST 12 competencies per batch. Coalesce overlapping
+     competency. Use the KKNI reference table below and pick the level that best fits the
+     integrative scope of the competency. KKNI 1-3 = operator (SMP/SMA/SMK); KKNI 4-6 = teknisi/
+     analis (D2/D3/D4/S1); KKNI 7-9 = ahli (profesi/magister/doktor). A post-hoc SBERT-based
+     labeler may revise this assignment.
+4. COMPETENCY COUNT: Produce AT MOST 12 competencies per batch. Coalesce overlapping
    themes into a single broader competency rather than splitting them. Quality over
    quantity — fewer well-anchored competencies are better than many shallow ones.
-6. Avoid creating competencies that strongly overlap with others in this batch; prefer distinct themes.
-7. Prefer higher-level, integrative competencies, not trivial one-skill items.
-8. CURRICULUM LANGUAGE: Write competencies as if for a Ministry of Education curriculum document.
+5. Avoid creating competencies that strongly overlap with others in this batch; prefer distinct themes.
+6. Prefer higher-level, integrative competencies, not trivial one-skill items.
+7. CURRICULUM LANGUAGE: Write competencies as if for a Ministry of Education curriculum document.
    Use learning-outcome language (what the learner can demonstrate or produce).
    AVOID HR/job-description phrasing: "actionable insights", "strategic decisions", "inform
    stakeholders", "drive value", "business impact", "competitive advantage", "meet business needs".
@@ -729,7 +694,7 @@ Please follow these rules:
    understanding", "present recommendations", "evaluate alternatives", "create artifacts".
    PRESERVE all substantive technical and cognitive requirements (methods, tools, processes).
    Competencies must be ASSESSABLE (e.g., by test, project, or portfolio).
-9. Give slightly higher priority and more detail to skills and themes that appear
+8. Give slightly higher priority and more detail to skills and themes that appear
    in future-critical domains (AI, data, cloud, security, human–AI collaboration),
    if such context is provided.
 {future_weighting_block}
@@ -768,8 +733,8 @@ def _validate_competency(c: dict) -> bool:
         c["soft_skills_required"] = [str(s).strip() for s in c["soft_skills_required"] if str(s).strip()]
     if "soft_skills_description" not in c or not isinstance(c.get("soft_skills_description"), str):
         c["soft_skills_description"] = ""
-    # KKNI level is normalized post-clamp by _finalize_kkni; here we only ensure
-    # the key exists so older cached competencies remain loadable.
+    # KKNI level is assigned (or revised) post-hoc by the SBERT-based labeler;
+    # here we only ensure the key exists so older cached competencies remain loadable.
     if "kkni_level" not in c:
         c["kkni_level"] = None
     return True
@@ -805,7 +770,6 @@ def call_llm_for_competencies(client: OpenAI,
                               few_shot_examples: Optional[List[Dict]] = None,
                               skill_future_weights: Optional[Dict[str, Dict]] = None,
                               skill_time_trends: Optional[Dict[str, Dict]] = None,
-                              skill_bloom_map: Optional[Dict[str, str]] = None,
                               curriculum_context: str = "",
                               vocational_domain: str = "",
                               top_soft_skills: Optional[List[str]] = None,
@@ -816,7 +780,6 @@ def call_llm_for_competencies(client: OpenAI,
         few_shot_examples=few_shot_examples,
         skill_future_weights=skill_future_weights,
         skill_time_trends=skill_time_trends,
-        skill_bloom_map=skill_bloom_map,
         curriculum_context=curriculum_context,
         vocational_domain=vocational_domain,
         top_soft_skills=top_soft_skills,
@@ -865,10 +828,10 @@ def call_llm_for_competencies(client: OpenAI,
                               f"from competency {c.get('id', '?')}")
                     c["related_skills"] = filtered
 
-                # KKNI: clamp LLM-proposed kkni_level to [floor, floor+1] where
-                # floor is derived from the highest Bloom in related_skills.
-                for c in valid:
-                    _finalize_kkni(c, skill_bloom_map)
+                # KKNI level assignment for generated competencies is now done
+                # post-hoc by the SBERT-based labeler (see kkni_labeler.py /
+                # Phase 2.3 of pipeline-redesign-v2). The LLM's proposed
+                # kkni_level is preserved here as-is and may be overwritten later.
 
                 # Hard cap: at most COMPETENCIES_PER_BATCH_CAP per batch.
                 # If the LLM ignored rule 5 and produced more, keep the most-anchored
@@ -959,7 +922,7 @@ def main():
     parser.add_argument(
         "--comprehensive",
         action="store_true",
-        help="Use all skills (with Bloom/type corrections) from advanced_skills_human_filtered.csv. "
+        help="Use all skills (with type corrections) from advanced_skills_human_filtered.csv. "
              "Tags each competency with all_skills_human_verified. Some competencies may be from unverified skills.",
     )
     parser.add_argument(
@@ -1089,10 +1052,9 @@ def main():
                     lines = []
                     for c in components[:20]:  # Limit to avoid token overflow
                         comp_name = c.get("component_name", "") or c.get("component_id", "")
-                        bloom = c.get("bloom_level", "")
                         phrases = c.get("phrases", [])
                         phrases_str = ", ".join(str(p) for p in (phrases[:5] if isinstance(phrases, list) else []))
-                        lines.append(f"  - {comp_name} (Bloom: {bloom}): {phrases_str}")
+                        lines.append(f"  - {comp_name}: {phrases_str}")
                     curriculum_context = "\n".join(lines)
                     print(f"[INFO] Loaded {len(components)} curriculum components from {curr_path.name}")
             except Exception as e:
@@ -1137,7 +1099,7 @@ def main():
         if not comp_path.exists():
             raise FileNotFoundError(
                 f"Neither advanced_skills_human_filtered.csv nor advanced_skills.csv found in {out_dir}. "
-                "Run apply_feedback first (without --filter_only) to apply Bloom/type corrections."
+                "Run apply_feedback first (without --filter_only) to apply type corrections."
             )
         print(f"[INFO] Comprehensive mode: using all skills from {comp_path.name}")
         df = pd.read_csv(comp_path)
@@ -1170,24 +1132,6 @@ def main():
         skills_sorted = grp.sort_values("freq", ascending=False)["skill"].tolist()
 
     print(f"[INFO] Total unique skills for competency generation: {len(skills_sorted)}")
-
-    # Build skill->Bloom map (mode or first non-N/A per skill)
-    skill_bloom_map = {}
-    if "bloom" in df.columns and "skill" in df.columns:
-        for skill in skills_sorted:
-            s = str(skill).strip()
-            vals = df[df["skill"].astype(str).str.strip() == s]["bloom"].dropna().astype(str).str.strip()
-            vals = vals[vals.str.lower() != "n/a"]
-            if len(vals) > 0:
-                try:
-                    mode_val = vals.mode().iloc[0]
-                except (IndexError, KeyError):
-                    mode_val = vals.iloc[0]
-                skill_bloom_map[s] = str(mode_val)
-        if skill_bloom_map:
-            print(f"[INFO] Loaded Bloom levels for {len(skill_bloom_map)} skills")
-    else:
-        print("[INFO] Bloom column not available; Bloom alignment optional in prompt")
 
     # Build skill->type map (for downranking vague single-word hard skills)
     skill_type_map: Dict[str, str] = {}
@@ -1351,7 +1295,6 @@ def main():
                     few_shot_examples=few_shot or [],
                     skill_future_weights=skill_future_weights or None,
                     skill_time_trends=skill_time_trends or None,
-                    skill_bloom_map=skill_bloom_map or None,
                     curriculum_context=curriculum_context,
                     vocational_domain=vocational_domain or "",
                     top_soft_skills=top_soft_skills,
@@ -1382,7 +1325,6 @@ def main():
                     few_shot_examples=few_shot or [],
                     skill_future_weights=skill_future_weights or None,
                     skill_time_trends=skill_time_trends or None,
-                    skill_bloom_map=skill_bloom_map or None,
                     curriculum_context=curriculum_context,
                     vocational_domain=vocational_domain or "",
                     top_soft_skills=top_soft_skills,
@@ -1421,7 +1363,6 @@ def main():
                     few_shot_examples=few_shot or [],
                     skill_future_weights=skill_future_weights or None,
                     skill_time_trends=skill_time_trends or None,
-                    skill_bloom_map=skill_bloom_map or None,
                     curriculum_context=curriculum_context,
                     vocational_domain=vocational_domain or "",
                     top_soft_skills=top_soft_skills,
@@ -1452,7 +1393,6 @@ def main():
                     few_shot_examples=few_shot or [],
                     skill_future_weights=skill_future_weights or None,
                     skill_time_trends=skill_time_trends or None,
-                    skill_bloom_map=skill_bloom_map or None,
                     curriculum_context=curriculum_context,
                     vocational_domain=vocational_domain or "",
                     top_soft_skills=top_soft_skills,

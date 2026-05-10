@@ -16,14 +16,15 @@ Design notes
     1-3 = Operator
     4-6 = Teknisi / Analis
     7-9 = Ahli (Profesi / Magister / Doktor)
-* `BLOOM_TO_KKNI_FLOOR` is the deterministic floor used by `kkni_floor_for_competency`.
-  The LLM is allowed to pick `floor` OR `floor + 1` (clamped by `clamp_llm_kkni`).
 * `STAGE_TO_KKNI` is the friendly mapping shown on the public UI.
+* KKNI level assignment for generated competencies is performed post-hoc by
+  `kkni_labeler.py` using SBERT semantic similarity to the level descriptors;
+  the previous Bloom-derived floor logic was removed in pipeline-redesign-v2.
 """
 
 from __future__ import annotations
 
-from typing import Dict, Iterable, List, Optional
+from typing import Dict, List, Optional
 
 # --------------------------------------------------------------------------- #
 # Level descriptors (verbatim summaries from Perpres 8/2012, Lampiran)
@@ -143,64 +144,6 @@ STAGE_TO_KKNI: Dict[str, List[int]] = {
     "S2":      [7, 8],
     "S3":      [9],
 }
-
-
-# --------------------------------------------------------------------------- #
-# Bloom → KKNI deterministic floor
-# The LLM is allowed to bump up by +1 (e.g. floor=5 → llm may pick 5 or 6).
-# Anything outside [floor, floor+1] gets clamped back to floor.
-# --------------------------------------------------------------------------- #
-
-BLOOM_TO_KKNI_FLOOR: Dict[str, int] = {
-    "Remember":   1,
-    "Understand": 2,
-    "Apply":      4,
-    "Analyze":    5,
-    "Evaluate":   6,
-    "Create":     7,
-    # Soft-skill default; rarely used since competencies are hard-only after the reframe
-    "N/A":        2,
-}
-
-_BLOOM_RANK = {b: i for i, b in enumerate(
-    ["Remember", "Understand", "Apply", "Analyze", "Evaluate", "Create"]
-)}
-
-
-def kkni_floor_for_competency(bloom_levels: Iterable[str]) -> int:
-    """Compute the deterministic KKNI floor for a competency.
-
-    Takes the Bloom levels of the competency's related_skills and returns the
-    floor based on the *highest* Bloom level present.
-
-    Falls back to KKNI 3 (SMK-level operator) if no Bloom levels are usable.
-    """
-    bloom_levels = [str(b).strip() for b in (bloom_levels or []) if b]
-    valid = [b for b in bloom_levels if b in _BLOOM_RANK]
-    if not valid:
-        return 3
-    highest = max(valid, key=lambda b: _BLOOM_RANK[b])
-    return BLOOM_TO_KKNI_FLOOR.get(highest, 3)
-
-
-def clamp_llm_kkni(llm_value: object, floor: int) -> int:
-    """Clamp an LLM-proposed KKNI level into the allowed band [floor, floor+1].
-
-    Any non-integer or out-of-band value falls back to the floor.
-    """
-    try:
-        v = int(llm_value)
-    except (TypeError, ValueError):
-        return floor
-    if v < KKNI_MIN_LEVEL:
-        return floor
-    if v > KKNI_MAX_LEVEL:
-        return min(floor + 1, KKNI_MAX_LEVEL)
-    if v < floor:
-        return floor
-    if v > floor + 1:
-        return min(floor + 1, KKNI_MAX_LEVEL)
-    return v
 
 
 def kkni_descriptor(level: int) -> str:
