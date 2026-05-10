@@ -79,7 +79,16 @@ api_keys/
 # ============================================================
 models/
 checkpoints/
-baseline_versions/
+# baseline_versions/ subdirs are case-by-case: most contain trained weights
+# and HF caches and are fully ignored; baseline_versions/jjzha_replicate/ is
+# tracked so the Phase 1.4 audit + scaffolding stays reviewable, but its
+# weight / cache subdirs are still ignored below.
+baseline_versions/jobbert_crf/
+baseline_versions/jobspanbert_stl/
+baseline_versions/v3_stl/
+baseline_versions/jjzha_replicate/hf_cache/
+baseline_versions/jjzha_replicate/jobbert_skill_replicate/
+baseline_versions/jjzha_replicate/jobbert_knowledge_replicate/
 *.safetensors
 *.ckpt
 *.h5
@@ -87,6 +96,7 @@ baseline_versions/
 *.onnx
 *.pt
 *.pth
+*.bin
 
 # Hugging Face / Sentence-Transformer caches
 **/hf_cache/
