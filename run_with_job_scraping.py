@@ -58,6 +58,12 @@ def main():
     parser.add_argument("--dedupe", action="store_true", help="Deduplicate at job level + sentence level")
     parser.add_argument("--bert-knowledge", action="store_true", help="Fuse BERT knowledge (hybrid mode)")
     parser.add_argument(
+        "--no-relevance-filter",
+        action="store_true",
+        help="Skip the zero-shot LLM sentence relevance filter (Phase 1.2). "
+             "Forwarded to preprocess_jobs_pipeline.py.",
+    )
+    parser.add_argument(
         "--include-indonesian", action="store_true",
         help="Item 5: Merge job_scraping/output/indonesian_jobs.csv before preprocessing (auto-enables --translate --dedupe)",
     )
@@ -104,6 +110,8 @@ def main():
         preprocess_cmd.append("--translate")
     if args.dedupe:
         preprocess_cmd.append("--dedupe")
+    if args.no_relevance_filter:
+        preprocess_cmd.append("--no-relevance-filter")
 
     print(f"[1/3] Preprocessing: {jobs_csv} -> {preprocess_out}")
     r = subprocess.run(preprocess_cmd, cwd=str(project_root))

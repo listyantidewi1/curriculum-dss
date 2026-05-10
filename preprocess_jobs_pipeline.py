@@ -134,6 +134,28 @@ def main():
     parser.add_argument("--max_len", type=int, default=600,
         help="Max sentence length in chars (default 600 for JobBERT 128-token limit)")
     parser.add_argument("--translation_model", type=str, default="Helsinki-NLP/opus-mt-mul-en")
+    parser.add_argument(
+        "--no-relevance-filter",
+        action="store_true",
+        help="Skip the zero-shot LLM sentence relevance filter (Phase 1.2). "
+             "When skipped, jobs_sentences_filtered.csv is a copy of the unfiltered "
+             "sentences so downstream stages still find the file they expect.",
+    )
+    parser.add_argument(
+        "--relevance-filter-model",
+        type=str,
+        default=None,
+        help="OpenRouter model id for the relevance filter "
+             "(default: sentence_relevance_filter.DEFAULT_MODEL)",
+    )
+    parser.add_argument(
+        "--relevance-filter-batch-size",
+        type=int,
+        default=None,
+        help="Sentences per LLM call for the relevance filter "
+             "(default: sentence_relevance_filter.DEFAULT_BATCH_SIZE = 30; "
+             "minimum recommended is 30 to amortize prompt overhead).",
+    )
 
     args = parser.parse_args()
 
@@ -300,10 +322,87 @@ def main():
     pipe_df.to_csv(pipe_path, index=False, encoding="utf-8-sig")
     print(f"[INFO] Saved pipeline-ready file: {pipe_path}")
 
-    # Also save as jobs_sentences.csv for pipeline compatibility (matches INPUT_CSV)
+    # Audit copy: jobs_sentences.csv = full unfiltered sentence set (preserved
+    # for inspection / re-runs with a different filter). Pipeline input by
+    # default is jobs_sentences_filtered.csv (next block).
     jobs_sent_path = out_dir / "jobs_sentences.csv"
     pipe_df.to_csv(jobs_sent_path, index=False, encoding="utf-8-sig")
-    print(f"[INFO] Saved: {jobs_sent_path} (pipeline input)")
+    print(f"[INFO] Saved audit copy: {jobs_sent_path}")
+
+    # -----------------------------
+    # Sentence relevance filter (pipeline-redesign-v2 Phase 1.2, Req 4)
+    # -----------------------------
+    filtered_path = out_dir / "jobs_sentences_filtered.csv"
+    if args.no_relevance_filter:
+        print(
+            "[INFO] --no-relevance-filter set; jobs_sentences_filtered.csv "
+            "will be a copy of the unfiltered sentences."
+        )
+        pipe_df.to_csv(filtered_path, index=False, encoding="utf-8-sig")
+        print(f"[INFO] Saved: {filtered_path} (filter skipped — same as audit)")
+    else:
+        try:
+            from sentence_relevance_filter import (
+                classify_sentences,
+                DEFAULT_BATCH_SIZE,
+                DEFAULT_MODEL,
+            )
+        except ImportError as exc:
+            print(
+                f"[WARN] sentence_relevance_filter unavailable ({exc}); "
+                f"skipping filter and copying unfiltered sentences to {filtered_path}."
+            )
+            pipe_df.to_csv(filtered_path, index=False, encoding="utf-8-sig")
+        else:
+            cache_path = out_dir / "sentence_relevance_cache.json"
+            sentences_for_filter = pipe_df["sentence_text"].astype(str).tolist()
+            print(
+                f"[INFO] Running zero-shot relevance filter on "
+                f"{len(sentences_for_filter)} sentences "
+                f"(cache: {cache_path.name}; YES = relevant, NO = drop)..."
+            )
+            try:
+                verdicts = classify_sentences(
+                    sentences_for_filter,
+                    cache_path=cache_path,
+                    model=args.relevance_filter_model or DEFAULT_MODEL,
+                    batch_size=args.relevance_filter_batch_size or DEFAULT_BATCH_SIZE,
+                )
+            except Exception as exc:
+                print(
+                    f"[WARN] Relevance filter failed ({exc}); falling back to "
+                    f"unfiltered sentences for {filtered_path}."
+                )
+                pipe_df.to_csv(filtered_path, index=False, encoding="utf-8-sig")
+            else:
+                pipe_df = pipe_df.copy()
+                pipe_df["is_relevant"] = verdicts
+                kept_df = pipe_df[pipe_df["is_relevant"]].drop(columns=["is_relevant"])
+
+                # Per-job kept / total log (Req 4.5)
+                per_job = (
+                    pipe_df.groupby("job_id")
+                    .agg(
+                        total=("sentence_text", "size"),
+                        kept=("is_relevant", "sum"),
+                    )
+                    .reset_index()
+                )
+                total_total = int(per_job["total"].sum())
+                total_kept = int(per_job["kept"].sum())
+                pct = (total_kept / total_total * 100.0) if total_total else 0.0
+                print(
+                    f"[INFO] Relevance filter kept {total_kept}/{total_total} "
+                    f"sentences ({pct:.1f}%) across {len(per_job)} jobs."
+                )
+
+                kept_df.to_csv(filtered_path, index=False, encoding="utf-8-sig")
+                print(f"[INFO] Saved: {filtered_path} (pipeline input — filtered)")
+
+                # Persist the per-job log for audit / debugging.
+                log_path = out_dir / "sentence_relevance_per_job.csv"
+                per_job.to_csv(log_path, index=False, encoding="utf-8-sig")
+                print(f"[INFO] Saved per-job kept/total log: {log_path}")
 
     print("[INFO] Preprocessing completed successfully.", flush=True)
 

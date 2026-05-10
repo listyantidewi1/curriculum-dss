@@ -38,9 +38,12 @@ OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 JOBS_SCRAPING_CSV    = PROJECT_ROOT / "job_scraping" / "output" / "english_jobs.csv"
 # Item 5: Indonesian-language job postings (place scraped data here; auto-translated via --include-indonesian)
 JOBS_SCRAPING_CSV_ID = PROJECT_ROOT / "job_scraping" / "output" / "indonesian_jobs.csv"
-# Preprocess output dir; pipeline reads jobs_sentences.csv from here
+# Preprocess output dir; pipeline reads jobs_sentences_filtered.csv from here
+# (post pipeline-redesign-v2 Phase 1.2 sentence relevance filter). The
+# unfiltered jobs_sentences.csv is preserved as an audit copy in the same
+# directory; load_job_data falls back to it if the filtered file is absent.
 PREPROCESS_OUTPUT_DIR = PROJECT_ROOT / "DATA" / "preprocessing" / "data_prepared"
-PIPELINE_INPUT_CSV = PREPROCESS_OUTPUT_DIR / "jobs_sentences.csv"
+PIPELINE_INPUT_CSV = PREPROCESS_OUTPUT_DIR / "jobs_sentences_filtered.csv"
 
 # ---- LABELS ----
 # We assume simple BIO: O, B, I for both skills and knowledge.

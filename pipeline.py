@@ -1894,10 +1894,24 @@ class AdvancedDataManager:
         if sample_size is None:
             sample_size = AdvancedPipelineConfig.SAMPLE_SIZE
 
-        logger.info(f"Loading data from {AdvancedPipelineConfig.INPUT_CSV}")
+        # Fallback: if the configured INPUT_CSV is missing (e.g. the relevance
+        # filter step hasn't been run yet on this corpus), try the unfiltered
+        # audit copy `jobs_sentences.csv` in the same directory before erroring out.
+        configured_path = str(AdvancedPipelineConfig.INPUT_CSV)
+        actual_path = configured_path
+        if not os.path.exists(configured_path):
+            audit = os.path.join(os.path.dirname(configured_path), "jobs_sentences.csv")
+            if os.path.basename(configured_path) != "jobs_sentences.csv" and os.path.exists(audit):
+                logger.warning(
+                    f"{configured_path} not found; falling back to "
+                    f"{audit} (unfiltered audit copy)."
+                )
+                actual_path = audit
+
+        logger.info(f"Loading data from {actual_path}")
 
         try:
-            df = pd.read_csv(AdvancedPipelineConfig.INPUT_CSV)
+            df = pd.read_csv(actual_path)
 
             required = {'job_id', 'sentence_text'}
             missing = required - set(df.columns)
