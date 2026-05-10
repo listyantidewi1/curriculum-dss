@@ -132,6 +132,15 @@ class SkillItem:
     source: str  # "BERT", "LLM", "BERT+LLM", "Hybrid"
     semantic_density: float = 1.0  # How information-dense the skill is
     context_agreement: float = 1.0  # Agreement with context
+    # Provenance fields (pipeline-redesign-v2 Phase 1.1, Req 6).
+    # sentence_id / sentence_text point to the originating sentence when known;
+    # extractor_source records which extractor produced this item ("BERT", "LLM",
+    # "BERT+LLM", "BERT (standalone)") and may diverge from `source` if a
+    # downstream stage rewrites the latter. When extractor_source is None the
+    # to_dict() emission falls back to `source` for backwards compatibility.
+    sentence_id: Optional[str] = None
+    sentence_text: Optional[str] = None
+    extractor_source: Optional[str] = None
 
     def to_dict(self):
         # Ensure all numeric values are Python floats before rounding
@@ -146,7 +155,10 @@ class SkillItem:
             "confidence_tier": self.confidence_tier.value,
             "source": self.source,
             "semantic_density": round(density, 2),
-            "context_agreement": round(agreement, 2)
+            "context_agreement": round(agreement, 2),
+            "sentence_id": self.sentence_id or "",
+            "sentence_text": self.sentence_text or "",
+            "extractor_source": self.extractor_source or self.source,
         }
 
 @dataclass
@@ -156,7 +168,11 @@ class KnowledgeItem:
     confidence_score: float
     confidence_tier: ConfidenceTier
     source: str
-    
+    # Provenance fields — see SkillItem above.
+    sentence_id: Optional[str] = None
+    sentence_text: Optional[str] = None
+    extractor_source: Optional[str] = None
+
     def to_dict(self):
         # Ensure confidence_score is a Python float, not a tensor
         confidence = ensure_float(self.confidence_score)
@@ -164,7 +180,10 @@ class KnowledgeItem:
             "knowledge": self.text,
             "confidence_score": round(confidence, 3),
             "confidence_tier": self.confidence_tier.value,
-            "source": self.source
+            "source": self.source,
+            "sentence_id": self.sentence_id or "",
+            "sentence_text": self.sentence_text or "",
+            "extractor_source": self.extractor_source or self.source,
         }
 
 # ============================================================
@@ -831,6 +850,7 @@ class ContextAwareExtractor:
         text: str = "",
         *,
         sentences: List[str] = None,
+        sentence_ids: List[str] = None,
         full_text: str = None,
     ) -> Dict[str, List[SkillItem]]:
         """Extract skills with context awareness and model agreement analysis.
@@ -845,29 +865,57 @@ class ContextAwareExtractor:
         - **Knowledge output: LLM-only** — Final knowledge comes from LLM; BERT knowledge
           is not fused into output (LLM_ONLY_KNOWLEDGE). Skills remain BERT+LLM hybrid.
 
+        Provenance (pipeline-redesign-v2 Phase 1.1, Req 6):
+        - Each BERT raw item is tagged with the (sentence_id, sentence_text) it
+          originated from before dedup so the merged item retains a usable trace.
+        - LLM items are pinpointed back to a sentence by case-insensitive substring
+          match against the per-sentence text; when no match exists, sentence_id /
+          sentence_text are left empty (LLM saw the full posting, can't pin further).
+
         For backward compatibility, if *sentences* is not provided the method
-        falls back to single-text mode (``text``).
+        falls back to single-text mode (``text``). When *sentence_ids* is omitted
+        but sentences is provided, provenance ids fall through as empty strings.
         """
         # Resolve inputs: prefer explicit sentences/full_text; fall back to legacy text arg.
         if sentences is None:
             sentences = [text] if text else []
         if full_text is None:
             full_text = text or "\n".join(sentences)
+        if sentence_ids is None:
+            sentence_ids = [""] * len(sentences)
+        elif len(sentence_ids) != len(sentences):
+            # Defensive: pad / truncate to align
+            if len(sentence_ids) < len(sentences):
+                sentence_ids = list(sentence_ids) + [""] * (len(sentences) - len(sentence_ids))
+            else:
+                sentence_ids = sentence_ids[: len(sentences)]
 
         # --- BERT: run per-sentence, aggregate & deduplicate ---
         # Skipped when EXTRACTION_MODE == "llm_only" (LLM-only ablation for RQ1).
         all_bert_skills_raw: List[Dict] = []
         all_bert_knowledge: List[Dict] = []
         if AdvancedPipelineConfig.EXTRACTION_MODE != "llm_only":
-            for sent in sentences:
+            for sent, sid in zip(sentences, sentence_ids):
                 sent = sent.strip()
                 if not sent:
                     continue
                 raw_skills, raw_knowledge = self.model_manager.extract_with_bert(sent)
+                # Tag each raw item with its source sentence so the merged item
+                # post-dedup retains a usable provenance trace.
+                for item in raw_skills:
+                    if isinstance(item, dict):
+                        item.setdefault('sentence_id', sid)
+                        item.setdefault('sentence_text', sent)
+                for item in raw_knowledge:
+                    if isinstance(item, dict):
+                        item.setdefault('sentence_id', sid)
+                        item.setdefault('sentence_text', sent)
                 all_bert_skills_raw.extend(raw_skills)
                 all_bert_knowledge.extend(raw_knowledge)
 
-            # Deduplicate BERT outputs (boost confidence for repeated items)
+            # Deduplicate BERT outputs (boost confidence for repeated items).
+            # Dedup keeps the highest-confidence item, so its (sentence_id, sentence_text)
+            # naturally rides along as the chosen provenance.
             all_bert_skills_raw = self._deduplicate_raw(all_bert_skills_raw, key='text')
             all_bert_knowledge = self._deduplicate_raw(all_bert_knowledge, key='text')
 
@@ -887,6 +935,10 @@ class ContextAwareExtractor:
         # Normalize LLM output: LLM may return skills as strings or dicts; knowledge as strings
         gpt_skills_raw = self._normalize_llm_skills(gpt_output.get('skills', []))
         gpt_knowledge_raw = self._normalize_llm_knowledge(gpt_output.get('knowledge', []))
+
+        # Pinpoint each LLM item to a sentence (best-effort, substring match).
+        self._pinpoint_llm_to_sentences(gpt_skills_raw, sentences, sentence_ids, key='skill')
+        self._pinpoint_llm_to_sentences(gpt_knowledge_raw, sentences, sentence_ids, key='text')
 
         # Convert to structured format (use full_text as context for classification)
         bert_skills = self._process_bert_skills(all_bert_skills_raw, full_text)
@@ -910,6 +962,38 @@ class ContextAwareExtractor:
             'gpt_knowledge': gpt_knowledge,
             'agreement_scores': agreement_scores,
         }
+
+    @staticmethod
+    def _pinpoint_llm_to_sentences(
+        items: List[Dict],
+        sentences: List[str],
+        sentence_ids: List[str],
+        key: str,
+    ) -> None:
+        """Annotate each LLM item with the first sentence that contains its text.
+
+        Mutates `items` in place: each dict gains `sentence_id` and `sentence_text`.
+        When no sentence contains the item's text (LLM may paraphrase), both fields
+        stay empty — the trace will mark this item as "from full posting, not pinned".
+        """
+        if not items:
+            return
+        # Pre-lower the sentences once so we don't redo it per item.
+        sent_lower = [s.lower() for s in sentences]
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+            text = str(item.get(key, "") or "").strip().lower()
+            sid_match = ""
+            stext_match = ""
+            if text:
+                for sl, sid, sraw in zip(sent_lower, sentence_ids, sentences):
+                    if text in sl:
+                        sid_match = sid
+                        stext_match = sraw
+                        break
+            item.setdefault('sentence_id', sid_match)
+            item.setdefault('sentence_text', stext_match)
 
     @staticmethod
     def _normalize_llm_skills(items) -> List[Dict]:
@@ -1016,7 +1100,7 @@ class ContextAwareExtractor:
     def _process_bert_skills(self, raw_skills: List[Dict], context: str) -> List[SkillItem]:
         """Process BERT skills with advanced features."""
         processed = []
-        
+
         for skill in raw_skills:
             if not isinstance(skill, dict):
                 continue
@@ -1025,15 +1109,15 @@ class ContextAwareExtractor:
             if not text or not str(text).strip():
                 continue
             text = str(text).strip()
-            
+
             # Calculate semantic density
             semantic_density = AdvancedTaxonomyManager.calculate_semantic_density(text)
-            
+
             # Classify skill with context
             skill_type, type_confidence = AdvancedTaxonomyManager.classify_skill_with_context(
                 text, context=[context]
             )
-            
+
             # Bloom classification removed in pipeline-redesign-v2 (Req 1).
 
             # Calculate overall confidence using named config weights
@@ -1053,31 +1137,34 @@ class ContextAwareExtractor:
                 confidence_tier=AdvancedTaxonomyManager.get_confidence_tier(final_confidence),
                 source="BERT",
                 semantic_density=semantic_density,
-                context_agreement=1.0
+                context_agreement=1.0,
+                sentence_id=str(skill.get('sentence_id') or "") or None,
+                sentence_text=str(skill.get('sentence_text') or "") or None,
+                extractor_source="BERT",
             )
             processed.append(skill_item)
-        
+
         return processed
-    
+
     def _process_gpt_skills(self, gpt_skills: List[Dict], context: str) -> List[SkillItem]:
         """Process LLM skills with advanced features."""
         processed = []
-        
+
         for skill in gpt_skills:
             text = skill.get('skill', '').strip()
             if not text:
                 continue
-            
+
             gpt_type = skill.get('type', 'Hard')
-            
+
             # Calculate semantic density
             semantic_density = AdvancedTaxonomyManager.calculate_semantic_density(text)
-            
+
             # Classify skill with context (use LLM's classification as hint)
             skill_type, type_confidence = AdvancedTaxonomyManager.classify_skill_with_context(
                 text, gpt_type, context=[context]
             )
-            
+
             # Bloom classification removed in pipeline-redesign-v2 (Req 1).
 
             # Calculate overall confidence using named config weights
@@ -1098,10 +1185,13 @@ class ContextAwareExtractor:
                 confidence_tier=AdvancedTaxonomyManager.get_confidence_tier(final_confidence),
                 source="LLM",
                 semantic_density=semantic_density,
-                context_agreement=1.0  # Will be adjusted later
+                context_agreement=1.0,  # Will be adjusted later
+                sentence_id=str(skill.get('sentence_id') or "") or None,
+                sentence_text=str(skill.get('sentence_text') or "") or None,
+                extractor_source="LLM",
             )
             processed.append(skill_item)
-        
+
         return processed
     
     def _analyze_model_agreement(self, bert_skills: List[SkillItem], 
@@ -1199,7 +1289,10 @@ class ContextAwareExtractor:
                 confidence_tier=AdvancedTaxonomyManager.get_confidence_tier(new_confidence),
                 source=skill.source,
                 semantic_density=skill.semantic_density,
-                context_agreement=agreement_factor
+                context_agreement=agreement_factor,
+                sentence_id=skill.sentence_id,
+                sentence_text=skill.sentence_text,
+                extractor_source=skill.extractor_source,
             )
             adjusted.append(adjusted_skill)
         
@@ -1303,7 +1396,10 @@ class AdvancedFusionEngine:
                     confidence_tier=AdvancedTaxonomyManager.get_confidence_tier(adjusted_confidence),
                     source="BERT (standalone)",
                     semantic_density=bert_skill.semantic_density,
-                    context_agreement=bert_skill.context_agreement * 0.9
+                    context_agreement=bert_skill.context_agreement * 0.9,
+                    sentence_id=bert_skill.sentence_id,
+                    sentence_text=bert_skill.sentence_text,
+                    extractor_source="BERT (standalone)",
                 )
                 fused.append(fused_skill)
         
@@ -1349,6 +1445,11 @@ class AdvancedFusionEngine:
             ensure_float(gpt_skill.context_agreement) * ensure_float(gpt_skill.confidence_score)
         ) / (ensure_float(bert_skill.confidence_score) + ensure_float(gpt_skill.confidence_score))
         
+        # Provenance: prefer BERT's pinned sentence (deterministic span). Fall back
+        # to LLM's pinpointed sentence when BERT didn't carry one.
+        prov_sid = bert_skill.sentence_id or gpt_skill.sentence_id
+        prov_stext = bert_skill.sentence_text or gpt_skill.sentence_text
+
         return SkillItem(
             text=fused_text,
             type=fused_type,
@@ -1356,7 +1457,10 @@ class AdvancedFusionEngine:
             confidence_tier=AdvancedTaxonomyManager.get_confidence_tier(fused_confidence),
             source="BERT+LLM",
             semantic_density=fused_density,
-            context_agreement=fused_context_agreement
+            context_agreement=fused_context_agreement,
+            sentence_id=prov_sid,
+            sentence_text=prov_stext,
+            extractor_source="BERT+LLM",
         )
     
     def fuse_knowledge_advanced(self, bert_knowledge: List[Dict], 
@@ -1381,20 +1485,33 @@ class AdvancedFusionEngine:
                 text=str(text_val).strip(),
                 confidence_score=confidence * 0.8,  # Slightly penalize BERT knowledge
                 confidence_tier=AdvancedTaxonomyManager.get_confidence_tier(confidence * 0.8),
-                source="BERT"
+                source="BERT",
+                sentence_id=str(item.get('sentence_id') or "") or None,
+                sentence_text=str(item.get('sentence_text') or "") or None,
+                extractor_source="BERT",
             ))
-        
+
         # Convert LLM knowledge to KnowledgeItems (items may be dict {"text": "..."} or str)
         gpt_items = []
         for item in gpt_knowledge:
-            text = item.get("text", item) if isinstance(item, dict) else str(item)
+            if isinstance(item, dict):
+                text = item.get("text", "")
+                sid = str(item.get('sentence_id') or "") or None
+                stext = str(item.get('sentence_text') or "") or None
+            else:
+                text = str(item)
+                sid = None
+                stext = None
             if not text or not str(text).strip():
                 continue
             gpt_items.append(KnowledgeItem(
                 text=str(text).strip(),
                 confidence_score=0.75,  # Base confidence for LLM
                 confidence_tier=AdvancedTaxonomyManager.get_confidence_tier(0.75),
-                source="LLM"
+                source="LLM",
+                sentence_id=sid,
+                sentence_text=stext,
+                extractor_source="LLM",
             ))
         
         # Start with LLM knowledge
@@ -1426,16 +1543,21 @@ class AdvancedFusionEngine:
                 if best_match_idx != -1:
                     bert_matched[i] = True
                     gpt_item = gpt_items[best_match_idx]
-                    
+
                     # Fuse matched knowledge
                     fused_confidence = (ensure_float(bert_item.confidence_score) + ensure_float(gpt_item.confidence_score)) / 2
                     fused_confidence *= (1.0 + best_match_score * 0.1)  # Bonus for match
-                    
+
                     fused_knowledge_item = KnowledgeItem(
                         text=gpt_item.text,  # Use LLM text (usually cleaner)
                         confidence_score=fused_confidence,
                         confidence_tier=AdvancedTaxonomyManager.get_confidence_tier(fused_confidence),
-                        source="BERT+LLM"
+                        source="BERT+LLM",
+                        # Prefer BERT's pinned sentence (deterministic span);
+                        # fall back to LLM's pinpointed sentence.
+                        sentence_id=bert_item.sentence_id or gpt_item.sentence_id,
+                        sentence_text=bert_item.sentence_text or gpt_item.sentence_text,
+                        extractor_source="BERT+LLM",
                     )
                     fused[best_match_idx] = fused_knowledge_item
         
@@ -1449,7 +1571,10 @@ class AdvancedFusionEngine:
                     text=bert_item.text,
                     confidence_score=adjusted_confidence,
                     confidence_tier=AdvancedTaxonomyManager.get_confidence_tier(adjusted_confidence),
-                    source="BERT (standalone)"
+                    source="BERT (standalone)",
+                    sentence_id=bert_item.sentence_id,
+                    sentence_text=bert_item.sentence_text,
+                    extractor_source="BERT (standalone)",
                 ))
         
         return fused
@@ -1658,15 +1783,19 @@ class AdvancedDataManager:
     
     def _initialize_files(self):
         """Create empty files with headers."""
-        # Skills CSV
+        # Skills CSV. sentence_id / sentence_text / extractor_source are
+        # provenance columns added in pipeline-redesign-v2 Phase 1.1 (Req 6).
         skills_columns = ['job_id', 'date_posted', 'skill', 'type',
                         'confidence_score', 'confidence_tier', 'source',
-                        'semantic_density', 'context_agreement']
-        
+                        'semantic_density', 'context_agreement',
+                        'sentence_id', 'sentence_text', 'extractor_source']
+
         pd.DataFrame(columns=skills_columns).to_csv(self.files['skills'], index=False)
-        
-        # Knowledge CSV
-        knowledge_columns = ['job_id', 'date_posted', 'knowledge', 'confidence_score', 'confidence_tier', 'source']
+
+        # Knowledge CSV (same provenance columns).
+        knowledge_columns = ['job_id', 'date_posted', 'knowledge',
+                             'confidence_score', 'confidence_tier', 'source',
+                             'sentence_id', 'sentence_text', 'extractor_source']
         pd.DataFrame(columns=knowledge_columns).to_csv(self.files['knowledge'], index=False)
         
         # Coverage CSV
@@ -1751,10 +1880,16 @@ class AdvancedDataManager:
         """Load job descriptions, group sentences by job_id, return per-job dicts.
 
         Each element contains:
-            job_id, date_posted, sentences (list[str]), full_text (str)
+            job_id, date_posted, sentences (list[str]), sentence_ids (list[str]),
+            full_text (str)
 
-        Sampling is performed at the *job* level so every sentence
-        belonging to a selected job is included.
+        sentence_ids are zero-padded provenance handles ({job_id}_{idx:04d}) emitted
+        by preprocess_jobs_pipeline.py per pipeline-redesign-v2 Phase 1.1. When the
+        upstream CSV predates that change and lacks a sentence_id column, ids fall
+        through as empty strings so downstream stages still run.
+
+        Sampling is performed at the *job* level so every sentence belonging to a
+        selected job is included.
         """
         if sample_size is None:
             sample_size = AdvancedPipelineConfig.SAMPLE_SIZE
@@ -1785,9 +1920,15 @@ class AdvancedDataManager:
             sort_col = 'sentence_id' if 'sentence_id' in df.columns else 'job_id'
             df = df.sort_values([sort_col])
 
+            has_sid = 'sentence_id' in df.columns
+
             jobs: List[Dict] = []
             for job_id, grp in df.groupby('job_id', sort=False):
                 sentences = grp['sentence_text'].astype(str).tolist()
+                if has_sid:
+                    sentence_ids = grp['sentence_id'].astype(str).tolist()
+                else:
+                    sentence_ids = [""] * len(sentences)
                 full_text = "\n".join(sentences)
                 date_posted = grp['job_date'].iloc[0] if 'job_date' in grp.columns else (
                     grp['date_posted'].iloc[0] if 'date_posted' in grp.columns else None
@@ -1796,6 +1937,7 @@ class AdvancedDataManager:
                     'job_id': job_id,
                     'date_posted': date_posted,
                     'sentences': sentences,
+                    'sentence_ids': sentence_ids,
                     'full_text': full_text,
                 })
 
@@ -2223,6 +2365,7 @@ class AdvancedSkillExtractionPipeline:
         date_posted: Optional[str] = None,
         *,
         sentences: List[str] = None,
+        sentence_ids: List[str] = None,
         full_text: str = None,
     ) -> Tuple[Dict, float]:
         """Process a single job posting.
@@ -2231,6 +2374,9 @@ class AdvancedSkillExtractionPipeline:
         ----------
         sentences : list[str], optional
             Individual sentences / chunks for BERT NER.
+        sentence_ids : list[str], optional
+            Provenance handles aligned with `sentences`. Threaded through to
+            extracted skills/knowledge per pipeline-redesign-v2 Phase 1.1.
         full_text : str, optional
             Concatenated posting text sent to the LLM.
         text : str
@@ -2240,6 +2386,8 @@ class AdvancedSkillExtractionPipeline:
             full_text = text
         if sentences is None:
             sentences = [text] if text else []
+        if sentence_ids is None:
+            sentence_ids = [""] * len(sentences)
 
         start_time = time.time()
         try:
@@ -2247,6 +2395,7 @@ class AdvancedSkillExtractionPipeline:
 
             extraction_results = self.context_extractor.extract_with_context_awareness(
                 sentences=sentences,
+                sentence_ids=sentence_ids,
                 full_text=full_text,
             )
             if not isinstance(extraction_results, dict):
@@ -2382,12 +2531,14 @@ class AdvancedSkillExtractionPipeline:
                 job_id = job['job_id']
                 date_posted = job.get('date_posted')
                 sentences = job['sentences']
+                sentence_ids = job.get('sentence_ids') or [""] * len(sentences)
                 full_text = job['full_text']
 
                 results, extraction_time = self.process_job(
                     job_id,
                     date_posted=date_posted,
                     sentences=sentences,
+                    sentence_ids=sentence_ids,
                     full_text=full_text,
                 )
 

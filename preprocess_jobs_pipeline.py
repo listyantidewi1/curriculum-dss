@@ -231,9 +231,13 @@ def main():
             if len(sent) < args.min_len or len(sent) > args.max_len:
                 continue
             sid += 1
+            # sentence_id is zero-padded {job_id}_{sid:04d} so it sorts naturally
+            # and stays unique across the whole corpus. Used for provenance traces
+            # back from extracted skills/knowledge to source sentences.
             rows.append({
                 "job_id": job_id,
                 "job_date": job_date,
+                "sentence_id": f"{job_id}_{sid:04d}",
                 "sentence_raw": sent
             })
 
@@ -286,8 +290,12 @@ def main():
     sents_df.to_csv(full_path, index=False, encoding="utf-8-sig")
     print(f"[INFO] Saved: {full_path}")
 
-    # Pipeline expects: job_id, sentence_text (and optionally job_date)
-    pipe_df = sents_df[["job_id", "job_date", "sentence_en"]].rename(columns={"sentence_en": "sentence_text"})
+    # Pipeline expects: job_id, sentence_id, sentence_text (and optionally job_date).
+    # sentence_id is the provenance handle that downstream stages thread back to
+    # advanced_skills.csv / advanced_knowledge.csv per pipeline-redesign-v2 Phase 1.1.
+    pipe_df = sents_df[["job_id", "job_date", "sentence_id", "sentence_en"]].rename(
+        columns={"sentence_en": "sentence_text"}
+    )
     pipe_path = out_dir / "job_sentences_for_pipeline.csv"
     pipe_df.to_csv(pipe_path, index=False, encoding="utf-8-sig")
     print(f"[INFO] Saved pipeline-ready file: {pipe_path}")
