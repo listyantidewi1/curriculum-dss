@@ -32,9 +32,15 @@ Then run `evaluate_extraction.py` and `evaluate_future_mapping.py` (they use `*_
 
 | File | Columns to Fill | Items |
 |------|----------------|-------|
-| gold_skills.csv | is_correct, type_label, bloom_label | ~150 |
+| gold_skills.csv | is_correct, type_label | ~150 |
 | gold_knowledge.csv | is_correct | ~100 |
 | gold_future_domain.csv | true_domain_id | ~100 |
+
+> **Note (pipeline-redesign-v2 Phase 1.3):** the `bloom_label` column was
+> removed from the gold-skills schema in May 2026. If you have a local
+> copy of `gold_skills.csv` from before that change, the `bloom_label`
+> column is now ignored by the loader; you can safely leave existing
+> values alone or drop the column entirely.
 
 ## Instructions
 
@@ -45,13 +51,11 @@ For each row, read the `skill` text and the `job_id` context.
   - `yes` — the text is a real skill/competence mentioned in the posting
   - `no` — garbage, fragment, not a skill, or hallucinated
 - **type_label**: What type of skill is this?
-  - `Hard` — technical, domain-specific
-  - `Soft` — interpersonal, transferable
+  - `Hard` — technical, domain-specific (verb-led action phrase like "designing UI/UX")
+  - `Soft` — interpersonal, transferable (single-word personality terms like "passion" are also valid)
   - `Both` — hybrid (e.g., "technical communication")
   - Leave blank if unsure
-- **bloom_label**: Bloom's taxonomy level (for hard skills only):
-  - `Remember`, `Understand`, `Apply`, `Analyze`, `Evaluate`, `Create`
-  - Leave blank if unsure or soft skill
+- ~~`bloom_label`~~: removed in pipeline-redesign-v2 Phase 1.3. Skip this column if your CSV still has it.
 - **labeler_id**: Your reviewer ID (e.g., "dewi", "alice")
 - **notes**: Optional free text
 
@@ -89,7 +93,7 @@ per gold set (configurable via `--overlap_n`). The export script uses
 ## Majority Vote
 When multiple reviewers label the same item:
 - **is_correct**: yes if count(yes) > count(no); else no (conservative tie-break)
-- **type_label**, **bloom_label**, **true_domain_id**: mode (most frequent)
+- **type_label**, **true_domain_id**: mode (most frequent)
 
 ## Pre-Labeling Calibration
 
@@ -108,7 +112,7 @@ Before starting, all reviewers should:
 | Extracted text is a valid skill but truncated (e.g., "machine learn") | Mark `no` — fragments are invalid extractions |
 | Text combines two skills (e.g., "Python and Java") | Mark `yes` if both are real skills mentioned in the posting |
 | Skill is too generic to be actionable (e.g., "work") | Mark `no` |
-| Skill is valid but the type/Bloom label is wrong | Mark `yes` for is_correct; correct type_label or bloom_label |
+| Skill is valid but the type label is wrong | Mark `yes` for is_correct; correct type_label (Bloom column was removed in Phase 1.3) |
 | Multi-domain skills (e.g., "data visualization" fits both Analytics and UX) | Choose the **primary** domain based on the item's typical use context; add the secondary domain in notes |
 | Domain mapping: skill fits no listed domain well | Use `none` |
 | Domain mapping: cannot decide between two close domains | Use `unclear` and explain in notes |

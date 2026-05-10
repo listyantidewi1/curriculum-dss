@@ -2,6 +2,19 @@
 
 This document describes the current pipeline architecture, data flow, and usage as of the latest implementation.
 
+> **pipeline-redesign-v2 in progress (May 2026):** the `Phase 1` / `Phase 2`
+> structure described below is the *legacy* run-script orchestration. A
+> separate architectural redesign tracked by `pipeline-redesign-v2` is reshaping
+> the extraction stack. Phase 1.1 (sentence provenance), 1.2 (sentence
+> relevance filter), 1.3 (Bloom removal) and 1.4 (jjzha replicate baseline)
+> have landed; Phase 1.5 (Skill-LLM LoRA fine-tune) is in progress; Phase 2
+> (clustering, cluster-driven competency generator, KKNI labeler, evaluator,
+> public UI updates) is queued. See
+> [`.kiro/specs/pipeline-redesign-v2/requirements.md`](.kiro/specs/pipeline-redesign-v2/requirements.md)
+> for the full spec and [`README.md`](README.md) "Project Status" table for the
+> current state. Sections in this file marked with **[LEGACY]** describe
+> behaviour that is scheduled to be replaced.
+
 ## System Purpose
 
 The pipeline is a **competency recommendation system** for vocational
@@ -10,18 +23,23 @@ for a school's vocational field:
 
 1. **Top-N curriculum-gap skills** (ranked by demand × empirical trend × future relevance).
 2. **Hard-skill competency statements**, each with:
-   - title, description, related (hard) skills, Bloom level, future relevance,
+   - title, description, related (hard) skills, future relevance,
    - `soft_skills_required` — 3–6 soft skills the learner needs, and
    - `soft_skills_description` — one sentence explaining how those soft skills support the competency.
+   - KKNI level (1–9, Perpres 8/2012) is now assigned post-hoc by an SBERT-based labeler in Phase 2.3 — no longer included in the LLM's direct output.
 
 Skill / knowledge extraction, future-domain mapping, FDR trend analysis, and
 expert review are all **infrastructure** that feed the competency layer.
 
 After the 2026 reframe:
-- **LLM-first extraction**: `--extraction-mode llm_only` is the default. BERT is preserved as an ablation path (`--extraction-mode hybrid` or `bert_only`).
+- **LLM-first extraction**: `--extraction-mode llm_only` is the default. BERT is preserved as an ablation path (`--extraction-mode hybrid` or `bert_only`). Phase 1.5 will replace the JobBERT path with a Skill-LLM LoRA-fine-tuned LLaMA 3.1 8B.
 - **Hard-skill competencies only**: extracted Soft-typed skills are excluded from competency input by default and instead surface per-competency via the soft-skill fields above. Pass `--include-soft-in-competencies` to revert.
 - **Hard cap of 12 competencies per batch** with semantic-title and skill-Jaccard deduplication.
+- **Verb-noun discrimination is preserved end-to-end**: skills are verb-led action phrases ("designing UI/UX"); knowledge items are noun phrases ("UI/UX"). Single-word soft skills ("passion", "self-starter") are valid SKILL items per SkillSpan annotation conventions.
+- **Sentence-level provenance**: every extracted item carries `(job_id, sentence_id, sentence_text, extractor_source)` (Phase 1.1).
+- **Sentence relevance filter**: zero-shot LLM drops irrelevant sentences (benefits, location, boilerplate) before extraction; SHA-256 cache makes re-runs cost zero (Phase 1.2).
 - **Domain assignment stays SBERT-based** (`future_weight_mapping.py`); the LLM is **not** asked to classify domains.
+- **Bloom classification removed** from the pipeline (Phase 1.3). Bloom decisions are returned to curriculum stakeholders.
 - **Future-aware feature is unchanged**.
 
 ### Environment
@@ -107,9 +125,9 @@ Default `--input` is `config.JOBS_SCRAPING_CSV`. `--dedupe` applies MD5 fingerpr
 
 | Aspect | Design |
 |--------|--------|
-| **Default mode** | `--extraction-mode llm_only`. The LLM extracts skills + knowledge in one call per job and classifies type (Hard/Soft) and Bloom in the same call. |
+| **Default mode** | `--extraction-mode llm_only`. The LLM extracts skills (verb-led, Hard/Soft typed) + knowledge (noun phrases) in one call per job. Bloom-level classification was removed in Phase 1.3 (Req 1). |
 | **Domain classification** | Always post-extraction via `future_weight_mapping.py` (SBERT cosine to `future_domains.csv`). The LLM is not asked to classify domain. |
-| **Bloom classification** | LLM produces a Bloom guess; pipeline overrides with `BloomClassifier` (SBERT-exemplar with LLM fallback) for consistency. |
+| **Bloom classification** | **[REMOVED in Phase 1.3 / Req 1]** Previously the LLM produced a Bloom guess and a `BloomClassifier` overrode it for consistency. Both code paths are gone; Bloom decisions are returned to curriculum stakeholders. |
 | **Hybrid ablation** | `--extraction-mode hybrid` runs JobBERT per-sentence and fuses with the LLM output (legacy behavior). Used for RQ1 ablation. |
 | **BERT-only mode** | `--extraction-mode bert_only` is preserved for diagnostics. |
 | **Knowledge output** | LLM-only (default). BERT knowledge is not fused. Use `--bert-knowledge` to enable BERT-knowledge fusion in hybrid mode. |
@@ -161,7 +179,7 @@ Config: `AdvancedPipelineConfig.EXTRACTION_MODE = "llm_only"`, `LLM_ONLY_KNOWLED
 
 | File | Description |
 |------|-------------|
-| `advanced_skills.csv` | Extracted skills with type, bloom, confidence |
+| `advanced_skills.csv` | Extracted skills with type, confidence, plus sentence-level provenance (sentence_id, sentence_text, extractor_source) per Phase 1.1 |
 | `advanced_knowledge.csv` | Extracted knowledge items |
 | `verified_skills.csv` | Skills with verification_level (calibrated or percentile-based) |
 | `future_skill_weights.csv` | Skill → future domain mapping (with mapping margin) |
@@ -185,8 +203,8 @@ Generated by `plot_generator.py` (Phase 1 step 3; Phase 2 step 10):
 | Plot | Purpose |
 |------|---------|
 | `skills_knowledge_total_per_model.png` | Total skills & knowledge by JobBERT/LLM/Hybrid |
-| `bloom_distribution_hard_skills.png` | Bloom taxonomy distribution |
-| `heatmap_curriculum_bloom_hard_skills.png` | Curriculum × Bloom heatmap |
+| ~~`bloom_distribution_hard_skills.png`~~ | **[REMOVED in Phase 1.3]** plotting function is now a stub |
+| ~~`heatmap_curriculum_bloom_hard_skills.png`~~ | **[REMOVED in Phase 1.3]** plotting function is now a stub |
 | `clusters_top_hard_skills.png`, `clusters_top_soft_skills.png`, `clusters_top_knowledge.png` | Semantic clusters of top items |
 | `clusters_demanded_not_covered.png` | Demanded but not covered by curriculum (insight) |
 | `coverage_distribution_hybrid.png` | Curriculum coverage distribution (insight) |
@@ -244,7 +262,7 @@ Then open:
 
 | Panel | Fields | Purpose |
 |-------|--------|---------|
-| Skills | Valid?, Type (corrected), Bloom (corrected), Notes | Validate extraction, correct Hard/Soft/Both, correct Bloom |
+| Skills | Valid?, Type (corrected), Notes | Validate extraction, correct Hard/Soft/Both. Bloom field removed in Phase 1.3 |
 | Knowledge | Valid?, Notes | Validate extraction (ignore Domain, Trend, Weight) |
 | Competencies | Quality (1–5), Relevant?, Notes | Assess competency quality |
 
@@ -252,7 +270,7 @@ Then open:
 
 Feedback is saved to `feedback_store/` (not the template CSVs):
 
-- `skill_feedback.csv` — review_id, reviewer_id, human_valid, human_type, human_bloom, human_notes
+- `skill_feedback.csv` — review_id, reviewer_id, human_valid, human_type, human_notes (human_bloom removed in Phase 1.3)
 - `knowledge_feedback.csv` — review_id, reviewer_id, human_valid, human_notes
 - `competency_feedback.csv` — competency_id, reviewer_id, human_quality, human_relevant, human_notes
 
@@ -291,8 +309,8 @@ Phase 2 has **17 steps** across 5 stages. Run after expert review is complete.
 
 | Step | Script | Input | Output |
 |------|--------|-------|--------|
-| 1 | `import_feedback.py` | feedback_store/*.csv | human_verified_skills.csv, bloom_corrections.json, type_corrections.json, competency_assessments.json, inter_rater_report.json |
-| 2 | `apply_feedback.py` | advanced_skills.csv, bloom/type corrections | advanced_skills_human_filtered.csv |
+| 1 | `import_feedback.py` | feedback_store/*.csv | human_verified_skills.csv, type_corrections.json, competency_assessments.json, inter_rater_report.json (bloom_corrections.json removed in Phase 1.3) |
+| 2 | `apply_feedback.py` | advanced_skills.csv, type corrections | advanced_skills_human_filtered.csv |
 | 3 | `validate_parameters.py` | expert_review_skills.csv or gold_skills.csv | parameter_validation_report.json, calibrated_threshold.json (CV-based) |
 | 4 | `verify_skills.py` | advanced_skills.csv, calibrated_threshold.json | verified_skills.csv (re-verified with calibrated threshold) |
 | 5 | `merge_gold_labels.py` | DATA/labels/gold_labels/*.csv | DATA/labels/gold_*_merged.csv |
@@ -313,7 +331,7 @@ Phase 2 has **17 steps** across 5 stages. Run after expert review is complete.
 
 ### Merge Rules (Multi-Reviewer)
 
-- **human_valid, bloom, type**: Majority vote across reviewers.
+- **human_valid, type**: Majority vote across reviewers (human_bloom removed in Phase 1.3).
 - **human_verified_skills**: Skills where majority said "valid".
 - **Inter-rater reliability**: Cohen's Kappa computed when ≥2 reviewers; saved to `inter_rater_report.json`.
 
@@ -322,7 +340,7 @@ Phase 2 has **17 steps** across 5 stages. Run after expert review is complete.
 | File | Description |
 |------|-------------|
 | `human_verified_skills.csv` | Skills marked valid by reviewers |
-| `bloom_corrections.json` | skill → correct Bloom level |
+| ~~`bloom_corrections.json`~~ | **[REMOVED in Phase 1.3]** Bloom corrections no longer collected |
 | `type_corrections.json` | skill → correct type (Hard/Soft/Both) |
 | `competency_assessments.json` | competency_id → quality, relevant, notes |
 | `calibrated_threshold.json` | Calibrated confidence threshold (from AUC/Brier analysis) |
@@ -390,7 +408,7 @@ export_for_review.py → expert_review_*.csv
     ↓
 [Gold set labeling + Expert review → feedback_store/]
     ↓
-import_feedback.py → human_verified_skills.csv, bloom/type corrections
+import_feedback.py → human_verified_skills.csv, type corrections
 apply_feedback.py → advanced_skills_human_filtered.csv
 validate_parameters.py → calibrated_threshold.json
     ↓
@@ -449,7 +467,7 @@ evaluate_future_mapping.py → future_mapping_evaluation_report.json
 | `export_for_review.py` | Create expert_review_*.csv |
 | `export_competencies_for_review.py` | Sample competencies for review |
 | `import_feedback.py` | Merge feedback_store → feedback artifacts |
-| `apply_feedback.py` | Apply Bloom/type corrections to skills |
+| `apply_feedback.py` | Apply type corrections to skills (Bloom corrections removed in Phase 1.3) |
 
 ### Evaluation (Scientific Rigor)
 | Script | Purpose |
@@ -631,7 +649,7 @@ For multiple experimental runs:
 - **Phase 2 dashboard fix**: `evaluate_future_mapping.py` — added `is_none_or_unclear` to `not_in_mapping` result (fixes KeyError).
 - **Future-domain mapping**: Expanded `example_terms` in `ingest_future_domains.py`; added `top2_domain_id`, `top3_domain_id` to `future_weight_mapping.py`; Top-3 accuracy and margin-stratified metrics in `evaluate_future_mapping.py`; updated future-mapping plot in `plot_scientific_analysis.py`.
 - **Calibration**: Calibration-aware signal weights in `verify_skills.py` (from `parameter_validation_report.json`); bin counts on calibration curve plot.
-- **Competency formulation**: Bloom per skill loaded and passed to prompt; one-sentence description; BLOOM ALIGNMENT rule (highest level among related skills); clear/measurable/operational guidance.
+- **Competency formulation**: one-sentence description with action verb (Design / Analyze / Evaluate / Create); clear / measurable / operational guidance. (Bloom alignment rule and skill→Bloom map were removed in Phase 1.3; KKNI level is now assigned post-hoc by the SBERT labeler in Phase 2.3.)
 - **Documentation**: BERT standalone limitation (RESEARCH_QUESTIONS.md); trend troubleshooting (PIPELINE.md); this changelog.
 
 ---

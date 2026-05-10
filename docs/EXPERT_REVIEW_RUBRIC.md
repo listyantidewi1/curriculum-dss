@@ -31,16 +31,15 @@ Choose **Invalid** when:
 - **Soft**: Interpersonal, transferable (e.g., "communicate effectively", "work in a team")
 - **Both**: Hybrid (e.g., "technical communication", "explain complex concepts to non-technical stakeholders")
 
-### Bloom (corrected)
+### ~~Bloom (corrected)~~
 
-For **hard skills only**. Use Bloom's taxonomy:
-- **Remember** – recall facts, terms, concepts
-- **Understand** – explain, interpret, summarize
-- **Apply** – use procedures, execute in new situations
-- **Analyze** – break down, compare, infer
-- **Evaluate** – critique, justify, assess
-- **Create** – design, produce, combine
-- **N/A** – for soft skills or when the level is unclear
+> **REMOVED in pipeline-redesign-v2 Phase 1.3 (Req 1).** Bloom-level
+> correction is no longer collected from reviewers. Bloom-level decisions
+> are returned to curriculum stakeholders per the requirements doc; the
+> reviewer's job is now limited to validity + type correction. The
+> downstream KKNI labeler (Phase 2.3) assigns KKNI level 1–9 post-hoc
+> via SBERT match against Perpres 8/2012 descriptors and does not depend
+> on a reviewer-supplied Bloom level.
 
 ---
 
@@ -129,5 +128,5 @@ Choose **No** when:
 
 Use the **Notes** field for:
 - Edge cases or borderline judgments
-- Suggested corrections (e.g., alternative Bloom level)
+- Suggested corrections (e.g., better skill type, span boundary, or canonical wording)
 - Context that affected your decision (for multi-reviewer consistency)
