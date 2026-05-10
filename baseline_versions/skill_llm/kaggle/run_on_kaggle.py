@@ -31,10 +31,15 @@ runs without needing the rest of the repo.
 from __future__ import annotations
 
 # =========================================================================
-# Cell 1: install missing packages (Kaggle has most pre-installed)
+# Cell 1: install missing packages
 # =========================================================================
-# Uncomment if Kaggle's pre-installed versions are too old:
-# !pip install -q -U transformers>=4.45 peft>=0.13 bitsandbytes accelerate>=0.34 datasets seqeval
+# Kaggle's base image doesn't include bitsandbytes (or has an old version).
+# Run this as a SEPARATE cell *before* the main script, then RESTART the
+# kernel before running the main script — bitsandbytes registers CUDA
+# kernels at import time and a stale torch session won't pick them up.
+#
+#     !pip install -q -U bitsandbytes>=0.46.1 peft>=0.13 accelerate>=0.34 datasets seqeval transformers
+#     # then: Run -> Restart Kernel
 
 # =========================================================================
 # Cell 2: imports + constants

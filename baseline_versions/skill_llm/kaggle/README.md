@@ -74,9 +74,33 @@ that's something like `/kaggle/input/abc123`; for Option B it stays
 
 ### 5. Paste & run
 
-1. In the Kaggle notebook, create a single code cell.
-2. Paste the **entire contents** of `run_on_kaggle.py` into that cell.
-3. Click **Run All** (or `Ctrl+F9`).
+You need **three cells in this order**:
+
+**Cell 1 — install missing packages**
+
+```python
+!pip install -q -U bitsandbytes>=0.46.1 peft>=0.13 accelerate>=0.34 datasets seqeval transformers
+```
+
+Run this cell, wait ~2–3 minutes for the download, then **Run → Restart
+Kernel**. The restart is required because bitsandbytes registers CUDA
+hooks at import time and a stale torch session won't pick them up.
+
+**Cell 2 — HF auth** (only needed if Kaggle Secrets isn't working — see
+"Troubleshooting" below)
+
+```python
+from huggingface_hub import login
+login(token="hf_PASTE_YOUR_TOKEN_HERE")
+```
+
+Run once. The token from your local `api_keys/hf_token.txt` works fine.
+**Don't commit the notebook publicly with this cell visible.**
+
+**Cell 3 — main script**
+
+Paste the **entire contents** of `run_on_kaggle.py` here. Click **Run**
+on this cell (not Run All — Cell 1 already finished, no need to re-pip).
 
 That's it. The script runs the three stages back-to-back:
 
@@ -130,9 +154,16 @@ on the saved version page.
    step 5).
 
 **"Could not read HF_TOKEN from Kaggle secrets"**
-→ Re-toggle the `HF_TOKEN` secret on for the notebook
-   (Add-ons → Secrets → click the toggle next to HF_TOKEN).
-   You may need to restart the kernel afterwards (Kernel → Restart).
+→ The Secret is on your account but isn't attached to *this notebook*.
+   Right sidebar → Add-ons → Secrets → find `HF_TOKEN` → toggle the
+   "Attached to this notebook" checkbox next to it. Then restart the
+   kernel (Run → Restart Kernel). If the toggle doesn't stick, fall back
+   to "Cell 2 — HF auth" above (hardcode the token via
+   `huggingface_hub.login(token=...)` in a separate cell).
+
+**"ImportError: Using bitsandbytes 4-bit quantization requires bitsandbytes"**
+→ You skipped Cell 1 or didn't restart the kernel after running it.
+   Run Cell 1, then Run → Restart Kernel, then re-run from Cell 2.
 
 **Training loss goes to NaN**
 → T4 sometimes has bf16 instability with bnb 4-bit. Switch
