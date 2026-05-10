@@ -23,16 +23,61 @@ The system is modular, reproducible, and supports multi-run **experimental aggre
 
 ---
 
+# 📍 Project Status — pipeline-redesign-v2
+
+The repository is mid-redesign. A mentor-driven architectural overhaul
+(`pipeline-redesign-v2`) is reshaping the extraction stack to remove Bloom
+classification from the pipeline, add full provenance traceability, replace
+domain-based batching with principled clustering, and switch the BERT extractor
+for an LLM-based one. Authoritative spec:
+[`.kiro/specs/pipeline-redesign-v2/requirements.md`](.kiro/specs/pipeline-redesign-v2/requirements.md).
+
+### Phase 1 — Data layer (current)
+
+| Sub-phase | Work | Status |
+|---|---|---|
+| **1.1** | Sentence-level provenance throughout (every extracted item carries `sentence_id`, `sentence_text`, `extractor_source`) | ✅ Done |
+| **1.2** | Zero-shot LLM sentence relevance filter (drops boilerplate / benefits / logistics) with SHA-256 cache | ✅ Done |
+| **1.3** | Bloom taxonomy removed from the pipeline (decisions returned to curriculum stakeholders) | ✅ Done |
+| **1.4** | JobBERT replicate (`baseline_versions/jjzha_replicate/`) — confirmed published checkpoint scores comparable to vanilla BERT; targets revised | ✅ Done |
+| **1.5** | Skill-LLM LoRA fine-tune of LLaMA 3.1 8B (`baseline_versions/skill_llm/`) — new BERT-replacement, paper-spec recipe | 🔄 In progress (training on Kaggle) |
+
+### Phase 2 — Pipeline reflow (queued)
+
+After 1.5 lands, Phase 2 will replace domain-based batching with HDBSCAN +
+agglomerative clustering, rewrite the competency generator to be cluster-driven
+with full provenance, add a post-hoc SBERT-based KKNI labeler (Perpres 8/2012
+levels 1–9), wire in education-level aggregation per competency, and add a
+competency evaluator (grounding / coherence / coverage). Public UI gets a
+"Why this competency?" provenance chain at the same time.
+
+### Onboarding for contributors
+
+- **[docs/RINGKASAN_KONTRIBUTOR.md](docs/RINGKASAN_KONTRIBUTOR.md)** —
+  Indonesian onboarding doc, 8 sections, written for a developer joining the
+  project. Read this first if you're new.
+- **[docs/PIPELINE_DIAGRAM.md](docs/PIPELINE_DIAGRAM.md)** —
+  the planned v2 architecture as Mermaid (renders inline on GitHub) plus an
+  AI-image-generator prompt for slides / paper figures.
+
+---
+
 # 📖 Documentation
 
 | Document | Purpose |
 |----------|---------|
 | **README.md** (this file) | Overview, quick start, high-level workflow |
 | **[PIPELINE.md](PIPELINE.md)** | Detailed pipeline documentation: phases, data flow, file dependencies, troubleshooting |
+| **[docs/PIPELINE_DIAGRAM.md](docs/PIPELINE_DIAGRAM.md)** | Planned v2 architecture diagram (Mermaid + AI-image prompt) |
+| **[docs/RINGKASAN_KONTRIBUTOR.md](docs/RINGKASAN_KONTRIBUTOR.md)** | Indonesian contributor onboarding (project goal, architecture, entry points, conventions) |
+| **[docs/PENJELASAN_UMUM.md](docs/PENJELASAN_UMUM.md)** | Indonesian general-public explainer (non-technical, for educators / policymakers) |
+| **[docs/KAJIAN_AKADEMIK.md](docs/KAJIAN_AKADEMIK.md)** | Indonesian academic reflection for promotor discussion |
 | **[docs/PUBLIC_UI.md](docs/PUBLIC_UI.md)** | Public-surface architecture (audiences, URL map, publish flow, caching) |
 | **[CALCULATIONS.md](CALCULATIONS.md)** | Scientific formulas: ranking, voting, weighting, priority scores, FDR, evaluation metrics |
 | **[SCIENTIFIC_METHODOLOGY.md](SCIENTIFIC_METHODOLOGY.md)** | **Full scientific documentation**: all statistical methods, formulas, and worked examples (binomial test, effect sizes, Kappa, power analysis, FDR, normalization, etc.) |
 | **[RESEARCH_QUESTIONS.md](RESEARCH_QUESTIONS.md)** | Research questions (RQ1–RQ5), evaluation metrics, gold set design, ablation study |
+| **[baseline_versions/jjzha_replicate/REPLICATION_REPORT.md](baseline_versions/jjzha_replicate/REPLICATION_REPORT.md)** | Phase 1.4 close-out: F1 matrix, why we pivot to Skill-LLM |
+| **[baseline_versions/skill_llm/README.md](baseline_versions/skill_llm/README.md)** | Phase 1.5: LoRA fine-tune setup, run book, expectations |
 | **[docs/DOCUMENTATION_INDEX.md](docs/DOCUMENTATION_INDEX.md)** | Central index of all documentation |
 
 ---
@@ -42,12 +87,14 @@ The system is modular, reproducible, and supports multi-run **experimental aggre
 ```
 skill-extraction/
 │
-├── pipeline.py                      # Main hybrid extraction pipeline
+├── pipeline.py                      # Main hybrid extraction pipeline (sentence-level provenance per Phase 1.1)
 ├── config.py                        # Global configuration
-├── plot_generator.py                # Visual analytics
+├── plot_generator.py                # Visual analytics (Bloom plots removed in v2; stubs preserved)
 ├── verify_skills.py                 # Skill verification (calibrated or percentile)
-├── generate_competencies.py         # Future-aware competency generator (LLM, domain-based batching)
-├── domain_batching.py               # Domain-based batching: grouping, fallbacks, merge logic
+├── sentence_relevance_filter.py     # Phase 1.2: zero-shot LLM sentence relevance filter (SHA-256 cached)
+├── generate_competencies.py         # Future-aware competency generator (LLM, domain-based batching today; cluster-driven in Phase 2.1)
+├── domain_batching.py               # Domain-based batching (legacy; Phase 2.1 replaces with HDBSCAN+agglomerative)
+├── kkni.py                          # KKNI level descriptors (Perpres 8/2012); Phase 2.3 SBERT labeler will live next to it
 ├── recommendations.py               # Ranked curriculum recommendations + ablation
 ├── enrich_with_dates.py             # Attach job_date → extraction outputs
 ├── skill_time_trend_analysis.py     # FDR-controlled time-series trends + stability
@@ -62,7 +109,7 @@ skill-extraction/
 ├── export_gold_set.py               # Stratified gold set for labeling
 ├── export_recommendations_for_review.py # Top-20 recs for expert priority labeling (RQ5 IRR)
 ├── import_feedback.py               # Merge feedback_store → feedback artifacts
-├── apply_feedback.py                # Apply Bloom/type corrections
+├── apply_feedback.py                # Apply type corrections (Bloom corrections removed in v2)
 │
 ├── evaluate_extraction.py           # Precision per extractor (BERT/LLM/Hybrid)
 ├── validate_parameters.py           # AUC, Brier, calibration, cross-validated AUC
@@ -124,6 +171,12 @@ skill-extraction/
 │
 ├── results/                         # Output of a single run
 ├── results_aggregated/              # Aggregated results across runs
+│
+├── baseline_versions/               # Research-track BERT/LLM extractor variants (mostly gitignored — weights too large)
+│   ├── jobbert_crf/                 # Original multitask + CRF baseline (legacy)
+│   ├── v3_stl/                     # Single-task + CRF baseline (legacy)
+│   ├── jjzha_replicate/             # Phase 1.4: replication of jjzha/jobbert_skill_extraction (audit + report tracked)
+│   └── skill_llm/                   # Phase 1.5: LoRA fine-tune of LLaMA 3.1 8B (paper-spec) + Kaggle training script
 │
 ├── RESEARCH_QUESTIONS.md            # RQs, metrics, ablation design
 ├── CALCULATIONS.md                  # Ranking, voting, weighting formulas
@@ -252,11 +305,14 @@ Skill/knowledge extraction is the infrastructure that feeds two products:
 2. **Hard-skill competency statements** with, per competency, a list and
    description of the soft skills a learner needs to perform it.
 
-LLM-first extraction: a single LLM call per job extracts skills, knowledge, and
-classifies type (Hard/Soft) and Bloom level. Domain is assigned post-extraction
-via SBERT cosine similarity to a curated future-domain taxonomy
-(`future_domains.csv`). BERT is retained as an optional ablation
-(`--extraction-mode hybrid`) but is no longer the default.
+LLM-first extraction: a single LLM call per job extracts skills (verb-led
+action phrases), knowledge (noun phrases — tools, technologies, concepts), and
+classifies skill type (Hard/Soft). Domain is assigned post-extraction via SBERT
+cosine similarity to a curated future-domain taxonomy (`future_domains.csv`).
+BERT is retained as an optional ablation (`--extraction-mode hybrid`) but is no
+longer the default. Bloom-level classification was removed from the pipeline
+in pipeline-redesign-v2 Phase 1.3 (Bloom decisions are now left to curriculum
+stakeholders).
 
 ## **Main Stages**
 
@@ -273,21 +329,34 @@ via SBERT cosine similarity to a curated future-domain taxonomy
 ### **2. LLM-first Extraction (BERT optional)**
 
 **Default extraction mode after the 2026 reframe:** `llm_only` — a single LLM
-call per job description extracts skills, knowledge, and classifies type
-(Hard / Soft) and Bloom level. BERT is retained for ablation
-(`--extraction-mode hybrid`).
+call per job description extracts skills (verb-led action phrases) and
+knowledge (noun phrases) and classifies skill type (Hard / Soft). BERT is
+retained for ablation (`--extraction-mode hybrid`).
 
+* **Verb-noun discrimination is load-bearing.** "designing UI/UX" is a SKILL;
+  "UI/UX" alone is KNOWLEDGE. The pipeline preserves this distinction
+  end-to-end because downstream stages (competency generation, KKNI labeler)
+  rely on the verb as a signal of cognitive level. Single-word soft skills
+  ("passion", "self-starter") are also valid SKILL items per SkillSpan
+  annotation conventions.
+* **Sentence-level provenance.** Every extracted item carries `(job_id,
+  sentence_id, sentence_text, extractor_source)` so any output can be traced
+  back to source. (Phase 1.1 of pipeline-redesign-v2.)
+* **Sentence relevance filter.** Before extraction, a zero-shot LLM filter
+  drops irrelevant sentences (benefits, location, boilerplate). Persistent
+  SHA-256 cache makes re-runs cost zero. (Phase 1.2.)
 * **LLM-based extractor** for structured JSON (configurable: DeepSeek, GPT, Gemini, Claude, etc.)
-* **JobBERT + CRF** is preserved as an ablation path (`--extraction-mode hybrid` or `bert_only`)
+* **JobBERT + CRF** preserved as an ablation path (`--extraction-mode hybrid` or `bert_only`); a Skill-LLM (LoRA-fine-tuned LLaMA 3.1 8B) replacement is in flight (Phase 1.5).
 * **Semantic agreement** using SBERT embeddings (used in fusion when hybrid mode is active)
 * **Skill normalization** (`skill_normalizer.py`) — SBERT greedy clustering (threshold 0.82); canonical = most frequent variant, tiebreak = shortest string
 * **Prompt versioning** — All LLM prompts are SHA-256 fingerprinted at runtime; combined hash stored in `run_metadata.json` for reproducibility
 
-### **3. Taxonomy Layer**
+### **3. Skill / Knowledge Taxonomy**
 
-* Hard vs soft skills
-* Bloom’s taxonomy for **hard skills only**
-* Semantic density scoring
+* **Skills** — verb-led action phrases (Hard) or single-word personality / behavioral terms (Soft)
+* **Knowledge** — noun phrases representing tools, technologies, frameworks, theoretical concepts
+* **Semantic density scoring** for confidence weighting
+* Bloom-level classification was removed in Phase 1.3 (Req 1) — Bloom decisions belong with curriculum stakeholders, not the pipeline
 
 ### **4. Curriculum Mapping**
 
@@ -296,7 +365,6 @@ call per job description extracts skills, knowledge, and classifies type
 * Compute:
 
   * coverage percentage
-  * HOT (Analyze-Evaluate-Create) distributions
   * component-level heatmaps
 
 ### **5. Future-of-Work Integration**
@@ -415,16 +483,6 @@ The system generates:
 * Skill/Knowledge counts
 * Confidence score distributions
 
-### **Bloom taxonomy distribution**
-
-* For hard skills only
-* Across JobBERT, LLM, Hybrid
-
-### **Curriculum heatmap**
-
-* Curriculum components (Y-axis)
-* Bloom levels (X-axis)
-
 ### **Top-N clusters**
 
 * Hard skills
@@ -472,7 +530,7 @@ anti-hallucination: prompt rule + post-validation filter for `related_skills`):
   for the description).
 * Each competency includes:
 
-  * `id`, `title`, `description` (single Bloom-verb-led sentence)
+  * `id`, `title`, `description` (single verb-led sentence — measurable, operational learning outcome)
   * `related_skills` (hard skills only, drawn from input)
   * `future_relevance` statement
   * `soft_skills_required` — list of 3–6 soft skills a learner needs
@@ -486,28 +544,39 @@ This output can be directly used in a **curriculum redesign document** or **expe
 
 # 📝 Pipeline Diagrams
 
-All diagrams can be generated using the provided prompts in `/docs/prompts/`
-(Or directly pasted into an AI image generator.)
+The planned v2 architecture is in **[docs/PIPELINE_DIAGRAM.md](docs/PIPELINE_DIAGRAM.md)**
+in two formats:
 
-### Includes:
+* **Mermaid source** — renders inline on GitHub / Notion / draw.io. Use when
+  you need a precise, version-controlled, editable diagram.
+* **Natural-language prompt** — paste into ChatGPT image / DALL-E / Midjourney
+  / Whimsical AI / Eraser.io for marketing-style figures (slides, paper).
 
-* Full pipeline architecture
-* Checkpoint diagrams:
-
-  * preprocessing
-  * hybrid extraction
-  * taxonomy mapping
-  * future-of-jobs layer
-  * competency generation & review
+For the legacy file-by-file flow (which files produce which outputs), see
+**[PIPELINE.md](PIPELINE.md)**.
 
 ---
 
-# 💼 Future Work
+# 💼 Roadmap — Phase 2 of pipeline-redesign-v2
 
-* Train a **domain-specific SBERT** model for improved skill-domain matching
-* Add **semantic search** over extracted competencies
-* Testing with >10,000 job postings
-* Incorporate additional national/regional forecast sources
+After Phase 1.5 (Skill-LLM LoRA fine-tune) lands, the queued Phase 2 work
+reshapes the generation flow on top of the new data layer:
+
+| Sub-phase | Work | Spec |
+|---|---|---|
+| **2.1** | Replace `domain_batching.py` with HDBSCAN + agglomerative clustering, winner per batch by SBERT cohesion. New file: `skill_clustering.py`. | Req 5 |
+| **2.2** | Rewrite `generate_competencies.py` to be cluster-driven and provenance-aware. Each competency carries `contributing_item_ids`, `source_job_ids`, `source_sentences`. | Req 6 |
+| **2.3** | New `kkni_labeler.py` — post-hoc SBERT match competency to KKNI levels 1–9 (Perpres 8/2012). Informational only, does not enter ranking. | Req 2 |
+| **2.4** | Aggregate education-level histogram per competency from contributing job postings. | Req 2 |
+| **2.5** | New `evaluate_competency_quality.py` — grounding score, coherence score, coverage score; flags hallucinated competencies. | Req 7 |
+| **2.6** | Public detail page gets a "Why this competency?" provenance chain; browse filters add KKNI level + education stage. | Req 8 |
+
+Longer-horizon ideas (post-Phase 2):
+
+* Train a **domain-specific SBERT** for stronger skill-domain matching
+* **Semantic search** over generated competencies (for the public dashboard)
+* Scaling tests with >10,000 job postings
+* Incorporate additional national / regional forecast sources
 
 ---
 
