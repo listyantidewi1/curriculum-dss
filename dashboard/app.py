@@ -239,8 +239,8 @@ def _review_coverage(result_dir: Path, feedback_dir: Path) -> Dict[str, Dict[str
             cov["skills"]["total"] = int(tpl["review_id"].nunique())
             if skill_fb.exists():
                 fb = pd.read_csv(skill_fb)
-                if {"review_id", "human_valid", "human_type", "human_bloom", "human_notes"}.intersection(set(fb.columns)):
-                    cols = [c for c in ["human_valid", "human_type", "human_bloom", "human_notes"] if c in fb.columns]
+                if {"review_id", "human_valid", "human_type", "human_notes"}.intersection(set(fb.columns)):
+                    cols = [c for c in ["human_valid", "human_type", "human_notes"] if c in fb.columns]
                     if cols and "review_id" in fb.columns:
                         f2 = fb[["review_id"] + cols].copy()
                         reviewed = f2.apply(
@@ -737,12 +737,6 @@ def _explanations() -> Dict[str, Dict[str, str]]:
             "formula": "",
             "limitations": "",
         },
-        "human_bloom": {
-            "title": "Bloom Level (Your Review)",
-            "what": "Cognitive level: Remember, Understand, Apply, Analyze, Evaluate, Create, or N/A. Overrides model classification.",
-            "formula": "",
-            "limitations": "",
-        },
         "human_quality": {
             "title": "Quality (Your Review)",
             "what": "Numbers and text are equivalent: 1=poor, 2=fair, 3=good, 4/5=excellent. Choose either; both are used the same in ranking.",
@@ -799,16 +793,6 @@ def _plot_explanations() -> Dict[str, Dict[str, str]]:
             "title": "Average Skills/Knowledge per Job",
             "what": "Shows average extracted items per posting for each model.",
             "how": "Use this to understand extraction density. Extremely high values may indicate over-extraction.",
-        },
-        "bloom_distribution_hard_skills.png": {
-            "title": "Bloom Distribution (Hard Skills)",
-            "what": "Distribution of hard skills across Bloom cognitive levels.",
-            "how": "Balanced upper levels (Analyze/Evaluate/Create) indicate stronger advanced competency demand.",
-        },
-        "heatmap_curriculum_bloom_hard_skills.png": {
-            "title": "Curriculum × Bloom Heatmap",
-            "what": "Maps demanded hard skills to curriculum components and Bloom levels.",
-            "how": "Darker cells mean higher demand concentration. Sparse areas can indicate curriculum gaps.",
         },
         "clusters_top_hard_skills.png": {
             "title": "Top Hard Skill Clusters",
@@ -1997,7 +1981,7 @@ def school_review(request: Request, department_id: Optional[int] = None):
     comp_fb = _load_feedback_csv(feedback_dir, "competency_feedback.csv")
 
     skills_df = _merge_template_with_reviewer_feedback(
-        skills_df, skills_fb, "review_id", reviewer_id, ["human_valid", "human_type", "human_bloom", "human_notes"]
+        skills_df, skills_fb, "review_id", reviewer_id, ["human_valid", "human_type", "human_notes"]
     )
     knowledge_df = _merge_template_with_reviewer_feedback(
         knowledge_df, knowledge_fb, "review_id", reviewer_id, ["human_valid", "human_notes"]
@@ -2029,7 +2013,6 @@ def save_skill_review(
     review_id: str = Form(...),
     human_valid: str = Form(""),
     human_type: str = Form(""),
-    human_bloom: str = Form(""),
     human_notes: str = Form(""),
 ):
     user = _require_role(request, "school")
@@ -2044,7 +2027,6 @@ def save_skill_review(
         {
             "human_valid": human_valid,
             "human_type": human_type,
-            "human_bloom": human_bloom,
             "human_notes": human_notes,
         },
     )
@@ -2121,7 +2103,6 @@ async def save_skill_review_api(request: Request):
         {
             "human_valid": str(payload.get("human_valid", "")),
             "human_type": str(payload.get("human_type", "")),
-            "human_bloom": str(payload.get("human_bloom", "")),
             "human_notes": str(payload.get("human_notes", "")),
         },
     )
@@ -2395,7 +2376,6 @@ def api_explain_score(
                 },
             },
             "verification": str(row.get("verification_level", "not_verified")),
-            "bloom_level": str(row.get("bloom", "—")),
             "skill_type": str(row.get("type", "—")),
         }
         return breakdown

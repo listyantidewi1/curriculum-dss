@@ -37,7 +37,7 @@
 <section id="skills-panel" class="card review-panel active">
   {% include "partials/review_rubric.html" %}
   <h3>Skill Review (sampled) <span class="hint" id="skills-progress"></span></h3>
-  <p class="panel-desc">Verify if the extracted skill is valid and correct the Bloom taxonomy if needed.</p>
+  <p class="panel-desc">Verify if the extracted skill is valid and (optionally) correct its skill type.</p>
   {% if skills %}
     {% for row in skills %}
       <form method="post" action="/dashboard/school/review/save_skill" class="comp-card review-item skill-item" data-kind="skill">
@@ -46,7 +46,6 @@
         <h4>{{ row.get("skill", "-") }} <span class="hint">#{{ row.get("review_id", "") }}</span></h4>
         <p class="hint">
           Current model type: <strong>{{ row.get("type", "-") }}</strong> |
-          Current model bloom: <strong>{{ row.get("bloom", "-") }}</strong> |
           Confidence: <strong>{{ row.get("confidence_score", "-") }}</strong>
           {% if explanations and explanations.confidence_score %}
           <span class="explain-wrap"><span class="explain-icon">?</span><span class="explain-popover">{{ explanations.confidence_score.what }}</span></span>
@@ -92,17 +91,6 @@
           <option value="Hard" {% if row.get("human_type") == "Hard" %}selected{% endif %}>Hard</option>
           <option value="Soft" {% if row.get("human_type") == "Soft" %}selected{% endif %}>Soft</option>
           <option value="Both" {% if row.get("human_type") == "Both" %}selected{% endif %}>Both</option>
-        </select>
-        <label>Bloom {% if explanations and explanations.human_bloom %}<span class="explain-wrap"><span class="explain-icon">?</span><span class="explain-popover">{{ explanations.human_bloom.what }}</span></span>{% endif %}</label>
-        <select name="human_bloom">
-          <option value="" {% if not row.get("human_bloom") %}selected{% endif %}>-</option>
-          <option value="Remember" {% if row.get("human_bloom") == "Remember" %}selected{% endif %}>Remember</option>
-          <option value="Understand" {% if row.get("human_bloom") == "Understand" %}selected{% endif %}>Understand</option>
-          <option value="Apply" {% if row.get("human_bloom") == "Apply" %}selected{% endif %}>Apply</option>
-          <option value="Analyze" {% if row.get("human_bloom") == "Analyze" %}selected{% endif %}>Analyze</option>
-          <option value="Evaluate" {% if row.get("human_bloom") == "Evaluate" %}selected{% endif %}>Evaluate</option>
-          <option value="Create" {% if row.get("human_bloom") == "Create" %}selected{% endif %}>Create</option>
-          <option value="N/A" {% if row.get("human_bloom") == "N/A" %}selected{% endif %}>N/A</option>
         </select>
         <label>Notes</label>
         <textarea name="human_notes" rows="2">{{ row.get("human_notes", "") }}</textarea>
@@ -193,8 +181,8 @@
           All skills human verified: {{ row.get("all_skills_human_verified", "-") }}
         </p>
         <p class="hint">Future relevance: {{ row.get("future_relevance", "-") }}</p>
-        <p class="hint"><strong>Related skills (Bloom level per skill):</strong></p>
-        <p class="mono related-skills-bloom">{{ row.get("related_skills_with_bloom", "") or row.get("related_skills", "-") }}</p>
+        <p class="hint"><strong>Related skills:</strong></p>
+        <p class="mono related-skills">{{ row.get("related_skills", "-") }}</p>
         <p class="hint">Skill focus (derived): <strong>{{ row.get("skill_focus", "—") }}</strong> — correct below if needed</p>
         <label>Skill focus {% if explanations and explanations.human_skill_focus %}<span class="explain-wrap"><span class="explain-icon">?</span><span class="explain-popover">{{ explanations.human_skill_focus.what }}</span></span>{% endif %}</label>
         <select name="human_skill_focus">
@@ -235,7 +223,7 @@
   Each reviewer’s feedback is stored separately (per reviewer_id). Schools with the same vocational field can aggregate results on the Results page to benefit from crowd-sourced data across departments.
 </p>
 <p class="hint" style="margin-top: 8px;">
-  <strong>How feedback is used:</strong> When multiple reviewers assess the same item, majority vote merges feedback. Your feedback is applied in Phase 2 (Run Phase 2 after review) to correct Bloom/type, calibrate thresholds, and re-generate competencies.
+  <strong>How feedback is used:</strong> When multiple reviewers assess the same item, majority vote merges feedback. Your feedback is applied in Phase 2 (Run Phase 2 after review) to correct skill type, calibrate thresholds, and re-generate competencies.
 </p>
 <p class="hint" style="margin-top: 4px;">
   <strong>Limitations:</strong> Skills, knowledge, and competencies are stratified samples; not all items are reviewed. Unverified items may still appear in final results.
@@ -263,7 +251,6 @@
       return !!(
         card.querySelector('[name="human_valid"]').value ||
         card.querySelector('[name="human_type"]').value ||
-        card.querySelector('[name="human_bloom"]').value ||
         card.querySelector('[name="human_notes"]').value.trim()
       );
     }
@@ -288,7 +275,6 @@
       data.review_id = card.querySelector('[name="review_id"]').value;
       data.human_valid = card.querySelector('[name="human_valid"]').value;
       data.human_type = card.querySelector('[name="human_type"]').value;
-      data.human_bloom = card.querySelector('[name="human_bloom"]').value;
       data.human_notes = card.querySelector('[name="human_notes"]').value;
       data.url = "/dashboard/school/review/api/save_skill";
     } else if (kind === "knowledge") {
@@ -335,7 +321,7 @@
       });
       if (!res.ok) throw new Error("save failed");
       card.classList.toggle("reviewed", isReviewed(card));
-      // Don't applyFilter on save: keep card visible so user can add Type, Bloom, Notes
+      // Don't applyFilter on save: keep card visible so user can add Type, Notes
       updateProgress();
       setSavedState(card, "ok");
     } catch (_e) {
@@ -378,7 +364,7 @@
     card.querySelectorAll("select, textarea").forEach((el) => {
       el.addEventListener("change", () => {
         card.classList.toggle("reviewed", isReviewed(card));
-        // Don't applyFilter on change: keep card visible so user can add Type, Bloom, Notes
+        // Don't applyFilter on change: keep card visible so user can add Type, Notes
         updateProgress();
         debounceSave(card, keyId);
       });

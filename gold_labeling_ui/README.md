@@ -34,7 +34,7 @@ Run `export_gold_set.py` first (step 11 of Phase 1) to create:
 ## Storage
 
 Labels are stored in `DATA/labels/gold_labels/`:
-- `skill_labels.csv` — gold_id, labeler_id, is_correct, type_label, bloom_label, notes
+- `skill_labels.csv` — gold_id, labeler_id, is_correct, type_label, notes
 - `knowledge_labels.csv` — gold_id, labeler_id, is_correct, notes
 - `domain_labels.csv` — gold_id, labeler_id, true_domain_id, notes
 

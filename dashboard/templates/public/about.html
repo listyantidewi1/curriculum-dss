@@ -24,8 +24,8 @@
     <p>
       An LLM reads each posting end-to-end and produces a structured JSON list of
       hard skills, soft skills, and knowledge items. JobBERT (a fine-tuned span tagger)
-      is retained as an ablation path but is no longer the default. Each skill carries
-      a Bloom level (Remember &rarr; Create) and a confidence score.
+      is retained as an ablation path but is no longer the default. Each item carries
+      a confidence score.
     </p>
   </div>
 
@@ -37,8 +37,7 @@
       into 8&ndash;12 competency statements. Each competency carries:
     </p>
     <ul>
-      <li>A Bloom level (highest among related skills)</li>
-      <li>A KKNI level 1&ndash;9, derived deterministically from Bloom + LLM judgment within a clamped band</li>
+      <li>A KKNI level 1&ndash;9, assigned post-hoc by an SBERT-based labeler that compares the competency statement to the Perpres 8/2012 level descriptors</li>
       <li>A list of <em>soft skills required</em> grounded in extracted soft skills + LLM expansion</li>
     </ul>
   </div>
@@ -89,9 +88,9 @@
       are queued for a follow-up pass.</li>
       <li>Coverage analysis uses substring + normalized-token matching, not deep semantic matching, so
       a curriculum entry like "OOP" may miss a competency phrased as "Object-Oriented Programming".</li>
-      <li>KKNI levels are constrained to a Bloom-derived floor band (floor or floor+1) to avoid LLM
-      over-reach. Edge cases involving high-craft Create-level competencies at low education stages
-      may need expert review.</li>
+      <li>KKNI levels are assigned post-hoc by SBERT similarity against the Perpres 8/2012 level
+      descriptors. Edge cases (e.g. high-craft competencies at low education stages) may need
+      expert review.</li>
     </ul>
   </div>
 

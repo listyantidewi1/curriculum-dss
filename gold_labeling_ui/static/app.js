@@ -85,15 +85,14 @@ let skillsData = [];
 async function autoSaveSkill(goldId, card) {
   const ic = card.querySelector(`select[data-field="is_correct"]`)?.value || "";
   const tl = card.querySelector(`select[data-field="type_label"]`)?.value || "";
-  const bl = card.querySelector(`select[data-field="bloom_label"]`)?.value || "";
   const nn = card.querySelector(`textarea[data-field="notes"]`)?.value || "";
   try {
     await postJson(`${API}/save_skill_label`, {
-      gold_id: goldId, is_correct: ic, type_label: tl, bloom_label: bl, notes: nn,
+      gold_id: goldId, is_correct: ic, type_label: tl, notes: nn,
       labeler_id: getLabelerId(),
     });
     const item = skillsData.find((x) => x.gold_id === goldId);
-    if (item) { item.is_correct = ic; item.type_label = tl; item.bloom_label = bl; item.notes = nn; }
+    if (item) { item.is_correct = ic; item.type_label = tl; item.notes = nn; }
     updateSkillProgress();
     card.classList.toggle("reviewed", !!(ic === "yes" || ic === "no"));
     showSaveIndicator(card, true);
@@ -127,7 +126,6 @@ function renderSkills() {
       </div>
       <div class="card-meta">
         <span class="meta-tag">Type: ${escapeHtml(item.type || "—")}</span>
-        <span class="meta-tag">Bloom: ${escapeHtml(item.bloom || "—")}</span>
         <span class="meta-tag">Confidence: ${item.confidence_score || "—"}</span>
         <span class="meta-tag">Source: ${escapeHtml(item.source || "—")}</span>
       </div>
@@ -147,18 +145,6 @@ function renderSkills() {
             <option value="Hard" ${item.type_label === "Hard" ? "selected" : ""}>Hard</option>
             <option value="Soft" ${item.type_label === "Soft" ? "selected" : ""}>Soft</option>
             <option value="Both" ${item.type_label === "Both" ? "selected" : ""}>Both</option>
-          </select>
-        </div>
-        <div class="col">
-          <div class="label">bloom_label</div>
-          <select data-field="bloom_label">
-            <option value="">--</option>
-            <option value="Remember" ${item.bloom_label === "Remember" ? "selected" : ""}>Remember</option>
-            <option value="Understand" ${item.bloom_label === "Understand" ? "selected" : ""}>Understand</option>
-            <option value="Apply" ${item.bloom_label === "Apply" ? "selected" : ""}>Apply</option>
-            <option value="Analyze" ${item.bloom_label === "Analyze" ? "selected" : ""}>Analyze</option>
-            <option value="Evaluate" ${item.bloom_label === "Evaluate" ? "selected" : ""}>Evaluate</option>
-            <option value="Create" ${item.bloom_label === "Create" ? "selected" : ""}>Create</option>
           </select>
         </div>
       </div>

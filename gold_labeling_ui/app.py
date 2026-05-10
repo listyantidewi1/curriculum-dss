@@ -40,7 +40,6 @@ class SkillLabel(BaseModel):
     gold_id: str
     is_correct: str = ""
     type_label: str = ""
-    bloom_label: str = ""
     notes: str = ""
     labeler_id: str = ""
 
@@ -176,7 +175,7 @@ def get_skills(labeler_id: str = Query("", alias="labeler_id")):
     rid = labeler_id.strip() or "default"
     df = _merge_template_with_labels(
         template, labels, "gold_id", rid,
-        ["is_correct", "type_label", "bloom_label", "notes"]
+        ["is_correct", "type_label", "notes"]
     )
     df = df.fillna("")
     items = df.to_dict(orient="records")
@@ -245,7 +244,6 @@ def save_skill_label(lbl: SkillLabel):
     _upsert_label(path, "gold_id", lbl.gold_id, rid, {
         "is_correct": lbl.is_correct.strip().lower(),
         "type_label": lbl.type_label.strip(),
-        "bloom_label": lbl.bloom_label.strip(),
         "notes": lbl.notes.strip(),
     })
     return {"ok": True}

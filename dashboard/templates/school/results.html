@@ -100,7 +100,7 @@
               if(sc.trend) msg += "Trend  (×0.30): " + sc.trend.value.toFixed(3) + " → +" + sc.trend.contribution.toFixed(3) + " ("+sc.trend.trend_label+")\n";
               if(sc.future) msg += "Future (×0.30): " + sc.future.value.toFixed(3) + " → +" + sc.future.contribution.toFixed(3) + " ("+sc.future.domain+")\n";
               msg += "─────────────────────────\n";
-              msg += "Bloom: " + (d.bloom_level||"—") + " | Type: " + (d.skill_type||"—") + " | Status: " + (d.verification||"—");
+              msg += "Type: " + (d.skill_type||"—") + " | Status: " + (d.verification||"—");
               alert(msg);
             });
         };

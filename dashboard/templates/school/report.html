@@ -226,7 +226,7 @@
   <!-- ================================================================ -->
   <h3>Competency Proposals</h3>
   <p class="section-note">
-    LLM-generated competencies structured by Bloom's taxonomy level, grouped by future-work domain.
+    LLM-generated competencies grouped by future-work domain, with KKNI levels assigned post-hoc.
     Ready for use in KOSP (Kurikulum Operasional Satuan Pendidikan) development.
   </p>
 
@@ -235,7 +235,6 @@
     <div class="competency-card">
       <div class="domain-tag">
         {{ c.future_domain or c.domain or "General" }}
-        · Bloom: {{ c.bloom_level or c.bloom or "—" }}
         {% if c.kkni_level %} · KKNI {{ c.kkni_level }}{% endif %}
       </div>
       <strong>{{ c.title or c.competency_title or ("Competency " ~ loop.index) }}</strong>

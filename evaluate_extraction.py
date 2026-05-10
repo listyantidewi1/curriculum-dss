@@ -510,51 +510,6 @@ def evaluate_irr(df: pd.DataFrame, id_col: str = "gold_id") -> Dict:
     return result
 
 
-def evaluate_bloom_classification(df: pd.DataFrame) -> Dict:
-    """Validate pipeline Bloom classification against gold-labeled Bloom levels.
-
-    Requires both ``bloom`` (pipeline prediction) and ``bloom_label`` (gold
-    label) columns to be present and non-empty.  Returns overall accuracy
-    and per-level precision.
-    """
-    if "bloom" not in df.columns or "bloom_label" not in df.columns:
-        return {"status": "missing_columns"}
-
-    sub = df.copy()
-    sub["bloom"] = sub["bloom"].astype(str).str.strip()
-    sub["bloom_label"] = sub["bloom_label"].astype(str).str.strip()
-    sub = sub[(sub["bloom_label"] != "") & (sub["bloom_label"].str.lower() != "nan")].copy()
-
-    if len(sub) < 5:
-        return {"status": "insufficient_data", "n": len(sub)}
-
-    sub["match"] = sub["bloom"].str.lower() == sub["bloom_label"].str.lower()
-    n = len(sub)
-    n_correct = int(sub["match"].sum())
-    accuracy = round(n_correct / n, 4)
-    ci = wilson_ci(accuracy, n)
-
-    per_level: List[Dict] = []
-    for level, grp in sub.groupby(sub["bloom_label"].str.lower()):
-        lvl_n = len(grp)
-        lvl_correct = int(grp["match"].sum())
-        per_level.append({
-            "bloom_level": str(level),
-            "n": lvl_n,
-            "correct": lvl_correct,
-            "accuracy": round(lvl_correct / lvl_n, 4) if lvl_n > 0 else 0.0,
-        })
-
-    return {
-        "status": "ok",
-        "n": n,
-        "n_correct": n_correct,
-        "accuracy": accuracy,
-        "accuracy_ci_95": list(ci),
-        "per_level": sorted(per_level, key=lambda x: x["bloom_level"]),
-    }
-
-
 def evaluate_type_classification(df: pd.DataFrame) -> Dict:
     """Validate pipeline type (hard/soft) classification against gold labels."""
     if "type" not in df.columns or "type_label" not in df.columns:
@@ -616,7 +571,6 @@ def main():
         print(f"[INFO] Loaded {len(skills_df)} labeled skills")
         irr = _load_irr_from_gold_labels(labels, "skill") if (labels / "gold_labels" / "skill_labels.csv").exists() else evaluate_irr(skills_df)
         by_src = evaluate_by_source(skills_df)
-        bloom_eval = evaluate_bloom_classification(skills_df)
         type_eval = evaluate_type_classification(skills_df)
         # RQ1 primary test: Hybrid vs LLM-only (requires --llmonly-labels-dir)
         rq1_primary = {"status": "no_llmonly_labels",
@@ -657,7 +611,6 @@ def main():
             "pairwise_comparisons": _pairwise_comparisons(by_src),
             "bert_contribution_analysis": bert_contrib,
             "irr": irr,
-            "bloom_validation": bloom_eval,
             "type_validation": type_eval,
         }
         overall = [r for r in report["skills"]["by_source"] if r["source"] == "all"]
@@ -665,11 +618,6 @@ def main():
             o = overall[0]
             print(f"  Skills overall: P={o['precision']:.3f} "
                   f"(95% CI {o['precision_ci_95']}), n={o['n']}")
-        if bloom_eval.get("status") == "ok":
-            print(f"  Bloom classification accuracy: {bloom_eval['accuracy']:.3f} "
-                  f"(n={bloom_eval['n']})")
-        elif bloom_eval.get("status") == "insufficient_data":
-            print(f"  Bloom validation: insufficient data (n={bloom_eval.get('n', 0)})")
         if type_eval.get("status") == "ok":
             print(f"  Type classification accuracy: {type_eval['accuracy']:.3f} "
                   f"(n={type_eval['n']})")

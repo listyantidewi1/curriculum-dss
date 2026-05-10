@@ -37,14 +37,15 @@ def load_curriculum_file(path: Path) -> List[Dict]:
                 {
                     "component_id": str(row.get("id", "")).strip(),
                     "component_name": str(row.get("name", "")).strip(),
-                    "bloom_level": str(row.get("bloom_level", "")).strip(),
                     "phrases": [str(x).strip() for x in row.get("phrases", []) if str(x).strip()],
                 }
             )
         return normalized
 
     df = pd.read_csv(path)
-    required = {"component_id", "component_name", "bloom_level", "phrases"}
+    # bloom_level was previously required but is ignored after pipeline-redesign-v2
+    # (Req 1.5: legacy CSVs with a bloom_level column still load without error).
+    required = {"component_id", "component_name", "phrases"}
     missing = required - set(df.columns)
     if missing:
         raise ValueError(f"Curriculum CSV missing columns: {sorted(missing)}")
@@ -55,7 +56,6 @@ def load_curriculum_file(path: Path) -> List[Dict]:
             {
                 "component_id": str(row["component_id"]).strip(),
                 "component_name": str(row["component_name"]).strip(),
-                "bloom_level": str(row["bloom_level"]).strip(),
                 "phrases": _split_phrases(row["phrases"]),
             }
         )

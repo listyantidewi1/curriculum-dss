@@ -10,9 +10,6 @@
     <div class="meta" style="font-size:13px; color:var(--muted); display:flex; gap:8px; flex-wrap:wrap;">
       {% if c.kkni_level %}<span class="kkni-pill" style="background:var(--kkni); color:white; padding:2px 10px; border-radius:999px;">KKNI {{ c.kkni_level }}</span>{% endif %}
       {% if c.future_domain %}<span class="domain-pill" style="background:var(--accent-soft); color:var(--accent); padding:2px 10px; border-radius:999px;">{{ c.future_domain }}</span>{% endif %}
-      {% if c.kkni_floor and c.kkni_floor != c.kkni_level %}
-        <span class="muted">Bloom-derived floor: KKNI {{ c.kkni_floor }}</span>
-      {% endif %}
     </div>
     <h1>{{ c.title }}</h1>
     <p class="muted" style="font-size:16px;">{{ c.description }}</p>

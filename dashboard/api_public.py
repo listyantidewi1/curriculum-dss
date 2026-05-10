@@ -190,7 +190,6 @@ def list_competencies(
     stage: Optional[str] = None,
     kkni_level: Optional[int] = None,
     domain: Optional[str] = None,
-    bloom: Optional[str] = None,
     q: Optional[str] = None,
     limit: int = 200,
     offset: int = 0,
@@ -219,7 +218,6 @@ def list_competencies(
 
     domain_q = (domain or "").strip().lower()
     text_q = (q or "").strip().lower()
-    bloom_q = (bloom or "").strip().lower()
 
     matched = []
     for c in comps:
@@ -233,11 +231,6 @@ def list_competencies(
         if domain_q:
             d = (c.get("batch_domain") or c.get("future_domain") or "").lower()
             if domain_q not in d:
-                continue
-        if bloom_q:
-            # Inferred from related_skills list won't be present; skip if not annotated
-            comp_bloom = (c.get("bloom") or c.get("bloom_level") or "").lower()
-            if bloom_q not in comp_bloom:
                 continue
         if text_q:
             blob = " ".join([
