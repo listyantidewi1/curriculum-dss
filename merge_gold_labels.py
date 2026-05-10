@@ -19,8 +19,8 @@ Outputs:
     DATA/labels/gold_future_domain_merged.csv
 
 Majority vote: For is_correct, yes wins if count(yes) > count(no); else no.
-If tie, use conservative (no for is_correct). For type_label, bloom_label,
-true_domain_id: use mode (most frequent).
+If tie, use conservative (no for is_correct). For type_label, true_domain_id:
+use mode (most frequent).
 """
 
 import argparse
@@ -57,12 +57,11 @@ def merge_skill_labels(template: pd.DataFrame, labels: pd.DataFrame) -> pd.DataF
     agg = labels.groupby("gold_id").agg(
         is_correct=("is_correct", _majority_is_correct),
         type_label=("type_label", _mode_or_empty),
-        bloom_label=("bloom_label", _mode_or_empty),
         labeler_id=("labeler_id", lambda x: ",".join(sorted(x.astype(str).unique()))),
     ).reset_index()
-    out = template.merge(agg[["gold_id", "is_correct", "type_label", "bloom_label", "labeler_id"]],
+    out = template.merge(agg[["gold_id", "is_correct", "type_label", "labeler_id"]],
                          on="gold_id", how="left", suffixes=("_tpl", ""))
-    for c in ["is_correct", "type_label", "bloom_label", "labeler_id"]:
+    for c in ["is_correct", "type_label", "labeler_id"]:
         tpl_col = f"{c}_tpl"
         if tpl_col in out.columns:
             out[c] = out[c].combine_first(out[tpl_col]).fillna("").astype(str)

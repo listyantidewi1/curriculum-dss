@@ -24,7 +24,7 @@ uvicorn review_ui.app:app --reload
 
 ## Features
 
-- **Skills**: Validity, type (Hard/Soft/Both), Bloom, notes
+- **Skills**: Validity, type (Hard/Soft/Both), notes
 - **Knowledge**: Validity, notes
 - **Competencies**: Quality (1–5), relevance (yes/no/partial), notes
 - **Show unreviewed only**: Filter per reviewer

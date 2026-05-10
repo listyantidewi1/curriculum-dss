@@ -2,7 +2,7 @@
 import_feedback.py
 
 Reads feedback from feedback_store/ (multi-reviewer format) or expert_review_*.csv (legacy).
-Merges multi-reviewer feedback using majority vote. Validates human_valid, human_bloom, etc.
+Merges multi-reviewer feedback using majority vote. Validates human_valid, human_type, etc.
 
 Scientific methods (see SCIENTIFIC_METHODOLOGY.md):
     - Majority vote for multi-reviewer merge (most frequent non-empty value)
@@ -12,7 +12,7 @@ Outputs to feedback_store/:
     - human_verified_skills.csv
     - human_verified_knowledge.csv
     - competency_assessments.json
-    - bloom_corrections.json
+    - type_corrections.json
 """
 
 import argparse
@@ -26,7 +26,6 @@ import pandas as pd
 import config
 
 VALID_HUMAN_VALID = {"valid", "invalid", ""}
-VALID_HUMAN_BLOOM = {"Remember", "Understand", "Apply", "Analyze", "Evaluate", "Create", "N/A", ""}
 VALID_HUMAN_QUALITY = {"1", "2", "3", "4", "5", "poor", "fair", "good", "excellent", ""}
 VALID_HUMAN_RELEVANT = {"yes", "no", "partial", ""}
 
@@ -67,9 +66,13 @@ def _load_skill_feedback(output_dir: Path, feedback_dir: Path) -> pd.DataFrame:
         df = pd.read_csv(template_path)
         if "human_valid" in df.columns:
             hv = df["human_valid"].astype(str).str.strip()
-            if hv.isin(["valid", "invalid"]).any() or (df["human_bloom"].astype(str).str.strip() != "").any():
+            if hv.isin(["valid", "invalid"]).any() or (
+                "human_type" in df.columns
+                and (df["human_type"].astype(str).str.strip() != "").any()
+            ):
                 # Migrate to feedback_store for future UI loads
-                mig = df[["review_id", "human_valid", "human_type", "human_bloom", "human_notes"]].copy()
+                cols = [c for c in ["review_id", "human_valid", "human_type", "human_notes"] if c in df.columns]
+                mig = df[cols].copy()
                 mig["reviewer_id"] = "default"
                 mig.to_csv(fb_path, index=False, encoding="utf-8-sig")
                 print(f"[INFO] Migrated legacy skill feedback to {fb_path}")
@@ -86,52 +89,43 @@ def import_skills_feedback(output_dir: Path, feedback_dir: Path) -> None:
         return
 
     # Aggregate by review_id (multi-reviewer: majority vote)
-    valid_bloom = {v for v in VALID_HUMAN_BLOOM if v}
     valid_types = {"Hard", "Soft", "Both"}
 
-    bloom_corrections = {}
     type_corrections = {}
     verified_rows = []
 
+    has_human_type = "human_type" in filled.columns
+
     for review_id, grp in filled.groupby("review_id"):
         hv_list = grp["human_valid"].astype(str).str.strip().str.lower().tolist()
-        hb_list = grp["human_bloom"].astype(str).str.strip().tolist()
-        ht_list = grp["human_type"].astype(str).str.strip().tolist()
+        ht_list = grp["human_type"].astype(str).str.strip().tolist() if has_human_type else []
         hv = _majority([v for v in hv_list if v in ("valid", "invalid")])
-        hb = _majority([v for v in hb_list if v in valid_bloom])
-        ht = _majority([v for v in ht_list if v in valid_types])
+        ht = _majority([v for v in ht_list if v in valid_types]) if has_human_type else ""
 
-        if not hv and not hb and not ht:
+        if not hv and not ht:
             continue
 
         row = grp.iloc[0].to_dict()
         row["human_valid"] = hv
-        row["human_bloom"] = hb
-        row["human_type"] = ht
-        if "skill" in row and hb:
-            bloom_corrections[str(row["skill"]).strip()] = hb
+        if has_human_type:
+            row["human_type"] = ht
         if "skill" in row and ht:
             type_corrections[str(row["skill"]).strip()] = ht
         if hv == "valid":
             verified_rows.append(row)
 
-    if not verified_rows and not bloom_corrections and not type_corrections:
+    if not verified_rows and not type_corrections:
         print("[INFO] No skill feedback found.")
         return
 
     # Build human_verified_skills.csv
     if verified_rows:
         verified = pd.DataFrame(verified_rows)
-        out_cols = [c for c in ["review_id", "job_id", "skill", "type", "bloom"] if c in verified.columns]
+        out_cols = [c for c in ["review_id", "job_id", "skill", "type"] if c in verified.columns]
         if out_cols:
             verified[out_cols].to_csv(feedback_dir / "human_verified_skills.csv", index=False, encoding="utf-8-sig")
             print(f"[INFO] Saved {len(verified)} verified skills to human_verified_skills.csv")
 
-    if bloom_corrections:
-        (feedback_dir / "bloom_corrections.json").write_text(
-            json.dumps(bloom_corrections, indent=2, ensure_ascii=False), encoding="utf-8"
-        )
-        print(f"[INFO] Saved {len(bloom_corrections)} Bloom corrections")
     if type_corrections:
         (feedback_dir / "type_corrections.json").write_text(
             json.dumps(type_corrections, indent=2, ensure_ascii=False), encoding="utf-8"

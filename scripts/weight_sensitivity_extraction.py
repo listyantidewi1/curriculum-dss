@@ -27,10 +27,8 @@ WEIGHT_GROUPS = {
     "BERT_TYPE_CONFIDENCE_WEIGHT": 0.3,
     "BERT_STANDALONE_PENALTY": 0.8,
     "BERT_DENSITY_FACTOR_BASE": 0.8,
-    "BERT_BLOOM_FACTOR_BASE": 0.5,
     "LLM_BASE_CONFIDENCE": 0.8,
     "LLM_TYPE_FACTOR_BASE": 0.6,
-    "LLM_BLOOM_FACTOR_BASE": 0.7,
     "LLM_DENSITY_FACTOR_BASE": 0.8,
     "FUSION_MATCH_BONUS_WEIGHT": 0.2,
     "FUSION_TYPE_DISAGREEMENT": 0.8,
@@ -74,7 +72,7 @@ def _simulate_precision_change(param: str, factor: float,
     delta = new_val - default
 
     boundary_fraction = 0.15
-    if "BLOOM" in param or "DENSITY" in param:
+    if "DENSITY" in param:
         boundary_fraction = 0.08
     elif "STANDALONE" in param:
         boundary_fraction = 0.10

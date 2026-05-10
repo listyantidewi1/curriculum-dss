@@ -68,7 +68,6 @@ function isSkillReviewed(item) {
   return !!(
     item.human_valid ||
     item.human_type ||
-    item.human_bloom ||
     item.human_notes
   );
 }
@@ -112,8 +111,6 @@ async function autoSaveSkill(reviewId, card) {
   const hv =
     card.querySelector(`select[data-field="human_valid"]`)?.value || "";
   const ht = card.querySelector(`select[data-field="human_type"]`)?.value || "";
-  const hb =
-    card.querySelector(`select[data-field="human_bloom"]`)?.value || "";
   const hn =
     card.querySelector(`textarea[data-field="human_notes"]`)?.value || "";
   try {
@@ -121,7 +118,6 @@ async function autoSaveSkill(reviewId, card) {
       review_id: reviewId,
       human_valid: hv,
       human_type: ht,
-      human_bloom: hb,
       human_notes: hn,
       reviewer_id: getReviewerId(),
     });
@@ -129,14 +125,13 @@ async function autoSaveSkill(reviewId, card) {
     if (item) {
       item.human_valid = hv;
       item.human_type = ht;
-      item.human_bloom = hb;
       item.human_notes = hn;
     }
     updateSkillProgress();
-    card.classList.toggle("reviewed", !!(hv || hb || hn));
+    card.classList.toggle("reviewed", !!(hv || ht || hn));
     showSaveIndicator(card, true);
     // Don't re-render on save when unreviewed-only: keep card visible so user can
-    // add Type, Bloom, Notes before moving on (hide only on "Next Unreviewed").
+    // add Type, Notes before moving on (hide only on "Next Unreviewed").
   } catch (e) {
     showSaveIndicator(card, false);
   }
@@ -184,7 +179,6 @@ function renderSkills() {
       </div>
       <div class="card-meta">
         <span class="meta-tag">Type: ${escapeHtml(item.type || "—")}</span>
-        <span class="meta-tag">Bloom: ${escapeHtml(item.bloom || "—")}</span>
         <span class="meta-tag">Confidence: ${item.confidence_score || "—"}</span>
         <span class="meta-tag">Source: ${escapeHtml(item.source || "—")}</span>
       </div>
@@ -205,19 +199,6 @@ function renderSkills() {
             <option value="Hard" ${item.human_type === "Hard" ? "selected" : ""}>Hard</option>
             <option value="Soft" ${item.human_type === "Soft" ? "selected" : ""}>Soft</option>
             <option value="Both" ${item.human_type === "Both" ? "selected" : ""}>Both (hybrid)</option>
-          </select>
-        </div>
-        <div class="col">
-          <div class="label">Bloom (corrected)</div>
-          <select data-field="human_bloom">
-            <option value="">--</option>
-            <option value="Remember" ${item.human_bloom === "Remember" ? "selected" : ""}>Remember</option>
-            <option value="Understand" ${item.human_bloom === "Understand" ? "selected" : ""}>Understand</option>
-            <option value="Apply" ${item.human_bloom === "Apply" ? "selected" : ""}>Apply</option>
-            <option value="Analyze" ${item.human_bloom === "Analyze" ? "selected" : ""}>Analyze</option>
-            <option value="Evaluate" ${item.human_bloom === "Evaluate" ? "selected" : ""}>Evaluate</option>
-            <option value="Create" ${item.human_bloom === "Create" ? "selected" : ""}>Create</option>
-            <option value="N/A" ${item.human_bloom === "N/A" ? "selected" : ""}>N/A</option>
           </select>
         </div>
       </div>
@@ -436,8 +417,8 @@ function renderCompetencies() {
         ${item.kkni_level ? `<span class="meta-tag">KKNI ${escapeHtml(String(item.kkni_level))}</span>` : ""}
         <span class="meta-tag">Future relevance: ${escapeHtml((item.future_relevance || "").slice(0, 80))}${(item.future_relevance || "").length > 80 ? "…" : ""}</span>
       </div>
-      <div class="label">Related skills (Bloom level per skill)</div>
-      <div class="value small mono">${escapeHtml(item.related_skills_with_bloom || item.related_skills || "")}</div>
+      <div class="label">Related skills</div>
+      <div class="value small mono">${escapeHtml(item.related_skills || "")}</div>
       ${item.soft_skills_required ? `<div class="label">Soft skills required</div>
       <div class="value small">${escapeHtml(item.soft_skills_required)}</div>` : ""}
       ${item.soft_skills_description ? `<div class="label">Soft skills (how they apply)</div>

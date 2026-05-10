@@ -75,7 +75,7 @@ def export_gold_skills(output_dir: Path, n: int, seed: int,
     sampled = _stratified_sample(df, n, strata, seed)
 
     keep = [c for c in [
-        "job_id", "skill", "type", "bloom", "confidence_score",
+        "job_id", "skill", "type", "confidence_score",
         "confidence_tier", "source", "semantic_density", "context_agreement",
     ] if c in sampled.columns]
     out = sampled[keep].copy()
@@ -89,7 +89,6 @@ def export_gold_skills(output_dir: Path, n: int, seed: int,
 
     out["is_correct"] = ""
     out["type_label"] = ""
-    out["bloom_label"] = ""
     out["labeler_id"] = ""
     out["notes"] = ""
 

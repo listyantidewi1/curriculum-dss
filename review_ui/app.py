@@ -43,7 +43,6 @@ class SkillFeedback(BaseModel):
     review_id: str
     human_valid: str = ""
     human_type: str = ""
-    human_bloom: str = ""
     human_notes: str = ""
     reviewer_id: str = ""
 
@@ -159,7 +158,7 @@ def get_skills(reviewer_id: str = Query("", alias="reviewer_id")):
     rid = reviewer_id.strip() or "default"
     df = _merge_template_with_feedback(
         template, feedback, "review_id", rid,
-        ["human_valid", "human_type", "human_bloom", "human_notes"]
+        ["human_valid", "human_type", "human_notes"]
     )
     df = df.fillna("")
     items = df.to_dict(orient="records")
@@ -228,7 +227,6 @@ def save_skill_feedback(fb: SkillFeedback):
     _upsert_feedback(path, "review_id", fb.review_id, rid, {
         "human_valid": fb.human_valid,
         "human_type": fb.human_type,
-        "human_bloom": fb.human_bloom,
         "human_notes": fb.human_notes,
     })
     return {"ok": True}
@@ -283,7 +281,6 @@ def save_all_skills(items: list[dict]):
         _upsert_feedback(path, "review_id", review_id, rid, {
             "human_valid": item.get("human_valid", ""),
             "human_type": item.get("human_type", ""),
-            "human_bloom": item.get("human_bloom", ""),
             "human_notes": item.get("human_notes", ""),
         })
     return {"ok": True, "updated": len(items)}

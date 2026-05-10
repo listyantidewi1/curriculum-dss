@@ -12,7 +12,7 @@ Inputs (from config.OUTPUT_DIR):
 
 Outputs:
     - expert_review_jobs.csv
-    - expert_review_skills.csv (with review columns: review_id, human_valid, human_bloom, human_notes)
+    - expert_review_skills.csv (with review columns: review_id, human_valid, human_type, human_notes)
     - expert_review_knowledge.csv (with review columns: review_id, human_valid, human_notes)
 """
 
@@ -67,7 +67,6 @@ def build_job_review_table(comp: pd.DataFrame) -> pd.DataFrame:
         "final_knowledge_count",
         "final_hard_skills",
         "final_soft_skills",
-        "final_bloom_distribution",
         "coverage_percentage",
         "skill_coverage_pct",
         "knowledge_coverage_pct",
@@ -83,8 +82,8 @@ def build_job_review_table(comp: pd.DataFrame) -> pd.DataFrame:
 
 
 def _stratified_sample_skills(df: pd.DataFrame, n: int) -> pd.DataFrame:
-    """Proportional stratified sampling by verification_level, type, bloom."""
-    strata_cols = [c for c in ["verification_level", "type", "bloom"] if c in df.columns]
+    """Proportional stratified sampling by verification_level and type."""
+    strata_cols = [c for c in ["verification_level", "type"] if c in df.columns]
     seed = config.RANDOM_SEED
     if not strata_cols or len(df) <= n:
         return df.sample(n=min(n, len(df)), random_state=seed)
@@ -140,13 +139,12 @@ def build_skill_review_table(
 ) -> pd.DataFrame:
     """
     Normalise skill table for expert review with stratified sampling.
-    Adds review columns: review_id, human_valid, human_bloom, human_notes.
+    Adds review columns: review_id, human_valid, human_type, human_notes.
     """
     cols = [
         "job_id",
         "skill",
         "type",
-        "bloom",
         "confidence_score",
         "confidence_tier",
         "verification_level",
@@ -178,7 +176,6 @@ def build_skill_review_table(
     )
     df["human_valid"] = ""
     df["human_type"] = ""
-    df["human_bloom"] = ""
     df["human_notes"] = ""
     df["reviewer_id"] = ""
 

@@ -128,13 +128,8 @@ def build_skill_demand(skills_df: pd.DataFrame) -> pd.DataFrame:
         type_map.columns = ["_group_key", "skill_type"]
         grp = grp.merge(type_map, on="_group_key", how="left")
 
-    if "bloom" in skills_df.columns:
-        bloom_map = skills_df.groupby("_group_key")["bloom"].agg(
-            lambda x: x.mode().iloc[0] if not x.mode().empty else "Unknown"
-        ).reset_index()
-        bloom_map.columns = ["_group_key", "bloom_level"]
-        grp = grp.merge(bloom_map, on="_group_key", how="left")
-
+    # bloom column dropped in pipeline-redesign-v2 (Req 1); bloom_level no longer
+    # joined onto recommendations.
     if "job_id" in skills_df.columns:
         job_ids = skills_df.groupby("_group_key")["job_id"].apply(
             lambda x: list(x.unique()[:5])

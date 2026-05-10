@@ -52,7 +52,7 @@ def main():
     keep_cols = [c for c in [
         "rank", "skill", "priority_score", "demand_freq",
         "trend_label", "trend_q_value", "future_weight",
-        "future_domain", "skill_type", "bloom_level",
+        "future_domain", "skill_type",
     ] if c in recs.columns]
     top = recs.head(args.top_n)[keep_cols].copy()
 

@@ -5,8 +5,7 @@ Exports a sampled subset of competency_proposals.json for human-in-the-loop revi
 Uses stratified sampling by batch_id to ensure diversity.
 
 Outputs:
-    - expert_review_competencies.csv (with human_quality, human_relevant, human_notes,
-      related_skills_with_bloom columns)
+    - expert_review_competencies.csv (with human_quality, human_relevant, human_notes columns)
 """
 
 import argparse
@@ -39,30 +38,6 @@ def _build_skill_type_map(output_dir: Path) -> dict[str, str]:
     return skill_type
 
 
-def _build_skill_bloom_map(output_dir: Path) -> dict[str, str]:
-    """Build skill text -> bloom level map from advanced_skills.csv or verified_skills.csv."""
-    skill_bloom: dict[str, str] = {}
-    for name in ["advanced_skills.csv", "verified_skills.csv"]:
-        path = output_dir / name
-        if not path.exists():
-            continue
-        df = pd.read_csv(path)
-        if "skill" not in df.columns or "bloom" not in df.columns:
-            continue
-        for _, row in df.iterrows():
-            skill = str(row.get("skill", "")).strip()
-            bloom = str(row.get("bloom", "")).strip()
-            if not skill:
-                continue
-            key = skill.lower()
-            # Prefer non-N/A bloom; don't overwrite good value with N/A
-            if bloom and bloom.upper() != "N/A":
-                skill_bloom[key] = bloom
-            elif key not in skill_bloom:
-                skill_bloom[key] = bloom if bloom else "?"
-    return skill_bloom
-
-
 def _derive_skill_focus(related_skills: list, skill_type_map: dict) -> str:
     """Derive competency focus from related skills: Hard, Soft, or Both."""
     if not related_skills or not skill_type_map:
@@ -89,20 +64,6 @@ def _derive_skill_focus(related_skills: list, skill_type_map: dict) -> str:
     return "Hard" if hard_count > soft_count else "Soft" if soft_count else ""
 
 
-def _format_related_skills_with_bloom(related_skills: list, skill_bloom: dict) -> str:
-    """Format related skills with Bloom level for each: 'skill1 (Apply), skill2 (Create)'."""
-    if not related_skills:
-        return ""
-    parts = []
-    for s in related_skills:
-        skill = str(s).strip() if s else ""
-        if not skill:
-            continue
-        bloom = skill_bloom.get(skill.lower(), "?")
-        parts.append(f"{skill} (Bloom: {bloom})" if bloom else f"{skill} (?)")
-    return "; ".join(parts)
-
-
 def load_competencies(output_dir: Path, input_file: str = "competency_proposals.json") -> list:
     """Load competencies from JSON."""
     path = output_dir / input_file
@@ -126,16 +87,13 @@ def build_competency_review_table(
     competencies: list,
     max_competencies: int = 100,
     exclude_ids: set | None = None,
-    skill_bloom_map: dict | None = None,
     skill_type_map: dict | None = None,
 ) -> pd.DataFrame:
     """
     Build competency review table with stratified sampling by batch_id.
     Adds review columns: human_quality, human_relevant, human_notes.
-    Adds related_skills_with_bloom: each skill with its Bloom level for review visibility.
     """
     exclude_ids = exclude_ids or set()
-    skill_bloom_map = skill_bloom_map or {}
     skill_type_map = skill_type_map or {}
     rows = []
     for idx, c in enumerate(competencies):
@@ -148,7 +106,6 @@ def build_competency_review_table(
         if not isinstance(related, list):
             related = []
         related_skills_json = json.dumps(related, ensure_ascii=False)
-        related_with_bloom = _format_related_skills_with_bloom(related, skill_bloom_map)
         skill_focus = _derive_skill_focus(related, skill_type_map)
         soft_required = c.get("soft_skills_required", []) or []
         if not isinstance(soft_required, list):
@@ -159,12 +116,10 @@ def build_competency_review_table(
             "title": c.get("title", ""),
             "description": c.get("description", ""),
             "related_skills": related_skills_json,
-            "related_skills_with_bloom": related_with_bloom,
             "skill_focus": skill_focus,
             "soft_skills_required": "; ".join(str(s).strip() for s in soft_required if str(s).strip()),
             "soft_skills_description": str(c.get("soft_skills_description", "")).strip(),
             "kkni_level": c.get("kkni_level", ""),
-            "kkni_floor": c.get("kkni_floor", ""),
             "kkni_descriptor": str(c.get("kkni_descriptor", "")).strip(),
             "future_relevance": c.get("future_relevance", ""),
             "all_skills_human_verified": c.get("all_skills_human_verified", ""),
@@ -252,16 +207,14 @@ def main():
     if max_comp != args.max_competencies:
         print(f"[INFO] Raised max_competencies to {max_comp} (minimum 50 for review UI)")
 
-    skill_bloom_map = _build_skill_bloom_map(out_dir)
     skill_type_map = _build_skill_type_map(out_dir)
-    print(f"[INFO] Loaded Bloom map for {len(skill_bloom_map)} skills, type map for {len(skill_type_map)} skills")
+    print(f"[INFO] Loaded type map for {len(skill_type_map)} skills")
 
     print(f"[INFO] Building competency review table (max={max_comp})...")
     df = build_competency_review_table(
         competencies,
         max_competencies=max_comp,
         exclude_ids=exclude_ids,
-        skill_bloom_map=skill_bloom_map,
         skill_type_map=skill_type_map,
     )
 

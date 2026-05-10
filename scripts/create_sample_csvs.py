@@ -78,7 +78,12 @@ def extract_jobs_from_skillspan(train_path: Path, max_jobs: int = 50) -> pd.Data
 
 
 def extract_curriculum_from_config() -> pd.DataFrame:
-    """Extract curriculum CSV from config.CURRICULUM_COMPONENTS."""
+    """Extract curriculum CSV from config.CURRICULUM_COMPONENTS.
+
+    Aggregates phrase examples across all Bloom-keyed sub-lists in the legacy
+    config structure into a single row per component (Bloom levels were
+    removed from the curriculum schema in pipeline-redesign-v2 / Req 1).
+    """
     try:
         import sys
         sys.path.insert(0, str(PROJECT_ROOT))
@@ -86,27 +91,34 @@ def extract_curriculum_from_config() -> pd.DataFrame:
     except ImportError:
         # Fallback: minimal sample
         return pd.DataFrame([
-            {"component_id": "computational_thinking", "component_name": "Computational Thinking", "bloom_level": "apply", "phrases": "pseudocode, flowcharting, algorithm execution"},
-            {"component_id": "digital_literacy", "component_name": "Digital Literacy", "bloom_level": "understand", "phrases": "search engine mechanisms, information ecosystem, digital citizenship"},
-            {"component_id": "programming", "component_name": "Programming Fundamentals", "bloom_level": "apply", "phrases": "variables, control structures, functions, debugging"},
+            {"component_id": "computational_thinking", "component_name": "Computational Thinking", "phrases": "pseudocode, flowcharting, algorithm execution"},
+            {"component_id": "digital_literacy", "component_name": "Digital Literacy", "phrases": "search engine mechanisms, information ecosystem, digital citizenship"},
+            {"component_id": "programming", "component_name": "Programming Fundamentals", "phrases": "variables, control structures, functions, debugging"},
         ])
 
     rows = []
     for comp_id, data in CURRICULUM_COMPONENTS.items():
         if not isinstance(data, dict):
             continue
-        # Human-readable name from id
         name = comp_id.replace("_", " ").title()
-        for bloom_level, phrases_list in data.items():
-            if bloom_level in ("understand", "apply", "analyze", "create", "remember", "evaluate") and isinstance(phrases_list, list):
-                phrases_str = ", ".join(str(p).strip() for p in phrases_list[:15] if p)  # Limit for sample
-                if phrases_str:
-                    rows.append({
-                        "component_id": comp_id,
-                        "component_name": name,
-                        "bloom_level": bloom_level,
-                        "phrases": phrases_str,
-                    })
+        phrases: list[str] = []
+        for key, phrases_list in data.items():
+            if key in ("understand", "apply", "analyze", "create", "remember", "evaluate") and isinstance(phrases_list, list):
+                phrases.extend(str(p).strip() for p in phrases_list if p)
+        # Dedupe while preserving order, then cap for sample readability
+        seen: set[str] = set()
+        deduped: list[str] = []
+        for p in phrases:
+            if p and p not in seen:
+                seen.add(p)
+                deduped.append(p)
+        phrases_str = ", ".join(deduped[:15])
+        if phrases_str:
+            rows.append({
+                "component_id": comp_id,
+                "component_name": name,
+                "phrases": phrases_str,
+            })
 
     return pd.DataFrame(rows)
 

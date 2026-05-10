@@ -2,13 +2,13 @@
 apply_feedback.py
 
 Applies human feedback from feedback_store/ to pipeline outputs:
-- Bloom overrides: use human_bloom from bloom_corrections.json
+- Type overrides: use human_type from type_corrections.json
 - Human-verified filter: keep only skills/knowledge with human_valid=valid
 
 Usage:
   python apply_feedback.py --output_dir results_run1
   # Creates advanced_skills_human_filtered.csv, advanced_knowledge_human_filtered.csv
-  # with Bloom overrides applied and optional filtering to human-verified only
+  # with type overrides applied and optional filtering to human-verified only
 """
 
 import argparse
@@ -20,14 +20,6 @@ import pandas as pd
 import config
 
 DEFAULT_FEEDBACK_DIR = Path(config.PROJECT_ROOT) / "feedback_store"
-
-
-def load_bloom_corrections(feedback_dir: Path) -> dict:
-    """Load skill_text -> correct_bloom from bloom_corrections.json."""
-    path = feedback_dir / "bloom_corrections.json"
-    if not path.exists():
-        return {}
-    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def load_type_corrections(feedback_dir: Path) -> dict:
@@ -69,21 +61,6 @@ def load_human_verified_knowledge(feedback_dir: Path) -> pd.DataFrame:
     return pd.read_csv(path)
 
 
-def apply_bloom_overrides(df: pd.DataFrame, corrections: dict) -> pd.DataFrame:
-    """Override bloom column for skills that have human corrections.
-    Uses case-insensitive matching to avoid missing corrections."""
-    if not corrections or "skill" not in df.columns:
-        return df
-    df = df.copy()
-    corrections_lower = {k.strip().lower(): v for k, v in corrections.items()}
-    df_skill_lower = df["skill"].astype(str).str.strip().str.lower()
-    for skill_lower, correct_bloom in corrections_lower.items():
-        mask = df_skill_lower == skill_lower
-        if mask.any():
-            df.loc[mask, "bloom"] = correct_bloom
-    return df
-
-
 def filter_to_human_verified_skills(df: pd.DataFrame, verified: pd.DataFrame) -> pd.DataFrame:
     """Keep only rows where (job_id, skill) exists in human_verified_skills.
     Uses case-insensitive skill matching."""
@@ -117,7 +94,7 @@ def filter_to_human_verified_knowledge(df: pd.DataFrame, verified: pd.DataFrame)
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Apply human feedback to pipeline outputs (Bloom overrides, human-verified filter)."
+        description="Apply human feedback to pipeline outputs (type overrides, human-verified filter)."
     )
     parser.add_argument(
         "--output_dir",
@@ -128,7 +105,7 @@ def main():
     parser.add_argument(
         "--filter_only",
         action="store_true",
-        help="If set, output only human-verified items. Otherwise only apply Bloom overrides.",
+        help="If set, output only human-verified items. Otherwise only apply type overrides.",
     )
     parser.add_argument(
         "--feedback_dir",
@@ -142,7 +119,6 @@ def main():
     feedback_dir = Path(args.feedback_dir) if args.feedback_dir else DEFAULT_FEEDBACK_DIR
     feedback_dir.mkdir(parents=True, exist_ok=True)
 
-    bloom_corrections = load_bloom_corrections(feedback_dir)
     type_corrections = load_type_corrections(feedback_dir)
     verified_skills = load_human_verified_skills(feedback_dir)
     verified_knowledge = load_human_verified_knowledge(feedback_dir)
@@ -151,7 +127,6 @@ def main():
     skills_path = out_dir / "advanced_skills.csv"
     if skills_path.exists():
         df = pd.read_csv(skills_path)
-        df = apply_bloom_overrides(df, bloom_corrections)
         df = apply_type_overrides(df, type_corrections)
         if args.filter_only and not verified_skills.empty:
             df = filter_to_human_verified_skills(df, verified_skills)
