@@ -89,6 +89,13 @@ baseline_versions/v3_stl/
 baseline_versions/jjzha_replicate/hf_cache/
 baseline_versions/jjzha_replicate/jobbert_skill_replicate/
 baseline_versions/jjzha_replicate/jobbert_knowledge_replicate/
+# baseline_versions/skill_llm/ — Phase 1.5 LoRA fine-tune. Source code +
+# docs + metrics are tracked; HF cache, prepared chat-format datasets,
+# checkpoint dir, and the saved LoRA adapter are not.
+baseline_versions/skill_llm/hf_cache/
+baseline_versions/skill_llm/datasets/
+baseline_versions/skill_llm/lora_adapter/
+baseline_versions/skill_llm/outputs/checkpoints/
 *.safetensors
 *.ckpt
 *.h5

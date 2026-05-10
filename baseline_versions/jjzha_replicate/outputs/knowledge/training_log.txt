@@ -1,0 +1,18 @@
+epoch   1 | train_loss 0.1152 | dev_f1 0.3821
+           *** new best (dev_f1=0.3821) ***
+epoch   2 | train_loss 0.0226 | dev_f1 0.5480
+           *** new best (dev_f1=0.5480) ***
+epoch   3 | train_loss 0.0131 | dev_f1 0.5990
+           *** new best (dev_f1=0.5990) ***
+epoch   4 | train_loss 0.0070 | dev_f1 0.6091
+           *** new best (dev_f1=0.6091) ***
+epoch   5 | train_loss 0.0041 | dev_f1 0.6165
+           *** new best (dev_f1=0.6165) ***
+epoch   6 | train_loss 0.0025 | dev_f1 0.6210
+           *** new best (dev_f1=0.6210) ***
+epoch   7 | train_loss 0.0018 | dev_f1 0.6126
+epoch   8 | train_loss 0.0012 | dev_f1 0.6029
+epoch   9 | train_loss 0.0010 | dev_f1 0.6076
+early stop after 9 epochs; best_epoch=6
+final dev:  {'split': 'dev', 'precision': 0.5715384615384616, 'recall': 0.6797804208600183, 'f1': 0.6209778520685332}
+final test: {'split': 'test', 'precision': 0.6044830079537238, 'recall': 0.7194492254733219, 'f1': 0.6569744597249508}
