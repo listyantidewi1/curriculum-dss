@@ -27,7 +27,7 @@ KKNI labeler, which both lose information if the verb is stripped.
 | Skill F1 | ≥ 0.70 | **≥ 0.54** (matches Skill-LLM SOTA = 0.543) |
 | Knowledge F1 | ≥ 0.80 | **≥ 0.74** (matches Skill-LLM SOTA = 0.742) |
 | Total span F1 | — | **≥ 0.65** (matches Skill-LLM SOTA = 0.648) |
-| Verb-preservation failure rate | — | **< 5%** (new — see AUDIT.md "CRITICAL INVARIANT") |
+| Verb-preservation gate | — | **model's short-SKILL rate ≤ training baseline + 0.10** (see AUDIT.md "CRITICAL INVARIANT") |
 
 ## Files
 
@@ -74,16 +74,20 @@ python baseline_versions/skill_llm/eval.py --adapter "" --output-subdir base_onl
 After step 3 you'll have `outputs/trained/metrics_{dev,test}.txt` with the F1
 matrix + verb-preservation diagnostic. Decision rules:
 
-- **Total F1 ≥ 0.65 AND verb-failure rate < 5%** → promote to `pipeline.py` per
-  the integration plan below.
+- **Total F1 ≥ 0.65 AND verb-preservation gate passes** → promote to `pipeline.py`
+  per the integration plan below. The gate passes when the model's short-SKILL
+  rate stays within `VERB_FAILURE_TOLERANCE_DELTA` (default 0.10) of the
+  training baseline (≈14% on SkillSpan, recorded in
+  `datasets/training_stats.json`).
 - **Total F1 < 0.65** → diagnose with the raw outputs JSONL: are JSON parse
   failures the bottleneck (try larger `INFERENCE_MAX_NEW_TOKENS`), or are
   span-text mismatches the bottleneck (try `INFERENCE_DO_SAMPLE = True` with
   low temperature for less brittle outputs)?
-- **Verb-failure rate ≥ 5%** → DO NOT promote. The fine-tune has degraded into
-  a noun-only extractor. Re-check the `prepare_data.py` diagnostic on the
-  training set; if that's clean, the problem is post-training drift —
-  retrain with more epochs or stricter LR scheduling.
+- **Verb-preservation gate fails** → DO NOT promote. The fine-tune has drifted
+  toward emitting tech nouns ("UI/UX", "Java") under SKILL. Re-check the
+  `metrics_*.txt` for the actual rate vs threshold; if `verb_short_rate` is
+  far above `verb_fail_threshold`, retrain with more epochs or a higher LoRA
+  rank.
 
 ## Pipeline integration (after the matrix passes)
 
@@ -112,11 +116,19 @@ LLM to write competencies from action-oriented input).
 
 ## What the verb-preservation diagnostic actually catches
 
-`eval.py` flags every predicted SKILL span shorter than 2 tokens. SkillSpan's
-gold annotations almost never have single-token skill spans (the sanity check
-in `prepare_data.py` typically reports < 1% on training data), so anything
-above ~5% on test outputs indicates the model has learned to emit nouns under
-the SKILL key. Failure modes that drive the rate up:
+`eval.py` counts predicted SKILL spans shorter than `VERB_PRESERVATION_MIN_TOKENS`
+(2 tokens) and compares the rate to the training-set baseline written by
+`prepare_data.py` to `datasets/training_stats.json`.
+
+SkillSpan's training data has ~14% single-token SKILL spans because the SKILL
+category covers soft skills like `passion`, `empathetic`, `self-starter`,
+`team-player` — those are legitimate single-token skills, not noun leaks. So
+a hard 5% gate would always fail on a well-trained model.
+
+The gate passes when the model's short-SKILL rate stays within
+`VERB_FAILURE_TOLERANCE_DELTA = 0.10` of the training baseline. On SkillSpan
+that means up to ~24% short-SKILL is OK; 25%+ is suspicious. Failure modes
+that drive the rate up:
 
 - LoRA rank too low (< 32) — adapter can't represent the structured JSON well
   enough and falls back to whatever pre-training memorised.

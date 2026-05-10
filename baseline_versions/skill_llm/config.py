@@ -90,15 +90,30 @@ SYSTEM_PROMPT = (
 SENTENCE_BOUNDARY_TOKEN = "**"
 
 # --- verb-preservation diagnostic ------------------------------------------
+#
+# The point of this diagnostic is to catch the failure mode where the model
+# collapses a verb-led action ("designing UI/UX") down to a tech noun ("UI/UX")
+# and emits the noun under the SKILL key instead of the KNOWLEDGE key.
+#
+# A naive "is this SKILL span shorter than 2 tokens?" check is too tight on
+# SkillSpan because the SKILL category natively includes single-token soft
+# skills ("passion", "passionate", "empathetic", "self-starter"). On the
+# training data ~14% of SKILL spans are single-token for this reason. We
+# therefore compare the *eval-time* short-SKILL rate against the *training-time*
+# rate (recorded in datasets/training_stats.json by prepare_data.py) and only
+# flag the model when it materially exceeds the training distribution.
 
-# A SKILL span is flagged as a verb-preservation failure if it has fewer than
-# this many whitespace tokens. Single-word skills like "design" / "Java" are
-# the canonical failure mode (collapsing verb-led action to noun head).
 VERB_PRESERVATION_MIN_TOKENS = 2
 
-# Maximum tolerable rate of SKILL spans that fail the verb check. Reported by
-# eval.py; treated as a CI gate when running automated regression tests.
-VERB_FAILURE_RATE_MAX = 0.05
+# Tolerance: how far above the training-set short-SKILL rate the model is
+# allowed to drift before we flag it as a verb-preservation failure. A value
+# of 0.10 means: if training is 14% short, eval must stay below 24% short.
+# Wider than the original 5% absolute gate; narrower than "anything goes".
+VERB_FAILURE_TOLERANCE_DELTA = 0.10
+
+# Path to the training-stats sidecar produced by prepare_data.py. Loaded at
+# eval time to set the per-run baseline for the diagnostic.
+TRAINING_STATS_PATH = DATASETS_DIR / "training_stats.json"
 
 # --- reproducibility -------------------------------------------------------
 

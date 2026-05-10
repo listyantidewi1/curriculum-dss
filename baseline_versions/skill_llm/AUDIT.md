@@ -37,6 +37,13 @@ phrase down to its noun head**, conflating skill with knowledge. Concretely:
 | "experience with Java" | KNOWLEDGE = "Java" | SKILL = "Java" |
 | "implementing and promoting QA topics" | SKILL = "implementing and promoting QA topics", KNOWLEDGE = "QA" | SKILL = "QA" |
 
+**Note on soft skills:** SkillSpan also annotates soft skills under the SKILL key,
+and many of those are legitimately single-token nouns or adjectives (`passion`,
+`empathetic`, `self-starter`, `team-player`). Roughly 14% of training-set SKILL
+spans are single-token for this reason. The diagnostic below accounts for this
+by gating on *drift from the training distribution* rather than an absolute
+threshold — see `prepare_data.py:write_training_stats` and `eval.py`.
+
 This distinction is **load-bearing** for the downstream pipeline:
 
 - The competency generator turns SKILL items into measurable learning outcomes
@@ -66,11 +73,13 @@ This distinction is **load-bearing** for the downstream pipeline:
 gold annotation (paper §"Methodology"). We preserve the same prompt template and
 output schema verbatim — see `config.py:SYSTEM_PROMPT` + `prepare_data.py`.
 
-`eval.py` includes a diagnostic that **counts every SKILL item shorter than 2 tokens
-or starting with a non-verb POS tag** as a verb-preservation failure, and reports
-the rate alongside span-set F1. The CI gate is "verb-failure rate < 5%". This is a
-guardrail against the model learning to emit nouns under the SKILL key during
-fine-tuning.
+`prepare_data.py` records the training-set short-SKILL rate to
+`datasets/training_stats.json`. `eval.py` loads that baseline and flags the model
+only when its short-SKILL rate exceeds the baseline by more than
+`VERB_FAILURE_TOLERANCE_DELTA` (default 0.10). This is a guardrail against the
+model drifting away from the training distribution — specifically, learning to
+emit tech nouns ("UI/UX", "Java") under SKILL — without being fooled by the
+legitimate soft-skill nouns SkillSpan natively annotates as single-token skills.
 
 ---
 

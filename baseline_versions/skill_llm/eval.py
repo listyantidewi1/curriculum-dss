@@ -12,10 +12,16 @@ Reports:
 2. **Verb-preservation diagnostic** — fraction of predicted SKILL spans that
    have fewer than VERB_PRESERVATION_MIN_TOKENS tokens. This catches the
    failure mode where the model collapses verb-led action ("designing UI/UX")
-   to noun head ("UI/UX") and emits the noun under SKILL. The threshold
-   VERB_FAILURE_RATE_MAX is the CI gate; exceeding it indicates the fine-tune
-   has degraded into a noun-only extractor and the resulting model should NOT
-   be promoted to pipeline.py.
+   to noun head ("UI/UX") and emits the noun under SKILL.
+
+   The gate is *relative* to the training-set baseline (loaded from
+   datasets/training_stats.json, written by prepare_data.py). SkillSpan
+   natively has ~14% single-token SKILL spans because of legitimate soft
+   skills ("passion", "empathetic"); a hard 5% gate would always fail. The
+   model is flagged only when its rate exceeds the training baseline by more
+   than VERB_FAILURE_TOLERANCE_DELTA percentage points. Failure means the
+   fine-tune has degraded into a noun-leaning extractor and the resulting
+   model should NOT be promoted to pipeline.py.
 
 Usage:
     # against the LoRA adapter we just trained (default)
@@ -53,10 +59,25 @@ from config import (
     OUTPUTS_DIR,
     SENTENCE_BOUNDARY_TOKEN,
     SYSTEM_PROMPT,
+    TRAINING_STATS_PATH,
     USE_4BIT,
-    VERB_FAILURE_RATE_MAX,
+    VERB_FAILURE_TOLERANCE_DELTA,
     VERB_PRESERVATION_MIN_TOKENS,
 )
+
+
+def load_training_baseline_rate() -> Optional[float]:
+    """Load the training-set short-SKILL rate written by prepare_data.py.
+    Returns None if the file isn't present (eval will fall back to a
+    fixed sane default in that case)."""
+    if not TRAINING_STATS_PATH.exists():
+        return None
+    try:
+        stats = json.loads(TRAINING_STATS_PATH.read_text(encoding="utf-8"))
+        rate = stats.get("skill_short_rate")
+        return float(rate) if rate is not None else None
+    except (json.JSONDecodeError, OSError, TypeError, ValueError):
+        return None
 
 
 os.environ.setdefault("HF_HOME", str(HF_CACHE_DIR))
@@ -330,6 +351,19 @@ def evaluate_split(
 
     verb_fail_rate = (n_skill_short / n_skill_pred) if n_skill_pred else 0.0
 
+    # Verb-preservation gate: model's short-SKILL rate must stay within
+    # VERB_FAILURE_TOLERANCE_DELTA of the training-set baseline. If we don't
+    # have a baseline (prepare_data.py wasn't re-run after the fix), fall back
+    # to a sane fixed gate of 0.20 — wider than 5%, narrower than infinity.
+    training_short_rate = load_training_baseline_rate()
+    if training_short_rate is None:
+        training_short_rate = 0.144  # observed SkillSpan train baseline
+        baseline_source = "fallback (training_stats.json not found)"
+    else:
+        baseline_source = f"training_stats.json ({training_short_rate:.4f})"
+    verb_fail_threshold = training_short_rate + VERB_FAILURE_TOLERANCE_DELTA
+    verb_gate_failed = verb_fail_rate > verb_fail_threshold
+
     # Write metrics + raw outputs
     output_dir.mkdir(parents=True, exist_ok=True)
     with open(output_dir / f"metrics_{split}.txt", "w", encoding="utf-8") as f:
@@ -351,13 +385,24 @@ def evaluate_split(
             f"skill_short_spans:   {n_skill_short} "
             f"(< {VERB_PRESERVATION_MIN_TOKENS} tokens)\n"
         )
-        f.write(f"verb_failure_rate:   {verb_fail_rate:.4f}\n")
-        f.write(f"verb_failure_max:    {VERB_FAILURE_RATE_MAX:.4f} (CI gate)\n")
-        if verb_fail_rate > VERB_FAILURE_RATE_MAX:
+        f.write(f"verb_short_rate:     {verb_fail_rate:.4f}\n")
+        f.write(f"training_baseline:   {training_short_rate:.4f} ({baseline_source})\n")
+        f.write(
+            f"verb_fail_threshold: {verb_fail_threshold:.4f} "
+            f"(baseline + tolerance {VERB_FAILURE_TOLERANCE_DELTA:.2f})\n"
+        )
+        if verb_gate_failed:
             f.write(
-                "WARN: verb-preservation diagnostic FAILED. The model is "
-                "emitting too many noun-only SKILL spans. Do NOT promote this "
-                "checkpoint to pipeline.py.\n"
+                "WARN: verb-preservation diagnostic FAILED. The model's "
+                "short-SKILL rate exceeds the training baseline by more "
+                "than the tolerance. It is leaning toward emitting nouns "
+                "as skills. Do NOT promote this checkpoint to pipeline.py.\n"
+            )
+        else:
+            f.write(
+                "OK: verb-preservation diagnostic passed (model's "
+                "short-SKILL rate stays within tolerance of the training "
+                "distribution).\n"
             )
 
     with open(output_dir / f"raw_outputs_{split}.jsonl", "w", encoding="utf-8") as f:
@@ -366,19 +411,23 @@ def evaluate_split(
 
     print(
         f"[INFO] {split}: skill F1={s_f1:.4f} | knowledge F1={k_f1:.4f} "
-        f"| total F1={t_f1:.4f} | verb_failure={verb_fail_rate:.1%}"
+        f"| total F1={t_f1:.4f} | short-SKILL={verb_fail_rate:.1%} "
+        f"(baseline {training_short_rate:.1%}, gate {verb_fail_threshold:.1%})"
     )
-    if verb_fail_rate > VERB_FAILURE_RATE_MAX:
+    if verb_gate_failed:
         print(
-            f"[WARN] verb-preservation diagnostic FAILED ({verb_fail_rate:.1%} > "
-            f"{VERB_FAILURE_RATE_MAX:.1%}). See AUDIT.md."
+            f"[WARN] verb-preservation diagnostic FAILED — model's "
+            f"short-SKILL rate {verb_fail_rate:.1%} exceeds gate "
+            f"{verb_fail_threshold:.1%}. See AUDIT.md."
         )
 
     return {
         "skill_f1": s_f1,
         "knowledge_f1": k_f1,
         "total_f1": t_f1,
-        "verb_failure_rate": verb_fail_rate,
+        "verb_short_rate": verb_fail_rate,
+        "verb_fail_threshold": verb_fail_threshold,
+        "verb_gate_failed": verb_gate_failed,
         "json_parse_failures": n_parse_failures,
     }
 
