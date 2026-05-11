@@ -261,10 +261,22 @@ class AdvancedPipelineConfig:
     # Knowledge: LLM-only in final output. BERT knowledge is passed to LLM as anti-hallucination
     # context but not fused (Direction A).
     LLM_ONLY_KNOWLEDGE = True
-    # Default is llm_only after the 2026 reframe to a competency recommendation
-    # system: BERT contributes little to downstream competency quality and is
-    # retained only as an ablation path (--extraction-mode hybrid).
+    # Layer 1 extractor selection. Valid values:
+    #   "llm_only"        — Layer 2 (full-posting LLM) only, no Layer 1
+    #   "hybrid"          — legacy: BERT (JobBERT) Layer 1 + LLM Layer 2 + fusion
+    #   "bert_only"       — BERT only (ablation)
+    #   "skill_llm_offline" — Skill-LLM 8B LoRA Layer 1 (pre-computed via Kaggle
+    #                       batch, loaded from SKILL_LLM_EXTRACTIONS_PATH) + LLM
+    #                       Layer 2 + fusion. This is the production mode after
+    #                       the 2026-05-12 extractor decision (see
+    #                       docs/EXTRACTOR_DECISION.md).
     EXTRACTION_MODE = "llm_only"
+
+    # Path to the JSONL file produced by baseline_versions/skill_llm/kaggle/
+    # run_inference_on_kaggle.py. Only consulted when EXTRACTION_MODE is
+    # "skill_llm_offline". See baseline_versions/skill_llm/INTEGRATION.md for
+    # the upstream workflow that produces this file.
+    SKILL_LLM_EXTRACTIONS_PATH = "results/skill_llm_extractions.jsonl"
 
     # Reproducibility (override via --seed)
     RANDOM_SEED = None  # Set from config.RANDOM_SEED or args.seed at runtime
@@ -311,7 +323,40 @@ class ModelManager:
         self.knowledge_label_map = None
         self.openai_client = None
         self.embedder = None
-        
+        self.skill_llm_offline = None  # Lazy-loaded; only when EXTRACTION_MODE == "skill_llm_offline"
+
+    def load_skill_llm_offline_if_needed(self) -> None:
+        """Load the offline Skill-LLM extractor when EXTRACTION_MODE selects it.
+
+        Reads pre-computed extractions from SKILL_LLM_EXTRACTIONS_PATH (a JSONL
+        file produced by baseline_versions/skill_llm/kaggle/run_inference_on_kaggle.py
+        and downloaded after the Kaggle batch run finishes). See INTEGRATION.md.
+        """
+        if AdvancedPipelineConfig.EXTRACTION_MODE != "skill_llm_offline":
+            return
+        if self.skill_llm_offline is not None:
+            return
+        from extractors.skill_llm_offline import SkillLLMOfflineExtractor
+        from pathlib import Path
+        path = Path(AdvancedPipelineConfig.SKILL_LLM_EXTRACTIONS_PATH)
+        self.skill_llm_offline = SkillLLMOfflineExtractor(path)
+
+    def extract_with_skill_llm_offline(
+        self, sentence_text: str, sentence_id: str = ""
+    ) -> Tuple[List[Dict], List[Dict]]:
+        """Drop-in replacement for extract_with_bert when EXTRACTION_MODE is
+        "skill_llm_offline". Reads from the pre-loaded offline extractor; if
+        the sentence is missing from the batch output, returns empty lists so
+        the pipeline can still proceed (Layer 2 LLM will pick up the slack)."""
+        if self.skill_llm_offline is None:
+            self.load_skill_llm_offline_if_needed()
+        if self.skill_llm_offline is None:
+            raise ValueError(
+                "Skill-LLM offline extractor not loaded. Check EXTRACTION_MODE "
+                "and SKILL_LLM_EXTRACTIONS_PATH in AdvancedPipelineConfig."
+            )
+        return self.skill_llm_offline.extract(sentence_text, sentence_id)
+
     def load_bert_model(self) -> None:
         """Load the JobBERT model and tokenizer."""
         logger.info(f"Loading Research JobBERT from {MULTITASK_MODEL_DIR}...")
@@ -912,26 +957,43 @@ class ContextAwareExtractor:
             else:
                 sentence_ids = sentence_ids[: len(sentences)]
 
-        # --- BERT: run per-sentence, aggregate & deduplicate ---
-        # Skipped when EXTRACTION_MODE == "llm_only" (LLM-only ablation for RQ1).
+        # --- Layer 1: per-sentence extraction, aggregate & deduplicate ---
+        # Mode-dependent:
+        #   llm_only          -> skip Layer 1 entirely (Layer 2 LLM handles everything)
+        #   skill_llm_offline -> use pre-computed Skill-LLM extractions (production mode
+        #                        after 2026-05-12 extractor decision)
+        #   hybrid / bert_only -> use JobBERT (legacy; retained as ablation per Req 9.4)
         all_bert_skills_raw: List[Dict] = []
         all_bert_knowledge: List[Dict] = []
-        if AdvancedPipelineConfig.EXTRACTION_MODE != "llm_only":
+        mode = AdvancedPipelineConfig.EXTRACTION_MODE
+        if mode != "llm_only":
+            # Layer-1 source tag for provenance — "skill_llm" or "bert"
+            if mode == "skill_llm_offline":
+                self.model_manager.load_skill_llm_offline_if_needed()
+                layer1_source = "skill_llm"
+            else:
+                layer1_source = "bert"
+
             for sent, sid in zip(sentences, sentence_ids):
                 sent = sent.strip()
                 if not sent:
                     continue
-                raw_skills, raw_knowledge = self.model_manager.extract_with_bert(sent)
+                if mode == "skill_llm_offline":
+                    raw_skills, raw_knowledge = self.model_manager.extract_with_skill_llm_offline(sent, sid)
+                else:
+                    raw_skills, raw_knowledge = self.model_manager.extract_with_bert(sent)
                 # Tag each raw item with its source sentence so the merged item
                 # post-dedup retains a usable provenance trace.
                 for item in raw_skills:
                     if isinstance(item, dict):
                         item.setdefault('sentence_id', sid)
                         item.setdefault('sentence_text', sent)
+                        item.setdefault('extractor_source', layer1_source)
                 for item in raw_knowledge:
                     if isinstance(item, dict):
                         item.setdefault('sentence_id', sid)
                         item.setdefault('sentence_text', sent)
+                        item.setdefault('extractor_source', layer1_source)
                 all_bert_skills_raw.extend(raw_skills)
                 all_bert_knowledge.extend(raw_knowledge)
 
