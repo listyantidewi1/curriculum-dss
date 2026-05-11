@@ -14,6 +14,35 @@ Usage:
     python ingest_future_domains.py --sources wef onet custom --output future_domains.csv
 
 The script can also merge a custom CSV that already follows the schema.
+
+DATA FRESHNESS (refreshed 2026-05-12 against WEF Future of Jobs Report 2025,
+released January 2025, horizon 2025-2030):
+
+- All WEF_FutureOfJobs_2025 citations align with the report's Skills Outlook
+  section. Top growing skills per the 2025 report (covered by our domains):
+    1. AI and big data                  -> WEF01 (AI/ML) + WEF02 (Big Data)
+    2. Networks and cybersecurity       -> WEF03 (now includes network terms)
+    3. Technology literacy              -> WEF08 (Technological Literacy)
+    4. Creative thinking                -> MCK04 (Critical Thinking & Creative)
+    5. Resilience, flexibility, agility -> MCK05 (Resilience & Adaptability)
+    6. Curiosity and lifelong learning  -> MCK05 (covers curiosity + learning)
+    7. Leadership and social influence  -> MCK03 (Leadership & People Dev)
+    8. Talent management                -> MCK03 (covers talent + hiring)
+    9. Analytical thinking              -> MCK04 (analytical + decision making)
+   10. Environmental stewardship        -> WEF06 (Sustainability Tech)
+
+- Top declining roles per WEF 2025 (covered in DECLINE_DOMAINS):
+  - Data Entry Clerks                   -> DEC01
+  - Routine clerical/secretarial work   -> DEC01 (umbrella)
+  - Routine maintenance coding          -> DEC03
+
+- DEC02 (Legacy Web Dev) is expert_consensus, not WEF-derived, but the
+  decline trajectory of legacy stacks (Flash, deprecated HTML, etc.) is
+  consistent with the 2025 report's broader skill-obsolescence framing.
+
+When the WEF publishes Future of Jobs Report 2027 (typical biennial cadence),
+this docstring + the citation strings + any new growing/declining categories
+should be reviewed.
 """
 
 import argparse
@@ -45,8 +74,8 @@ WEF_DOMAINS = [
     {"domain_id": "WEF02", "future_domain": "Big Data & Analytics",
      "example_terms": "data analytics, data engineering, business intelligence, data visualization, statistical modeling, data pipelines, data warehousing, ETL, Spark, Hadoop, data lakes, KPI dashboards, A/B testing, quantitative analysis, data science",
      "trend_label": "Strong_Growth", "trend_score": 0.9, "source": "WEF_FutureOfJobs_2025", "horizon_year": 2030},
-    {"domain_id": "WEF03", "future_domain": "Cybersecurity",
-     "example_terms": "cybersecurity, information security, penetration testing, threat intelligence, zero trust, SOC, incident response, encryption, vulnerability assessment, SIEM, firewall, malware analysis, compliance audit, security operations, digital forensics",
+    {"domain_id": "WEF03", "future_domain": "Networks & Cybersecurity",
+     "example_terms": "cybersecurity, information security, penetration testing, threat intelligence, zero trust, SOC, incident response, encryption, vulnerability assessment, SIEM, firewall, malware analysis, compliance audit, security operations, digital forensics, network engineering, network protocols, TCP/IP, routing, switching, SD-WAN, network monitoring, intrusion detection, IPS, IDS, network architecture",
      "trend_label": "Strong_Growth", "trend_score": 0.9, "source": "WEF_FutureOfJobs_2025", "horizon_year": 2030},
     {"domain_id": "WEF04", "future_domain": "Cloud Computing & Infrastructure",
      "example_terms": "cloud computing, kubernetes, docker, AWS, Azure, GCP, terraform, infrastructure as code, CI/CD, DevOps, container orchestration, serverless, load balancing, auto-scaling, cloud migration",
@@ -96,12 +125,12 @@ MCKINSEY_DOMAINS = [
     {"domain_id": "MCK03", "future_domain": "Leadership & People Development",
      "example_terms": "leadership, team management, mentoring, coaching, talent management, performance management, hiring, onboarding, career development, people management, motivation, delegation, conflict resolution, team building, empowerment",
      "trend_label": "Moderate_Growth", "trend_score": 0.55, "source": "McKinsey_FutureOfWork_2025", "horizon_year": 2030},
-    {"domain_id": "MCK04", "future_domain": "Critical Thinking & Problem Solving",
-     "example_terms": "analytical thinking, critical thinking, problem solving, creative thinking, decision making, strategic thinking, logical reasoning, root cause analysis, troubleshooting, design thinking, systems thinking, judgment",
-     "trend_label": "Strong_Growth", "trend_score": 0.8, "source": "McKinsey_FutureOfWork_2025", "horizon_year": 2030},
-    {"domain_id": "MCK05", "future_domain": "Resilience & Adaptability",
-     "example_terms": "resilience, flexibility, agility, adaptability, change management, continuous learning, growth mindset, self-motivation, stress management, time management, work-life balance, curiosity",
-     "trend_label": "Strong_Growth", "trend_score": 0.75, "source": "WEF_FutureOfJobs_2025", "horizon_year": 2030},
+    {"domain_id": "MCK04", "future_domain": "Critical, Analytical & Creative Thinking",
+     "example_terms": "analytical thinking, critical thinking, problem solving, creative thinking, creativity, ideation, decision making, strategic thinking, logical reasoning, root cause analysis, troubleshooting, design thinking, systems thinking, judgment, innovation, lateral thinking",
+     "trend_label": "Strong_Growth", "trend_score": 0.85, "source": "WEF_FutureOfJobs_2025", "horizon_year": 2030},
+    {"domain_id": "MCK05", "future_domain": "Resilience, Adaptability & Lifelong Learning",
+     "example_terms": "resilience, flexibility, agility, adaptability, change management, continuous learning, lifelong learning, growth mindset, self-motivation, stress management, time management, work-life balance, curiosity, intellectual curiosity, learning agility, upskilling, reskilling",
+     "trend_label": "Strong_Growth", "trend_score": 0.8, "source": "WEF_FutureOfJobs_2025", "horizon_year": 2030},
 ]
 
 ESCO_DOMAINS = [
@@ -114,15 +143,23 @@ ESCO_DOMAINS = [
 ]
 
 DECLINE_DOMAINS = [
+    # DEC01: WEF Future of Jobs 2025 lists "Data Entry Clerks" among the
+    # fastest-declining roles in absolute numbers; broader clerical/secretarial
+    # work also declining. Score -0.6 retained (consistent with 2023 reading).
     {"domain_id": "DEC01", "future_domain": "Routine Data Entry & Clerical",
-     "example_terms": "data entry, routine clerical work, simple repetitive administration, manual bookkeeping, form filling, spreadsheet data entry, manual transcription",
-     "trend_label": "Decline", "trend_score": -0.6, "source": "WEF_FutureOfJobs_2023", "horizon_year": 2030},
+     "example_terms": "data entry, routine clerical work, simple repetitive administration, manual bookkeeping, form filling, spreadsheet data entry, manual transcription, basic secretarial tasks, paperwork processing, manual filing",
+     "trend_label": "Decline", "trend_score": -0.6, "source": "WEF_FutureOfJobs_2025", "horizon_year": 2030},
+    # DEC02: not directly cited by WEF 2025 (the report focuses on roles, not
+    # specific tech stacks). Kept as Expert_consensus for transparency. Score
+    # -0.4 reflects continued obsolescence of pre-modern web stacks.
     {"domain_id": "DEC02", "future_domain": "Legacy Web Development",
-     "example_terms": "static websites, basic HTML only, table-based layouts, Flash development, frames, inline styles, deprecated tags",
+     "example_terms": "static websites, basic HTML only, table-based layouts, Flash development, frames, inline styles, deprecated tags, jQuery-only frontends, legacy PHP, ASP classic",
      "trend_label": "Decline", "trend_score": -0.4, "source": "Expert_consensus", "horizon_year": 2028},
+    # DEC03: WEF 2025 cites GenAI / automation as transforming or replacing
+    # routine coding. Citation updated from McKinsey 2023 to WEF 2025.
     {"domain_id": "DEC03", "future_domain": "Routine Maintenance Coding",
-     "example_terms": "boilerplate code updates, simple feature maintenance, repetitive bug fixing without design thinking, copy-paste programming, trivial CRUD, minor tweaks",
-     "trend_label": "Decline", "trend_score": -0.3, "source": "McKinsey_FutureOfWork_2023", "horizon_year": 2030},
+     "example_terms": "boilerplate code updates, simple feature maintenance, repetitive bug fixing without design thinking, copy-paste programming, trivial CRUD, minor tweaks, manual code generation, formulaic refactors",
+     "trend_label": "Decline", "trend_score": -0.3, "source": "WEF_FutureOfJobs_2025", "horizon_year": 2030},
 ]
 
 BUILTIN_SOURCES = {

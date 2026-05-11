@@ -443,19 +443,19 @@ market reports.  The table below documents each value and its source:
 
 | Domain ID | Domain | trend_score | Source Report / Section |
 |-----------|--------|-------------|------------------------|
-| WEF01 | AI & Machine Learning | 1.0 | WEF Future of Jobs 2025 — top growing skill cluster |
-| WEF02 | Big Data & Analytics | 0.9 | WEF Future of Jobs 2025 — 2nd growing cluster |
-| WEF03 | Cybersecurity | 0.9 | WEF Future of Jobs 2025 — critical infrastructure need |
+| WEF01 | AI & Machine Learning | 1.0 | WEF Future of Jobs 2025 — #1 top growing skill (AI and big data) |
+| WEF02 | Big Data & Analytics | 0.9 | WEF Future of Jobs 2025 — paired with AI in #1 cluster |
+| WEF03 | Networks & Cybersecurity | 0.9 | WEF Future of Jobs 2025 — #2 top growing skill (networks and cybersecurity) |
 | WEF04 | Cloud Computing | 0.85 | WEF Future of Jobs 2025 — infrastructure demand |
 | WEF05 | Digital Platforms | 0.7 | WEF Future of Jobs 2025 — moderate growth |
-| WEF06 | Sustainability Tech | 0.6 | WEF Future of Jobs 2025 — emerging but niche |
-| WEF07 | Human-AI Collaboration | 0.95 | WEF Future of Jobs 2025 — co-pilot paradigm |
-| WEF08 | Digital Fluency | 0.85 | WEF Future of Jobs 2025 — foundational literacy |
-| MCK04 | Critical Thinking | 0.8 | McKinsey Future of Work 2025 — human-centric skills |
-| MCK05 | Resilience | 0.75 | WEF Future of Jobs 2025 — adaptability premium |
+| WEF06 | Sustainability Tech | 0.6 | WEF Future of Jobs 2025 — #10 top growing (environmental stewardship) |
+| WEF07 | Human-AI Collaboration | 0.95 | WEF Future of Jobs 2025 — co-pilot paradigm + GenAI adoption |
+| WEF08 | Technological Literacy | 0.85 | WEF Future of Jobs 2025 — #3 top growing skill |
+| MCK04 | Critical, Analytical & Creative Thinking | 0.85 | WEF Future of Jobs 2025 — #4 creative thinking + #9 analytical thinking |
+| MCK05 | Resilience, Adaptability & Lifelong Learning | 0.8 | WEF Future of Jobs 2025 — #5 resilience + #6 curiosity and lifelong learning |
 | ONET01 | Software Engineering | 0.65 | O*NET Bright Outlook 2024 — stable growth |
 | ONET04 | Game Dev / XR | 0.6 | O*NET Bright Outlook 2024 — XR expansion |
-| MCK03 | Leadership | 0.55 | McKinsey Future of Work 2025 |
+| MCK03 | Leadership | 0.55 | McKinsey Future of Work 2025; WEF 2025 #7 leadership and social influence |
 | ONET03 | UX/UI Design | 0.55 | O*NET Bright Outlook 2024 |
 | ONET05 | QA & Testing | 0.55 | O*NET Bright Outlook 2024 |
 | ESCO01 | Project Management | 0.55 | ESCO v1.2 2024 |
@@ -463,10 +463,10 @@ market reports.  The table below documents each value and its source:
 | ONET06 | Blockchain | 0.5 | O*NET Bright Outlook 2024 — uncertain trajectory |
 | MCK01 | Process Automation | 0.5 | McKinsey Future of Work 2025 |
 | ESCO02 | Business Analysis | 0.5 | ESCO v1.2 2024 |
-| MCK02 | Communication | 0.4 | McKinsey Future of Work 2025 — stable |
-| DEC03 | Routine Maintenance | -0.3 | McKinsey Future of Work 2023 — automation risk |
-| DEC02 | Legacy Web Dev | -0.4 | Expert consensus — declining relevance |
-| DEC01 | Routine Data Entry | -0.6 | WEF Future of Jobs 2023 — high automation risk |
+| MCK02 | Communication | 0.4 | McKinsey Future of Work 2025 — stable (trend_tier = Stable per refresh) |
+| DEC03 | Routine Maintenance | -0.3 | WEF Future of Jobs 2025 — GenAI / automation replacing routine coding |
+| DEC02 | Legacy Web Dev | -0.4 | Expert consensus — declining relevance (not directly WEF-cited) |
+| DEC01 | Routine Data Entry | -0.6 | WEF Future of Jobs 2025 — Data Entry Clerks #3 fastest declining role |
 
 **Limitations:**
 - Scores are ordinal judgements, not interval-scale measurements.
