@@ -65,6 +65,29 @@ os.environ.setdefault("CUDA_VISIBLE_DEVICES", "0")
 # tell whether training is hung or just slow.
 os.environ["PYTHONUNBUFFERED"] = "1"
 
+# Install required packages INLINE before any torch / peft / transformers
+# import. Kaggle's base image ships an older bitsandbytes and a separate
+# "!pip install" cell needs a kernel restart to be picked up; running pip
+# inline in the same Python process before the first heavy import sidesteps
+# that footgun entirely. The Cell 1 !pip install above is now belt-and-
+# -suspenders -- this block will succeed even if Cell 1 never ran.
+import subprocess
+import sys
+print("[INFO] ensuring required packages are up to date...")
+subprocess.run(
+    [
+        sys.executable, "-m", "pip", "install", "-q", "-U",
+        "bitsandbytes>=0.46.1",
+        "peft>=0.13",
+        "accelerate>=0.34",
+        "datasets",
+        "seqeval",
+        "transformers",
+    ],
+    check=True,
+)
+print("[INFO] package install complete")
+
 import numpy as np
 import torch
 from datasets import load_dataset
