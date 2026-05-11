@@ -536,17 +536,24 @@ def generate_one(model, tokenizer, tokens: List[str]) -> str:
         {"role": "system", "content": SYSTEM_PROMPT},
         {"role": "user", "content": build_user_message(tokens)},
     ]
+    # transformers >= 4.50 returns a BatchEncoding (dict-like) when
+    # return_tensors="pt"; older versions returned a raw tensor. Use
+    # return_dict=True explicitly + **inputs spread + inputs["input_ids"]
+    # so the code works on both old and new transformers without sniffing.
     inputs = tokenizer.apply_chat_template(
-        messages, return_tensors="pt", add_generation_prompt=True
+        messages,
+        return_tensors="pt",
+        add_generation_prompt=True,
+        return_dict=True,
     ).to(model.device)
     out = model.generate(
-        inputs,
+        **inputs,
         max_new_tokens=INFERENCE_MAX_NEW_TOKENS,
         do_sample=INFERENCE_DO_SAMPLE,
         temperature=INFERENCE_TEMPERATURE if INFERENCE_DO_SAMPLE else 1.0,
         pad_token_id=tokenizer.pad_token_id,
     )
-    new_tokens = out[0, inputs.shape[1]:]
+    new_tokens = out[0, inputs["input_ids"].shape[1]:]
     return tokenizer.decode(new_tokens, skip_special_tokens=True)
 
 
@@ -711,7 +718,18 @@ if __name__ == "__main__":
     print("\n" + "=" * 72)
     print("Step 3/3: evaluate on dev + test")
     print("=" * 72)
-    evaluate(splits=("dev", "test"))
+    # Defensive wrapper: if eval crashes for any reason, the LoRA adapter
+    # from training is still saved at ADAPTER_DIR and we want Save Version
+    # to persist /kaggle/working/ outputs (which only happens on success).
+    # Print the traceback for diagnosis but let the notebook exit cleanly.
+    try:
+        evaluate(splits=("dev", "test"))
+    except Exception as e:
+        import traceback
+        print(f"[ERROR] evaluation failed: {type(e).__name__}: {e}")
+        traceback.print_exc()
+        print(f"[INFO] LoRA adapter is saved at {ADAPTER_DIR}")
+        print("[INFO] you can download it and re-run eval separately")
 
     print("\n" + "=" * 72)
     print("DONE.")
