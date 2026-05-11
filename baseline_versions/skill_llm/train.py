@@ -205,7 +205,10 @@ def main() -> None:
         report_to=[],
         seed=RANDOM_SEED,
         gradient_checkpointing=True,
-        gradient_checkpointing_kwargs={"use_reentrant": False},
+        # use_reentrant=True avoids a known hang on Turing GPUs (T4) when
+        # combined with bitsandbytes >= 0.49 fp16 4-bit on the first backward
+        # pass. Marginally slower than use_reentrant=False but stable.
+        gradient_checkpointing_kwargs={"use_reentrant": True},
     )
 
     trainer = Trainer(

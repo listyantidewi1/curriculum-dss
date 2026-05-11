@@ -59,6 +59,12 @@ from typing import Dict, List, Optional, Set, Tuple
 # sufficient (8B at 4-bit + LoRA fits in ~10 GB on one T4).
 os.environ.setdefault("CUDA_VISIBLE_DEVICES", "0")
 
+# Unbuffered Python output so Trainer's per-step log lines appear in Kaggle's
+# Logs panel in near-real-time. Without this, Save Version runs can buffer
+# multiple minutes of stdout/stderr before flushing, making it impossible to
+# tell whether training is hung or just slow.
+os.environ["PYTHONUNBUFFERED"] = "1"
+
 import numpy as np
 import torch
 from datasets import load_dataset
@@ -401,7 +407,12 @@ def train() -> None:
         warmup_ratio=WARMUP_RATIO,
         lr_scheduler_type=LR_SCHEDULER,
         max_grad_norm=GRAD_CLIP_NORM,
-        logging_steps=10,
+        # Log every step including step 1, not every 10 steps. With
+        # gradient_accumulation=4, "step 10" is 40 forward+backward passes,
+        # which on T4+fp16+4-bit can take 8+ minutes and looks like a hang.
+        # Per-step logs give us a definitive signal that training is alive.
+        logging_steps=1,
+        logging_first_step=True,
         save_strategy="epoch",
         save_total_limit=1,
         eval_strategy="epoch" if "dev" in tokenised else "no",
@@ -411,7 +422,13 @@ def train() -> None:
         report_to=[],
         seed=RANDOM_SEED,
         gradient_checkpointing=True,
-        gradient_checkpointing_kwargs={"use_reentrant": False},
+        # use_reentrant=True is the classic GC implementation. Combining
+        # use_reentrant=False with bitsandbytes >= 0.49 and fp16 on Turing
+        # has been observed to hang silently on the first backward pass
+        # (see bitsandbytes-foundation/bitsandbytes#1340 et al). Reentrant
+        # GC is slightly slower and uses marginally more VRAM but is the
+        # stable path on this hardware stack.
+        gradient_checkpointing_kwargs={"use_reentrant": True},
     )
 
     trainer = Trainer(
