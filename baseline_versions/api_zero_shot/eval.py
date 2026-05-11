@@ -329,7 +329,18 @@ def evaluate(
     n_skill_pred = n_skill_short = n_parse_failures = n_api_failures = 0
     raw_outputs: List[dict] = []
 
-    for ex in tqdm(examples, desc=f"{split}/{model.split('/')[-1]}"):
+    # Incremental save for crash safety. The original eval would only write
+    # raw_outputs at the end -- a mid-run crash (observed for Llama 70B at
+    # step 1254/3569 on 2026-05-12) destroyed all partial progress. We now
+    # stream raw_outputs to disk as we go, so future crashes preserve work.
+    output_dir.mkdir(parents=True, exist_ok=True)
+    model_slug = model.replace("/", "-").replace(":", "-")
+    raw_path_incremental = output_dir / f"raw_outputs_{split}_{model_slug}.jsonl"
+    raw_path_incremental.write_text("", encoding="utf-8")  # truncate / create
+    raw_fp = open(raw_path_incremental, "a", encoding="utf-8")
+    FLUSH_EVERY_N = 50
+
+    for i_ex, ex in enumerate(tqdm(examples, desc=f"{split}/{model.split('/')[-1]}")):
         tokens = ex["tokens"]
         sentence = " ".join(tokens)
         gold_skill = gold_spans_from_bio(tokens, ex.get("tags_skill", []))
@@ -349,7 +360,13 @@ def evaluate(
         parsed = parse_assistant_json(raw_text)
         pred_skill: Set[Tuple[int, int]] = set()
         pred_knowl: Set[Tuple[int, int]] = set()
-        if parsed is None:
+        # Defensive: some models (observed: Llama 3.1 70B at step 1254/3569 on
+        # 2026-05-12) emit a top-level JSON array instead of the prompted
+        # {"SKILL":..., "KNOWLEDGE":...} dict. The original code crashed with
+        # AttributeError when calling .get() on a list. Treat non-dict outputs
+        # as a parse failure for safety; the per-model parse_failure_rate in
+        # the metrics report will surface the rate so we know it happened.
+        if parsed is None or not isinstance(parsed, dict):
             n_parse_failures += 1
         else:
             for item in parsed.get("SKILL", []) or []:
@@ -380,7 +397,14 @@ def evaluate(
         knowl_fp += len(pred_knowl - gold_knowl)
         knowl_fn += len(gold_knowl - pred_knowl)
 
-        raw_outputs.append({"tokens": tokens, "raw_output": raw_text, "parsed": parsed})
+        rec = {"tokens": tokens, "raw_output": raw_text, "parsed": parsed}
+        raw_outputs.append(rec)
+        raw_fp.write(json.dumps(rec, ensure_ascii=False) + "\n")
+        if (i_ex + 1) % FLUSH_EVERY_N == 0:
+            raw_fp.flush()
+
+    raw_fp.flush()
+    raw_fp.close()
 
     s_p, s_r, s_f1 = f1(skill_tp, skill_fp, skill_fn)
     k_p, k_r, k_f1 = f1(knowl_tp, knowl_fp, knowl_fn)
@@ -393,10 +417,8 @@ def evaluate(
     verb_fail_threshold = DEFAULT_TRAIN_SHORT_RATE + VERB_FAILURE_TOLERANCE_DELTA
     verb_failed = verb_short > verb_fail_threshold
 
-    output_dir.mkdir(parents=True, exist_ok=True)
-    model_slug = model.replace("/", "-").replace(":", "-")
     metrics_path = output_dir / f"metrics_{split}_{model_slug}.txt"
-    raw_path = output_dir / f"raw_outputs_{split}_{model_slug}.jsonl"
+    raw_path = raw_path_incremental  # already populated incrementally above
 
     with open(metrics_path, "w", encoding="utf-8") as f:
         f.write(f"=== {split.upper()} METRICS -- {model} (zero-shot via OpenRouter) ===\n")
@@ -430,9 +452,8 @@ def evaluate(
             "OK: verb-preservation diagnostic passed.\n"
         )
 
-    with open(raw_path, "w", encoding="utf-8") as f:
-        for rec in raw_outputs:
-            f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+    # raw_outputs JSONL was written incrementally during the loop (see
+    # raw_path_incremental above) so it survives mid-run crashes.
 
     print(
         f"\n[RESULT] {split} | {model}\n"
