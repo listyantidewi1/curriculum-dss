@@ -45,7 +45,7 @@ from config import (
     MAX_RETRIES,
     MAX_TOKENS,
     OPENROUTER_BASE_URL,
-    OPENROUTER_KEY_FILE,
+    OPENROUTER_KEY_FILES,
     OUTPUTS_DIR,
     RANDOM_SEED,
     REQUEST_TIMEOUT,
@@ -67,11 +67,23 @@ from config import (
 def load_openrouter_client() -> OpenAI:
     api_key = os.getenv("OPENROUTER_API_KEY")
     if not api_key:
-        if not OPENROUTER_KEY_FILE.exists():
+        for key_file in OPENROUTER_KEY_FILES:
+            if key_file.exists():
+                api_key = key_file.read_text(encoding="utf-8").strip()
+                if api_key:
+                    print(f"[INFO] loaded OpenRouter API key from {key_file.name}")
+                    break
+        if not api_key:
+            paths = ", ".join(str(p) for p in OPENROUTER_KEY_FILES)
             raise FileNotFoundError(
-                f"OPENROUTER_API_KEY env var unset and {OPENROUTER_KEY_FILE} missing"
+                f"OPENROUTER_API_KEY env var unset and no key file found at: {paths}"
             )
-        api_key = OPENROUTER_KEY_FILE.read_text(encoding="utf-8").strip()
+    if not api_key.startswith("sk-or-"):
+        sys.stderr.write(
+            f"[WARN] loaded key does not start with 'sk-or-' (OpenRouter prefix). "
+            f"If you see 401 errors, check that the key file contains a valid "
+            f"OpenRouter key (https://openrouter.ai/keys), not a Jatevo / OpenAI / etc. key.\n"
+        )
     return OpenAI(api_key=api_key, base_url=OPENROUTER_BASE_URL)
 
 

@@ -24,10 +24,15 @@ OUTPUTS_DIR = PACKAGE_ROOT / "outputs"
 
 # --- OpenRouter client -----------------------------------------------------
 
-# Same loading convention as generate_competencies.py / sentence_relevance_filter.py:
-# env var OPENROUTER_API_KEY takes priority, then fall back to api_keys/jatevo.txt.
+# Loading convention: env var OPENROUTER_API_KEY takes priority, then try each
+# file in order (OpenRouter.txt is the active key after commit 2aced75 which
+# switched the competency generator from Jatevo back to OpenRouter; jatevo.txt
+# is kept as a fallback for backwards compatibility).
 OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
-OPENROUTER_KEY_FILE = PROJECT_ROOT / "api_keys" / "jatevo.txt"
+OPENROUTER_KEY_FILES = [
+    PROJECT_ROOT / "api_keys" / "OpenRouter.txt",
+    PROJECT_ROOT / "api_keys" / "jatevo.txt",
+]
 
 # Models to evaluate. Pass --model <slug> on the CLI; this is the menu.
 SUPPORTED_MODELS = {
