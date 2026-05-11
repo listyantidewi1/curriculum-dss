@@ -209,6 +209,11 @@ def main() -> None:
         # combined with bitsandbytes >= 0.49 fp16 4-bit on the first backward
         # pass. Marginally slower than use_reentrant=False but stable.
         gradient_checkpointing_kwargs={"use_reentrant": True},
+        # Use plain print() instead of tqdm.write() for per-step logs.
+        # tqdm.write() is a no-op in non-TTY environments (Kaggle Save
+        # Version, CI logs, redirected stdout), which makes training look
+        # hung even when it isn't. print() works everywhere.
+        disable_tqdm=True,
     )
 
     trainer = Trainer(

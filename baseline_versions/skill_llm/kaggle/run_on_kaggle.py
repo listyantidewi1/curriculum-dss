@@ -413,6 +413,14 @@ def train() -> None:
         # Per-step logs give us a definitive signal that training is alive.
         logging_steps=1,
         logging_first_step=True,
+        # CRITICAL for Kaggle Save Version mode: with disable_tqdm=False
+        # (the default) Trainer routes the {'loss': ...} log dict through
+        # tqdm.write(). In non-TTY environments tqdm auto-disables itself
+        # and tqdm.write() becomes a silent no-op -- so per-step logs vanish
+        # entirely and training looks hung even when it is progressing
+        # normally. disable_tqdm=True swaps ProgressCallback for
+        # PrinterCallback, which uses plain print() and works in batch mode.
+        disable_tqdm=True,
         save_strategy="epoch",
         save_total_limit=1,
         eval_strategy="epoch" if "dev" in tokenised else "no",
