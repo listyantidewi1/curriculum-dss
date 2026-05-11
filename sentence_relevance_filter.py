@@ -84,11 +84,13 @@ def _save_cache(cache_path: Optional[Path], cache: dict) -> None:
 
 def _load_openrouter_client() -> OpenAI:
     """Mirror generate_competencies.load_openrouter_client(): env var first,
-    fallback to api_keys/jatevo.txt (the project's OpenRouter key file)."""
+    fallback to api_keys/OpenRouter.txt (the project's OpenRouter key file
+    after commit 2aced75 switched back to OpenRouter from Jatevo)."""
     base_url = "https://openrouter.ai/api/v1"
     api_key = os.getenv("OPENROUTER_API_KEY")
     if not api_key:
-        key_path = Path("api_keys") / "jatevo.txt"
+        key_path = Path("api_keys") / "OpenRouter.txt"
+        # key_path = Path("api_keys") / "jatevo.txt"  # swap-back path if reverting to Jatevo
         try:
             api_key = key_path.read_text(encoding="utf-8").strip()
         except FileNotFoundError as exc:

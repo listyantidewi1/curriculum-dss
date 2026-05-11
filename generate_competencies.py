@@ -262,8 +262,8 @@ def load_openrouter_client() -> OpenAI:
 
     # 2) fallback: api_keys/OpenRouter.txt
     if not api_key:
-        # key_path = Path("api_keys") / "OpenRouter.txt"
-        key_path = Path("api_keys") / "jatevo.txt"
+        key_path = Path("api_keys") / "OpenRouter.txt"
+        # key_path = Path("api_keys") / "jatevo.txt"  # swap-back path if reverting to Jatevo (GPT-only)
         try:
             with open(key_path, "r", encoding="utf-8") as f:
                 api_key = f.read().strip()
