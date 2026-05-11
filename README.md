@@ -43,23 +43,30 @@ for an LLM-based one. Authoritative spec:
 | **1.2** | Zero-shot LLM sentence relevance filter (drops boilerplate / benefits / logistics) with SHA-256 cache | ✅ Done |
 | **1.3** | Bloom taxonomy removed from the pipeline (decisions returned to curriculum stakeholders) | ✅ Done |
 | **1.4** | JobBERT replicate (`baseline_versions/jjzha_replicate/`) — confirmed published checkpoint scores comparable to vanilla BERT; targets revised to literature-grounded gate | ✅ Done |
-| **1.5** | Skill-LLM LoRA fine-tune of LLaMA 3.1 8B (`baseline_versions/skill_llm/`) — Layer-1 candidate, paper-spec recipe | 🔄 Eval running on Kaggle |
-| **1.5b** | API zero-shot baseline (`baseline_versions/api_zero_shot/`) — OpenRouter (GPT-4o-mini, Claude Haiku 3.5, Llama 3.1 70B, DeepSeek-V3) as Layer-1 candidates with no local GPU | 🔄 Ready to run (~$3 for full suite) |
+| **1.5** | Skill-LLM LoRA fine-tune of LLaMA 3.1 8B (`baseline_versions/skill_llm/`) — **chosen as production Layer 1** (total F1 0.65, passes all sub-gates, see [docs/EXTRACTOR_DECISION.md](docs/EXTRACTOR_DECISION.md)) | ✅ Done — shipping |
+| **1.5b** | API zero-shot baseline (`baseline_versions/api_zero_shot/`) — kept as paper baseline (zero-shot underperforms fine-tune by ~0.25 F1) | ✅ Done — paper baseline only |
 
-### Phase 2 — Pipeline reflow (queued)
+### Phase 2 — Pipeline reflow (Layer 1 decision settled; implementation queued)
 
-After the Layer-1 extractor decision lands (Skill-LLM vs API zero-shot),
-Phase 2 will replace domain-based batching with HDBSCAN + agglomerative
-clustering, rewrite the competency generator to be cluster-driven with full
-provenance (`contributing_item_ids` + `source_sentences` per competency), add
-a post-hoc SBERT-based KKNI labeler (Perpres 8/2012 levels 1–9), wire in
-education-level aggregation per competency, and add a competency evaluator
-with a **hard grounding gate (≥ 0.80) that makes hallucinated competencies a
-technical impossibility, not a quality problem to spot-check**. Public UI
-gets a "Why this competency?" provenance chain at the same time. Phase 2
-ordering is `2.1 → 2.2 → 2.5 → 2.3 → 2.4 → 2.6` — the grounding gate (2.5) is
-brought online before KKNI/education metadata (2.3/2.4) so no un-vetted
-competencies reach users.
+Layer 1 extractor decision settled 2026-05-12: **Skill-LLM 8B LoRA wins**
+(see [docs/EXTRACTOR_DECISION.md](docs/EXTRACTOR_DECISION.md)). Phase 2
+implementation now begins on a clean foundation:
+
+- **2.1** Replace domain-based batching with HDBSCAN + agglomerative clustering
+- **2.2** Rewrite the competency generator to be cluster-driven with full
+  provenance (`contributing_item_ids` + `source_sentences` per competency)
+- **2.5** Competency evaluator with **hard grounding gate (≥ 0.80) that makes
+  hallucinated competencies a technical impossibility, not a quality problem
+  to spot-check**
+- **2.3** Post-hoc SBERT-based KKNI labeler (Perpres 8/2012 levels 1–9, informational only)
+- **2.4** Education-level aggregation per competency (Indonesian S1/D3/D4/SMK
+  + ISCED for non-Indonesian institutions)
+- **2.6** Public UI provenance chains — "Why this competency?" click-through
+  on every recommendation
+
+Phase 2 ordering is `2.1 → 2.2 → 2.5 → 2.3 → 2.4 → 2.6` — the grounding gate
+(2.5) is brought online before KKNI/education metadata (2.3/2.4) so no
+un-vetted competencies reach users. Target deadline: 2026-06-08.
 
 ### Onboarding for contributors
 

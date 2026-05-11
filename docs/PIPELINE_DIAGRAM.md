@@ -1,4 +1,4 @@
-# Pipeline Diagram — pipeline-redesign-v2 (planned)
+# Pipeline Diagram — pipeline-redesign-v2
 
 Two formats. Use whichever your target tool understands:
 
@@ -9,10 +9,14 @@ Two formats. Use whichever your target tool understands:
   Midjourney, Stable Diffusion, Whimsical AI, Eraser.io AI, or any
   diagram-from-prose tool. Use for marketing slides / paper figures.
 
-Both reflect the **planned v2 architecture** (post pipeline-redesign-v2,
-not the legacy pre-Phase-1 pipeline). For the legacy file-by-file flow
-see [`PIPELINE.md`](../PIPELINE.md). For the design rationale see
-[`.kiro/specs/pipeline-redesign-v2/requirements.md`](../.kiro/specs/pipeline-redesign-v2/requirements.md).
+Both reflect the **v2 architecture as of 2026-05-12** — Layer 1 extractor
+decision settled (Skill-LLM 8B LoRA wins; see [EXTRACTOR_DECISION.md](EXTRACTOR_DECISION.md)),
+Phase 2 stages spec'd in requirements.md but partially pending implementation
+(Phase 2.1 clustering, 2.2 cluster-driven competency generator, 2.5 grounding
+evaluator etc. — see README phase table for status).
+
+For the legacy file-by-file flow see [`PIPELINE.md`](../PIPELINE.md). For the
+design rationale see [`.kiro/specs/pipeline-redesign-v2/requirements.md`](../.kiro/specs/pipeline-redesign-v2/requirements.md).
 
 ---
 
@@ -37,9 +41,9 @@ flowchart LR
     %% --- Hybrid extraction ---
     subgraph EXT ["3. Hybrid Extraction"]
         direction TB
-        BERT["BERT path<br/>Skill-LLM<br/><i>LoRA LLaMA 3.1 8B</i><br/>per-sentence"]
-        LLM["LLM path<br/><i>DeepSeek-V3</i><br/>full-posting arbitration"]
-        FUSE{{"Fusion Engine<br/><i>SBERT-based</i>"}}
+        BERT["Layer 1: sentence-level<br/><b>Skill-LLM</b><br/><i>LoRA LLaMA 3.1 8B</i><br/>F1: 0.65 (total)<br/>chosen 2026-05-12"]
+        LLM["Layer 2: full-posting<br/><i>DeepSeek-V3</i><br/>catches implicit/<br/>contextual skills"]
+        FUSE{{"Fusion Engine<br/><i>SBERT-based<br/>semantic agreement</i>"}}
         BERT --> FUSE
         LLM --> FUSE
     end
@@ -129,18 +133,19 @@ Paste this into ChatGPT (with image generation), DALL-E 3, Midjourney
 Tweak the style line at the bottom for your output medium (slide vs.
 paper vs. dashboard hero).
 
-> **Subject:** A clean technical architecture diagram titled *"Future-Aware Hybrid Skill Extraction Pipeline — for Indonesian SMK curriculum reform"*. Horizontal flow, left-to-right, three swim-lane band: inputs · processing · outputs.
+> **Subject:** A clean technical architecture diagram titled *"Future-Aware Hybrid Skill Extraction Pipeline — competency recommendations for software-engineering curriculum design (schools, universities, institutions, governments)"*. Horizontal flow, left-to-right, three swim-lane band: inputs · processing · outputs.
 >
 > **Inputs (left, light blue rounded rectangles, document/globe icons):**
-> Job postings (scraped from LinkedIn / Indeed / JobStreet); Future-domain references (WEF · O\*NET · McKinsey); Curriculum upload from SMK administrators.
+> Job postings (scraped from LinkedIn / Indeed / JobStreet); Future-domain references (WEF Future of Jobs 2025, O\*NET, McKinsey); Curriculum upload from educational institutions (SMK, university vocational faculties, etc.).
 >
 > **Processing stages (center, soft yellow rounded rectangles, numbered 1–9, connected by solid arrows showing main flow):**
 >
 > 1. **Preprocessing** — sentence splitting, deduplication, translation, KKNI education-level extraction. Annotation: "provenance: every item carries `sentence_id`".
 > 2. **Sentence Relevance Filter** — zero-shot LLM drops irrelevant sentences (benefits, logistics, boilerplate); persistent SHA-256 cache for cost-zero re-runs.
-> 3. **Hybrid Extraction** — a sub-group with two parallel paths converging into a "Fusion Engine" diamond:
->    - BERT path: Skill-LLM (LoRA-fine-tuned LLaMA 3.1 8B) per-sentence, emits structured JSON with verb-led SKILL and noun KNOWLEDGE.
->    - LLM path: DeepSeek-V3 on full posting, arbitrates ambiguous categorizations using surrounding context.
+> 3. **Hybrid two-layer Extraction** — a sub-group with two parallel paths converging into a "Fusion Engine" diamond:
+>    - **Layer 1** (sentence-level, deterministic): Skill-LLM, a LoRA-fine-tuned LLaMA 3.1 8B Instruct, runs per-sentence and emits structured JSON with verb-led SKILL and noun KNOWLEDGE. Total F1 0.65 on SkillSpan test (matches paper SOTA). Chosen over zero-shot API alternatives in 2026-05-12 evaluation.
+>    - **Layer 2** (full-posting, contextual): DeepSeek-V3 via OpenRouter reads each entire posting, catches implicit and context-dependent skills that token-level Layer 1 can't (e.g., "the role demands strong analytical thinking" even when no skill phrase is explicit).
+>    - **Fusion**: SBERT-based semantic agreement voting. Items in both layers are high-confidence; Layer-2-only items pass through an extra grounding check.
 > 4. **Skill Clustering** — HDBSCAN + Agglomerative; the winner per batch is selected by mean intra-cluster SBERT cohesion.
 > 5. **Competency Generation** — LLM synthesizes competency statements from each cluster, with full provenance (contributing item IDs + source sentences).
 > 6. **KKNI Labeler** (post-hoc) — SBERT match against Perpres 8/2012 level descriptors 1–9 (informational only, does not enter ranking).
@@ -164,7 +169,7 @@ paper vs. dashboard hero).
 > - "Human-in-the-loop: expert review at extraction + competency stages, Cohen's / Fleiss' Kappa"
 > - "Provenance throughout: every output traces back to source job_id + sentence_id + sentence_text"
 >
-> **Style:** Modern flat-design infographic. Soft pastel palette (light blue inputs, soft yellow processing stages, soft purple parallel branches, light green outputs, red dashed lines for human-in-the-loop annotations). Rounded corners on all rectangles. Solid arrows for the primary data flow; dotted arrows for parallel branches; dashed red lines for human-in-the-loop callouts. Minimum text inside boxes — prefer concise labels with small icons. Subtle Indonesian SMK education context (a small batik motif accent in one corner, a KKNI badge somewhere visible). All technical labels in English. Aspect ratio 16:9, landscape, sized for slide-deck use.
+> **Style:** Modern flat-design infographic. Soft pastel palette (light blue inputs, soft yellow processing stages, soft purple parallel branches, light green outputs, red dashed lines for human-in-the-loop annotations). Rounded corners on all rectangles. Solid arrows for the primary data flow; dotted arrows for parallel branches; dashed red lines for human-in-the-loop callouts. Minimum text inside boxes — prefer concise labels with small icons. Audience is generic education-design (schools, universities, institutions, governments); the Indonesian SMK / KKNI context is the first user-testing cohort but the architecture is not Indonesia-specific. A small KKNI Level 1–9 badge somewhere visible is appropriate (KKNI metadata is one of the outputs, regardless of audience). All technical labels in English. Aspect ratio 16:9, landscape, sized for slide-deck use.
 
 ---
 
