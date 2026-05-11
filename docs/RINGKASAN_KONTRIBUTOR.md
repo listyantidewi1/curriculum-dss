@@ -15,8 +15,11 @@
 
 ## 1. Apa yang Kami Bangun
 
-**Sistem Rekomendasi Kompetensi berbasis Data Pasar Kerja** untuk reformasi
-kurikulum SMK di Indonesia. Sistem ini:
+**Sistem Rekomendasi Kompetensi berbasis Data Pasar Kerja** untuk siapa saja
+yang merancang kurikulum software engineering — sekolah, universitas,
+lembaga pendidikan, pemerintah. Cohort uji pengguna pertama: SMK dan
+fakultas vokasi universitas (D3/D4) di Indonesia, tapi arsitektur dan
+deliverable-nya generik untuk audiens lebih luas. Sistem ini:
 
 1. **Mengambil ribuan iklan lowongan kerja** dari berbagai platform (LinkedIn,
    Indeed, JobStreet, dll.).
@@ -129,7 +132,15 @@ berdasarkan masukan mentor. Progres Phase 1 (data layer):
 | **1.2** | Sentence relevance filter (zero-shot LLM) | ✅ Selesai |
 | **1.3** | Hapus klasifikasi Bloom dari pipeline (kembalikan ke pemangku kepentingan) | ✅ Selesai |
 | **1.4** | Replikasi `jjzha/jobbert_skill_extraction` sebagai BERT baseline | ✅ Selesai (lihat [REPLICATION_REPORT.md](../baseline_versions/jjzha_replicate/REPLICATION_REPORT.md)) |
-| **1.5** | LoRA fine-tune Skill-LLM (LLaMA 3.1 8B) sebagai BERT-replacement | 🔄 Sedang training |
+| **1.5** | LoRA fine-tune Skill-LLM (LLaMA 3.1 8B) — kandidat Layer 1 | 🔄 Eval di Kaggle |
+| **1.5b** | API zero-shot baseline (GPT-4o-mini, Claude Haiku, Llama 70B, DeepSeek-V3 via OpenRouter) — kandidat Layer 1 tanpa GPU lokal | 🔄 Siap dijalankan (~$3 untuk full suite) |
+
+**Catatan tentang keputusan Layer 1:** kami sedang head-to-head antara
+Skill-LLM 8B (fine-tune) dan beberapa model API zero-shot. Layer 2
+(LLM full-posting) sudah settled — DeepSeek-V3 via OpenRouter. Produksi
+adalah Layer 1 + Layer 2 + fusion, selalu. Kalau API zero-shot memenangkan
+gate kualitas, deployment tidak butuh GPU 16 GB lokal sama sekali —
+seluruh pipeline jalan via API.
 
 Phase 2 (pipeline reflow) belum dimulai; akan menggantikan domain-batching
 dengan clustering, menulis ulang competency generator agar cluster-driven

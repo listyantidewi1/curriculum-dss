@@ -347,6 +347,108 @@ NDCG = DCG / IDCG
 
 ---
 
+## 9.5 Competency Grounding Score (Phase 2.5 — hallucination gate)
+
+The grounding score measures whether each generated competency is empirically
+grounded in extracted skills/knowledge from real job postings. It is the
+**anti-hallucination defence** for the recommendation system.
+
+### Formula
+
+For each competency `c` with declared `related_skills = [s_1, s_2, …, s_k]`
+and a provenance set `evidence_pool = {extracted items contributing to c}`:
+
+```
+grounding(c) = | {s_i in related_skills : exists e in evidence_pool with
+                   SBERT_cos(s_i, e) ≥ tau_grounding} | / k
+```
+
+Where:
+- `tau_grounding = 0.70` (configurable; SBERT cosine similarity threshold)
+- `k = |related_skills|`
+- A `related_skill` is "grounded" if at least one extracted item in the
+  competency's provenance is semantically close to it (cosine ≥ tau)
+
+### Gate
+
+```
+if grounding(c) < 0.80:
+    flag c as "potentially_hallucinated"
+    exclude c from the dashboard recommendation surface
+```
+
+The 0.80 threshold means at least 4 out of every 5 `related_skills` must
+trace back to actual evidence. A competency that fails this gate is **never
+shown to users** — hallucination is a technical impossibility at the
+recommendation surface, not a quality problem reviewers must spot-check.
+
+### Reporting
+
+Per `metrics_competency.txt`:
+- `grounding_mean`, `grounding_median`, `grounding_p10` across all generated competencies
+- `flagged_hallucinated_count` (competencies excluded by the gate)
+- `coherence_mean` (Req 7.2: mean pairwise SBERT cosine within `related_skills`)
+- `coverage` (Req 7.3: fraction of extracted items represented in at least one surviving competency)
+
+### Worked Example
+
+Competency: "Implement secure REST APIs with authentication"
+- `related_skills` = ["implementing REST APIs", "designing authentication flows", "applying OAuth 2.0", "input validation"] (k=4)
+- `evidence_pool` includes extracted items: "build RESTful endpoints", "OAuth 2.0 integration", "JWT token validation", "session management"
+- Cosine similarities (SBERT):
+  - "implementing REST APIs" vs "build RESTful endpoints": 0.84 ≥ 0.70 ✓
+  - "designing authentication flows" vs "session management": 0.72 ≥ 0.70 ✓
+  - "applying OAuth 2.0" vs "OAuth 2.0 integration": 0.91 ≥ 0.70 ✓
+  - "input validation" vs all items: max 0.62 < 0.70 ✗
+- grounding = 3/4 = 0.75
+- **0.75 < 0.80 → FLAGGED as potentially hallucinated, excluded from recommendations**
+
+The "input validation" skill couldn't be traced to a specific evidence item;
+the competency over-claimed. Excluding it prevents misleading users.
+
+---
+
+## 9.6 Top-20 Stability Metric (production-volume experiment)
+
+For declaring stability of competency recommendations across sample sizes
+(Phase 2.5b stability experiment, see [SCIENTIFIC_METHODOLOGY.md §16c](SCIENTIFIC_METHODOLOGY.md)):
+
+### Within-N stability (across seeds)
+
+For 3 runs at the same N with different random seeds, producing top-20
+competency lists A₁, A₂, A₃:
+
+```
+within_N_jaccard(N) = mean( Jaccard(A_i, A_j) for i < j )
+                    = (J(A_1,A_2) + J(A_1,A_3) + J(A_2,A_3)) / 3
+
+Jaccard(A, B) = |A ∩ B| / |A ∪ B|
+```
+
+Competencies compared by **normalized title** (`normalize_for_grouping`) so
+cosmetic rephrasing doesn't break matching.
+
+### Across-N stability
+
+For consecutive sample sizes N and N_prev:
+
+```
+across_N_jaccard(N, N_prev) = mean over seeds of
+                              Jaccard(top20_at_N, top20_at_N_prev)
+```
+
+### Stability declaration
+
+N is **declared stable** when:
+```
+within_N_jaccard(N) ≥ 0.80   AND   across_N_jaccard(N, N_prev) ≥ 0.85
+```
+
+The smallest such N is the **stability point N\***. Production runs use
+N ≥ N* to guarantee stable recommendations.
+
+---
+
 ## 10. Competency–Knowledge Enrichment (Dashboard)
 
 Lexical overlap (tokens ≥4 chars) between competency (title, description, related_skills) and knowledge items:
@@ -372,6 +474,9 @@ Top 8 knowledge items by `(overlap DESC, confidence DESC, text)` attached as `re
 | Competency human | 0.7×skill + 0.3×quality + rel_adj + verify_adj |
 | FDR threshold | q < 0.05 |
 | P@N | (yes + 0.5×partial) / N |
+| Grounding score (Phase 2.5 hallucination gate) | grounded_count / |related_skills|; gate at ≥ 0.80 |
+| Within-N Jaccard (stability) | mean pairwise Jaccard of top-20 across 3 seeds at same N; ≥ 0.80 declares stable |
+| Across-N Jaccard (stability) | Jaccard(top20_N, top20_N-1); ≥ 0.85 declares diminishing returns |
 
 ---
 

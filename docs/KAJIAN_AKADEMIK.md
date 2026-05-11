@@ -271,6 +271,21 @@ diuji. Beberapa komponen sistem—khususnya pemetaan ke
 `future_domains.csv` dan ekstraksi level pendidikan—mungkin
 memerlukan adaptasi domain-spesifik.
 
+**Audiens yang lebih luas dari SMK.**
+Pasca-konsultasi promotor Mei 2026, mission sistem diperluas: bukan hanya
+SMK Indonesia, melainkan **siapa saja yang merancang kurikulum software
+engineering** — SMK, universitas, fakultas vokasi (D3/D4), lembaga
+pendidikan tinggi, dinas pendidikan, atau pemerintah. Cohort uji pengguna
+pertama tetap SMK + fakultas vokasi universitas di Indonesia (KKNI 2–6
+relevant), namun arsitektur sistem (provenance per kalimat, hybrid
+extraction Layer 1 + Layer 2, grounding gate untuk anti-hallucination)
+sengaja generik. Implikasi: KKNI labeler tetap menjadi *informational
+metadata*, bukan filter wajib — konsumen institusional yang tidak
+beroperasi dalam kerangka KKNI dapat mengabaikannya tanpa kehilangan
+fungsionalitas. *Education-level extractor* memiliki regex Indonesia-
+spesifik (S1/D3/D4/SMK) namun akan diperluas dengan padanan ISCED untuk
+audiens internasional.
+
 **Sample size dan representativitas industri.**
 Default `SAMPLE_SIZE` adalah 1000 lowongan, dengan rentang produksi
 hingga 10.000 selama 12 bulan. Apakah sampel ini representatif terhadap

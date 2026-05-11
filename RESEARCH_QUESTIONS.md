@@ -19,26 +19,54 @@ The pipeline is a **curriculum gap / reform tool**, not a compliance tool. It su
 
 ## Research Questions
 
-### RQ1 — Extraction Quality (LLM-only primary; hybrid as ablation)
-**Does LLM-only extraction produce sufficient quality for downstream competency
-recommendation, and does adding BERT (hybrid) materially improve precision?**
+### RQ1 — Extraction Quality (hybrid two-layer architecture; Layer 1 candidate decision)
+**Which Layer 1 sentence-level extractor (Skill-LLM 8B LoRA, API zero-shot, or
+JobBERT) wins, and does fusion with Layer 2 (full-posting LLM) materially lift
+precision over Layer 1 alone?**
 
-After the 2026 reframe, **LLM-only is the primary extraction mode**; hybrid is
-the ablation. The question becomes whether BERT contributes a measurable
-precision lift over LLM-only — if not, the simpler LLM-only path stands.
+Production extraction is a hybrid two-layer architecture (`.kiro/specs/pipeline-redesign-v2/requirements.md`
+Req 3.6 + Req 9.1): Layer 1 is a sentence-level extractor for explicit spans;
+Layer 2 is a full-posting LLM that catches implicit / context-dependent skills
+the token-level Layer 1 cannot. Layer 1 candidates are evaluated head-to-head
+on the SkillSpan test set; Layer 2 is settled (DeepSeek-V3 via OpenRouter).
 
-| Metric | Definition | Target |
-|--------|-----------|--------|
-| Precision (LLM-only) | correct extractions / all extractions | > 0.70 |
-| Hybrid lift | precision(hybrid) − precision(LLM-only) | reported (effect size + Wilson CI) |
+**Gate 1 — Layer 1 quality gate (must pass):**
 
-*Note: Recall and F1 are not estimable with this gold-set design (stratified sample of outputs, not exhaustive corpus annotations). See [SCIENTIFIC_METHODOLOGY.md §10](SCIENTIFIC_METHODOLOGY.md).*
+| Metric | Definition | Gate |
+|---|---|---|
+| total F1 | strict span-set F1 (skill + knowledge micro-avg, Skill-LLM Table 2 definition) | ≥ 0.55 |
+| skill F1 | strict span-set F1 for SKILL spans | report (literature ceiling ≈ 0.54) |
+| knowledge F1 | strict span-set F1 for KNOWLEDGE spans | report (literature ceiling ≈ 0.74) |
+| verb_short_rate | fraction of predicted SKILL spans with < 2 tokens | ≤ 0.244 (baseline 0.144 + 0.10 tolerance) |
+| parse_failure_rate | fraction of items where the model output is not valid JSON | ≤ 0.02 |
 
-Evaluation: compare **LLM-only** (primary) and **Hybrid** (ablation) on the
-gold set (`DATA/labels/gold_skills.csv`, `DATA/labels/gold_knowledge.csv`).
-The hybrid run is performed in `results/hybrid/` (`run.bat` step 2);
-`evaluate_extraction.py --llmonly-labels-dir results/hybrid/DATA/labels`
-performs the comparison.
+**Notes:**
+- The earlier target of skill F1 ≥ 0.70 / knowledge F1 ≥ 0.80 was revised to the
+  literature-grounded gate above. The published SkillSpan SOTA (Skill-LLM,
+  Herandi et al. 2024 AAAI) is 0.543 / 0.742; no token-level method exceeds
+  ~0.57 skill F1. The original target was unreachable.
+- The gate is composite. A model that passes total F1 but fails verb-preservation
+  is rejected — the verb-noun distinction is load-bearing for downstream KKNI
+  labeling and competency generation.
+- Layer 1 F1 is one of two extractors. The 0.55 gate is lower than if Layer 1
+  were the only source; fusion with Layer 2 lifts the production-mode precision.
+
+**Gate 2 — Hybrid lift:**
+
+| Metric | Definition | Reported |
+|---|---|---|
+| fusion lift | F1(L1+L2 fusion) − F1(L1 alone) | effect size + Wilson CI |
+| Layer 2 standalone | F1 of LLM-only full-posting extraction | for ablation comparison |
+
+*Note: Recall and F1 are estimable for sentence-level evaluation against the
+SkillSpan test set, which is exhaustively annotated. The qualifier "not
+estimable" applies only to our own production extractions evaluated against
+a stratified output sample — see [SCIENTIFIC_METHODOLOGY.md §10](SCIENTIFIC_METHODOLOGY.md).*
+
+Evaluation: each Layer 1 candidate produces `metrics_test.txt` in its own
+package directory (`baseline_versions/skill_llm/`, `baseline_versions/api_zero_shot/`,
+`baseline_versions/jjzha_replicate/`). Decision rationale recorded in
+`docs/EXTRACTOR_DECISION.md` after all candidates have measured numbers.
 
 ### RQ1b — Competency Generation Quality
 **Do generated competencies meet curriculum-design quality bars, given the
@@ -67,6 +95,29 @@ validity judgments?**
 | Calibration Error | max abs(predicted prob - observed freq) in 10 bins | < 0.15 |
 
 Evaluation: logistic regression on reviewed items; 5-fold cross-validated.
+
+### RQ2b — Production-volume stability
+
+**At what corpus size does the pipeline produce stable competency
+recommendations? Beyond what N does adding more job postings no longer
+materially change the output?**
+
+| Metric | Definition | Target |
+|--------|-----------|--------|
+| Jaccard top-20 across seeds | overlap of top-20 competencies between 3 runs at the same N with different random sample seeds | ≥ 0.80 at the declared stability point |
+| Jaccard top-20 vs N-1 (across sizes) | overlap of top-20 between N and the previous tested N | declared stable when overlap ≥ 0.85 (diminishing returns) |
+| Grounding score (mean) | mean fraction of `related_skills` per competency that are present in provenance | ≥ 0.80 (hallucination gate) |
+| Coherence score (mean) | mean within-cluster SBERT pairwise similarity of `related_skills` | report |
+| Coverage of gold set | fraction of gold-set items represented in at least one generated competency | report |
+
+Sample sizes evaluated: **N ∈ {500, 1000, 2500, 5000, 10000}** (and 20000 if
+budget permits). For each N, 3 runs with different seeds. Stability point N*
+is the smallest N where Jaccard(top-20, seeds) ≥ 0.80 AND Jaccard(top-20, N-1)
+≥ 0.85 (further N yields diminishing returns).
+
+This is itself a research finding — the empirical sample-size requirement for
+stable curriculum recommendations from a job-posting corpus has not been
+established in the literature.
 
 ### RQ3 — Trend Detection
 **Can we identify statistically robust emerging and declining skills from job

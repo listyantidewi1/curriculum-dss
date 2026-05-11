@@ -1,12 +1,15 @@
 # 🎓 Future-Aware Competency Recommendation System
 
-### **Curriculum design support for vocational schools (IT / Software / Game Development)**
+### **Curriculum design support for anyone designing software-engineering curriculum** — schools, universities, educational institutions, governments. First user-testing cohort: Indonesian SMK + university vocational faculties (D3/D4).
 
 This repository is a **competency recommendation system**: given a corpus of real
 job postings, it produces a ranked list of **hard-skill competency statements**
-(with soft-skill requirements attached per competency) that a school can use to
-update its curriculum. Skill and knowledge extraction is the infrastructure;
-**competency recommendations are the product**.
+(with soft-skill requirements attached per competency) that any educational
+institution can use to align its curriculum with current and future job-market
+demand. Skill and knowledge extraction is the infrastructure;
+**competency recommendations are the product**. Every recommendation is
+traceable to the specific job-posting sentences that produced it — no black
+boxes between "we read 10,000 postings" and "here is a competency we recommend."
 
 * Extract **hard skills** and **knowledge** from job postings (LLM-first; BERT retained for ablation)
 * Map skills to **future-of-work domains** (WEF / O\*NET / McKinsey, SBERT cosine)
@@ -39,17 +42,24 @@ for an LLM-based one. Authoritative spec:
 | **1.1** | Sentence-level provenance throughout (every extracted item carries `sentence_id`, `sentence_text`, `extractor_source`) | ✅ Done |
 | **1.2** | Zero-shot LLM sentence relevance filter (drops boilerplate / benefits / logistics) with SHA-256 cache | ✅ Done |
 | **1.3** | Bloom taxonomy removed from the pipeline (decisions returned to curriculum stakeholders) | ✅ Done |
-| **1.4** | JobBERT replicate (`baseline_versions/jjzha_replicate/`) — confirmed published checkpoint scores comparable to vanilla BERT; targets revised | ✅ Done |
-| **1.5** | Skill-LLM LoRA fine-tune of LLaMA 3.1 8B (`baseline_versions/skill_llm/`) — new BERT-replacement, paper-spec recipe | 🔄 In progress (training on Kaggle) |
+| **1.4** | JobBERT replicate (`baseline_versions/jjzha_replicate/`) — confirmed published checkpoint scores comparable to vanilla BERT; targets revised to literature-grounded gate | ✅ Done |
+| **1.5** | Skill-LLM LoRA fine-tune of LLaMA 3.1 8B (`baseline_versions/skill_llm/`) — Layer-1 candidate, paper-spec recipe | 🔄 Eval running on Kaggle |
+| **1.5b** | API zero-shot baseline (`baseline_versions/api_zero_shot/`) — OpenRouter (GPT-4o-mini, Claude Haiku 3.5, Llama 3.1 70B, DeepSeek-V3) as Layer-1 candidates with no local GPU | 🔄 Ready to run (~$3 for full suite) |
 
 ### Phase 2 — Pipeline reflow (queued)
 
-After 1.5 lands, Phase 2 will replace domain-based batching with HDBSCAN +
-agglomerative clustering, rewrite the competency generator to be cluster-driven
-with full provenance, add a post-hoc SBERT-based KKNI labeler (Perpres 8/2012
-levels 1–9), wire in education-level aggregation per competency, and add a
-competency evaluator (grounding / coherence / coverage). Public UI gets a
-"Why this competency?" provenance chain at the same time.
+After the Layer-1 extractor decision lands (Skill-LLM vs API zero-shot),
+Phase 2 will replace domain-based batching with HDBSCAN + agglomerative
+clustering, rewrite the competency generator to be cluster-driven with full
+provenance (`contributing_item_ids` + `source_sentences` per competency), add
+a post-hoc SBERT-based KKNI labeler (Perpres 8/2012 levels 1–9), wire in
+education-level aggregation per competency, and add a competency evaluator
+with a **hard grounding gate (≥ 0.80) that makes hallucinated competencies a
+technical impossibility, not a quality problem to spot-check**. Public UI
+gets a "Why this competency?" provenance chain at the same time. Phase 2
+ordering is `2.1 → 2.2 → 2.5 → 2.3 → 2.4 → 2.6` — the grounding gate (2.5) is
+brought online before KKNI/education metadata (2.3/2.4) so no un-vetted
+competencies reach users.
 
 ### Onboarding for contributors
 
@@ -78,6 +88,7 @@ competency evaluator (grounding / coherence / coverage). Public UI gets a
 | **[RESEARCH_QUESTIONS.md](RESEARCH_QUESTIONS.md)** | Research questions (RQ1–RQ5), evaluation metrics, gold set design, ablation study |
 | **[baseline_versions/jjzha_replicate/REPLICATION_REPORT.md](baseline_versions/jjzha_replicate/REPLICATION_REPORT.md)** | Phase 1.4 close-out: F1 matrix, why we pivot to Skill-LLM |
 | **[baseline_versions/skill_llm/README.md](baseline_versions/skill_llm/README.md)** | Phase 1.5: LoRA fine-tune setup, run book, expectations |
+| **[baseline_versions/api_zero_shot/README.md](baseline_versions/api_zero_shot/README.md)** | Phase 1.5b: OpenRouter zero-shot baseline (no GPU), decision rubric vs Skill-LLM |
 | **[docs/DOCUMENTATION_INDEX.md](docs/DOCUMENTATION_INDEX.md)** | Central index of all documentation |
 
 ---
@@ -176,7 +187,8 @@ skill-extraction/
 │   ├── jobbert_crf/                 # Original multitask + CRF baseline (legacy)
 │   ├── v3_stl/                     # Single-task + CRF baseline (legacy)
 │   ├── jjzha_replicate/             # Phase 1.4: replication of jjzha/jobbert_skill_extraction (audit + report tracked)
-│   └── skill_llm/                   # Phase 1.5: LoRA fine-tune of LLaMA 3.1 8B (paper-spec) + Kaggle training script
+│   ├── skill_llm/                   # Phase 1.5: LoRA fine-tune of LLaMA 3.1 8B (paper-spec) + Kaggle training script
+│   └── api_zero_shot/               # Phase 1.5b: OpenRouter zero-shot baseline (GPT-4o-mini, Claude Haiku, Llama 70B, DeepSeek-V3) -- Layer-1 candidate, no local GPU
 │
 ├── RESEARCH_QUESTIONS.md            # RQs, metrics, ablation design
 ├── CALCULATIONS.md                  # Ranking, voting, weighting formulas

@@ -68,48 +68,63 @@ Choose **Invalid** when:
 
 ## 3. Competency Review
 
-Competencies are curriculum-style statements generated from skills. Each has a **title**, **description**, **related skills**, and **future relevance** note.
+Competencies are curriculum-style statements generated from skills. Each has a **title**, **description**, **related skills**, **future relevance** note, and (Phase 2.2 onward) **provenance**: `contributing_item_ids` and `source_sentences` linking back to the job-posting sentences that produced it.
 
-### Quality (1–5)
+**Use the provenance click-through.** Before rating, expand the source sentences. The competency is supposed to be a faithful synthesis of those skills/knowledge items extracted from those sentences. If it isn't, the validity and relevance scores should reflect that.
 
-Rate how well the competency is written and how suitable it is for curriculum use.
+### Four-dimensional rating (per competency)
 
-| Score | Label     | Meaning |
-|-------|-----------|---------|
-| **1** | Poor      | Unusable: incoherent, wrong grouping, misleading, or trivial |
-| **2** | Fair      | Weak: unclear, partly wrong, or too narrow to be useful |
-| **3** | Good      | Acceptable: clear, reasonable grouping, usable with minor edits |
-| **4** | Good      | Strong: clear, well-structured, good level for curriculum |
-| **5** | Excellent | Outstanding: exemplary statement, integrative, curriculum-ready |
+| Dimension | Scale | Question |
+|---|---|---|
+| **Validity** | 1–5 Likert | "This is a well-defined competency that a software engineer would have." |
+| **Relevance** | 1–5 Likert | "This competency is relevant for the target curriculum (SMK / D3 / D4 / undergraduate IT)." |
+| **Specificity** | 1–5 Likert | "This competency is specific enough that learner progress against it can be assessed." |
+| **Recommend** | Yes / No | "Would you recommend including this competency in the curriculum?" |
 
-**When to choose each:**
-- **1**: The competency does not make sense, groups unrelated skills, or is factually wrong.
-- **2**: The competency is partially correct but has significant issues (vague, incomplete, or misaligned with skills).
-- **3**: The competency is usable as-is. Minor wording improvements possible but not critical.
-- **4**: The competency is well written and would fit directly into a curriculum.
-- **5**: The competency is exemplary—clear, integrative, and clearly maps to the related skills.
+**Likert scale (1–5):** 1 = Strongly Disagree, 2 = Disagree, 3 = Neutral, 4 = Agree, 5 = Strongly Agree.
 
-### Relevant?
+**Detailed anchors per Likert level:**
 
-**Relevance = How well the competency aligns with its related skill set and the target curriculum domain.**
+| Score | Validity | Relevance | Specificity |
+|---|---|---|---|
+| 1 | Incoherent, mislabeled, or fabricated | Off-domain or unrelated to SE/IT | Untestable, abstract, or aspirational |
+| 2 | Partially well-formed but with significant issues | Tangentially related; weak fit | Vague — progress could not be measured |
+| 3 | Acceptable; usable with minor revisions | Reasonable fit for the curriculum | Measurable but with some ambiguity |
+| 4 | Well-formed and operational | Clear fit for the target curriculum | Clearly assessable |
+| 5 | Exemplary — clear, integrative, curriculum-ready | Highly relevant and central to the curriculum | Precisely scoped — assessment design is obvious |
 
-Choose **Yes** when:
-- The competency **accurately groups and represents** its related skills
-- The competency is **relevant to the curriculum domain** (e.g., Software & Game Development)
-- A learner achieving this competency would legitimately possess the related skills
-- The competency would be useful for curriculum design in the target domain
+**Recommend (Yes/No):** holistic gate. Yes means you would actually advocate for including this in a curriculum (not just that it scored well on the Likert dimensions). No means despite any Likert scores, you would not include it.
 
-Choose **Partial** when:
-- Some related skills fit; others do not
-- The competency is relevant but too narrow or too broad for the skill set
-- Minor misalignment between title/description and related skills
+### Inter-rater reliability protocol
 
-Choose **No** when:
-- The competency **does not align** with its related skills (wrong grouping, mismatched scope)
-- The competency is **not relevant** to the curriculum domain
-- The competency would mislead curriculum designers about what the skills actually imply
+When 3+ reviewers rate the same competencies:
 
-**Key question:** *Is this competency a faithful and useful representation of these skills for curriculum purposes?*
+- **Fleiss' Kappa** computed on the 1–5 Likert dimensions (3+ raters, ordinal data)
+- **Cohen's Kappa pairwise** (averaged) for the Yes/No `Recommend` dimension
+- **Free-marginal Kappa (Randolph's)** reported alongside Fleiss' when the marginal distributions are highly skewed (e.g., almost all "Recommend = Yes") to address the Cohen's Kappa paradox in unbalanced data
+
+**Acceptance thresholds (Landis & Koch 1977 — standard benchmark in education research):**
+
+| Kappa range | Interpretation | Action |
+|---|---|---|
+| < 0.20 | Slight | Rejected; revise rubric and re-rate |
+| 0.21 – 0.40 | Fair | Marginal; flag in paper's limitations section |
+| 0.41 – 0.60 | **Moderate** | **Minimum acceptable threshold** |
+| 0.61 – 0.80 | Substantial | Target |
+| 0.81 – 1.00 | Almost perfect | Excellent |
+
+**Target: Fleiss' Kappa ≥ 0.60** (substantial agreement) on each Likert dimension. Below 0.41 triggers protocol revision and re-rating. Between 0.41 and 0.60 ships with caveat.
+
+### Reviewer setup (default for v2 user-testing window)
+
+- 3 reviewers
+- Each reviewer rates **75 competencies**: 50 unique to that reviewer + 25 shared across all three (IRR computed on the 25 shared)
+- Total unique competencies evaluated: 50 × 3 + 25 = **175**
+- Workload estimate: ~30s per dimension per competency (with provenance click-through) → ~2.5 hours per reviewer, split across two sessions
+
+### Legacy 2-dimensional rubric
+
+The previous `human_quality` (1–5) + `human_relevant` (yes/no/partial) schema is still readable by `import_feedback.py`. New reviews should use the 4-dimensional schema. Existing 2-dim feedback is mapped: `human_quality → human_validity`, `human_relevant → human_recommend` (partial → no).
 
 ---
 

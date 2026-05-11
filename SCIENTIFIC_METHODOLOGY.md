@@ -246,10 +246,25 @@ python scripts/power_analysis_gold_set.py --p0 0.5 --p1 0.7
 
 ### When to Use Which
 
-| Raters | Metric |
-|--------|--------|
-| 2 | Cohen's Kappa |
-| 3+ | Fleiss' Kappa |
+| Raters | Metric | Notes |
+|--------|--------|-------|
+| 2 | Cohen's Kappa | Pairwise; report exact two-rater values |
+| 3+ | Fleiss' Kappa | Multi-rater; for ordinal Likert dimensions in our v2 expert review |
+| 3+, skewed marginals | Randolph's free-marginal Kappa (alongside Fleiss') | Addresses Cohen's Kappa paradox when distributions are highly skewed (e.g., almost all "Yes") |
+
+### Acceptance thresholds (Landis & Koch 1977)
+
+The textbook benchmark in education research:
+
+| Kappa | Interpretation | Action |
+|---|---|---|
+| < 0.20 | Slight | Reject; revise rubric and re-rate |
+| 0.21 – 0.40 | Fair | Flag in limitations section |
+| 0.41 – 0.60 | **Moderate** | **Minimum acceptable threshold** for paper-grade results |
+| 0.61 – 0.80 | Substantial | Target |
+| 0.81 – 1.00 | Almost perfect | Excellent |
+
+v2 expert-review default: target ≥ 0.60 (substantial); below 0.41 triggers re-rating with rubric revision.
 
 ### Cohen's Kappa (2 Raters)
 
@@ -850,6 +865,65 @@ For recommendation weight sensitivity, see §9 and:
 ```bash
 python recommendations.py --sensitivity
 ```
+
+---
+
+## 16c. Production-Volume Stability Experiment (v2)
+
+### Purpose
+
+Empirically determine the smallest corpus size N* at which competency
+recommendations are stable across seeds. This is itself a research finding:
+the sample-size requirement for stable curriculum recommendations from a
+job-posting corpus has not been established in the literature.
+
+### Design
+
+1. Sample sizes: **N ∈ {500, 1000, 2500, 5000, 10000}** (and 20000 if budget
+   permits).
+2. For each N, run the full pipeline **3 times** with different stratified
+   random sample seeds. All other config (extractor, weights, prompts) held
+   constant.
+3. Measure per N (mean across 3 seeds, ± std):
+   - Number of unique competencies surviving the grounding gate
+   - **Jaccard top-20 across seeds at same N** (within-N stability)
+   - **Jaccard top-20 vs previous N** (across-N stability)
+   - Mean grounding score
+   - Mean coherence score
+   - Coverage of the SkillSpan gold set
+4. **Declare stability at N\*** when both:
+   ```
+   within_N_jaccard(N*) ≥ 0.80          (results stable across seeds at this size)
+   across_N_jaccard(N*, N*−1) ≥ 0.85    (going bigger doesn't materially change results)
+   ```
+
+### Jaccard top-20 formula
+
+For two ranked top-20 lists A and B:
+```
+Jaccard(A, B) = |A ∩ B| / |A ∪ B|
+```
+Where competencies are compared by normalized title (`normalize_for_grouping`)
+to absorb cosmetic re-phrasing.
+
+### Output
+
+`results/stability_experiment/N_<n>_seed_<s>/` per run, plus a summary report
+and a publication figure: **Jaccard top-20 vs N, with ±std bars across the 3
+seeds** (line chart with error bars).
+
+### Cost ballpark
+
+At N=10000 with API Layer 1 + Layer 2: ~$5 per run × 3 seeds × 6 N values ≈
+$90. Well within the $1000 budget.
+
+### Why this matters
+
+Indonesian SMK and university curriculum reform happens on a quarterly cadence
+at fastest. A pipeline that demands 100k postings/week to produce stable
+recommendations is operationally infeasible; one that's stable at 5k/quarter
+is deployable. Knowing N* lets us right-size production runs and document
+the empirical sample-size requirement in the paper.
 
 ---
 
