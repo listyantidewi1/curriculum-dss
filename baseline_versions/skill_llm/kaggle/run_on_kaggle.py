@@ -51,6 +51,14 @@ import re
 from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple
 
+# Lock to a SINGLE GPU before any torch import. Required on Kaggle's
+# "GPU T4 x2" accelerator: with both T4s visible, accelerate's device_map="auto"
+# shards the 8B model across both 16 GB GPUs, and QLoRA gradient computation
+# across the shard boundary causes silent CUDA crashes -> Kaggle kernel
+# auto-restart -> training loops forever without progressing. Single-GPU is
+# sufficient (8B at 4-bit + LoRA fits in ~10 GB on one T4).
+os.environ.setdefault("CUDA_VISIBLE_DEVICES", "0")
+
 import numpy as np
 import torch
 from datasets import load_dataset
@@ -95,7 +103,11 @@ BASE_MODEL_NAME = "meta-llama/Llama-3.1-8B-Instruct"
 
 USE_4BIT = True
 BNB_4BIT_QUANT_TYPE = "nf4"
-BNB_4BIT_COMPUTE_DTYPE = "bfloat16"
+# float16, not bfloat16: T4 (Turing, compute 7.5) has no bf16 tensor cores so
+# bf16 falls back to slow software emulation and has triggered hard crashes in
+# bitsandbytes >= 0.49 on Turing. P100 (Pascal, compute 6.0) also lacks bf16.
+# Only A100/H100 (compute >= 8.0) have native bf16 — neither is on Kaggle free.
+BNB_4BIT_COMPUTE_DTYPE = "float16"
 BNB_4BIT_USE_DOUBLE_QUANT = True
 
 LORA_RANK = 64
@@ -113,7 +125,10 @@ WEIGHT_DECAY = 0.0
 WARMUP_RATIO = 0.10
 LR_SCHEDULER = "cosine"
 GRAD_CLIP_NORM = 1.0
-MAX_SEQ_LEN = 1024
+# SkillSpan sentences are short (median ~25 tokens, p99 ~120 tokens). 256
+# fits the prompt + JSON target with margin and is ~4x faster + lower VRAM
+# than 1024, which materially reduces both runtime and OOM risk on T4 16 GB.
+MAX_SEQ_LEN = 256
 
 INFERENCE_MAX_NEW_TOKENS = 512
 INFERENCE_DO_SAMPLE = False
@@ -390,7 +405,9 @@ def train() -> None:
         save_strategy="epoch",
         save_total_limit=1,
         eval_strategy="epoch" if "dev" in tokenised else "no",
-        bf16=True,
+        # fp16, not bf16 — T4/P100 lack bf16 tensor cores (see BNB_4BIT_COMPUTE_DTYPE note).
+        bf16=False,
+        fp16=True,
         report_to=[],
         seed=RANDOM_SEED,
         gradient_checkpointing=True,

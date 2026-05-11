@@ -42,7 +42,12 @@ BASE_MODEL_NAME = "meta-llama/Llama-3.1-8B-Instruct"
 # 4-bit NF4 quantisation (bitsandbytes). Required to fit 8B on 24 GB GPUs.
 USE_4BIT = True
 BNB_4BIT_QUANT_TYPE = "nf4"
-BNB_4BIT_COMPUTE_DTYPE = "bfloat16"
+# float16, not bfloat16: most consumer / free-tier GPUs (T4 Turing compute 7.5,
+# P100 Pascal compute 6.0, RTX 30xx) lack bf16 tensor cores. bf16 there falls
+# back to slow emulation and bitsandbytes >= 0.49 has triggered hard crashes on
+# Turing+bf16. Native bf16 only exists on compute >= 8.0 (A100, H100, RTX 40xx).
+# Switch to bfloat16 if and only if you confirmed your GPU is Ampere or newer.
+BNB_4BIT_COMPUTE_DTYPE = "float16"
 BNB_4BIT_USE_DOUBLE_QUANT = True
 
 # --- LoRA recipe (Skill-LLM paper §"Experimental Setup") --------------------
@@ -67,10 +72,12 @@ GRAD_CLIP_NORM = 1.0
 
 # --- tokenisation ----------------------------------------------------------
 
-# Skill-LLM doesn't pin a sequence length. SkillSpan sentences fit easily in
-# 512 tokens after the system+user template, but generation can extend the JSON
-# response. 1024 is a safe upper bound that still fits in 24 GB at 4-bit.
-MAX_SEQ_LEN = 1024
+# Skill-LLM doesn't pin a sequence length. SkillSpan sentences are short
+# (median ~25 tokens, p99 ~120 tokens); 256 fits the chat template + JSON target
+# with margin and is ~4x faster + much lower VRAM than 1024. This materially
+# reduces both runtime and OOM risk on 16 GB GPUs (T4, P100). Raise only if
+# your input sentences are routinely > 200 tokens AND you have spare VRAM.
+MAX_SEQ_LEN = 256
 
 # --- inference -------------------------------------------------------------
 

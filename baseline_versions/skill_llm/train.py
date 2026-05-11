@@ -198,7 +198,10 @@ def main() -> None:
         save_strategy="epoch",
         save_total_limit=2,
         eval_strategy="epoch" if "dev" in tokenised else "no",
-        bf16=True,
+        # fp16, not bf16 — most non-Ampere GPUs lack bf16 tensor cores. See
+        # config.BNB_4BIT_COMPUTE_DTYPE note.
+        bf16=False,
+        fp16=True,
         report_to=[],
         seed=RANDOM_SEED,
         gradient_checkpointing=True,
