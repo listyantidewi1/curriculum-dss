@@ -2,7 +2,7 @@
 
 **Decision:** Skill-LLM (LoRA-fine-tuned LLaMA 3.1 8B Instruct) is the production Layer-1 extractor.
 
-**Date:** 2026-05-12. Preliminary — finalized once Llama 3.1 70B and DeepSeek-V3.2 zero-shot evals complete (in flight). Decision is robust to those remaining results: the F1 gap between Skill-LLM and any zero-shot API is large enough (≥ 0.25 on the two measured candidates) that the remaining models would need to materially outperform their peers to change the outcome.
+**Date:** 2026-05-12. **Final** — all four API zero-shot candidates evaluated (GPT-4o-mini, Claude Haiku 3.5, DeepSeek-V3.2, Llama 3.1 70B). The F1 gap between Skill-LLM (0.6485) and the best API zero-shot (DeepSeek at 0.4254) is **0.22**, far beyond the v2 decision rule threshold (`API < Skill-LLM − 0.05 → ship Skill-LLM`). No remaining candidate could plausibly close the gap.
 
 **Architecture context:** the pipeline uses a hybrid two-layer extractor (`.kiro/specs/pipeline-redesign-v2/requirements.md` Req 3.6 + Req 9.1). Layer 1 is sentence-level. Layer 2 is the full-posting LLM (DeepSeek-V3 via OpenRouter — unchanged by this decision). Production extraction = Layer 1 + Layer 2 + SBERT fusion. This document settles **Layer 1 only.**
 
@@ -18,20 +18,8 @@ All metrics are strict span-set F1 per the Skill-LLM paper Table 2 definition.
 | GPT-4o-mini (zero-shot via OpenRouter) | 0.3958 | 0.2206 | 0.4921 | 0.1002 ✓ | 0 / 3569 ✓ | ❌ Total F1 < 0.55 |
 | Claude Haiku 3.5 (zero-shot via OpenRouter) | 0.3594 | 0.3091 | 0.4035 | **0.3360** ✗ | **481 / 3569** ✗ | ❌ FAIL (3 of 5 sub-gates) |
 | DeepSeek-V3.2 (zero-shot via OpenRouter) | 0.4254 | 0.3493 | 0.4866 | **0.4829** ✗ | 2 / 3569 ✓ | ❌ FAIL (Total F1 < 0.55, verb-preservation) |
-| Llama 3.1 70B (zero-shot via OpenRouter) | _re-run needed_ | _re-run needed_ | _re-run needed_ | _re-run needed_ | _re-run needed_ | crashed at step 1254/3569 — see note below |
+| Llama 3.1 70B (zero-shot via OpenRouter) | 0.3740 | 0.3636 | 0.3854 | 0.1969 ✓ | 11 / 3569 ✓ | ❌ Total F1 < 0.55 |
 | jjzha JobBERT (Phase 1.4 audit, for reference) | n/a | 0.5190 | 0.6531 | n/a | n/a | retired |
-
-**Note on Llama 3.1 70B (2026-05-12):** the initial run crashed with
-`AttributeError: 'list' object has no attribute 'get'` at step 1254/3569.
-Root cause: Llama 70B occasionally emits a top-level JSON array instead
-of the prompted `{"SKILL": ..., "KNOWLEDGE": ...}` dict, and the original
-`evaluate()` code called `.get()` on the parsed output without an
-`isinstance(parsed, dict)` check. Fixed in `baseline_versions/api_zero_shot/eval.py`
-commit `<TBD>` with both a defensive type check AND incremental raw-output
-writes (so a future crash preserves partial progress). Re-run Llama 70B
-with the patched code when convenient — the decision below does not
-depend on the result because the F1 gap is too wide for any API zero-shot
-to close.
 
 ### Reference points
 
@@ -75,8 +63,22 @@ Per-candidate breakdown:
 - parse_failure_rate = 2/3569 = 0.06% ✓
 - Two sub-gate failures. Not viable for production. (Interesting: DeepSeek is the model used by `pipeline.py` for Layer 2 full-posting extraction. Its zero-shot per-sentence performance is materially worse than its per-document performance because per-sentence prompts lack the surrounding context that lets it tell verb-led skills from bare nouns.)
 
-### Llama 3.1 70B — re-run needed
-Initial run crashed at step 1254/3569 (eval.py bug — see note in results table above). Bug is now fixed; re-run with the patched code. Even at the upper bound of plausible scores (Llama 70B zero-shot is typically below DeepSeek and on par with GPT-4o-mini on similar tasks), it cannot close the ≥ 0.22 F1 gap to Skill-LLM, so the decision is unaffected.
+### Llama 3.1 70B ❌ FAIL (Total F1)
+- total F1 = 0.3740 < 0.55 — fails primary gate by 0.18
+- verb_short_rate = 0.1969 ✓ (passes; only API zero-shot model besides GPT-4o-mini that does)
+- parse_failure_rate = 11/3569 = 0.31% ✓
+- Knowledge F1 (0.385) is unusually low for a 70B model — the model's knowledge recall is 0.355, lower than precision 0.421, meaning it *under-extracts* knowledge. The opposite failure mode from DeepSeek (which over-extracts but collapses verbs). Worst total F1 among the four API candidates.
+- This is the second-most "well-behaved" API model (verb-pres + parse OK) but its F1 is so low that the structural conformance doesn't rescue it. Confirms the pattern: zero-shot LLMs struggle with SkillSpan's strict span-set F1 regardless of model size or quality.
+
+### Initial run note (historical)
+Llama 70B's first run on 2026-05-12 crashed at step 1254/3569 with
+`AttributeError: 'list' object has no attribute 'get'`. Root cause: Llama 70B
+occasionally emits a top-level JSON array instead of the prompted
+`{"SKILL": ..., "KNOWLEDGE": ...}` dict; the original `evaluate()` code called
+`.get()` on the parsed output without an `isinstance(parsed, dict)` check.
+Fixed in commit `665a120` with both a defensive type check AND incremental
+raw-output writes. Re-run completed successfully on 2026-05-12; numbers above
+reflect the patched-code run.
 
 ---
 
@@ -153,4 +155,5 @@ These do not block the decision but should be tracked:
 - 2026-05-11: GPT-4o-mini full test split eval, ~1h wall-clock, ~$0.40 OpenRouter cost.
 - 2026-05-11: Claude Haiku 3.5 full test split eval, ~1.5h wall-clock, ~$1.80 OpenRouter cost.
 - 2026-05-12: DeepSeek-V3.2 full test split eval, ~3h wall-clock, ~$0.50 OpenRouter cost. Failed Gate 1 + verb-preservation.
-- 2026-05-12: Llama 3.1 70B full test eval crashed at step 1254/3569 due to a list-shaped JSON output handled by `parsed.get()` without an `isinstance(parsed, dict)` check. Patched in eval.py; re-run pending.
+- 2026-05-12: Llama 3.1 70B full test eval, initial attempt crashed at step 1254/3569 (list-shaped JSON not handled by `parsed.get()` — fixed in commit `665a120`).
+- 2026-05-12: Llama 3.1 70B re-run on patched code completed successfully, ~1.5h wall-clock, ~$0.80 OpenRouter cost. Failed Gate 1 (Total F1 0.374). All 4 API candidates now evaluated; decision final.
