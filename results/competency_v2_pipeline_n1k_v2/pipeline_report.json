@@ -1,0 +1,85 @@
+{
+  "tag": "n1k_v2",
+  "model": "gpt-5.4-mini",
+  "phase1_input": "D:\\Projects\\skill-extraction\\DATA\\preprocessing\\phase1_n1k",
+  "jobs_metadata": "D:\\Projects\\skill-extraction\\DATA\\preprocessing\\data_prepared_n1k\\jobs_metadata.csv",
+  "stages": {
+    "phase1_load": {
+      "n_items": 11842,
+      "n_skills": 6699,
+      "n_knowledge": 5143
+    },
+    "phase2_1_clustering": {
+      "n_items_input": 11842,
+      "n_items_canonical": 9922,
+      "n_items_after_frequency_filter": 598,
+      "n_items_hard_plus_knowledge": 598,
+      "n_items_soft": 0,
+      "n_clusters_hdbscan": 41,
+      "n_clusters_recovered": 1,
+      "n_clusters_split": 26,
+      "n_clusters_dropped_low_cohesion": 0,
+      "n_items_ungrouped": 1,
+      "cohesion_mean": 0.8012,
+      "cohesion_median": 0.8511,
+      "cohesion_min": 0.5661,
+      "runtime_seconds": 10.24,
+      "config": {
+        "embedder_model": "sentence-transformers/all-MiniLM-L6-v2",
+        "embedding_cache_dir": "cache/embeddings",
+        "template_prefix": "skill or knowledge area: ",
+        "min_global_frequency": 2,
+        "min_cluster_size": 3,
+        "min_samples": 2,
+        "cluster_selection_epsilon": 0.15,
+        "cluster_selection_method": "eom",
+        "cohesion_threshold": 0.55,
+        "max_cluster_size": 25,
+        "max_split_recursion": 3,
+        "enable_agglomerative_recovery": true,
+        "enable_oversize_split": true,
+        "naming_max_unigrams": 5,
+        "naming_max_bigrams": 3,
+        "naming_max_trigrams": 2,
+        "seed": 42
+      }
+    },
+    "phase2_2_generation": {
+      "n_competencies": 1,
+      "n_batch_reasonings": 67,
+      "model": "gpt-5.4-mini",
+      "grounding_threshold": 0.8
+    },
+    "phase2_5b_text_quality": {
+      "n_passed": 1,
+      "n_failed": 0
+    },
+    "phase2_3_kkni": {
+      "version": "v2.3.0",
+      "n_evaluated": 1,
+      "n_relabeled": 1,
+      "n_skipped_low_confidence": 0,
+      "n_kept_llm": 0,
+      "mean_similarity": 0.3306194543838501,
+      "config": {
+        "sbert_model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+        "allowed_levels": [
+          3,
+          6
+        ],
+        "override_min_similarity": 0.3,
+        "snap_to_allowed": true
+      }
+    },
+    "phase2_4_education": {
+      "version": "v2.4.0",
+      "n_evaluated": 1,
+      "n_with_education_data": 1,
+      "n_no_education_data": 0,
+      "n_jobs_in_lookup": 535,
+      "jobs_metadata_path": "D:\\Projects\\skill-extraction\\DATA\\preprocessing\\data_prepared_n1k\\jobs_metadata.csv"
+    }
+  },
+  "total_runtime_seconds": 717.41,
+  "final_n_competencies": 1
+}

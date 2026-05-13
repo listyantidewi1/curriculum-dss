@@ -1,0 +1,2714 @@
+[
+  {
+    "id": "comp_8e3f8dfe",
+    "title": "Design and manage multi-cloud platform infrastructure",
+    "description": "Apply AWS, GCP, Google Cloud, and related cloud services to design, configure, and operate secure application infrastructure. Include networking, automation, compliance checks, and implementation choices that support reliable deployment across cloud environments.",
+    "related_skills": [
+      "AWS",
+      "GCP",
+      "Google Cloud",
+      "GCP)"
+    ],
+    "soft_skills_required": [
+      "cross-functional collaboration",
+      "analytical problem solving",
+      "communication with technical stakeholders"
+    ],
+    "soft_skills_description": "Work with product, security, and engineering teams to translate platform requirements into workable cloud designs and explain trade-offs clearly.",
+    "rationale": "The source evidence repeatedly points to cloud platform work that goes beyond naming providers: defining architectures, automating infrastructure, and handling secure, reliable operation across environments. Learners should be able to choose services, configure cloud components, and justify deployment patterns for a specific application or platform need. This is distinct from the Redis competency because it focuses on the provider layer, networking, and infrastructure governance rather than application data services. The examples also show multi-cloud scope, so the competency should cover transferring patterns across AWS and Google Cloud ecosystems.",
+    "batch_reasoning_id": "br_ec403c7ff7",
+    "contributing_item_ids": [
+      "item_53cbe0c42f",
+      "item_114ee19a30",
+      "item_4df39480d1",
+      "item_abdfd283c0",
+      "item_b5731753fc",
+      "item_af3c8ea2e5",
+      "item_f6e0fa6069",
+      "item_19a12f28cb",
+      "item_5c66159da5",
+      "item_1040451d49",
+      "item_637adc065e",
+      "item_9808f7e0f8",
+      "item_51b6bd486e",
+      "item_00a2dad273",
+      "item_4cd2a179d1",
+      "item_b47307c0ed",
+      "item_bbafdc0e52",
+      "item_898cb6d69a",
+      "item_bf14e8e4ce",
+      "item_5a785c800a",
+      "item_59731f754b",
+      "item_8f388df3f1",
+      "item_7aea0817f4",
+      "item_395c150df6",
+      "item_9456ef2db3",
+      "item_4918c37e8b",
+      "item_970d82b2a3",
+      "item_d51d3f7aa9",
+      "item_c98bc11bc7",
+      "item_2184094a87",
+      "item_036a362e5c",
+      "item_0e4a2d14f6",
+      "item_f6d2c33685",
+      "item_4bf28d51b9",
+      "item_7f18b5252c",
+      "item_753a9e3479",
+      "item_11df5a85b0",
+      "item_a02548b367",
+      "item_14459686de"
+    ],
+    "source_job_ids": [
+      "in-1a8db636594a0aa7",
+      "in-26fcda83aa945eae",
+      "in-425a1ab3b065a1d3",
+      "in-4b4f01061b247012",
+      "in-4cba81718fbdf6cc",
+      "in-50f125342579cf8d",
+      "in-6494e0d22b12e6d0",
+      "in-6b04783cb9a7cd0b",
+      "in-7265ffb330a0a461",
+      "in-7bfb0db7aca97a49",
+      "in-85f8a4a3f1dd9d5a",
+      "in-902aab6a926ef851",
+      "in-934b574eb377fc0d",
+      "in-9f78125e63bdf920",
+      "in-a9afed092c9e53dc",
+      "in-aa54af51fa5cae34",
+      "in-ae3020d659627986",
+      "in-b649e0487c55adc7",
+      "in-c1aa2666eccbbece",
+      "in-c31d90733c699a8d",
+      "in-cd9d3346729a1579",
+      "in-d516e8f69716dc8b",
+      "in-e06397cdf902595e",
+      "in-e58620419782850f",
+      "in-e65eda467eea4c54",
+      "in-e7666ef634ab22f9",
+      "in-fb5015af73b8ddd8"
+    ],
+    "source_sentence_ids": [
+      "in-1a8db636594a0aa7_0008",
+      "in-26fcda83aa945eae_0006",
+      "in-26fcda83aa945eae_0013",
+      "in-425a1ab3b065a1d3_0016",
+      "in-4b4f01061b247012_0002",
+      "in-4cba81718fbdf6cc_0005",
+      "in-50f125342579cf8d_0010",
+      "in-6494e0d22b12e6d0_0003",
+      "in-6b04783cb9a7cd0b_0024",
+      "in-7265ffb330a0a461_0001",
+      "in-7bfb0db7aca97a49_0015",
+      "in-85f8a4a3f1dd9d5a_0006",
+      "in-902aab6a926ef851_0006",
+      "in-934b574eb377fc0d_0004",
+      "in-934b574eb377fc0d_0008",
+      "in-934b574eb377fc0d_0012",
+      "in-934b574eb377fc0d_0014",
+      "in-934b574eb377fc0d_0020",
+      "in-9f78125e63bdf920_0006",
+      "in-9f78125e63bdf920_0009",
+      "in-a9afed092c9e53dc_0004",
+      "in-aa54af51fa5cae34_0018",
+      "in-ae3020d659627986_0012",
+      "in-b649e0487c55adc7_0005",
+      "in-b649e0487c55adc7_0010",
+      "in-c1aa2666eccbbece_0011",
+      "in-c1aa2666eccbbece_0019",
+      "in-c1aa2666eccbbece_0024",
+      "in-c1aa2666eccbbece_0026",
+      "in-c1aa2666eccbbece_0028",
+      "in-c31d90733c699a8d_0007",
+      "in-cd9d3346729a1579_0007",
+      "in-d516e8f69716dc8b_0003",
+      "in-e06397cdf902595e_0005",
+      "in-e06397cdf902595e_0007",
+      "in-e58620419782850f_0008",
+      "in-e65eda467eea4c54_0002",
+      "in-e7666ef634ab22f9_0004",
+      "in-fb5015af73b8ddd8_0005",
+      "in-fb5015af73b8ddd8_0006"
+    ],
+    "source_sentences": [
+      "Using Visual Studio, JavaScript, Node.js, React, AWS, .net, or C #, you and your partner will fix a quick production issue, develop a new feature, or build something brand new.As lead engineer, you’ll also spend time each day checking in with other team members, up to 4, to help them with any specific coding issues as needed.",
+      "Your broad responsibilities will include: owning the technical engagement and ultimate success around specific implementation projects; defining implementation architectures, responding to RFPs, developing a deep expertise in the AWS technologies as well as broad know -how around how applications and services are constructed using the AWS platform; and being a subject matter expert on security as it relates to customer applications and services.",
+      "As a partner development manager within AWS, you will have the exciting opportunity to build mind share and adoption of the AWS cloud computing platform within the Generative AI domain.",
+      "As a member of the UC organization, you’ll support the development and management of Compute, Database, Storage, Internet of Things (Iot), Platform, and Productivity Apps services in AWS, including support for customers who require specialized security solutions for customers who require specialized security solutions for their cloud services.",
+      "Collaborate with cross -functional teams to maintain and optimize cloud environments leveraging AWS, Azure, and Google Cloud technologies.",
+      "We are seeking a highly experienced and hands -on Principal Consultant with deep expertise across both AWS and Azure, specializing in infrastructure architecture, design, and deployment.",
+      "You will leverage your extensive experience with AWS and other cloud platforms, Infrastructure as Code (IaC), and CI/CD methodologies to build scalable, secure, and automated systems.",
+      "This individual will focus on automating and validating Compliance -as -Code (CaC) policies across multi cloud environments including GCP, Azure and AWS.",
+      "You could be one of our 3100 committed team members who are up to the challenge. About the role As our new Senior Data Engineer, you’ll play a pivotal role in establishing V/Line’s enterprise data foundation by designing, building and scaling high quality data pipelines and products on AWS and/or Databricks.",
+      "You’ll lead complex data initiatives, apply bestpractice engineering, automation and governance, and ensure data is accurate, reliable and ready for analytics and AI.‑quality data pipelines and products on AWS and/or Databricks.",
+      "You are ready to lead the end -to -end delivery of Amazon Connect -based contact center solutions and oversee design, architecture, and implementation across AWS services such as Lambda, Lex, S3, and Contact Lens.",
+      "The Partner Sales Cloud Specialist is the primary field -level owner of Redis’s partnerships with AWS and Google Cloud, responsible for driving scalable co -sell execution, marketplace growth, and partner -led pipeline across both hyper -scalers.",
+      "Joint Go -to -Market Execution Design and operationalize a repeatable co -sell motion for AWS and GCP by connecting Redis Account Executives with the right cloud sellers, including FSRs, CEs, PEs, and equivalent GCP roles.",
+      "Field Enablement and Champion Development Lead enablement for Redis, AWS, and GCP field teams through practical field guides, competitive frameworks, and positioning against native cloud services.",
+      "As a significant contributor throughout the software development lifecycle, you'll build services that are deployed to every AWS region using AWS services in a fully Infrastructure as Code (IaC) environment, where you'll own everything end -to -end.",
+      "Reporting to the Technical Lead, you will leverage your expertise in JavaScript, AWS, and Agile methodologies to develop and maintain robust applications.",
+      "You'll work with cutting -edge AWS technologies to architect and build scalable, high -performance identity services that set the foundation for Autodesk's future.",
+      "We are looking for someone who is passionate about: Building scalable, secure, and innovative GenAI prototypes and production solutions using AWS services like Amazon Bedrock, Amazon SageMaker, Amazon Q, and other AWS GenAI capabilities that solve diverse and challenging problems across customers in the defense sector.",
+      "You will regularly take part in deep -dive education and design exercises to create truly innovative GenAI solutions built on AWS. This position requires that the candidate selected be a US Citizen and obtain and maintain an active TS/SCI security clearance with polygraph. Key job responsibilities Own the approach (business, organizational, technical) and ultimate success around specific GenAI projects, from prototype development through production deployment.",
+      "Ensure customer success in ideating, prototyping, and launching GenAI solutions on the AWS platform."
+    ],
+    "future_relevance": "Stable: multi-cloud platform engineering remains a core capability as organizations continue to standardize infrastructure while mixing cloud providers.",
+    "future_weight": 0.78,
+    "empirical_trend": "Emerging",
+    "kkni_level": 6,
+    "kkni_level_source": "llm_suggested",
+    "kkni_match_similarity": null,
+    "education_levels_demanded": {
+      "D3": 0.3077,
+      "S1": 0.6923
+    },
+    "education_kkni_demanded": {
+      "5": 0.3077,
+      "6": 0.6923
+    },
+    "n_jobs_with_education": 13,
+    "grounding_score_preview": 1.0,
+    "grounding_flagged": false,
+    "grounding_score": 0.65,
+    "skill_grounding_score": 0.75,
+    "sentence_relevance_score": 0.65,
+    "grounding_passed": true,
+    "grounding_method": "sbert",
+    "grounding_reasoning": "skill_grounding = 3/4 = 0.750 | sentence_relevance = 13/20 = 0.650 | canonical (min) = 0.650 (threshold 0.50). Skills not well-supported: 'GCP)' (best_cos=0.38). Sentences off-topic: 7 of 20 (e.g., sent#0 cos=0.21, sent#5 cos=0.40, sent#8 cos=0.33). ",
+    "evaluator_version": "v2.5.0",
+    "generated_at": "2026-05-13T11:50:10.168731+00:00",
+    "generator_version": "v2.0.0",
+    "cluster_id": "cluster_h0024",
+    "cluster_summary_label": "aws redis gcp: google, cloud",
+    "provider": "jatevo",
+    "model": "gpt-5.4-mini",
+    "merged_from": [],
+    "title_evidence_concerns": [],
+    "demand_score": 1.0,
+    "priority_score": 0.829,
+    "title_id": "Rancang dan kelola infrastruktur platform multi-cloud",
+    "description_id": "Terapkan AWS, GCP, Google Cloud, dan layanan cloud terkait untuk merancang, mengonfigurasi, dan mengoperasikan infrastruktur aplikasi yang aman. Sertakan networking, automation, compliance checks, dan pilihan implementasi yang mendukung deployment yang andal di berbagai cloud environments.",
+    "rationale_id": "Bukti sumber berulang kali menunjukkan pekerjaan cloud platform yang melampaui sekadar menyebut penyedia: mendefinisikan arsitektur, mengotomatisasi infrastruktur, dan menangani operasi yang aman serta andal lintas environment. Peserta didik harus mampu memilih service, mengonfigurasi komponen cloud, dan menjelaskan pola deployment untuk kebutuhan application atau platform tertentu. Ini berbeda dari kompetensi Redis karena berfokus pada provider layer, networking, dan governance infrastruktur, bukan pada application data services. Contoh-contohnya juga menunjukkan cakupan multi-cloud, sehingga kompetensi ini harus mencakup penerapan pola lintas AWS dan Google Cloud ecosystem.",
+    "future_relevance_id": "Stable: multi-cloud platform engineering tetap menjadi kapabilitas inti seiring organisasi terus menstandardisasi infrastructure sambil menggabungkan cloud providers.",
+    "soft_skills_description_id": "Bekerja dengan tim product, security, dan engineering untuk menerjemahkan platform requirements ke dalam cloud design yang dapat dijalankan serta menjelaskan trade-off dengan jelas.",
+    "related_skills_id": [
+      "AWS",
+      "GCP",
+      "Google Cloud",
+      "GCP)"
+    ],
+    "soft_skills_required_id": [
+      "kolaborasi lintas fungsi",
+      "analytical problem solving",
+      "komunikasi dengan technical stakeholders"
+    ],
+    "occupation_matches": [
+      {
+        "occupation_en": "Cloud Solutions Architect",
+        "occupation_id": "Cloud Solutions Architect",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.7142,
+        "description_en": "The Cloud Solutions Architect occupational role covers competencies in designing end-to-end cloud architectures that meet business, security, and scalability requirements across one or more cloud providers (AWS, GCP, Azure). It includes defining solution patterns, evaluating trade-offs between services, planning migration strategies from on-premises to cloud, ensuring compliance with security and ",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "Cloud Engineer",
+        "occupation_id": "Cloud Engineer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.6757,
+        "description_en": "The Cloud Engineer occupational role covers competencies in designing, provisioning, and operating cloud infrastructure on AWS, Google Cloud, Microsoft Azure, or hybrid platforms. It includes selecting cloud services, configuring compute and networking resources, implementing security controls, automating deployments with infrastructure-as-code, monitoring cost and reliability, and integrating clo",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "Full-Stack Developer",
+        "occupation_id": "Full-Stack Developer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.4418,
+        "description_en": "The Full-Stack Developer occupational role covers competencies in building complete web applications across frontend and backend layers. It includes using JavaScript frameworks for UI (React, Angular), server-side languages for APIs (Node.js, Python, C#, Java), designing and integrating databases (SQL or NoSQL), implementing authentication, deploying to cloud, and managing end-to-end delivery from",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      }
+    ]
+  },
+  {
+    "id": "comp_f9cf030d",
+    "title": "Design and deliver AI/ML pipeline architectures",
+    "description": "Design end-to-end AI/ML pipelines that move data from ingestion through transformation, validation, training, deployment, and monitoring. Integrate pipelines with platform, security, and operational requirements while optimizing reliability and reuse.",
+    "related_skills": [
+      "AI/ML",
+      "data ingestion",
+      "data pipelines",
+      "data pipeline"
+    ],
+    "soft_skills_required": [
+      "system thinking",
+      "cross-functional communication"
+    ],
+    "soft_skills_description": "Learners need to coordinate data, platform, and model needs across teams and explain trade-offs in pipeline design.",
+    "rationale": "The evidence repeatedly points to constructing full-lifecycle ML systems, not just running tools. Mentions of data ingestion, data pipelines, and pipeline work show responsibility for connecting sources, preparing data, and supporting downstream model use. The AI/ML item anchors the learning outcome in model-centered work, while the pipeline items anchor the data flow and operational integration. Mastery would be shown by building a pipeline that is secure, maintainable, and ready for model training and consumption.",
+    "batch_reasoning_id": "br_66d70f68d3",
+    "contributing_item_ids": [
+      "item_31ae0b83c3",
+      "item_82b7c8f479",
+      "item_6e5c66ab0c",
+      "item_d817427e46",
+      "item_22de681b4a",
+      "item_699d75b6c9",
+      "item_63e7543705",
+      "item_945d7648ca",
+      "item_d6ff2c7ddd",
+      "item_35047f7ab3",
+      "item_c242fe4a29",
+      "item_1163b12030",
+      "item_a60a5b340a",
+      "item_61caa82e34"
+    ],
+    "source_job_ids": [
+      "in-0cac4c44efc9dd8a",
+      "in-0f0c3c704693d7dd",
+      "in-27bf2ece3dabd644",
+      "in-2f92d629147b66d0",
+      "in-3b5a19d578a18a18",
+      "in-596e1216fbb0edde",
+      "in-68a989aae163f3a3",
+      "in-74793fbd2ad53e44",
+      "in-ad0f890c150609c7",
+      "in-bea719b45ad94738",
+      "in-c5d0009a2b4ade15"
+    ],
+    "source_sentence_ids": [
+      "in-0cac4c44efc9dd8a_0017",
+      "in-0f0c3c704693d7dd_0006",
+      "in-27bf2ece3dabd644_0020",
+      "in-2f92d629147b66d0_0013",
+      "in-3b5a19d578a18a18_0022",
+      "in-596e1216fbb0edde_0003",
+      "in-68a989aae163f3a3_0002",
+      "in-68a989aae163f3a3_0003",
+      "in-68a989aae163f3a3_0004",
+      "in-68a989aae163f3a3_0007",
+      "in-68a989aae163f3a3_0008",
+      "in-74793fbd2ad53e44_0002",
+      "in-ad0f890c150609c7_0009",
+      "in-bea719b45ad94738_0012",
+      "in-c5d0009a2b4ade15_0003"
+    ],
+    "source_sentences": [
+      "It is an ambitious vision that will require the development of products at the cutting edge of Machine Learning and AI. About the Role To strengthen our AI for Science (AI4S) team, we are looking for AI/ML Engineers with a track record in developing and validating machine learning models for real -world scientific problems.",
+      "The selected candidate will design, develop, test, and deliver AI/ML components to advance the Intelligence Community’s (IC) ability to characterize complex adversary threats with speed and accuracy.",
+      "Data Requirements: Leverage relevant data sources and types for AI/ML models, including connections to future data sources. Provide access to datasets necessary for training, testing, and validating AI/ML models. Document and ensure reproducibility of data preparation steps.",
+      "AI/ML Services: Deliver a scalable AI/ML software stack supporting the AI/ML lifecycle across NASIC. Ensure AI/ML components operate within the architecture, data pipelines, and security frameworks defined by the government. Design processes for easy sharing of AI/ML models.",
+      "You will work collaboratively on large projects with many other software engineers and functions, like human design, hardware sensing, AI/ML and others.",
+      "You will contribute to the end -to -end AI/ML software development lifecycle, ensuring reproducible research and state -of -the -art results for our customers.",
+      "Bonus points if you’re a former founder or early engineer at a startup. You are interested in AI/ML.",
+      "Additionally, the engineer will use AI/ML to develop tools and techniques to include fine tuning Large Language Models (LLM) that assist in enhanced vulnerability identification and mitigation capabilities. Job Responsibilities/Qualifications: Mission Focus: Collaborate closely with technical leadership to design, develop, and maintain LLM orchestration frameworks that coordinate static analyzers, retrieval -augmented generation (RAG) systems, and automated testing pipelines.",
+      "You will design, integrate, and optimize full -lifecycle ML pipelines, from data ingestion and model training to deployment and monitoring, ensuring all solutions meet DoW and Intelligence Community security and compliance standards.",
+      "As a diversified, national organization, Centene's technology professionals have access to competitive benefits including a fresh perspective on workplace flexibility. Position Purpose: Develops and operationalizes data pipelines to make data available for consumption (reports and advanced analytics), including data ingestion, data transformation, data validation / quality, data pipeline optimization, and orchestration.",
+      "The ideal candidate will bridge the gap between technical data work and digital marketing strategy, helping our team to optimize marketing tech stacks and build seamless data pipelines to improve reporting accuracy.",
+      "Python, JavaScript) Experience working with event streaming and data pipeline technologies (e.g.",
+      "Fresh graduates with strong project experience are welcome to apply. Proficiency in Python for scripting, test automation, and data pipeline work."
+    ],
+    "future_relevance": "Stable: organizations will continue needing reliable AI/ML data pipelines as model workloads grow and governance expectations tighten.",
+    "future_weight": 0.78,
+    "empirical_trend": "Emerging",
+    "kkni_level": 5,
+    "kkni_level_source": "sbert_labeller",
+    "kkni_match_similarity": 0.3019,
+    "education_levels_demanded": {
+      "S1": 0.75,
+      "S2": 0.125,
+      "D3": 0.125
+    },
+    "education_kkni_demanded": {
+      "6": 0.75,
+      "8": 0.125,
+      "5": 0.125
+    },
+    "n_jobs_with_education": 8,
+    "grounding_score_preview": 1.0,
+    "grounding_flagged": false,
+    "grounding_score": 0.5385,
+    "skill_grounding_score": 0.75,
+    "sentence_relevance_score": 0.5385,
+    "grounding_passed": true,
+    "grounding_method": "sbert",
+    "grounding_reasoning": "skill_grounding = 3/4 = 0.750 | sentence_relevance = 7/13 = 0.538 | canonical (min) = 0.538 (threshold 0.50). Skills not well-supported: 'data ingestion' (best_cos=0.32). Sentences off-topic: 6 of 13 (e.g., sent#1 cos=0.41, sent#4 cos=0.38, sent#9 cos=0.43). ",
+    "evaluator_version": "v2.5.0",
+    "generated_at": "2026-05-13T11:51:16.634686+00:00",
+    "generator_version": "v2.0.0",
+    "cluster_id": "cluster_h0032",
+    "cluster_summary_label": "ai/ml data ingestion: designing, implementing",
+    "provider": "jatevo",
+    "model": "gpt-5.4-mini",
+    "merged_from": [],
+    "title_evidence_concerns": [],
+    "demand_score": 0.4074,
+    "priority_score": 0.5585,
+    "title_id": "Rancang dan sampaikan arsitektur pipeline AI/ML",
+    "description_id": "Rancang pipeline AI/ML end-to-end yang memindahkan data dari ingestion melalui transformation, validation, training, deployment, dan monitoring. Integrasikan pipeline dengan requirement platform, security, dan operasional sambil mengoptimalkan reliability dan reuse.",
+    "rationale_id": "Bukti berulang kali mengarah pada pembangunan sistem ML full-lifecycle, bukan hanya menjalankan tools. Penyebutan data ingestion, data pipelines, dan pipeline work menunjukkan tanggung jawab untuk menghubungkan sumber, menyiapkan data, dan mendukung penggunaan model downstream. Item AI/ML menambatkan learning outcome pada work yang berpusat pada model, sementara item pipeline menambatkan alur data dan operational integration. Mastery akan ditunjukkan dengan membangun pipeline yang secure, maintainable, dan siap untuk model training dan consumption.",
+    "future_relevance_id": "Stabil: organisasi akan terus membutuhkan AI/ML data pipelines yang andal seiring meningkatnya model workloads dan menguatnya ekspektasi governance.",
+    "soft_skills_description_id": "Pembelajar perlu mengoordinasikan kebutuhan data, platform, dan model lintas tim serta menjelaskan trade-off dalam desain pipeline.",
+    "related_skills_id": [
+      "AI/ML",
+      "data ingestion",
+      "data pipelines",
+      "data pipeline"
+    ],
+    "soft_skills_required_id": [
+      "system thinking",
+      "komunikasi lintas fungsi"
+    ],
+    "occupation_matches": [
+      {
+        "occupation_en": "MLOps Engineer",
+        "occupation_id": "MLOps Engineer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.4871,
+        "description_en": "The MLOps Engineer occupational role covers competencies in operationalising machine learning models. It includes building ML pipelines for data ingestion, training, and deployment; managing model versioning and experiment tracking with tools like MLflow or Weights & Biases; deploying models at scale on cloud or on-premises infrastructure; monitoring model drift and retraining; and integrating ML ",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "Associate Data Engineer",
+        "occupation_id": "Skema Okupasi Insinyur Data Madya",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.4647,
+        "description_en": "The Associate Data Engineer occupational certification scheme references SKKNI Kepmenaker No. 299 of 2020 (AI / Data Engineering Sub-field). It covers data pipeline design, ETL processes, data warehouse management, and data quality assurance competencies.",
+        "is_official": true,
+        "source_type": "Template-based / Kepmenaker 299/2020"
+      },
+      {
+        "occupation_en": "Data Engineer",
+        "occupation_id": "Skema Okupasi Data Engineer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.4376,
+        "description_en": "The Data Engineer occupational certification scheme references SKKNI Kepmenaker No. 299 of 2020 (AI / Data Engineering Sub-field). It covers large-scale data infrastructure building, data workflow orchestration, and data storage system optimization competencies.",
+        "is_official": true,
+        "source_type": "Template-based / Kepmenaker 299/2020"
+      }
+    ]
+  },
+  {
+    "id": "comp_0c8530d2",
+    "title": "Build web application interfaces with modern JavaScript frameworks",
+    "description": "Develop and maintain client-side web interfaces using React or Angular in a production codebase. Implement UI features, connect them to application logic, and troubleshoot routine framework issues within an established frontend architecture.",
+    "related_skills": [
+      "React",
+      "Angular"
+    ],
+    "soft_skills_required": [
+      "collaboration",
+      "debugging communication",
+      "attention to detail"
+    ],
+    "soft_skills_description": "Work effectively with designers and backend developers, explain UI defects clearly, and apply consistent implementation details across components.",
+    "rationale": "The evidence repeatedly points to frontend implementation work using React and Angular, not just awareness of the tools. The sample sentences connect these frameworks to day-to-day feature delivery and UI development in full-stack and web engineering contexts. A learner would demonstrate mastery by building screens, components, and interactions that fit an existing application pattern and can be tested and debugged. This competency is distinct from the infrastructure competency because it focuses on browser-facing product behavior rather than cloud and runtime automation.",
+    "batch_reasoning_id": "br_c745b9d706",
+    "contributing_item_ids": [
+      "item_a8016acd54",
+      "item_6605f3a884",
+      "item_6abcfde343",
+      "item_912cfaedb6",
+      "item_54c2109ce6",
+      "item_cfc85a826d",
+      "item_7c88319894",
+      "item_24651dd311",
+      "item_ce5312c49f",
+      "item_f8d9a0d569",
+      "item_0cef9d1a4c",
+      "item_eab74b4dfd",
+      "item_5a3f651d64"
+    ],
+    "source_job_ids": [
+      "in-2151014363e86a4b",
+      "in-3f0be147dfb88780",
+      "in-461e3271095f68b7",
+      "in-5fd0a9fc77a8fa0d",
+      "in-7f12083a3becb230",
+      "in-902f37f24c1b70f5",
+      "in-9d072466327ef70f",
+      "in-aa0c9baaaa37e1a0",
+      "in-b6697efc79e6ecf1",
+      "in-e58620419782850f",
+      "in-eeb912b7ed03caad"
+    ],
+    "source_sentence_ids": [
+      "in-2151014363e86a4b_0001",
+      "in-3f0be147dfb88780_0002",
+      "in-461e3271095f68b7_0008",
+      "in-5fd0a9fc77a8fa0d_0005",
+      "in-7f12083a3becb230_0009",
+      "in-7f12083a3becb230_0012",
+      "in-7f12083a3becb230_0014",
+      "in-902f37f24c1b70f5_0006",
+      "in-9d072466327ef70f_0006",
+      "in-aa0c9baaaa37e1a0_0004",
+      "in-aa0c9baaaa37e1a0_0007",
+      "in-b6697efc79e6ecf1_0005",
+      "in-e58620419782850f_0008",
+      "in-eeb912b7ed03caad_0006"
+    ],
+    "source_sentences": [
+      "Using Visual Studio, JavaScript, Node.js, React, AWS, .net, or C #, you and your partner will fix a quick production issue, develop a new feature, or build something brand new.As lead engineer, you’ll also spend time each day checking in with other team members, up to 4, to help them with any specific coding issues as needed.",
+      "Come join a passionate and skilled group of developers, designers, and product folks that care deeply about our users and the work they do. Description We’re looking for a Senior Full Stack Software Engineer, ideally with expertise with technologies like Node.js, React, Typescript, Javascript, and SQL.",
+      "Join us to drive positive, lasting change that moves missions and the government forward! You Are: A motivated and inquisitive developer with a strong background in Full Stack Development using Java, Spring Boot, HTML, and either Angular or React.",
+      "You will be responsible for creating solutions for our clients that leverage technologies like .NET Core, React, C #, .NET Framework, Azure, Azure DevOps, SQL Server, Office365 and Dynamics365, as well as modern JavaScript libraries.",
+      "Experience in React or Angular. Communication: Strong communication and organizational skills. Advantageous Skills The following skills and experiences are considered advantageous: Experience in Azure or Azure DevOps is a strong advantage. Experience in SQL Server is a strong advantage. Experience in JavaScript or TypeScript frameworks is a strong advantage Application Process Please submit your application and CV through our online application portal.",
+      "You will not only create highly responsive user interfaces using React and/or Angular, but you will also drive the backend integration strategies, leveraging deep knowledge of Auth0 or Okta APIs.",
+      "Design, develop, and maintain responsive, high -performance web applications using React and Angular for all user -facing identity flows.",
+      "Must haves: Extensive experience across the full software development lifecycle (SDLC), including design, coding, testing, debugging, deployment, and maintenance Development Experience – 35% UI development using modern frameworks like Angular and NodeJS.",
+      "Experience with Angular framework/Java. Stay up to date with new technologies and trends in identity management Job Systems/Information Technology Organization Cummins Inc. Role Category On -site with Flexibility Job Type Exempt - Experienced ReqID 2426028 Relocation Package Yes 100% On -Site No Cummins and E -Verify At Cummins, we are an equal opportunity and affirmative action employer dedicated to diversity in the workplace.",
+      "Do you meet this requirement? Can you meet the hybrid requirements of 2 days a week in office in Rockville, MD? What clearance level do you currently possess (None, Public Trust, Secret, Top Secret) What is the latest version of Angular you are fluent in (You will be tested on this)? List your current Azure certifications. What is your favorite OOP design pattern and why? Do you have any professional AI experience?"
+    ],
+    "future_relevance": "Stable: React and Angular remain core frontend frameworks in long-lived product teams, even as surrounding tooling evolves.",
+    "future_weight": 0.86,
+    "empirical_trend": "Stable",
+    "kkni_level": 4,
+    "kkni_level_source": "llm_suggested",
+    "kkni_match_similarity": null,
+    "education_levels_demanded": {
+      "S2": 0.2857,
+      "S1": 0.7143
+    },
+    "education_kkni_demanded": {
+      "8": 0.2857,
+      "6": 0.7143
+    },
+    "n_jobs_with_education": 7,
+    "grounding_score_preview": 1.0,
+    "grounding_flagged": false,
+    "grounding_score": 0.6,
+    "skill_grounding_score": 1.0,
+    "sentence_relevance_score": 0.6,
+    "grounding_passed": true,
+    "grounding_method": "sbert",
+    "grounding_reasoning": "skill_grounding = 2/2 = 1.000 | sentence_relevance = 6/10 = 0.600 | canonical (min) = 0.600 (threshold 0.50). Sentences off-topic: 4 of 10 (e.g., sent#1 cos=0.43, sent#4 cos=0.40, sent#8 cos=0.42). ",
+    "evaluator_version": "v2.5.0",
+    "generated_at": "2026-05-13T11:51:25.022265+00:00",
+    "generator_version": "v2.0.0",
+    "cluster_id": "cluster_h0033",
+    "cluster_summary_label": "angular infrastructure code: orchestration, react",
+    "provider": "jatevo",
+    "model": "gpt-5.4-mini",
+    "merged_from": [],
+    "title_evidence_concerns": [],
+    "demand_score": 0.4074,
+    "priority_score": 0.601,
+    "title_id": "Bangun antarmuka web application dengan modern JavaScript frameworks",
+    "description_id": "Kembangkan dan pelihara antarmuka web client-side menggunakan React atau Angular dalam codebase produksi. Implementasikan fitur UI, hubungkan ke application logic, dan troubleshooting masalah framework rutin dalam arsitektur frontend yang sudah ada.",
+    "rationale_id": "Bukti berulang kali mengarah pada pekerjaan implementasi frontend menggunakan React dan Angular, bukan hanya kesadaran akan tools tersebut. Kalimat-kalimat contoh mengaitkan framework ini dengan delivery fitur harian dan pengembangan UI dalam konteks full-stack dan web engineering. Seorang learner akan menunjukkan penguasaan dengan membangun screen, component, dan interaction yang sesuai dengan pola application yang sudah ada dan dapat diuji serta di-debug. Kompetensi ini berbeda dari kompetensi infrastructure karena berfokus pada perilaku product yang terlihat di browser, bukan pada cloud dan runtime automation.",
+    "future_relevance_id": "Stable: React dan Angular tetap menjadi core frontend frameworks dalam long-lived product teams, bahkan ketika tooling di sekelilingnya terus berkembang.",
+    "soft_skills_description_id": "Bekerja secara efektif dengan designer dan backend developer, jelaskan defect UI dengan jelas, dan terapkan detail implementasi yang konsisten di seluruh component.",
+    "related_skills_id": [
+      "React",
+      "Angular"
+    ],
+    "soft_skills_required_id": [
+      "collaboration",
+      "debugging communication",
+      "perhatian terhadap detail"
+    ],
+    "occupation_matches": [
+      {
+        "occupation_en": "Frontend Developer",
+        "occupation_id": "Frontend Developer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.6861,
+        "description_en": "The Frontend Developer occupational role covers competencies in building user-facing web applications using modern JavaScript frameworks (React, Angular, Vue, Svelte), HTML5, CSS3, and responsive design principles. It includes implementing component-based UIs, managing client-side state, integrating with REST or GraphQL APIs, ensuring cross-browser compatibility, optimising performance, and applyi",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "Full-Stack Developer",
+        "occupation_id": "Full-Stack Developer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.5959,
+        "description_en": "The Full-Stack Developer occupational role covers competencies in building complete web applications across frontend and backend layers. It includes using JavaScript frameworks for UI (React, Angular), server-side languages for APIs (Node.js, Python, C#, Java), designing and integrating databases (SQL or NoSQL), implementing authentication, deploying to cloud, and managing end-to-end delivery from",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "UI/UX Designer",
+        "occupation_id": "UI/UX Designer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.4757,
+        "description_en": "The UI/UX Designer occupational role covers competencies in researching user needs, designing interaction flows, prototyping interfaces, applying systems thinking to product design, and ensuring accessibility across digital products. It includes user research and interviews, information architecture, wireframing and prototyping in tools such as Figma, conducting usability testing, applying design ",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      }
+    ]
+  },
+  {
+    "id": "comp_9720b2c7",
+    "title": "Translate stakeholder needs into technical delivery requirements",
+    "description": "Gather, analyse, and refine needs from business and operational stakeholders into clear requirements for data, platform, and application work. Coordinate delivery across development, support, and product teams while keeping implementation choices aligned to the target platform or workflow.",
+    "related_skills": [
+      "work closely with stakeholders",
+      "business",
+      "application support",
+      "ServiceNow"
+    ],
+    "soft_skills_required": [
+      "stakeholder communication",
+      "cross-functional coordination",
+      "clarity of written requirements"
+    ],
+    "soft_skills_description": "The learner needs to communicate across business and technical audiences, negotiate priorities, and document decisions clearly enough that different teams can act on them without rework.",
+    "rationale": "The source evidence consistently describes a bridge role between business users and technical teams, whether the context is ServiceNow implementation, application support, or data-product delivery. The phrase \"work closely with stakeholders\" appears alongside requirements gathering and migration planning, which points to analysis and translation rather than simple communication. Learners could demonstrate mastery by producing precise requirements, resolving ambiguities, and coordinating handoffs across teams. This is distinct from governance-focused work because it centers on shaping delivery inputs and execution alignment, not on policy or compliance controls.",
+    "batch_reasoning_id": "br_4999aa100d",
+    "contributing_item_ids": [
+      "item_ca1495b382",
+      "item_797c9ae616",
+      "item_bef8332385",
+      "item_313833da74",
+      "item_ea81d5b83f",
+      "item_614f5aae97",
+      "item_30222e7cf7",
+      "item_dbf620fb77",
+      "item_78a723c0ae",
+      "item_651c59ebc8",
+      "item_f0c155e277"
+    ],
+    "source_job_ids": [
+      "in-26fcda83aa945eae",
+      "in-38c99d9330b0ce91",
+      "in-5c3f0f8d0b0b2aa5",
+      "in-7b3bad767d1eaf4d",
+      "in-c3f2b715968d1e34",
+      "in-e4fccefe17f5cd64",
+      "in-ea80f3916e41b681",
+      "in-ec735e19a47aed1a"
+    ],
+    "source_sentence_ids": [
+      "in-26fcda83aa945eae_0006",
+      "in-38c99d9330b0ce91_0006",
+      "in-5c3f0f8d0b0b2aa5_0021",
+      "in-7b3bad767d1eaf4d_0008",
+      "in-7b3bad767d1eaf4d_0009",
+      "in-c3f2b715968d1e34_0001",
+      "in-c3f2b715968d1e34_0006",
+      "in-e4fccefe17f5cd64_0004",
+      "in-e4fccefe17f5cd64_0005",
+      "in-ea80f3916e41b681_0003",
+      "in-ec735e19a47aed1a_0003"
+    ],
+    "source_sentences": [
+      "This role will work closely with stakeholders across the organization to understand data needs, define reporting and analytics requirements, and ensure successful delivery of data products, dashboards, and AI/ML solutions.",
+      "You’ll work closely with stakeholders to gather requirements, assess current applications, and propose effective migration strategies to AWS.",
+      "You work with senior stakeholders across technology, governance, and business areas to ensure the platform remains trusted, scalable, efficient, and compliant.",
+      "The candidate must be able to interact with numerous internal teams including business, operations, application development, and application support groups.",
+      "The incumbent will have at least 2 years of progressive IT/business experience and a business background.",
+      "The ideal candidate has strong application support experience, understands technical architecture and various integration protocols, and can collaborate across business and technical teams What you do 1 .",
+      "About the Role: Serve as the critical bridge between business stakeholders and technical development teams for ServiceNow implementation projects, with specific focus on Public Sector Digital Services (PSDS), Customer Service Management (CSM), and App Engine implementations.",
+      "Senior ServiceNow IT Asset Management (ITAM) Integration Consultant Role Overview We are seeking a senior level, hands on ServiceNow IT Asset Management (ITAM) contractor with proven experience integrating ServiceNow ITAM with SAP Ariba.",
+      "In this role, you will plan and execute System Administrative tasks with a specialized focus on ServiceNow operations and leading teams.",
+      "This role will collaborate with other Operations team to plan and execute all System Administrative tasks for the ServiceNow platform and may direct junior administrative staff."
+    ],
+    "future_relevance": "Stable, because complex software delivery will continue to depend on people who can translate business intent into implementable technical work.",
+    "future_weight": 0.86,
+    "empirical_trend": "Emerging",
+    "kkni_level": 7,
+    "kkni_level_source": "sbert_labeller",
+    "kkni_match_similarity": 0.4592,
+    "education_levels_demanded": {
+      "D3": 0.6667,
+      "S2": 0.3333
+    },
+    "education_kkni_demanded": {
+      "5": 0.6667,
+      "8": 0.3333
+    },
+    "n_jobs_with_education": 3,
+    "grounding_score_preview": 1.0,
+    "grounding_flagged": false,
+    "grounding_score": 0.5,
+    "skill_grounding_score": 0.5,
+    "sentence_relevance_score": 0.5,
+    "grounding_passed": true,
+    "grounding_method": "sbert",
+    "grounding_reasoning": "skill_grounding = 2/4 = 0.500 | sentence_relevance = 5/10 = 0.500 | canonical (min) = 0.500 (threshold 0.50). Skills not well-supported: 'business' (best_cos=0.29), 'application support' (best_cos=0.42). Sentences off-topic: 5 of 10 (e.g., sent#4 cos=0.20, sent#5 cos=0.45, sent#7 cos=0.34). ",
+    "evaluator_version": "v2.5.0",
+    "generated_at": "2026-05-13T11:49:42.928830+00:00",
+    "generator_version": "v2.0.0",
+    "cluster_id": "cluster_h0021",
+    "cluster_summary_label": "agency bending time: high, business",
+    "provider": "jatevo",
+    "model": "gpt-5.4-mini",
+    "merged_from": [],
+    "title_evidence_concerns": [
+      {
+        "term": "Translate",
+        "literal_hits": 0,
+        "n_sentences": 10,
+        "min_required": 2,
+        "severity": "warning"
+      }
+    ],
+    "demand_score": 0.2963,
+    "priority_score": 0.5265,
+    "title_id": "Terjemahkan kebutuhan stakeholder menjadi technical delivery requirements",
+    "description_id": "Kumpulkan, analisis, dan perbaiki kebutuhan dari stakeholder bisnis dan operasional menjadi requirements yang jelas untuk pekerjaan data, platform, dan application. Koordinasikan delivery di seluruh tim development, support, dan product sambil menjaga pilihan implementasi tetap selaras dengan target platform atau workflow.",
+    "rationale_id": "Bukti sumber secara konsisten menggambarkan peran jembatan antara user bisnis dan tim teknis, baik dalam konteks implementasi ServiceNow, application support, maupun delivery data-product. Frasa \"work closely with stakeholders\" muncul bersama pengumpulan requirements dan perencanaan migrasi, yang mengarah pada analysis dan translation, bukan sekadar komunikasi. Learners dapat menunjukkan mastery dengan menghasilkan requirements yang presisi, menyelesaikan ambiguitas, dan mengoordinasikan handoff lintas tim. Hal ini berbeda dari pekerjaan yang berfokus pada governance karena berpusat pada pembentukan input delivery dan penyelarasan eksekusi, bukan pada policy atau compliance controls.",
+    "future_relevance_id": "Stabil, karena pengiriman software yang kompleks akan terus bergantung pada orang yang dapat menerjemahkan niat bisnis menjadi pekerjaan teknis yang dapat diimplementasikan.",
+    "soft_skills_description_id": "Pembelajar perlu berkomunikasi dengan audiens bisnis dan teknis, menegosiasikan prioritas, dan mendokumentasikan keputusan dengan cukup jelas sehingga tim yang berbeda dapat menindaklanjutinya tanpa perlu pengerjaan ulang.",
+    "related_skills_id": [
+      "bekerja erat dengan para stakeholder",
+      "business",
+      "application support",
+      "ServiceNow"
+    ],
+    "soft_skills_required_id": [
+      "komunikasi stakeholder",
+      "koordinasi lintas fungsi",
+      "kejelasan written requirements"
+    ],
+    "occupation_matches": [
+      {
+        "occupation_en": "Solutions Architect",
+        "occupation_id": "Solutions Architect",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.5158,
+        "description_en": "The Solutions Architect occupational role covers competencies in designing end-to-end software solutions that integrate multiple systems, technologies, and stakeholders. It includes gathering requirements, evaluating technical trade-offs, designing integration patterns between enterprise systems, defining data flows and APIs, and producing architectural documentation that guides engineering teams.",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "Engineering Tech Lead",
+        "occupation_id": "Engineering Tech Lead",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.5008,
+        "description_en": "The Engineering Tech Lead occupational role covers competencies in technical leadership within a software engineering team. It includes mentoring engineers, defining technical standards and review practices, owning architectural decisions, coordinating delivery across sprints, breaking down complex problems into actionable tasks, and balancing hands-on engineering work with team-facing responsibil",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "Project Management",
+        "occupation_id": "Skema Okupasi Manajemen Proyek",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.4579,
+        "description_en": "The ICT Project Management occupational certification scheme references the SKKNI ICT Project Management Field and National ICT Occupation Map. It covers project initiation, planning, execution, monitoring, and closure competencies for ICT projects.",
+        "is_official": true,
+        "source_type": "Template-based / Peta Okupasi TIK"
+      }
+    ]
+  },
+  {
+    "id": "comp_dbc56707",
+    "title": "Build ASP.NET and .NET Core web application services",
+    "description": "Develop and extend server-side web applications using C#, ASP.NET, and .NET Core. Implement page/controller behavior, web APIs, and application features that follow common .NET architectural patterns and support secure, scalable delivery.",
+    "related_skills": [
+      "C #",
+      ".NET Core",
+      "ASP.NET"
+    ],
+    "soft_skills_required": [
+      "Problem solving",
+      "Code collaboration"
+    ],
+    "soft_skills_description": "Work effectively with teammates to diagnose issues, implement changes, and review service behavior against application requirements.",
+    "rationale": "The source evidence consistently points to server-side .NET application development, not isolated syntax knowledge. C# appears alongside ASP.NET and .NET Core in tasks such as adding page behavior, building Web API services, and implementing application features. A learner proving mastery would create working endpoints, integrate business logic, and adapt code to standard web patterns. This competency is distinct from the database/reporting one because it focuses on application structure and service delivery rather than data querying or report generation.",
+    "batch_reasoning_id": "br_f6d05adc35",
+    "contributing_item_ids": [
+      "item_734e71ed2a",
+      "item_ae1265381d",
+      "item_202acd5929",
+      "item_76b6132541",
+      "item_39dca4a377",
+      "item_6662fdf69a",
+      "item_f8ec5d86f7",
+      "item_db04de68b6",
+      "item_cfbe407714",
+      "item_4ed4544c14",
+      "item_b9eb59c97b"
+    ],
+    "source_job_ids": [
+      "in-461e3271095f68b7",
+      "in-4bca36c0621d5702",
+      "in-58b11e224f073c85",
+      "in-5e0b78b3549704dd",
+      "in-6b04783cb9a7cd0b",
+      "in-aa0c9baaaa37e1a0",
+      "in-e3b585ed9e8a5ece",
+      "in-e58620419782850f"
+    ],
+    "source_sentence_ids": [
+      "in-461e3271095f68b7_0008",
+      "in-4bca36c0621d5702_0002",
+      "in-58b11e224f073c85_0022",
+      "in-5e0b78b3549704dd_0013",
+      "in-5e0b78b3549704dd_0014",
+      "in-5e0b78b3549704dd_0015",
+      "in-6b04783cb9a7cd0b_0024",
+      "in-aa0c9baaaa37e1a0_0004",
+      "in-aa0c9baaaa37e1a0_0006",
+      "in-e3b585ed9e8a5ece_0009",
+      "in-e3b585ed9e8a5ece_0032",
+      "in-e58620419782850f_0008"
+    ],
+    "source_sentences": [
+      "Using Visual Studio, JavaScript, Node.js, React, AWS, .net, or C #, you and your partner will fix a quick production issue, develop a new feature, or build something brand new.As lead engineer, you’ll also spend time each day checking in with other team members, up to 4, to help them with any specific coding issues as needed.",
+      "Special Skills, Other Special Skills or Requirements: Experience designing and developing User Interfaces using HTML, ASP.NET, C # and client -side validations.",
+      "You have proven expertise with .NET Core Services/Web API, and C # You have advanced proficiency with Next.js framework including routing, Server -Side Rendering (SSR), and its full -stack capabilities.",
+      "You have proven expertise with .NET Core Services/Web API, and C # Experience with image manipulation - ideal exp TensorFlow and PyTorch You have hands -on experience with software architecture principles and patterns such as serverless architecture, Microservices, RESTful APIs.",
+      "You will be responsible for creating solutions for our clients that leverage technologies like .NET Core, React, C #, .NET Framework, Azure, Azure DevOps, SQL Server, Office365 and Dynamics365, as well as modern JavaScript libraries.",
+      "Experience using ASP.NET for Page Controller pattern to add functionality to individual pages such that to accept input from the page request, invoke the requested actions on the mode.",
+      "You will operate with a high degree of autonomy within a mature ASP.NET -based platform, contributing to complex feature development, architectural improvements, and production stability."
+    ],
+    "future_relevance": "Stable: .NET, ASP.NET, and C# remain core enterprise web technologies and continue to evolve rather than disappear.",
+    "future_weight": 0.82,
+    "empirical_trend": "Stable",
+    "kkni_level": 6,
+    "kkni_level_source": "llm_suggested",
+    "kkni_match_similarity": null,
+    "education_levels_demanded": {
+      "S1": 0.75,
+      "S2": 0.25
+    },
+    "education_kkni_demanded": {
+      "6": 0.75,
+      "8": 0.25
+    },
+    "n_jobs_with_education": 4,
+    "grounding_score_preview": 1.0,
+    "grounding_flagged": false,
+    "grounding_score": 0.6667,
+    "skill_grounding_score": 0.6667,
+    "sentence_relevance_score": 0.7143,
+    "grounding_passed": true,
+    "grounding_method": "sbert",
+    "grounding_reasoning": "skill_grounding = 2/3 = 0.667 | sentence_relevance = 5/7 = 0.714 | canonical (min) = 0.667 (threshold 0.50). Skills not well-supported: 'C #' (best_cos=0.43). Sentences off-topic: 2 of 7 (e.g., sent#0 cos=0.34, sent#5 cos=0.42). ",
+    "evaluator_version": "v2.5.0",
+    "generated_at": "2026-05-13T11:51:08.621292+00:00",
+    "generator_version": "v2.0.0",
+    "cluster_id": "cluster_h0031",
+    "cluster_summary_label": "asp net ssrs: core, server",
+    "provider": "jatevo",
+    "model": "gpt-5.4-mini",
+    "merged_from": [],
+    "title_evidence_concerns": [],
+    "demand_score": 0.2963,
+    "priority_score": 0.5645,
+    "title_id": "Bangun layanan aplikasi web ASP.NET dan .NET Core",
+    "description_id": "Kembangkan dan perluas server-side web applications menggunakan C#, ASP.NET, dan .NET Core. Implementasikan perilaku page/controller, web APIs, dan fitur aplikasi yang mengikuti common .NET architectural patterns serta mendukung secure, scalable delivery.",
+    "rationale_id": "Bukti sumber secara konsisten mengarah pada pengembangan aplikasi .NET di sisi server, bukan pengetahuan sintaks yang terisolasi. C# muncul bersama ASP.NET dan .NET Core dalam tugas seperti menambahkan perilaku halaman, membangun layanan Web API, dan mengimplementasikan fitur aplikasi. Seorang pembelajar yang membuktikan penguasaan akan membuat endpoint yang berfungsi, mengintegrasikan business logic, dan menyesuaikan kode dengan pola web standar. Kompetensi ini berbeda dari kompetensi database/reporting karena berfokus pada struktur aplikasi dan penyampaian layanan, bukan pada query data atau pembuatan report.",
+    "future_relevance_id": "Stable: .NET, ASP.NET, dan C# tetap menjadi core enterprise web technologies dan terus berkembang, bukan menghilang.",
+    "soft_skills_description_id": "Bekerja secara efektif dengan rekan tim untuk mendiagnosis masalah, menerapkan perubahan, dan meninjau perilaku service terhadap application requirements.",
+    "related_skills_id": [
+      "C #",
+      ".NET Core",
+      "ASP.NET"
+    ],
+    "soft_skills_required_id": [
+      "Problem solving",
+      "Kolaborasi kode"
+    ],
+    "occupation_matches": [
+      {
+        "occupation_en": "Full-Stack Developer",
+        "occupation_id": "Full-Stack Developer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.6484,
+        "description_en": "The Full-Stack Developer occupational role covers competencies in building complete web applications across frontend and backend layers. It includes using JavaScript frameworks for UI (React, Angular), server-side languages for APIs (Node.js, Python, C#, Java), designing and integrating databases (SQL or NoSQL), implementing authentication, deploying to cloud, and managing end-to-end delivery from",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "Backend Developer",
+        "occupation_id": "Backend Developer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.5699,
+        "description_en": "The Backend Developer occupational role covers competencies in designing and implementing server-side application logic, APIs, and database integration using languages and frameworks such as Java, C#/.NET, ASP.NET, Python, Node.js, or Go. It includes writing RESTful or GraphQL APIs, handling authentication and authorisation, managing database transactions, optimising query performance, and integra",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "Frontend Developer",
+        "occupation_id": "Frontend Developer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.5694,
+        "description_en": "The Frontend Developer occupational role covers competencies in building user-facing web applications using modern JavaScript frameworks (React, Angular, Vue, Svelte), HTML5, CSS3, and responsive design principles. It includes implementing component-based UIs, managing client-side state, integrating with REST or GraphQL APIs, ensuring cross-browser compatibility, optimising performance, and applyi",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      }
+    ]
+  },
+  {
+    "id": "comp_46675260",
+    "title": "Apply IAM and security knowledge to diagnose and improve access controls",
+    "description": "Use IAM and foundational security knowledge to analyse access-related issues, compare available remediation options, and apply appropriate controls within defined security practices. Improve existing processes by identifying gaps, proposing fixes, and adapting standard security methods to new situations.",
+    "related_skills": [
+      "IAM",
+      "CompTIA Security +"
+    ],
+    "soft_skills_required": [
+      "analytical thinking",
+      "attention to detail"
+    ],
+    "soft_skills_description": "The learner must notice security gaps, compare alternatives, and communicate the implications of a chosen fix clearly enough for others to act on.",
+    "rationale": "The evidence centers on using IAM knowledge with broader security knowledge to handle both existing and novel issues, which goes beyond simple procedure-following. CompTIA Security + reinforces the underlying security concepts that support this applied work. A learner mastering this could diagnose common identity and access problems, choose suitable controls, and explain why a remediation fits the context. It is distinct from the collaboration competency because the primary output here is sound security analysis and control improvement, not stakeholder alignment. The complexity fits KKNI 5 because it requires analysis and selection among standard security methods.",
+    "batch_reasoning_id": "br_dad54710cd",
+    "contributing_item_ids": [
+      "item_ed6afaf168",
+      "item_4e47bdd37b",
+      "item_bf4c97f44c",
+      "item_3faf8d5cc3",
+      "item_152d99f46a",
+      "item_cfeca20545",
+      "item_0747095ddc",
+      "item_01d4192f98",
+      "item_8d083929c2"
+    ],
+    "source_job_ids": [
+      "in-144d63886c895c3b",
+      "in-37fe4aa3a970b90e",
+      "in-7f12083a3becb230",
+      "in-870680034a82f0a3",
+      "in-aa54af51fa5cae34",
+      "in-dfb85616896bcf18"
+    ],
+    "source_sentence_ids": [
+      "in-144d63886c895c3b_0005",
+      "in-37fe4aa3a970b90e_0007",
+      "in-37fe4aa3a970b90e_0008",
+      "in-37fe4aa3a970b90e_0009",
+      "in-37fe4aa3a970b90e_0015",
+      "in-7f12083a3becb230_0002",
+      "in-870680034a82f0a3_0005",
+      "in-aa54af51fa5cae34_0003",
+      "in-aa54af51fa5cae34_0011",
+      "in-dfb85616896bcf18_0008"
+    ],
+    "source_sentences": [
+      "Using your extensive IAM knowledge and experience, and your broader security knowledge, you apply this to both existing and novel issues.",
+      "You continually seek to improve your knowledge, both theoretical and applied, in IAM and beyond.",
+      "You are able to author and contribute to Security Policies and Technical Standards within IAM and continually seek to improve our policies in line with emerging thinking and observed scenarios within our business.",
+      "You are recognised as a subject matter expert in IAM and mentor others in the domain, while asking challenging questions to help grow experience and understanding.",
+      "This role involves designing, developing, and maintaining robust IAM solutions to ensure secure and efficient access management across our enterprise systems.",
+      "This role will focus on the integration of OKTA into our broader IAM infrastructure, ensuring seamless identity management across environments.",
+      "The role supports internal application teams, IAM, and Tier 2 support globally, maintaining security compliance workflows, Nudge and onboarding experiences, and Workspace One Intelligence dashboards.",
+      "CompTIA Security +, EC -Council Certified Hacker, or CISM (Certified Information Security Manager)) are desirable Remote/Hybrid Policy: This role offers the flexibility of a fully remote environment.",
+      "REQUIRED EDUCATION: Currently pursuing an Associate or Bachelor’s degree in Cybersecurity, Information Technology, Computer Science, or a related field. Industry certifications (CompTIA Security +, Network +, or related) are a plus but not required. Ongoing job -specific training will be provided."
+    ],
+    "future_relevance": "Stable, because identity and access management remains a core control area across cloud, enterprise, and regulated environments.",
+    "future_weight": 0.82,
+    "empirical_trend": "Emerging",
+    "kkni_level": 5,
+    "kkni_level_source": "sbert_labeller",
+    "kkni_match_similarity": 0.3875,
+    "education_levels_demanded": {
+      "S1": 0.75,
+      "D3": 0.25
+    },
+    "education_kkni_demanded": {
+      "6": 0.75,
+      "5": 0.25
+    },
+    "n_jobs_with_education": 4,
+    "grounding_score_preview": 1.0,
+    "grounding_flagged": false,
+    "grounding_score": 0.5,
+    "skill_grounding_score": 0.5,
+    "sentence_relevance_score": 0.5556,
+    "grounding_passed": true,
+    "grounding_method": "sbert",
+    "grounding_reasoning": "skill_grounding = 1/2 = 0.500 | sentence_relevance = 5/9 = 0.556 | canonical (min) = 0.500 (threshold 0.50). Skills not well-supported: 'IAM' (best_cos=0.42). Sentences off-topic: 4 of 9 (e.g., sent#3 cos=0.39, sent#6 cos=0.43, sent#7 cos=0.35). ",
+    "evaluator_version": "v2.5.0",
+    "generated_at": "2026-05-13T11:48:20.160513+00:00",
+    "generator_version": "v2.0.0",
+    "cluster_id": "cluster_h0012",
+    "cluster_summary_label": "cross functionally work: comptia, iam",
+    "provider": "jatevo",
+    "model": "gpt-5.4-mini",
+    "merged_from": [],
+    "title_evidence_concerns": [],
+    "demand_score": 0.2222,
+    "priority_score": 0.4849,
+    "title_id": "Terapkan pengetahuan IAM dan security untuk mendiagnosis dan meningkatkan access controls",
+    "description_id": "Gunakan IAM dan pengetahuan security dasar untuk menganalisis masalah yang terkait access, membandingkan opsi remediation yang tersedia, dan menerapkan controls yang sesuai dalam security practices yang telah ditetapkan. Tingkatkan proses yang ada dengan mengidentifikasi gaps, mengusulkan perbaikan, dan menyesuaikan standard security methods untuk situasi baru.",
+    "rationale_id": "Bukti tersebut berpusat pada penggunaan pengetahuan IAM dengan pengetahuan keamanan yang lebih luas untuk menangani masalah yang sudah ada maupun yang baru, yang melampaui sekadar mengikuti prosedur. CompTIA Security + memperkuat konsep keamanan mendasar yang mendukung pekerjaan terapan ini. Seorang pembelajar yang menguasai hal ini dapat mendiagnosis masalah identitas dan akses yang umum, memilih kontrol yang sesuai, dan menjelaskan mengapa suatu remediation sesuai dengan konteksnya. Ini berbeda dari competency kolaborasi karena output utama di sini adalah analisis keamanan yang baik dan peningkatan kontrol, bukan penyelarasan stakeholder. Kompleksitasnya sesuai dengan KKNI 5 karena membutuhkan analisis dan seleksi di antara metode keamanan standar.",
+    "future_relevance_id": "Stabil, karena identity and access management tetap menjadi area kontrol inti di seluruh cloud, enterprise, dan lingkungan yang diatur.",
+    "soft_skills_description_id": "Pembelajar harus menyadari celah keamanan, membandingkan alternatif, dan mengomunikasikan implikasi dari perbaikan yang dipilih dengan cukup jelas agar orang lain dapat mengambil tindakan.",
+    "related_skills_id": [
+      "IAM",
+      "CompTIA Security +"
+    ],
+    "soft_skills_required_id": [
+      "analytical thinking",
+      "perhatian terhadap detail"
+    ],
+    "occupation_matches": [
+      {
+        "occupation_en": "Information Security Engineer",
+        "occupation_id": "Information Security Engineer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.4978,
+        "description_en": "The Information Security Engineer occupational role covers competencies in securing organisational systems and networks beyond the scope of the traditional Cyber Security Specialist. It includes implementing identity and access management (IAM), applying secure coding practices, vulnerability assessment and penetration testing, incident response, security monitoring with SIEM tools, and ensuring c",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "Cyber Security Specialist",
+        "occupation_id": "Skema Okupasi Cyber Security Specialist",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.4544,
+        "description_en": "The Cyber Security Specialist occupational certification scheme references the SKKNI Information and Cyber Security Field and ICT Occupation Map 2025. It covers system vulnerability assessment, penetration testing, cyber incident response, and information security management competencies.",
+        "is_official": true,
+        "source_type": "Template-based / Peta Okupasi TIK 2025"
+      }
+    ]
+  },
+  {
+    "id": "comp_33df1e6c",
+    "title": "Design and implement infrastructure as code for reliable cloud systems",
+    "description": "Create and maintain cloud infrastructure definitions using Infrastructure as Code and automation practices. Select standard deployment patterns that support repeatability, secure configuration, and integration with delivery pipelines.",
+    "related_skills": [
+      "Infrastructure as Code (IaC)",
+      "SRE",
+      "observability"
+    ],
+    "soft_skills_required": [
+      "systems thinking",
+      "collaboration",
+      "analytical thinking",
+      "communication"
+    ],
+    "soft_skills_description": "Works across development and operations teams to standardize environments and align automation with production needs.",
+    "rationale": "The source evidence links IaC with automated cloud systems and continuous improvement of observability in SRE-style environments. The wording points to more than routine configuration: it involves choosing implementation patterns that make infrastructure reproducible, secure, and supportable. A learner would demonstrate mastery by defining infrastructure stacks, integrating them into CI/CD, and showing that the resulting systems are easy to operate and inspect. It is distinct from incident response because the focus here is on building the operating environment, not handling live outages.",
+    "batch_reasoning_id": "br_8b679a73be",
+    "contributing_item_ids": [
+      "item_10db702306",
+      "item_83dd9162c0",
+      "item_65debed08d",
+      "item_a6c19ee029",
+      "item_a9d6ee2f5a",
+      "item_bd5d912a37",
+      "item_320e094e92"
+    ],
+    "source_job_ids": [
+      "in-25d07a0fab17cbf1",
+      "in-450d3c91c41ced10",
+      "in-7bfb0db7aca97a49",
+      "in-902aab6a926ef851",
+      "in-b92e4f190ec38b6c",
+      "in-f323714988853fba"
+    ],
+    "source_sentence_ids": [
+      "in-25d07a0fab17cbf1_0017",
+      "in-25d07a0fab17cbf1_0018",
+      "in-450d3c91c41ced10_0015",
+      "in-7bfb0db7aca97a49_0015",
+      "in-902aab6a926ef851_0006",
+      "in-b92e4f190ec38b6c_0012",
+      "in-f323714988853fba_0003"
+    ],
+    "source_sentences": [
+      "The ideal candidate will have deep expertise in Application Performance Monitoring (APM), Infrastructure as Code (IaC), automation, and distributed tracing using OpenTelemetry.",
+      "You will leverage your extensive experience with AWS and other cloud platforms, Infrastructure as Code (IaC), and CI/CD methodologies to build scalable, secure, and automated systems.",
+      "As a significant contributor throughout the software development lifecycle, you'll build services that are deployed to every AWS region using AWS services in a fully Infrastructure as Code (IaC) environment, where you'll own everything end -to -end.",
+      "This role will focus on implementing landing zones, identity integration, networking, and Infrastructure as Code (IaC) frameworks, working closely with senior platform engineers and platform services teams.",
+      "As a lead, you will guide the design, implementation, and continuous improvement of observability solutions, ensuring system reliability, performance, and scalability while fostering best practices in SRE and DevOps.",
+      "Own complex Android systems end -to -end across UI architecture, networking, local persistence/state, observability, and release processes."
+    ],
+    "future_relevance": "Stable: cloud delivery continues to rely on IaC for repeatable, auditable, and scalable operations.",
+    "future_weight": 0.85,
+    "empirical_trend": "Emerging",
+    "kkni_level": 5,
+    "kkni_level_source": "llm_suggested",
+    "kkni_match_similarity": null,
+    "education_levels_demanded": {
+      "S1": 1.0
+    },
+    "education_kkni_demanded": {
+      "6": 1.0
+    },
+    "n_jobs_with_education": 3,
+    "grounding_score_preview": 1.0,
+    "grounding_flagged": false,
+    "grounding_score": 0.6667,
+    "skill_grounding_score": 0.6667,
+    "sentence_relevance_score": 0.6667,
+    "grounding_passed": true,
+    "grounding_method": "sbert",
+    "grounding_reasoning": "skill_grounding = 2/3 = 0.667 | sentence_relevance = 4/6 = 0.667 | canonical (min) = 0.667 (threshold 0.50). Skills not well-supported: 'observability' (best_cos=0.33). Sentences off-topic: 2 of 6 (e.g., sent#0 cos=0.35, sent#5 cos=0.33). ",
+    "evaluator_version": "v2.5.0",
+    "generated_at": "2026-05-13T11:47:43.968631+00:00",
+    "generator_version": "v2.0.0",
+    "cluster_id": "cluster_h0008",
+    "cluster_summary_label": "code iac observability: incident, response",
+    "provider": "jatevo",
+    "model": "gpt-5.4-mini",
+    "merged_from": [
+      "comp_13332939"
+    ],
+    "title_evidence_concerns": [],
+    "demand_score": 0.2222,
+    "priority_score": 0.5439,
+    "title_id": "Rancang dan implementasikan infrastructure as code untuk sistem cloud yang andal",
+    "description_id": "Buat dan pelihara definisi cloud infrastructure menggunakan Infrastructure as Code dan praktik automation. Pilih pola deployment standar yang mendukung repeatability, secure configuration, dan integrasi dengan delivery pipelines.",
+    "rationale_id": "Bukti sumber mengaitkan IaC dengan automated cloud systems dan continuous improvement of observability dalam lingkungan bergaya SRE. Redaksinya menunjukkan lebih dari sekadar konfigurasi rutin: ini melibatkan pemilihan implementation patterns yang membuat infrastructure dapat direproduksi, aman, dan mudah didukung. Seorang learner akan menunjukkan mastery dengan mendefinisikan infrastructure stacks, mengintegrasikannya ke dalam CI/CD, dan menunjukkan bahwa sistem yang dihasilkan mudah dioperasikan dan diperiksa. Ini berbeda dari incident response karena fokus di sini adalah membangun operating environment, bukan menangani live outages.",
+    "future_relevance_id": "Stable: cloud delivery terus mengandalkan IaC untuk operasi yang repeatable, auditable, dan scalable.",
+    "soft_skills_description_id": "Bekerja lintas tim development dan operations untuk menstandarkan environment dan menyelaraskan automation dengan kebutuhan production.",
+    "related_skills_id": [
+      "Infrastructure as Code (IaC)",
+      "SRE",
+      "observability"
+    ],
+    "soft_skills_required_id": [
+      "systems thinking",
+      "collaboration",
+      "analytical thinking",
+      "komunikasi"
+    ],
+    "occupation_matches": [
+      {
+        "occupation_en": "Cloud Solutions Architect",
+        "occupation_id": "Cloud Solutions Architect",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.6125,
+        "description_en": "The Cloud Solutions Architect occupational role covers competencies in designing end-to-end cloud architectures that meet business, security, and scalability requirements across one or more cloud providers (AWS, GCP, Azure). It includes defining solution patterns, evaluating trade-offs between services, planning migration strategies from on-premises to cloud, ensuring compliance with security and ",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "Cloud Engineer",
+        "occupation_id": "Cloud Engineer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.5827,
+        "description_en": "The Cloud Engineer occupational role covers competencies in designing, provisioning, and operating cloud infrastructure on AWS, Google Cloud, Microsoft Azure, or hybrid platforms. It includes selecting cloud services, configuring compute and networking resources, implementing security controls, automating deployments with infrastructure-as-code, monitoring cost and reliability, and integrating clo",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "Data Engineer",
+        "occupation_id": "Skema Okupasi Data Engineer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.4533,
+        "description_en": "The Data Engineer occupational certification scheme references SKKNI Kepmenaker No. 299 of 2020 (AI / Data Engineering Sub-field). It covers large-scale data infrastructure building, data workflow orchestration, and data storage system optimization competencies.",
+        "is_official": true,
+        "source_type": "Template-based / Kepmenaker 299/2020"
+      }
+    ]
+  },
+  {
+    "id": "comp_a2133781",
+    "title": "Characterize wireless performance with lab instruments and metrics",
+    "description": "Use RF test equipment and communication metrics to measure transmitter and receiver behavior, compare results to expected thresholds, and identify impairments. Apply tools such as spectrum analyzers and signal generators together with metrics like EVM and sensitivity to assess system quality.",
+    "related_skills": [
+      "EVM",
+      "sensitivity",
+      "spectrum analyzer",
+      "signal generator"
+    ],
+    "soft_skills_required": [
+      "analytical thinking",
+      "precision",
+      "documentation"
+    ],
+    "soft_skills_description": "Interprets noisy measurement data carefully, records test conditions, and explains results clearly to engineering partners.",
+    "rationale": "These skills cluster around validation work: the source sentences pair lab equipment with performance measures used in wireless characterization. EVM and sensitivity are not abstract theory terms here; they are practical indicators for judging link quality and impairment impact. A learner could demonstrate mastery by setting up tests, collecting readings, interpreting deviations, and recommending corrective action. This competency is separate from integration because it focuses on measuring and diagnosing behavior after the system is assembled.",
+    "batch_reasoning_id": "br_a7ede639e8",
+    "contributing_item_ids": [
+      "item_e8a1e51f37",
+      "item_9f4c34aed8",
+      "item_23e731b3b0",
+      "item_fccb7e3584",
+      "item_113f4381ff",
+      "item_6a942ca9eb"
+    ],
+    "source_job_ids": [
+      "in-58b11e224f073c85",
+      "in-e4f142d537136fba"
+    ],
+    "source_sentence_ids": [
+      "in-58b11e224f073c85_0017",
+      "in-58b11e224f073c85_0020",
+      "in-e4f142d537136fba_0017",
+      "in-e4f142d537136fba_0019"
+    ],
+    "source_sentences": [
+      "Proficiency using and understanding of the theory of operation of lab equipment (spectrum analyzer, signal generator, power meter).",
+      "Experience using and understanding of the theory of operation of wireless/RF test equipment such as signal analyzer, signal generator, and spectrum analyzer."
+    ],
+    "future_relevance": "Stable: hardware validation and RF performance testing remain essential wherever wireless devices and transceivers are developed.",
+    "future_weight": 0.79,
+    "empirical_trend": "Stable",
+    "kkni_level": 4,
+    "kkni_level_source": "sbert_labeller",
+    "kkni_match_similarity": 0.3438,
+    "education_levels_demanded": {
+      "S1": 1.0
+    },
+    "education_kkni_demanded": {
+      "6": 1.0
+    },
+    "n_jobs_with_education": 2,
+    "grounding_score_preview": 1.0,
+    "grounding_flagged": false,
+    "grounding_score": 0.5,
+    "skill_grounding_score": 0.5,
+    "sentence_relevance_score": 1.0,
+    "grounding_passed": true,
+    "grounding_method": "sbert",
+    "grounding_reasoning": "skill_grounding = 2/4 = 0.500 | sentence_relevance = 2/2 = 1.000 | canonical (min) = 0.500 (threshold 0.50). Skills not well-supported: 'EVM' (best_cos=0.11), 'sensitivity' (best_cos=0.19). ",
+    "evaluator_version": "v2.5.0",
+    "generated_at": "2026-05-13T11:46:31.675479+00:00",
+    "generator_version": "v2.0.0",
+    "cluster_id": "cluster_h0002",
+    "cluster_summary_label": "analyzer signal generator: integration, bs",
+    "provider": "jatevo",
+    "model": "gpt-5.4-mini",
+    "merged_from": [],
+    "title_evidence_concerns": [
+      {
+        "term": "Characterize",
+        "literal_hits": 0,
+        "n_sentences": 2,
+        "min_required": 2,
+        "severity": "warning"
+      }
+    ],
+    "demand_score": 0.0741,
+    "priority_score": 0.4166,
+    "title_id": "Karakterisasi kinerja wireless dengan instrumen lab dan metrik",
+    "description_id": "Gunakan RF test equipment dan communication metrics untuk mengukur perilaku transmitter dan receiver, membandingkan hasil dengan expected thresholds, dan mengidentifikasi impairment. Terapkan tools seperti spectrum analyzers dan signal generators bersama metrik seperti EVM dan sensitivity untuk menilai kualitas sistem.",
+    "rationale_id": "Keterampilan ini berpusat pada pekerjaan validasi: kalimat sumber memasangkan peralatan laboratorium dengan ukuran performa yang digunakan dalam karakterisasi wireless. EVM dan sensitivity di sini bukan istilah teori abstrak; melainkan indikator praktis untuk menilai kualitas link dan dampak impairment. Seorang pembelajar dapat menunjukkan penguasaan dengan menyiapkan pengujian, mengumpulkan pembacaan, menafsirkan penyimpangan, dan merekomendasikan tindakan korektif. Kompetensi ini terpisah dari integrasi karena berfokus pada pengukuran dan diagnosis perilaku setelah sistem dirakit.",
+    "future_relevance_id": "Stabil: validasi hardware dan pengujian performa RF tetap penting di mana pun wireless devices dan transceivers dikembangkan.",
+    "soft_skills_description_id": "Menafsirkan data pengukuran yang berisik dengan hati-hati, mencatat kondisi pengujian, dan menjelaskan hasil dengan jelas kepada mitra engineering.",
+    "related_skills_id": [
+      "EVM",
+      "sensitivity",
+      "spectrum analyzer",
+      "signal generator"
+    ],
+    "soft_skills_required_id": [
+      "analytical thinking",
+      "presisi",
+      "dokumentasi"
+    ],
+    "occupation_matches": []
+  },
+  {
+    "id": "comp_87fe1e15",
+    "title": "Train and refine machine learning models",
+    "description": "Build model training workflows that turn prepared data into validated models and improved performance. Apply feature engineering, run offline and online experiments, and adjust training approaches within a standard ML pipeline from data ingestion through monitoring.",
+    "related_skills": [
+      "model training",
+      "modelling"
+    ],
+    "soft_skills_required": [
+      "attention to detail",
+      "analytical thinking",
+      "perseverance"
+    ],
+    "soft_skills_description": "Carefully inspect data and results, compare alternatives objectively, and iterate until the model is reliable enough for use.",
+    "rationale": "The evidence repeatedly points to hands-on creation and improvement of model-based solutions, not just theoretical understanding. One source ties modelling to mission engineering and simulation, while another places model training inside a full lifecycle pipeline with experimentation and monitoring. A learner mastering this competency could assemble training workflows, compare model results, and refine methods for a defined use case. It is distinct from broader problem-solving because the focus is specifically on model construction, evaluation, and lifecycle operation.",
+    "batch_reasoning_id": "br_3b75728893",
+    "contributing_item_ids": [
+      "item_b90ce3df84",
+      "item_aa7e76caa2",
+      "item_2437a26af5",
+      "item_9e6c875bf4",
+      "item_57ce3cc4a0",
+      "item_a5818b43e8"
+    ],
+    "source_job_ids": [
+      "in-0cb3a9ea8f5915d3",
+      "in-3ec9eba42d6b41eb",
+      "in-68a233b7b64c3e73",
+      "in-68a989aae163f3a3",
+      "in-e3b585ed9e8a5ece"
+    ],
+    "source_sentence_ids": [
+      "in-0cb3a9ea8f5915d3_0020",
+      "in-3ec9eba42d6b41eb_0017",
+      "in-68a233b7b64c3e73_0012",
+      "in-68a989aae163f3a3_0004",
+      "in-e3b585ed9e8a5ece_0022",
+      "in-e3b585ed9e8a5ece_0025"
+    ],
+    "source_sentences": [
+      "Works on training data collection, feature engineering, model training, offline and online experimentation.",
+      "You will design, integrate, and optimize full -lifecycle ML pipelines, from data ingestion and model training to deployment and monitoring, ensuring all solutions meet DoW and Intelligence Community security and compliance standards.",
+      "You have hands -on experience with model training using TensorFlow and PyTorch.",
+      "You have experience with model training and evaluation, tuning hyperparameters and evaluating model performance using metrics such as accuracy, precision, recall, etc.",
+      "Depending on your experience: Provide technical mentorship and guidance to the ML research community, advising on projects, and shaping our research roadmap based on your deep technical expertise. Provide developmental support to other ML research scientists. Create, lead, and run ML research projects, fostering collaborative and diverse teams to solve high priority modelling problems.",
+      "You will apply mission engineering, modelling and simulation to ensure integration and traceability across the full lifecycle."
+    ],
+    "future_relevance": "Stable: model training remains a core capability as ML systems move from experimentation into production and monitoring.",
+    "future_weight": 0.84,
+    "empirical_trend": "Emerging",
+    "kkni_level": 5,
+    "kkni_level_source": "sbert_labeller",
+    "kkni_match_similarity": 0.3877,
+    "education_levels_demanded": {
+      "S2": 0.6,
+      "S3": 0.2,
+      "S1": 0.2
+    },
+    "education_kkni_demanded": {
+      "8": 0.6,
+      "9": 0.2,
+      "6": 0.2
+    },
+    "n_jobs_with_education": 5,
+    "grounding_score_preview": 1.0,
+    "grounding_flagged": false,
+    "grounding_score": 0.5,
+    "skill_grounding_score": 0.5,
+    "sentence_relevance_score": 0.6667,
+    "grounding_passed": true,
+    "grounding_method": "sbert",
+    "grounding_reasoning": "skill_grounding = 1/2 = 0.500 | sentence_relevance = 4/6 = 0.667 | canonical (min) = 0.500 (threshold 0.50). Skills not well-supported: 'modelling' (best_cos=0.45). Sentences off-topic: 2 of 6 (e.g., sent#4 cos=0.45, sent#5 cos=0.28). ",
+    "evaluator_version": "v2.5.0",
+    "generated_at": "2026-05-13T11:46:50.692252+00:00",
+    "generator_version": "v2.0.0",
+    "cluster_id": "cluster_h0004",
+    "cluster_summary_label": "complex problems model: modelling, solve",
+    "provider": "jatevo",
+    "model": "gpt-5.4-mini",
+    "merged_from": [],
+    "title_evidence_concerns": [],
+    "demand_score": 0.1852,
+    "priority_score": 0.4761,
+    "title_id": "Latih dan refine model machine learning",
+    "description_id": "Bangun workflow model training yang mengubah data yang telah disiapkan menjadi model yang tervalidasi dan performa yang lebih baik. Terapkan feature engineering, jalankan eksperimen offline dan online, serta sesuaikan pendekatan training di dalam pipeline ML standar dari data ingestion hingga monitoring.",
+    "rationale_id": "Bukti berulang kali menunjuk pada pembuatan dan peningkatan solusi berbasis model secara hands-on, bukan hanya pemahaman teoretis. Salah satu sumber mengaitkan modelling dengan mission engineering dan simulation, sementara sumber lain menempatkan model training di dalam full lifecycle pipeline dengan experimentation dan monitoring. Seorang pembelajar yang menguasai competency ini dapat menyusun training workflows, membandingkan hasil model, dan menyempurnakan methods untuk use case yang ditentukan. Ini berbeda dari broader problem-solving karena fokusnya secara spesifik pada model construction, evaluation, dan lifecycle operation.",
+    "future_relevance_id": "Stabil: model training tetap menjadi kemampuan inti saat sistem ML bergerak dari eksperimen ke production dan monitoring.",
+    "soft_skills_description_id": "Periksa data dan hasil dengan cermat, bandingkan alternatif secara objektif, dan lakukan iterasi sampai model cukup andal untuk digunakan.",
+    "related_skills_id": [
+      "model training",
+      "modelling"
+    ],
+    "soft_skills_required_id": [
+      "perhatian terhadap detail",
+      "analytical thinking",
+      "perseverance"
+    ],
+    "occupation_matches": [
+      {
+        "occupation_en": "Machine Learning Engineer",
+        "occupation_id": "Machine Learning Engineer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.6276,
+        "description_en": "The Machine Learning Engineer occupational role covers competencies in designing, training, and deploying machine learning models for production use. It includes selecting algorithms and architectures, preparing training datasets, training and evaluating models using frameworks such as TensorFlow or PyTorch, optimising model inference, building inference services and APIs, and monitoring model per",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "MLOps Engineer",
+        "occupation_id": "MLOps Engineer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.6147,
+        "description_en": "The MLOps Engineer occupational role covers competencies in operationalising machine learning models. It includes building ML pipelines for data ingestion, training, and deployment; managing model versioning and experiment tracking with tools like MLflow or Weights & Biases; deploying models at scale on cloud or on-premises infrastructure; monitoring model drift and retraining; and integrating ML ",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "NLP / Language Model Engineer",
+        "occupation_id": "NLP / Language Model Engineer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.5202,
+        "description_en": "The NLP / Language Model Engineer occupational role covers competencies in building applications that use natural language processing or large language models. It includes selecting and fine-tuning pretrained models, implementing prompt engineering and retrieval-augmented generation (RAG), evaluating model outputs for classification, generation, retrieval, or sequence tasks, and integrating langua",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      }
+    ]
+  },
+  {
+    "id": "comp_5e55aed6",
+    "title": "Design accessible interaction flows for complex products",
+    "description": "Create intuitive user interactions for complex digital products while applying accessibility principles throughout the design process. Shape flows, prototype solutions, and refine interface behavior so users can complete tasks efficiently and inclusively.",
+    "related_skills": [
+      "interaction design",
+      "accessibility"
+    ],
+    "soft_skills_required": [
+      "user empathy",
+      "clear communication"
+    ],
+    "soft_skills_description": "Understand user needs, explain design decisions, and collaborate with stakeholders to refine interactions and accessibility choices.",
+    "rationale": "The evidence consistently links interaction design with accessibility in the context of building usable product experiences, not just visual polish. The examples emphasize prototyping, high-fidelity execution, and improving workflows, which supports a competency about designing interactions that work for diverse users. A learner could demonstrate mastery by producing task flows, prototypes, and interface decisions that meet accessibility requirements. This is distinct from systems thinking because the focus here is on the user-facing interaction layer and inclusive execution rather than broader cross-domain integration.",
+    "batch_reasoning_id": "br_d1c520914f",
+    "contributing_item_ids": [
+      "item_3486461a82",
+      "item_780ef29723",
+      "item_baefbc8075",
+      "item_ef500b8e8c",
+      "item_e26b1e9422"
+    ],
+    "source_job_ids": [
+      "in-0bba5604e1a0eace",
+      "in-515fc446eb9b09b4",
+      "in-653781d9bb66c9e7",
+      "in-d19ab4d4d2695f83"
+    ],
+    "source_sentence_ids": [
+      "in-0bba5604e1a0eace_0005",
+      "in-515fc446eb9b09b4_0022",
+      "in-653781d9bb66c9e7_0017",
+      "in-d19ab4d4d2695f83_0005"
+    ],
+    "source_sentences": [
+      "Craft Development Build foundational skills in interaction design, prototyping, accessibility, and systems thinking. Gain hands -on experience with AI -specific UX patterns Strengthen presentation skills by sharing work in small group settings.",
+      "Design Craft High -level competence across interaction design, information architecture, and systems thinking. Experience simplifying complex, domain -heavy workflows into intuitive experiences. Strong product sense — you understand how design decisions affect behaviour, metrics, and business outcomes. Ability to work fluidly between discovery, concepting, prototyping, and high -fidelity execution.",
+      "This role requires strong QA practices, accessibility expertise, and the ability to deliver results under project deadlines.",
+      "The ideal candidate will have a strong background in accessibility, and a passion for delivering exceptional customer experiences."
+    ],
+    "future_relevance": "Stable: accessible interaction design remains essential as product teams face stronger usability expectations and accessibility requirements.",
+    "future_weight": 0.78,
+    "empirical_trend": "Emerging",
+    "kkni_level": 5,
+    "kkni_level_source": "llm_suggested",
+    "kkni_match_similarity": null,
+    "education_levels_demanded": {
+      "S1": 1.0
+    },
+    "education_kkni_demanded": {
+      "6": 1.0
+    },
+    "n_jobs_with_education": 2,
+    "grounding_score_preview": 1.0,
+    "grounding_flagged": false,
+    "grounding_score": 0.5,
+    "skill_grounding_score": 0.5,
+    "sentence_relevance_score": 0.5,
+    "grounding_passed": true,
+    "grounding_method": "sbert",
+    "grounding_reasoning": "skill_grounding = 1/2 = 0.500 | sentence_relevance = 2/4 = 0.500 | canonical (min) = 0.500 (threshold 0.50). Skills not well-supported: 'interaction design' (best_cos=0.42). Sentences off-topic: 2 of 4 (e.g., sent#2 cos=0.31, sent#3 cos=0.32). ",
+    "evaluator_version": "v2.5.0",
+    "generated_at": "2026-05-13T11:48:28.652196+00:00",
+    "generator_version": "v2.0.0",
+    "cluster_id": "cluster_h0013",
+    "cluster_summary_label": "accessibility systems thinking: interaction, design",
+    "provider": "jatevo",
+    "model": "gpt-5.4-mini",
+    "merged_from": [],
+    "title_evidence_concerns": [],
+    "demand_score": 0.1481,
+    "priority_score": 0.4433,
+    "title_id": "Rancang alur interaksi yang aksesibel untuk produk yang kompleks",
+    "description_id": "Buat interaksi user yang intuitif untuk produk digital yang kompleks sambil menerapkan prinsip accessibility sepanjang proses design. Bentuk alur, prototype solusi, dan perbaiki perilaku interface agar user dapat menyelesaikan tugas secara efisien dan inklusif.",
+    "rationale_id": "Bukti secara konsisten mengaitkan interaction design dengan accessibility dalam konteks membangun product experience yang usable, bukan hanya visual polish. Contoh-contohnya menekankan prototyping, high-fidelity execution, dan perbaikan workflows, yang mendukung kompetensi tentang merancang interactions yang bekerja untuk diverse users. Seorang learner dapat menunjukkan mastery dengan menghasilkan task flows, prototypes, dan interface decisions yang memenuhi accessibility requirements. Ini berbeda dari systems thinking karena fokus di sini adalah pada lapisan interaction yang berhadapan langsung dengan user dan inclusive execution, bukan integrasi lintas domain yang lebih luas.",
+    "future_relevance_id": "Stable: accessible interaction design tetap penting saat tim produk menghadapi ekspektasi usability yang lebih tinggi dan persyaratan accessibility.",
+    "soft_skills_description_id": "Memahami kebutuhan pengguna, menjelaskan keputusan desain, dan berkolaborasi dengan stakeholder untuk menyempurnakan interaksi dan pilihan accessibility.",
+    "related_skills_id": [
+      "interaction design",
+      "accessibility"
+    ],
+    "soft_skills_required_id": [
+      "user empathy",
+      "komunikasi yang jelas"
+    ],
+    "occupation_matches": [
+      {
+        "occupation_en": "Solutions Architect",
+        "occupation_id": "Solutions Architect",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.5236,
+        "description_en": "The Solutions Architect occupational role covers competencies in designing end-to-end software solutions that integrate multiple systems, technologies, and stakeholders. It includes gathering requirements, evaluating technical trade-offs, designing integration patterns between enterprise systems, defining data flows and APIs, and producing architectural documentation that guides engineering teams.",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "UI/UX Designer",
+        "occupation_id": "UI/UX Designer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.5214,
+        "description_en": "The UI/UX Designer occupational role covers competencies in researching user needs, designing interaction flows, prototyping interfaces, applying systems thinking to product design, and ensuring accessibility across digital products. It includes user research and interviews, information architecture, wireframing and prototyping in tools such as Figma, conducting usability testing, applying design ",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "Embedded Systems Engineer",
+        "occupation_id": "Embedded Systems Engineer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.4539,
+        "description_en": "The Embedded Systems Engineer occupational role covers competencies in designing and programming software that runs on embedded systems and IoT devices. It includes programming in C or C++ on microcontrollers (ARM, AVR, ESP32), designing firmware, communicating with sensors and actuators, optimising for memory and power constraints, integrating with wireless protocols (Bluetooth, LoRa, WiFi), and ",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      }
+    ]
+  },
+  {
+    "id": "comp_96234384",
+    "title": "Integrate systems thinking into product and workflow design",
+    "description": "Analyze how design decisions affect connected workflows, technical constraints, metrics, and business outcomes. Use systems thinking to simplify complex, domain-heavy problems into coherent product structures and practical design choices.",
+    "related_skills": [
+      "systems thinking",
+      "interaction design"
+    ],
+    "soft_skills_required": [
+      "analytical reasoning",
+      "collaboration"
+    ],
+    "soft_skills_description": "Work across product, engineering, and business perspectives, and explain trade-offs in a way that supports aligned decisions.",
+    "rationale": "The source sentences show systems thinking used to handle complex technical domains, balance speed and clarity, and connect design choices to metrics and business outcomes. That is broader than routine interface design because it requires selecting and evaluating solutions across multiple constraints. A learner could show mastery by mapping dependencies, identifying trade-offs, and justifying design decisions that improve the whole system. This competency is separate from the accessibility-focused one because its primary concern is cross-cutting analysis and integration, not inclusive interaction details.",
+    "batch_reasoning_id": "br_d1c520914f",
+    "contributing_item_ids": [
+      "item_48154f0069",
+      "item_13a00bb987",
+      "item_e3acda0c6f",
+      "item_3486461a82",
+      "item_780ef29723"
+    ],
+    "source_job_ids": [
+      "in-515fc446eb9b09b4",
+      "in-653781d9bb66c9e7",
+      "in-df48aa4df4f485e8"
+    ],
+    "source_sentence_ids": [
+      "in-515fc446eb9b09b4_0022",
+      "in-653781d9bb66c9e7_0017",
+      "in-df48aa4df4f485e8_0008"
+    ],
+    "source_sentences": [
+      "Craft Development Build foundational skills in interaction design, prototyping, accessibility, and systems thinking. Gain hands -on experience with AI -specific UX patterns Strengthen presentation skills by sharing work in small group settings.",
+      "The ideal candidate brings strong systems thinking, experience designing SaaS or internal tools, and the ability to work autonomously from discovery through delivery—balancing speed, clarity, and user empathy across complex technical domains.",
+      "Design Craft High -level competence across interaction design, information architecture, and systems thinking. Experience simplifying complex, domain -heavy workflows into intuitive experiences. Strong product sense — you understand how design decisions affect behaviour, metrics, and business outcomes. Ability to work fluidly between discovery, concepting, prototyping, and high -fidelity execution."
+    ],
+    "future_relevance": "Stable: as software products grow more interconnected, systems thinking remains a core design capability for reducing friction and risk.",
+    "future_weight": 0.8,
+    "empirical_trend": "Stable",
+    "kkni_level": 5,
+    "kkni_level_source": "sbert_labeller",
+    "kkni_match_similarity": 0.3884,
+    "education_levels_demanded": {
+      "S1": 0.5,
+      "S3": 0.5
+    },
+    "education_kkni_demanded": {
+      "6": 0.5,
+      "9": 0.5
+    },
+    "n_jobs_with_education": 2,
+    "grounding_score_preview": 1.0,
+    "grounding_flagged": false,
+    "grounding_score": 0.5,
+    "skill_grounding_score": 0.5,
+    "sentence_relevance_score": 0.6667,
+    "grounding_passed": true,
+    "grounding_method": "sbert",
+    "grounding_reasoning": "skill_grounding = 1/2 = 0.500 | sentence_relevance = 2/3 = 0.667 | canonical (min) = 0.500 (threshold 0.50). Skills not well-supported: 'interaction design' (best_cos=0.42). Sentences off-topic: 1 of 3 (e.g., sent#0 cos=0.37). ",
+    "evaluator_version": "v2.5.0",
+    "generated_at": "2026-05-13T11:48:28.652538+00:00",
+    "generator_version": "v2.0.0",
+    "cluster_id": "cluster_h0013",
+    "cluster_summary_label": "accessibility systems thinking: interaction, design",
+    "provider": "jatevo",
+    "model": "gpt-5.4-mini",
+    "merged_from": [],
+    "title_evidence_concerns": [],
+    "demand_score": 0.1111,
+    "priority_score": 0.4344,
+    "title_id": "Integrasikan systems thinking ke dalam desain produk dan workflow",
+    "description_id": "Analisis bagaimana keputusan desain memengaruhi workflow yang terhubung, kendala teknis, metrik, dan hasil bisnis. Gunakan systems thinking untuk menyederhanakan masalah yang kompleks dan sangat bergantung pada domain menjadi struktur produk yang koheren dan pilihan desain yang praktis.",
+    "rationale_id": "Kalimat sumber menunjukkan systems thinking digunakan untuk menangani domain teknis yang kompleks, menyeimbangkan kecepatan dan kejelasan, serta menghubungkan pilihan desain dengan metrics dan business outcomes. Itu lebih luas daripada routine interface design karena memerlukan pemilihan dan evaluasi solusi di berbagai constraints. Seorang learner dapat menunjukkan mastery dengan memetakan dependencies, mengidentifikasi trade-offs, dan membenarkan design decisions yang meningkatkan keseluruhan system. Competency ini terpisah dari yang berfokus pada accessibility karena perhatian utamanya adalah cross-cutting analysis dan integration, bukan inclusive interaction details.",
+    "future_relevance_id": "Stabil: seiring produk software menjadi semakin saling terhubung, systems thinking tetap menjadi kemampuan desain inti untuk mengurangi friction dan risk.",
+    "soft_skills_description_id": "Bekerja lintas perspektif product, engineering, dan business, serta jelaskan trade-off dengan cara yang mendukung keputusan yang selaras.",
+    "related_skills_id": [
+      "systems thinking",
+      "interaction design"
+    ],
+    "soft_skills_required_id": [
+      "analytical reasoning",
+      "collaboration"
+    ],
+    "occupation_matches": [
+      {
+        "occupation_en": "Solutions Architect",
+        "occupation_id": "Solutions Architect",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.5735,
+        "description_en": "The Solutions Architect occupational role covers competencies in designing end-to-end software solutions that integrate multiple systems, technologies, and stakeholders. It includes gathering requirements, evaluating technical trade-offs, designing integration patterns between enterprise systems, defining data flows and APIs, and producing architectural documentation that guides engineering teams.",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "NLP / Language Model Engineer",
+        "occupation_id": "NLP / Language Model Engineer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.5055,
+        "description_en": "The NLP / Language Model Engineer occupational role covers competencies in building applications that use natural language processing or large language models. It includes selecting and fine-tuning pretrained models, implementing prompt engineering and retrieval-augmented generation (RAG), evaluating model outputs for classification, generation, retrieval, or sequence tasks, and integrating langua",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "Embedded Systems Engineer",
+        "occupation_id": "Embedded Systems Engineer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.4576,
+        "description_en": "The Embedded Systems Engineer occupational role covers competencies in designing and programming software that runs on embedded systems and IoT devices. It includes programming in C or C++ on microcontrollers (ARM, AVR, ESP32), designing firmware, communicating with sensors and actuators, optimising for memory and power constraints, integrating with wireless protocols (Bluetooth, LoRa, WiFi), and ",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      }
+    ]
+  },
+  {
+    "id": "comp_6b564a42",
+    "title": "Develop and optimize language-model and NLP solutions",
+    "description": "Apply machine learning methods to build, adapt, and improve systems that process human language. The work includes selecting appropriate approaches for large language models and natural language processing tasks, then evaluating performance and refining model behavior for the target use case.",
+    "related_skills": [
+      "large language models",
+      "natural language processing"
+    ],
+    "soft_skills_required": [
+      "analytical reasoning",
+      "problem solving",
+      "communication with stakeholders"
+    ],
+    "soft_skills_description": "Explain model tradeoffs, interpret task requirements, and communicate performance limits or risks clearly to technical and non-technical collaborators.",
+    "rationale": "The evidence centers on AI/ML work with text-based models rather than generic data science. Large language models and natural language processing appear together as core technical domains, and the source sentences point to both development and optimization of model behavior. A learner mastering this competency could choose methods, test outputs, and improve model performance for language tasks. It is distinct from the infrastructure competency because the focus is on model design and evaluation, not deployment or runtime operations.",
+    "batch_reasoning_id": "br_74452f391c",
+    "contributing_item_ids": [
+      "item_265a7d64b9",
+      "item_64005c0962",
+      "item_f32f0a0fca",
+      "item_d3b4343891",
+      "item_076726a559"
+    ],
+    "source_job_ids": [
+      "in-1b69bb7870b74542",
+      "in-2c2310c2c4f07f3a",
+      "in-3f6b4beed747b16e",
+      "in-980ea9e792a15159",
+      "in-f331fb5c7713405d"
+    ],
+    "source_sentence_ids": [
+      "in-1b69bb7870b74542_0005",
+      "in-2c2310c2c4f07f3a_0008",
+      "in-3f6b4beed747b16e_0007",
+      "in-980ea9e792a15159_0003",
+      "in-f331fb5c7713405d_0012"
+    ],
+    "source_sentences": [
+      "You will support the development of AI/ML algorithms in a multitude of disciplines from large language models, natural language processing, and time -series predictive analytics.",
+      "You will be responsible for solving hard compiler optimization problems to achieve optimum performance for variety of ML model families including massive scale large language models like Llama, Deepseek, and beyond as well as stable diffusion, vision transformers and multi -model models.",
+      "You will bring a practical understanding of generative AI, large language models and modern AI frameworks, along with experience building APIs, services and integrations.",
+      "MORSE is searching for a Lead Data Scientist with expertise in data analysis, data science, and algorithm development in one or more of a variety of fields including visual classification, big data, natural language processing, machine translation, time sequenced data, and advanced metrics."
+    ],
+    "future_relevance": "Emerging, because language-model and NLP capabilities are expanding quickly and are being embedded into more production systems.",
+    "future_weight": 0.86,
+    "empirical_trend": "Emerging",
+    "kkni_level": 5,
+    "kkni_level_source": "sbert_labeller",
+    "kkni_match_similarity": 0.4402,
+    "education_levels_demanded": {
+      "S1": 0.25,
+      "S2": 0.5,
+      "S3": 0.25
+    },
+    "education_kkni_demanded": {
+      "6": 0.25,
+      "8": 0.5,
+      "9": 0.25
+    },
+    "n_jobs_with_education": 4,
+    "grounding_score_preview": 1.0,
+    "grounding_flagged": false,
+    "grounding_score": 0.5,
+    "skill_grounding_score": 0.5,
+    "sentence_relevance_score": 0.75,
+    "grounding_passed": true,
+    "grounding_method": "sbert",
+    "grounding_reasoning": "skill_grounding = 1/2 = 0.500 | sentence_relevance = 3/4 = 0.750 | canonical (min) = 0.500 (threshold 0.50). Skills not well-supported: 'natural language processing' (best_cos=0.38). Sentences off-topic: 1 of 4 (e.g., sent#3 cos=0.26). ",
+    "evaluator_version": "v2.5.0",
+    "generated_at": "2026-05-13T11:48:59.337092+00:00",
+    "generator_version": "v2.0.0",
+    "cluster_id": "cluster_h0017",
+    "cluster_summary_label": "devsecops distributed computing: language, models",
+    "provider": "jatevo",
+    "model": "gpt-5.4-mini",
+    "merged_from": [],
+    "title_evidence_concerns": [
+      {
+        "term": "NLP",
+        "literal_hits": 0,
+        "n_sentences": 4,
+        "min_required": 2,
+        "severity": "warning"
+      }
+    ],
+    "demand_score": 0.1852,
+    "priority_score": 0.4821,
+    "title_id": "Kembangkan dan optimalkan solusi language-model dan NLP",
+    "description_id": "Terapkan metode machine learning untuk membangun, menyesuaikan, dan meningkatkan sistem yang memproses bahasa manusia. Pekerjaan ini mencakup pemilihan pendekatan yang tepat untuk large language models dan tugas natural language processing, lalu mengevaluasi performa serta menyempurnakan perilaku model untuk use case yang dituju.",
+    "rationale_id": "Bukti ini berpusat pada pekerjaan AI/ML dengan model berbasis teks, bukan data science generik. Large language models dan natural language processing muncul bersama sebagai domain teknis inti, dan kalimat sumber menunjukkan baik pengembangan maupun optimisasi perilaku model. Seorang pembelajar yang menguasai competency ini dapat memilih metode, menguji output, dan meningkatkan performa model untuk tugas bahasa. Ini berbeda dari competency infrastruktur karena fokusnya adalah pada desain dan evaluasi model, bukan deployment atau operasi runtime.",
+    "future_relevance_id": "Muncul, karena kapabilitas language-model dan NLP berkembang dengan cepat dan semakin disematkan ke lebih banyak sistem production.",
+    "soft_skills_description_id": "Jelaskan tradeoff model, interpretasikan requirement tugas, dan komunikasikan batasan performa atau risiko dengan jelas kepada kolaborator teknis maupun non-teknis.",
+    "related_skills_id": [
+      "large language models",
+      "natural language processing"
+    ],
+    "soft_skills_required_id": [
+      "analytical reasoning",
+      "problem solving",
+      "komunikasi dengan stakeholders"
+    ],
+    "occupation_matches": [
+      {
+        "occupation_en": "NLP / Language Model Engineer",
+        "occupation_id": "NLP / Language Model Engineer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.6196,
+        "description_en": "The NLP / Language Model Engineer occupational role covers competencies in building applications that use natural language processing or large language models. It includes selecting and fine-tuning pretrained models, implementing prompt engineering and retrieval-augmented generation (RAG), evaluating model outputs for classification, generation, retrieval, or sequence tasks, and integrating langua",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "Machine Learning Engineer",
+        "occupation_id": "Machine Learning Engineer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.4584,
+        "description_en": "The Machine Learning Engineer occupational role covers competencies in designing, training, and deploying machine learning models for production use. It includes selecting algorithms and architectures, preparing training datasets, training and evaluating models using frameworks such as TensorFlow or PyTorch, optimising model inference, building inference services and APIs, and monitoring model per",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "MLOps Engineer",
+        "occupation_id": "MLOps Engineer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.433,
+        "description_en": "The MLOps Engineer occupational role covers competencies in operationalising machine learning models. It includes building ML pipelines for data ingestion, training, and deployment; managing model versioning and experiment tracking with tools like MLflow or Weights & Biases; deploying models at scale on cloud or on-premises infrastructure; monitoring model drift and retraining; and integrating ML ",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      }
+    ]
+  },
+  {
+    "id": "comp_de672417",
+    "title": "Work cross-functionally to deliver shared improvements",
+    "description": "Coordinate with multiple teams to gather data, build a shared view of an issue, and align on practical improvement plans. Present findings and recommendations in a way that helps different stakeholders agree on actions and execute them together.",
+    "related_skills": [
+      "work cross -functionally",
+      "work with others"
+    ],
+    "soft_skills_required": [
+      "communication",
+      "stakeholder management"
+    ],
+    "soft_skills_description": "The learner needs to translate analysis into clear recommendations, listen to competing priorities, and build agreement across teams without relying on authority alone.",
+    "rationale": "The source sentences describe collaboration as an active delivery skill: obtaining and analysing data, presenting insight, and gaining agreement across multiple teams. They also show teamwork used to create company-wide remediation and improvement strategies, which makes this broader than casual cooperation. A learner could demonstrate mastery by leading a small improvement effort, aligning different functions on evidence, and coordinating execution. It is distinct from the IAM competency because the focus is not security knowledge itself but the social and analytical process of getting improvements accepted and implemented. KKNI 5 fits because the work involves analysing information, planning actions, and coordinating established methods across groups.",
+    "batch_reasoning_id": "br_dad54710cd",
+    "contributing_item_ids": [
+      "item_8031d8ef13",
+      "item_4a113178df",
+      "item_e81abf0859",
+      "item_5876a79776"
+    ],
+    "source_job_ids": [
+      "in-2fb22a4e9210f78b",
+      "in-37fe4aa3a970b90e",
+      "in-b2c26cfe1ad4b255"
+    ],
+    "source_sentence_ids": [
+      "in-2fb22a4e9210f78b_0020",
+      "in-37fe4aa3a970b90e_0011",
+      "in-37fe4aa3a970b90e_0012",
+      "in-b2c26cfe1ad4b255_0007"
+    ],
+    "source_sentences": [
+      "You work cross -functionally to identity and deliver opportunities for improvement; obtaining, analysing and presenting data and insight to stakeholders across multiple teams to gain agreement.",
+      "As part of the Data Analytics team, you will similarly work cross -functionally to design, build, and iterate on our stream processing and ingestion pipeline.",
+      "You work with others to generate remediation and improvement strategies of company -wide scale and to establish plans to execute these improvements.",
+      "We are looking for talented individuals who are passionate about the work they do, prepared to think differently, are pragmatic and able to work with others to influence outcomes."
+    ],
+    "future_relevance": "Stable, because cross-functional delivery is a persistent requirement in software and security work where changes affect many teams.",
+    "future_weight": 0.78,
+    "empirical_trend": "Emerging",
+    "kkni_level": 5,
+    "kkni_level_source": "sbert_labeller",
+    "kkni_match_similarity": 0.3884,
+    "education_levels_demanded": {
+      "D3": 0.5,
+      "S1": 0.5
+    },
+    "education_kkni_demanded": {
+      "5": 0.5,
+      "6": 0.5
+    },
+    "n_jobs_with_education": 2,
+    "grounding_score_preview": 1.0,
+    "grounding_flagged": false,
+    "grounding_score": 0.5,
+    "skill_grounding_score": 0.5,
+    "sentence_relevance_score": 0.5,
+    "grounding_passed": true,
+    "grounding_method": "sbert",
+    "grounding_reasoning": "skill_grounding = 1/2 = 0.500 | sentence_relevance = 2/4 = 0.500 | canonical (min) = 0.500 (threshold 0.50). Skills not well-supported: 'work with others' (best_cos=0.44). Sentences off-topic: 2 of 4 (e.g., sent#1 cos=0.37, sent#3 cos=0.22). ",
+    "evaluator_version": "v2.5.0",
+    "generated_at": "2026-05-13T11:48:20.160892+00:00",
+    "generator_version": "v2.0.0",
+    "cluster_id": "cluster_h0012",
+    "cluster_summary_label": "cross functionally work: comptia, iam",
+    "provider": "jatevo",
+    "model": "gpt-5.4-mini",
+    "merged_from": [],
+    "title_evidence_concerns": [],
+    "demand_score": 0.1111,
+    "priority_score": 0.4284,
+    "title_id": "Bekerja lintas fungsi untuk menghasilkan perbaikan bersama",
+    "description_id": "Berkoordinasi dengan beberapa tim untuk mengumpulkan data, membangun pandangan bersama tentang suatu masalah, dan menyelaraskan rencana perbaikan yang praktis. Menyajikan temuan dan rekomendasi dengan cara yang membantu berbagai stakeholder menyepakati tindakan dan menjalankannya bersama-sama.",
+    "rationale_id": "Kalimat sumber menggambarkan kolaborasi sebagai keterampilan delivery yang aktif: memperoleh dan menganalisis data, menyajikan insight, dan mendapatkan kesepakatan di berbagai tim. Kalimat tersebut juga menunjukkan kerja tim digunakan untuk membuat strategi remediation dan improvement di seluruh perusahaan, yang membuatnya lebih luas daripada cooperation biasa. Seorang learner dapat menunjukkan mastery dengan memimpin upaya improvement kecil, menyelaraskan berbagai fungsi berdasarkan bukti, dan mengoordinasikan execution. Ini berbeda dari kompetensi IAM karena fokusnya bukan pada pengetahuan security itu sendiri, melainkan pada proses sosial dan analitis untuk mendapatkan improvement yang diterima dan diimplementasikan. KKNI 5 cocok karena pekerjaannya melibatkan analisis informasi, perencanaan tindakan, dan koordinasi metode yang sudah mapan di berbagai kelompok.",
+    "future_relevance_id": "Stabil, karena cross-functional delivery adalah persyaratan yang terus-menerus dalam pekerjaan software dan security di mana perubahan memengaruhi banyak tim.",
+    "soft_skills_description_id": "Pembelajar perlu menerjemahkan analisis menjadi rekomendasi yang jelas, mendengarkan prioritas yang saling bersaing, dan membangun kesepakatan lintas tim tanpa hanya mengandalkan otoritas.",
+    "related_skills_id": [
+      "bekerja lintas fungsi",
+      "bekerja dengan orang lain"
+    ],
+    "soft_skills_required_id": [
+      "komunikasi",
+      "stakeholder management"
+    ],
+    "occupation_matches": [
+      {
+        "occupation_en": "Solutions Architect",
+        "occupation_id": "Solutions Architect",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.4674,
+        "description_en": "The Solutions Architect occupational role covers competencies in designing end-to-end software solutions that integrate multiple systems, technologies, and stakeholders. It includes gathering requirements, evaluating technical trade-offs, designing integration patterns between enterprise systems, defining data flows and APIs, and producing architectural documentation that guides engineering teams.",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "Associate Data Scientist",
+        "occupation_id": "Skema Okupasi Associate Data Scientist",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.4191,
+        "description_en": "The Associate Data Scientist occupational certification scheme references SKKNI Kepmenaker No. 299 of 2020 (AI / Data Science Sub-field). It covers predictive modeling, model evaluation, and data analysis results communication competencies.",
+        "is_official": true,
+        "source_type": "Template-based / Kepmenaker 299/2020"
+      },
+      {
+        "occupation_en": "MLOps Engineer",
+        "occupation_id": "MLOps Engineer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.4112,
+        "description_en": "The MLOps Engineer occupational role covers competencies in operationalising machine learning models. It includes building ML pipelines for data ingestion, training, and deployment; managing model versioning and experiment tracking with tools like MLflow or Weights & Biases; deploying models at scale on cloud or on-premises infrastructure; monitoring model drift and retraining; and integrating ML ",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      }
+    ]
+  },
+  {
+    "id": "comp_900cffda",
+    "title": "Lead secure engineering delivery across teams",
+    "description": "Guide secure solution delivery by combining technical direction with collaboration across product, engineering, and architecture stakeholders. Coordinate implementation choices for SecDevOps-style work and align delivery with security frameworks and organizational standards.",
+    "related_skills": [
+      "technical leadership",
+      "CISM"
+    ],
+    "soft_skills_required": [
+      "Leadership",
+      "Stakeholder management",
+      "Strategic communication"
+    ],
+    "soft_skills_description": "Learners must influence decisions across teams, explain security priorities clearly, and coordinate delivery without relying on direct authority alone.",
+    "rationale": "The cluster includes explicit technical leadership language tied to SecDevOps, scalable secure solutions, and partnership with other leaders, which indicates responsibility beyond individual task execution. CISM appears as evidence of security management orientation and supports a leadership-oriented security competency rather than a standalone exam topic. A learner could demonstrate mastery by leading secure design reviews, aligning stakeholders on control decisions, and steering delivery toward a defined security architecture. This is distinct from the technical cybersecurity competency because it centers on coordination, decision-making, and direction across teams.",
+    "batch_reasoning_id": "br_148a1dcda5",
+    "contributing_item_ids": [
+      "item_6363b2fcb0",
+      "item_2ef36c19f2",
+      "item_417671e2cc",
+      "item_e200498d2a"
+    ],
+    "source_job_ids": [
+      "in-17cf96ddf558545a",
+      "in-825a8ea00a4830da",
+      "in-9efcf7cde3874508",
+      "in-bb8659b166898904",
+      "in-dfb85616896bcf18",
+      "in-eefdffe82c18dc8b"
+    ],
+    "source_sentence_ids": [
+      "in-17cf96ddf558545a_0002",
+      "in-825a8ea00a4830da_0002",
+      "in-9efcf7cde3874508_0002",
+      "in-bb8659b166898904_0004",
+      "in-dfb85616896bcf18_0008",
+      "in-eefdffe82c18dc8b_0005"
+    ],
+    "source_sentences": [
+      "This role provides technical leadership in SecDevOps, leveraging infrastructure and policy as code, open -source and COTS tools, and container -based platforms to deliver scalable, secure solutions aligned with Zero Trust (NIST 800 -207, DoD ZT RA).",
+      "The successful candidate will provide technical leadership and expert system programming support across the z/OS platform, ensuring high availability, performance and service stability.",
+      "The role provides technical leadership for network, firewall, server, cloud and identity platforms, ensuring they are robust, secure and aligned with safeguarding and cyber security best practice.",
+      "CompTIA Security +, EC -Council Certified Hacker, or CISM (Certified Information Security Manager)) are desirable Remote/Hybrid Policy: This role offers the flexibility of a fully remote environment."
+    ],
+    "future_relevance": "Stable, because secure engineering increasingly requires leaders who can bridge security, platform, and product delivery.",
+    "future_weight": 0.9,
+    "empirical_trend": "Emerging",
+    "kkni_level": 7,
+    "kkni_level_source": "sbert_labeller",
+    "kkni_match_similarity": 0.3822,
+    "education_levels_demanded": {
+      "S1": 1.0
+    },
+    "education_kkni_demanded": {
+      "6": 1.0
+    },
+    "n_jobs_with_education": 4,
+    "grounding_score_preview": 1.0,
+    "grounding_flagged": false,
+    "grounding_score": 0.5,
+    "skill_grounding_score": 1.0,
+    "sentence_relevance_score": 0.5,
+    "grounding_passed": true,
+    "grounding_method": "sbert",
+    "grounding_reasoning": "skill_grounding = 2/2 = 1.000 | sentence_relevance = 2/4 = 0.500 | canonical (min) = 0.500 (threshold 0.50). Sentences off-topic: 2 of 4 (e.g., sent#1 cos=0.38, sent#3 cos=0.41). ",
+    "evaluator_version": "v2.5.0",
+    "generated_at": "2026-05-13T11:48:36.046808+00:00",
+    "generator_version": "v2.0.0",
+    "cluster_id": "cluster_h0014",
+    "cluster_summary_label": "engineering cybersecurity cism: technical, leadership",
+    "provider": "jatevo",
+    "model": "gpt-5.4-mini",
+    "merged_from": [],
+    "title_evidence_concerns": [],
+    "demand_score": 0.2222,
+    "priority_score": 0.5089,
+    "title_id": "Pimpin delivery secure engineering lintas tim",
+    "description_id": "Pandu penyampaian solusi yang aman dengan menggabungkan arahan teknis bersama kolaborasi lintas pemangku kepentingan product, engineering, dan architecture. Koordinasikan pilihan implementasi untuk pekerjaan bergaya SecDevOps dan selaraskan delivery dengan security frameworks serta standar organisasi.",
+    "rationale_id": "Cluster ini mencakup bahasa kepemimpinan teknis yang eksplisit terkait dengan SecDevOps, scalable secure solutions, dan kemitraan dengan pemimpin lain, yang menunjukkan tanggung jawab di luar pelaksanaan tugas individual. CISM tampak sebagai bukti orientasi security management dan mendukung competency security yang berorientasi pada kepemimpinan, bukan sebagai topik ujian yang berdiri sendiri. Seorang learner dapat menunjukkan mastery dengan memimpin secure design reviews, menyelaraskan stakeholders pada keputusan control, dan mengarahkan delivery menuju security architecture yang telah ditetapkan. Ini berbeda dari competency cybersecurity teknis karena berfokus pada koordinasi, pengambilan keputusan, dan pengarahan lintas tim.",
+    "future_relevance_id": "Stabil, karena secure engineering semakin membutuhkan pemimpin yang dapat menjembatani security, platform, dan product delivery.",
+    "soft_skills_description_id": "Pembelajar harus memengaruhi keputusan lintas tim, menjelaskan prioritas security dengan jelas, dan mengoordinasikan delivery tanpa hanya mengandalkan otoritas langsung.",
+    "related_skills_id": [
+      "technical leadership",
+      "CISM"
+    ],
+    "soft_skills_required_id": [
+      "Leadership",
+      "Manajemen stakeholder",
+      "Komunikasi strategis"
+    ],
+    "occupation_matches": [
+      {
+        "occupation_en": "Engineering Tech Lead",
+        "occupation_id": "Engineering Tech Lead",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.6126,
+        "description_en": "The Engineering Tech Lead occupational role covers competencies in technical leadership within a software engineering team. It includes mentoring engineers, defining technical standards and review practices, owning architectural decisions, coordinating delivery across sprints, breaking down complex problems into actionable tasks, and balancing hands-on engineering work with team-facing responsibil",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "Solutions Architect",
+        "occupation_id": "Solutions Architect",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.4787,
+        "description_en": "The Solutions Architect occupational role covers competencies in designing end-to-end software solutions that integrate multiple systems, technologies, and stakeholders. It includes gathering requirements, evaluating technical trade-offs, designing integration patterns between enterprise systems, defining data flows and APIs, and producing architectural documentation that guides engineering teams.",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "Information Security Engineer",
+        "occupation_id": "Information Security Engineer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.4616,
+        "description_en": "The Information Security Engineer occupational role covers competencies in securing organisational systems and networks beyond the scope of the traditional Cyber Security Specialist. It includes implementing identity and access management (IAM), applying secure coding practices, vulnerability assessment and penetration testing, incident response, security monitoring with SIEM tools, and ensuring c",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      }
+    ]
+  },
+  {
+    "id": "comp_dad7d65c",
+    "title": "Integrate enterprise systems and data workflows",
+    "description": "Connect ERP and related business platforms to other systems using standard integration patterns and data workflows. Manage data movement across operational domains such as billing, claims, inventory, and cloud databases while preserving correctness and compliance.",
+    "related_skills": [
+      "ERP",
+      "data integration"
+    ],
+    "soft_skills_required": [
+      "systems thinking",
+      "cross-functional communication",
+      "documentation"
+    ],
+    "soft_skills_description": "Learners must trace dependencies across business systems, explain data flows to non-developers, and document interfaces and assumptions clearly.",
+    "rationale": "The examples place ERP inside interface and integration work, showing the need to connect enterprise platforms rather than simply administer them. Data integration appears with real-time processing, cloud database management, release automation, and domain workflows, which requires selecting standard methods and coordinating multiple moving parts. A learner can prove mastery by designing an integration path between business systems, mapping data flows, and validating that records move correctly across domains. This competency is separate from full-stack development because its main challenge is interoperability and workflow alignment across enterprise platforms.",
+    "batch_reasoning_id": "br_dfd5ba24b0",
+    "contributing_item_ids": [
+      "item_60571e8315",
+      "item_fbba4f246f",
+      "item_047bab5caf",
+      "item_e0f2afc598"
+    ],
+    "source_job_ids": [
+      "in-344392d5db21a549",
+      "in-5a54965a6f6afdc4",
+      "in-a7c80e2086f0d108",
+      "in-da48b82aff62ae6c"
+    ],
+    "source_sentence_ids": [
+      "in-344392d5db21a549_0001",
+      "in-5a54965a6f6afdc4_0011",
+      "in-a7c80e2086f0d108_0015",
+      "in-a7c80e2086f0d108_0040",
+      "in-da48b82aff62ae6c_0002"
+    ],
+    "source_sentences": [
+      "Required Experience interfacing with or working within CRM, ERP, eCommerce, or EMR/EHR solutions and common integration patterns.",
+      "Project Manager – SaaS ERP & Mobile Applications (On -Site) Location: On -site at our Retford office (DN22 7PX) Employment Type: Full -time About the Role We are looking for an experienced Project Manager to take ownership of the performance, planning, and delivery of our SaaS -based ERP platform and companion mobile applications.",
+      "This position’s primary responsibility is to provide database support to the production ERP suite.",
+      "Your work will span real -time data processing, Cloud database management, data integration, database release automation, and the delivery of custom data solutions."
+    ],
+    "future_relevance": "Stable: enterprises continue to modernize ERP and data pipelines, keeping integration skills essential even as specific platforms evolve.",
+    "future_weight": 0.78,
+    "empirical_trend": "Emerging",
+    "kkni_level": 5,
+    "kkni_level_source": "llm_suggested",
+    "kkni_match_similarity": null,
+    "education_levels_demanded": {
+      "S1": 1.0
+    },
+    "education_kkni_demanded": {
+      "6": 1.0
+    },
+    "n_jobs_with_education": 2,
+    "grounding_score_preview": 1.0,
+    "grounding_flagged": false,
+    "grounding_score": 0.5,
+    "skill_grounding_score": 0.5,
+    "sentence_relevance_score": 0.75,
+    "grounding_passed": true,
+    "grounding_method": "sbert",
+    "grounding_reasoning": "skill_grounding = 1/2 = 0.500 | sentence_relevance = 3/4 = 0.750 | canonical (min) = 0.500 (threshold 0.50). Skills not well-supported: 'ERP' (best_cos=0.40). Sentences off-topic: 1 of 4 (e.g., sent#1 cos=0.36). ",
+    "evaluator_version": "v2.5.0",
+    "generated_at": "2026-05-13T11:51:43.120687+00:00",
+    "generator_version": "v2.0.0",
+    "cluster_id": "cluster_h0035",
+    "cluster_summary_label": "data integration stack: erp, software",
+    "provider": "jatevo",
+    "model": "gpt-5.4-mini",
+    "merged_from": [],
+    "title_evidence_concerns": [],
+    "demand_score": 0.1481,
+    "priority_score": 0.4433,
+    "title_id": "Integrasikan enterprise systems dan data workflows",
+    "description_id": "Hubungkan ERP dan platform bisnis terkait ke sistem lain menggunakan pola integrasi standar dan workflow data. Kelola pergerakan data di seluruh domain operasional seperti billing, claims, inventory, dan cloud databases sambil menjaga keakuratan dan compliance.",
+    "rationale_id": "Contoh-contoh tersebut menempatkan ERP di dalam pekerjaan interface dan integration, menunjukkan perlunya menghubungkan platform enterprise daripada sekadar mengadministrasikannya. Data integration muncul bersama real-time processing, cloud database management, release automation, dan domain workflows, yang menuntut pemilihan metode standar serta koordinasi dari berbagai komponen yang bergerak. Seorang pembelajar dapat membuktikan penguasaan dengan merancang integration path antara business systems, memetakan data flows, dan memvalidasi bahwa records berpindah dengan benar lintas domain. Kompetensi ini terpisah dari full-stack development karena tantangan utamanya adalah interoperability dan penyelarasan workflow di seluruh platform enterprise.",
+    "future_relevance_id": "Stabil: enterprise terus memodernisasi ERP dan data pipelines, sehingga keterampilan integration tetap esensial meskipun platform spesifik terus berkembang.",
+    "soft_skills_description_id": "Peserta didik harus menelusuri dependencies lintas business systems, menjelaskan data flows kepada non-developers, dan mendokumentasikan interfaces serta assumptions secara jelas.",
+    "related_skills_id": [
+      "ERP",
+      "data integration"
+    ],
+    "soft_skills_required_id": [
+      "systems thinking",
+      "komunikasi lintas fungsi",
+      "dokumentasi"
+    ],
+    "occupation_matches": [
+      {
+        "occupation_en": "Associate Data Engineer",
+        "occupation_id": "Skema Okupasi Insinyur Data Madya",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.5542,
+        "description_en": "The Associate Data Engineer occupational certification scheme references SKKNI Kepmenaker No. 299 of 2020 (AI / Data Engineering Sub-field). It covers data pipeline design, ETL processes, data warehouse management, and data quality assurance competencies.",
+        "is_official": true,
+        "source_type": "Template-based / Kepmenaker 299/2020"
+      },
+      {
+        "occupation_en": "Cloud Solutions Architect",
+        "occupation_id": "Cloud Solutions Architect",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.5326,
+        "description_en": "The Cloud Solutions Architect occupational role covers competencies in designing end-to-end cloud architectures that meet business, security, and scalability requirements across one or more cloud providers (AWS, GCP, Azure). It includes defining solution patterns, evaluating trade-offs between services, planning migration strategies from on-premises to cloud, ensuring compliance with security and ",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "Data Engineer",
+        "occupation_id": "Skema Okupasi Data Engineer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.5179,
+        "description_en": "The Data Engineer occupational certification scheme references SKKNI Kepmenaker No. 299 of 2020 (AI / Data Engineering Sub-field). It covers large-scale data infrastructure building, data workflow orchestration, and data storage system optimization competencies.",
+        "is_official": true,
+        "source_type": "Template-based / Kepmenaker 299/2020"
+      }
+    ]
+  },
+  {
+    "id": "comp_f08f95e1",
+    "title": "Innovate and prototype advanced AI-enabled solutions",
+    "description": "Formulate and evaluate new solution approaches that improve customer experience or answer quality, especially in GenAI and retrieval-based systems. Build prototypes that combine multiple methods or services to demonstrate measurable impact and inform future product direction.",
+    "related_skills": [
+      "drive innovation",
+      "Lambda"
+    ],
+    "soft_skills_required": [
+      "creative problem solving",
+      "systems thinking",
+      "evidence-based judgment"
+    ],
+    "soft_skills_description": "Explore new approaches, compare alternatives, and justify design choices using clear impact measures and prototype results.",
+    "rationale": "The evidence for innovation goes beyond incremental improvement and explicitly references novel solution patterns such as semantic retrieval, RAG, multi-agent orchestration, and knowledge graphs. Lambda belongs here because one sample uses it in GenAI prototype building as part of an experimental stack. A learner could demonstrate mastery by proposing and prototyping a new architecture, then evaluating whether it improves accuracy, relevance, or user experience. It is distinct from the AWS delivery competency because it emphasizes experimentation and new solution design rather than standard implementation.",
+    "batch_reasoning_id": "br_23bc3e0252",
+    "contributing_item_ids": [
+      "item_f5aba6b8b7",
+      "item_7042974c03",
+      "item_a7686bfc63",
+      "item_4131b1d6d5"
+    ],
+    "source_job_ids": [
+      "in-425a1ab3b065a1d3",
+      "in-c1aa2666eccbbece",
+      "in-c39b0329d8469431"
+    ],
+    "source_sentence_ids": [
+      "in-425a1ab3b065a1d3_0004",
+      "in-425a1ab3b065a1d3_0016",
+      "in-c1aa2666eccbbece_0020",
+      "in-c39b0329d8469431_0003"
+    ],
+    "source_sentences": [
+      "You will help drive innovation, build differentiated solutions, and define new customer experiences for our customers (and customers, customers).",
+      "You will drive innovation across semantic retrieval, retrieval -augmented generation, multi -agent orchestration, and knowledge graph–driven approaches to deliver answers that are accurate, context -aware, and measurable in impact.",
+      "You are ready to lead the end -to -end delivery of Amazon Connect -based contact center solutions and oversee design, architecture, and implementation across AWS services such as Lambda, Lex, S3, and Contact Lens.",
+      "Build functional GenAI prototypes using AWS services (Amazon Bedrock, SageMaker, Lambda, Step Functions, etc.) to demonstrate art -of -the -possible for DoD customers."
+    ],
+    "future_relevance": "Emerging: AI-enabled solution design is expanding quickly, with rapid change in tooling and architectures.",
+    "future_weight": 0.3,
+    "empirical_trend": "Emerging",
+    "kkni_level": 5,
+    "kkni_level_source": "sbert_labeller",
+    "kkni_match_similarity": 0.3747,
+    "education_levels_demanded": {
+      "D3": 0.5,
+      "S1": 0.5
+    },
+    "education_kkni_demanded": {
+      "5": 0.5,
+      "6": 0.5
+    },
+    "n_jobs_with_education": 2,
+    "grounding_score_preview": 1.0,
+    "grounding_flagged": false,
+    "grounding_score": 0.5,
+    "skill_grounding_score": 0.5,
+    "sentence_relevance_score": 0.5,
+    "grounding_passed": true,
+    "grounding_method": "sbert",
+    "grounding_reasoning": "skill_grounding = 1/2 = 0.500 | sentence_relevance = 2/4 = 0.500 | canonical (min) = 0.500 (threshold 0.50). Skills not well-supported: 'Lambda' (best_cos=0.23). Sentences off-topic: 2 of 4 (e.g., sent#2 cos=0.20, sent#3 cos=0.45). ",
+    "evaluator_version": "v2.5.0",
+    "generated_at": "2026-05-13T11:53:11.147305+00:00",
+    "generator_version": "v2.0.0",
+    "cluster_id": "cluster_h0044",
+    "cluster_summary_label": "drive innovation gather: lambda, professional",
+    "provider": "jatevo",
+    "model": "gpt-5.4-mini",
+    "merged_from": [],
+    "title_evidence_concerns": [
+      {
+        "term": "Innovate",
+        "literal_hits": 0,
+        "n_sentences": 4,
+        "min_required": 2,
+        "severity": "warning"
+      },
+      {
+        "term": "AI-enabled",
+        "literal_hits": 0,
+        "n_sentences": 4,
+        "min_required": 2,
+        "severity": "warning"
+      }
+    ],
+    "demand_score": 0.1111,
+    "priority_score": 0.2844,
+    "title_id": "Inovasi dan buat prototype solusi canggih yang diaktifkan oleh AI",
+    "description_id": "Rumuskan dan evaluasi pendekatan solusi baru yang meningkatkan customer experience atau kualitas jawaban, terutama dalam GenAI dan retrieval-based systems. Bangun prototype yang menggabungkan multiple methods atau services untuk menunjukkan dampak yang terukur dan menginformasikan arah produk di masa depan.",
+    "rationale_id": "Bukti untuk inovasi melampaui perbaikan bertahap dan secara eksplisit merujuk pada pola solusi baru seperti semantic retrieval, RAG, multi-agent orchestration, dan knowledge graphs. Lambda termasuk di sini karena salah satu sampel menggunakannya dalam pembuatan prototipe GenAI sebagai bagian dari experimental stack. Seorang learner dapat menunjukkan penguasaan dengan mengusulkan dan membuat prototipe arsitektur baru, lalu mengevaluasi apakah itu meningkatkan akurasi, relevansi, atau user experience. Ini berbeda dari AWS delivery competency karena menekankan eksperimen dan desain solusi baru daripada implementasi standar.",
+    "future_relevance_id": "Muncul: desain solusi berbasis AI berkembang dengan cepat, dengan perubahan yang pesat dalam tooling dan arsitektur.",
+    "soft_skills_description_id": "Jelajahi pendekatan baru, bandingkan alternatif, dan justifikasi pilihan desain menggunakan ukuran dampak yang jelas dan hasil prototype.",
+    "related_skills_id": [
+      "mendorong inovasi",
+      "Lambda"
+    ],
+    "soft_skills_required_id": [
+      "creative problem solving",
+      "systems thinking",
+      "penilaian berbasis bukti"
+    ],
+    "occupation_matches": [
+      {
+        "occupation_en": "Solutions Architect",
+        "occupation_id": "Solutions Architect",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.4668,
+        "description_en": "The Solutions Architect occupational role covers competencies in designing end-to-end software solutions that integrate multiple systems, technologies, and stakeholders. It includes gathering requirements, evaluating technical trade-offs, designing integration patterns between enterprise systems, defining data flows and APIs, and producing architectural documentation that guides engineering teams.",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "Cloud Solutions Architect",
+        "occupation_id": "Cloud Solutions Architect",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.4273,
+        "description_en": "The Cloud Solutions Architect occupational role covers competencies in designing end-to-end cloud architectures that meet business, security, and scalability requirements across one or more cloud providers (AWS, GCP, Azure). It includes defining solution patterns, evaluating trade-offs between services, planning migration strategies from on-premises to cloud, ensuring compliance with security and ",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      }
+    ]
+  },
+  {
+    "id": "comp_a93af48f",
+    "title": "Design and implement enterprise integration solutions",
+    "description": "Design, build, and refine integration solutions that move and transform data between systems using standard integration patterns and reliable messaging. The work includes selecting appropriate approaches for data transformation, validating data quality, and ensuring the solution fits established enterprise integration needs.",
+    "related_skills": [
+      "integration patterns",
+      "data transformation"
+    ],
+    "soft_skills_required": [
+      "analytical thinking",
+      "attention to detail",
+      "collaboration"
+    ],
+    "soft_skills_description": "The learner must compare system constraints, coordinate interfaces across teams, and verify that transformed data remains accurate and usable.",
+    "rationale": "The evidence repeatedly points to integration work rather than generic development. Integration patterns and data transformation appear together in contexts about building pipelines and reliable messaging, which implies choosing and applying established methods to connect systems. A learner would show mastery by mapping source and target systems, selecting an appropriate pattern, and implementing transformations that preserve correctness. This is distinct from Microsoft platform use because it focuses on integration architecture and data flow regardless of vendor stack.",
+    "batch_reasoning_id": "br_3d08ed2574",
+    "contributing_item_ids": [
+      "item_3c68db3b33",
+      "item_f4650f2750",
+      "item_e9f755cfb0"
+    ],
+    "source_job_ids": [
+      "in-209713b7f9b715dc",
+      "in-74793fbd2ad53e44",
+      "in-a7c80e2086f0d108"
+    ],
+    "source_sentence_ids": [
+      "in-209713b7f9b715dc_0007",
+      "in-74793fbd2ad53e44_0002",
+      "in-a7c80e2086f0d108_0021"
+    ],
+    "source_sentences": [
+      "A strong understanding of integration patterns, cloud technologies, and modern development practices is essential.",
+      "As a diversified, national organization, Centene's technology professionals have access to competitive benefits including a fresh perspective on workplace flexibility. Position Purpose: Develops and operationalizes data pipelines to make data available for consumption (reports and advanced analytics), including data ingestion, data transformation, data validation / quality, data pipeline optimization, and orchestration."
+    ],
+    "future_relevance": "Stable: system integration remains a core enterprise need as organizations continue connecting cloud, legacy, and analytics platforms.",
+    "future_weight": 0.82,
+    "empirical_trend": "Emerging",
+    "kkni_level": 7,
+    "kkni_level_source": "sbert_labeller",
+    "kkni_match_similarity": 0.3051,
+    "education_levels_demanded": {
+      "S1": 1.0
+    },
+    "education_kkni_demanded": {
+      "6": 1.0
+    },
+    "n_jobs_with_education": 3,
+    "grounding_score_preview": 1.0,
+    "grounding_flagged": false,
+    "grounding_score": 0.5,
+    "skill_grounding_score": 0.5,
+    "sentence_relevance_score": 0.5,
+    "grounding_passed": true,
+    "grounding_method": "sbert",
+    "grounding_reasoning": "skill_grounding = 1/2 = 0.500 | sentence_relevance = 1/2 = 0.500 | canonical (min) = 0.500 (threshold 0.50). Skills not well-supported: 'data transformation' (best_cos=0.34). Sentences off-topic: 1 of 2 (e.g., sent#1 cos=0.41). ",
+    "evaluator_version": "v2.5.0",
+    "generated_at": "2026-05-13T11:48:51.111767+00:00",
+    "generator_version": "v2.0.0",
+    "cluster_id": "cluster_h0016",
+    "cluster_summary_label": "computer science software: microsoft, transformation",
+    "provider": "jatevo",
+    "model": "gpt-5.4-mini",
+    "merged_from": [],
+    "title_evidence_concerns": [],
+    "demand_score": 0.1111,
+    "priority_score": 0.4404,
+    "title_id": "Rancang dan implementasikan enterprise integration solutions",
+    "description_id": "Rancang, bangun, dan sempurnakan solusi integrasi yang memindahkan dan mentransformasi data antar sistem menggunakan standard integration patterns dan reliable messaging. Pekerjaan ini mencakup pemilihan pendekatan yang tepat untuk data transformation, memvalidasi kualitas data, dan memastikan solusi sesuai dengan kebutuhan enterprise integration yang telah ditetapkan.",
+    "rationale_id": "Bukti berulang kali mengarah pada pekerjaan integration daripada development generik. Integration patterns dan data transformation muncul bersama dalam konteks tentang membangun pipelines dan reliable messaging, yang mengimplikasikan pemilihan dan penerapan metode yang sudah mapan untuk menghubungkan systems. Seorang learner akan menunjukkan mastery dengan memetakan source dan target systems, memilih pattern yang sesuai, dan mengimplementasikan transformations yang menjaga correctness. Ini berbeda dari penggunaan Microsoft platform karena berfokus pada integration architecture dan data flow terlepas dari vendor stack.",
+    "future_relevance_id": "Stabil: system integration tetap menjadi kebutuhan inti enterprise seiring organisasi terus menghubungkan platform cloud, legacy, dan analytics.",
+    "soft_skills_description_id": "Pembelajar harus membandingkan batasan sistem, mengoordinasikan interface lintas tim, dan memverifikasi bahwa data yang ditransformasikan tetap akurat dan dapat digunakan.",
+    "related_skills_id": [
+      "integration patterns",
+      "data transformation"
+    ],
+    "soft_skills_required_id": [
+      "analytical thinking",
+      "perhatian terhadap detail",
+      "collaboration"
+    ],
+    "occupation_matches": [
+      {
+        "occupation_en": "Solutions Architect",
+        "occupation_id": "Solutions Architect",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.613,
+        "description_en": "The Solutions Architect occupational role covers competencies in designing end-to-end software solutions that integrate multiple systems, technologies, and stakeholders. It includes gathering requirements, evaluating technical trade-offs, designing integration patterns between enterprise systems, defining data flows and APIs, and producing architectural documentation that guides engineering teams.",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "Cloud Solutions Architect",
+        "occupation_id": "Cloud Solutions Architect",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.4864,
+        "description_en": "The Cloud Solutions Architect occupational role covers competencies in designing end-to-end cloud architectures that meet business, security, and scalability requirements across one or more cloud providers (AWS, GCP, Azure). It includes defining solution patterns, evaluating trade-offs between services, planning migration strategies from on-premises to cloud, ensuring compliance with security and ",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "Associate Data Engineer",
+        "occupation_id": "Skema Okupasi Insinyur Data Madya",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.4448,
+        "description_en": "The Associate Data Engineer occupational certification scheme references SKKNI Kepmenaker No. 299 of 2020 (AI / Data Engineering Sub-field). It covers data pipeline design, ETL processes, data warehouse management, and data quality assurance competencies.",
+        "is_official": true,
+        "source_type": "Template-based / Kepmenaker 299/2020"
+      }
+    ]
+  },
+  {
+    "id": "comp_fa9338be",
+    "title": "Apply hands-on software engineering practices across modern application architectures",
+    "description": "Use practical development experience to implement and adapt software systems with modern architectural patterns. This includes working across APIs, services, integrations, and platform-specific extensions while making routine design and implementation choices within an established stack.",
+    "related_skills": [
+      "hands -on experience",
+      "building and pioneering in the technology space?"
+    ],
+    "soft_skills_required": [
+      "practical problem solving",
+      "collaboration with engineering teammates"
+    ],
+    "soft_skills_description": "The learner should be able to translate requirements into implementable changes and coordinate with others when integrating services or extending a platform.",
+    "rationale": "The evidence points to active implementation work, not just familiarity: one posting ties hands-on experience to software architecture principles such as serverless, microservices, and RESTful APIs, while another ties it to customization, extensions, and integrations in a business application stack. The “building and pioneering” phrase adds a product-building orientation, but it still sits inside hands-on engineering practice rather than a separate method. A learner could show mastery by delivering working services, extending an existing platform, and choosing appropriate standard architectural patterns. This is distinct from evaluation work because it focuses on construction and integration, not on judging model or system performance.",
+    "batch_reasoning_id": "br_d3aa1809dd",
+    "contributing_item_ids": [
+      "item_4c1f065e45",
+      "item_2f680d669a",
+      "item_a748c56723"
+    ],
+    "source_job_ids": [
+      "in-3ec75c58bbf2cdaa",
+      "in-4b2b5d95626247f3",
+      "in-e3b585ed9e8a5ece",
+      "in-ffe4595c4e1108e1"
+    ],
+    "source_sentence_ids": [
+      "in-3ec75c58bbf2cdaa_0001",
+      "in-4b2b5d95626247f3_0009",
+      "in-e3b585ed9e8a5ece_0032",
+      "in-ffe4595c4e1108e1_0001"
+    ],
+    "source_sentences": [
+      "You have proven expertise with .NET Core Services/Web API, and C # Experience with image manipulation - ideal exp TensorFlow and PyTorch You have hands -on experience with software architecture principles and patterns such as serverless architecture, Microservices, RESTful APIs.",
+      "Senior Software Engineer, Full Stack Do you love building and pioneering in the technology space?",
+      "Lead Software Engineer, DevOps Do you love building and pioneering in the technology space?"
+    ],
+    "future_relevance": "Stable: hands-on implementation across APIs, services, and platform extensions remains a core software capability even as specific frameworks change.",
+    "future_weight": 0.78,
+    "empirical_trend": "Emerging",
+    "kkni_level": 5,
+    "kkni_level_source": "sbert_labeller",
+    "kkni_match_similarity": 0.3415,
+    "education_levels_demanded": {
+      "S1": 0.75,
+      "S2": 0.25
+    },
+    "education_kkni_demanded": {
+      "6": 0.75,
+      "8": 0.25
+    },
+    "n_jobs_with_education": 4,
+    "grounding_score_preview": 1.0,
+    "grounding_flagged": false,
+    "grounding_score": 0.5,
+    "skill_grounding_score": 0.5,
+    "sentence_relevance_score": 0.6667,
+    "grounding_passed": true,
+    "grounding_method": "sbert",
+    "grounding_reasoning": "skill_grounding = 1/2 = 0.500 | sentence_relevance = 2/3 = 0.667 | canonical (min) = 0.500 (threshold 0.50). Skills not well-supported: 'hands -on experience' (best_cos=0.35). Sentences off-topic: 1 of 3 (e.g., sent#2 cos=0.41). ",
+    "evaluator_version": "v2.5.0",
+    "generated_at": "2026-05-13T11:52:07.941954+00:00",
+    "generator_version": "v2.0.0",
+    "cluster_id": "cluster_h0037",
+    "cluster_summary_label": "experience building pioneering: evaluation, space",
+    "provider": "jatevo",
+    "model": "gpt-5.4-mini",
+    "merged_from": [],
+    "title_evidence_concerns": [],
+    "demand_score": 0.1481,
+    "priority_score": 0.4433,
+    "title_id": "Terapkan praktik software engineering secara hands-on di seluruh arsitektur aplikasi modern",
+    "description_id": "Gunakan pengalaman pengembangan praktis untuk mengimplementasikan dan menyesuaikan software systems dengan modern architectural patterns. Ini mencakup bekerja lintas API, services, integrations, dan platform-specific extensions sambil membuat pilihan design dan implementation rutin dalam sebuah stack yang telah ditetapkan.",
+    "rationale_id": "Bukti menunjukkan adanya pekerjaan implementasi aktif, bukan sekadar familiaritas: satu posting mengaitkan pengalaman praktik langsung dengan prinsip software architecture seperti serverless, microservices, dan RESTful APIs, sementara yang lain mengaitkannya dengan customization, extensions, dan integrations dalam sebuah business application stack. Frasa “building and pioneering” menambahkan orientasi product-building, tetapi tetap berada dalam praktik engineering hands-on, bukan metode yang terpisah. Seorang learner dapat menunjukkan mastery dengan menghasilkan layanan yang berfungsi, memperluas platform yang sudah ada, dan memilih standard architectural patterns yang sesuai. Ini berbeda dari evaluation work karena berfokus pada construction dan integration, bukan pada penilaian model atau system performance.",
+    "future_relevance_id": "Stable: implementasi hands-on di seluruh API, services, dan platform extensions tetap menjadi kapabilitas software inti meskipun framework tertentu berubah.",
+    "soft_skills_description_id": "Pembelajar harus mampu menerjemahkan requirements menjadi perubahan yang dapat diimplementasikan dan berkoordinasi dengan orang lain saat mengintegrasikan services atau memperluas platform.",
+    "related_skills_id": [
+      "pengalaman hands-on",
+      "membangun dan merintis di bidang teknologi?"
+    ],
+    "soft_skills_required_id": [
+      "pemecahan masalah praktis",
+      "kolaborasi dengan engineering teammates"
+    ],
+    "occupation_matches": [
+      {
+        "occupation_en": "Solutions Architect",
+        "occupation_id": "Solutions Architect",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.6791,
+        "description_en": "The Solutions Architect occupational role covers competencies in designing end-to-end software solutions that integrate multiple systems, technologies, and stakeholders. It includes gathering requirements, evaluating technical trade-offs, designing integration patterns between enterprise systems, defining data flows and APIs, and producing architectural documentation that guides engineering teams.",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "Mobile Application Developer",
+        "occupation_id": "Mobile Application Developer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.5969,
+        "description_en": "The Mobile Application Developer occupational role covers competencies in building native or cross-platform mobile applications for Android (Kotlin, Java) and iOS (Swift, Objective-C), or with cross-platform frameworks such as React Native or Flutter. It includes implementing mobile UI patterns, managing application state, integrating device sensors and APIs, optimising for performance and battery",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "Cloud Solutions Architect",
+        "occupation_id": "Cloud Solutions Architect",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.5837,
+        "description_en": "The Cloud Solutions Architect occupational role covers competencies in designing end-to-end cloud architectures that meet business, security, and scalability requirements across one or more cloud providers (AWS, GCP, Azure). It includes defining solution patterns, evaluating trade-offs between services, planning migration strategies from on-premises to cloud, ensuring compliance with security and ",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      }
+    ]
+  },
+  {
+    "id": "comp_dafdbaae",
+    "title": "Lead engineers through mentoring and technical standards",
+    "description": "Provide technical leadership by mentoring engineers, reviewing architecture decisions, and establishing shared engineering standards. Guide teams to improve delivery quality while supporting adoption of consistent practices across a platform or product area.",
+    "related_skills": [
+      "mentoring",
+      "team leadership"
+    ],
+    "soft_skills_required": [
+      "coaching",
+      "influence"
+    ],
+    "soft_skills_description": "Support others' growth, give actionable feedback, and align multiple engineers around shared technical decisions and standards.",
+    "rationale": "The evidence points to leadership in a technical context, not general management. Phrases such as enabling engineers, architecture reviews, and setting engineering standards show responsibility for improving how others work and for influencing technical direction. A learner could demonstrate this by coaching colleagues, facilitating design reviews, and raising team-level consistency in delivery practices. It is separate from the integration competency because the focus shifts from building CRM/API solutions to leading the people and process that build them.",
+    "batch_reasoning_id": "br_a7322af23a",
+    "contributing_item_ids": [
+      "item_b15ef9f6c9",
+      "item_28ecdc1947",
+      "item_4c731b01b6"
+    ],
+    "source_job_ids": [
+      "in-26fcda83aa945eae",
+      "in-6b2996db275351fc",
+      "in-b92e4f190ec38b6c",
+      "in-c1ea0762e70c054f"
+    ],
+    "source_sentence_ids": [
+      "in-26fcda83aa945eae_0017",
+      "in-6b2996db275351fc_0024",
+      "in-b92e4f190ec38b6c_0017",
+      "in-c1ea0762e70c054f_0007"
+    ],
+    "source_sentences": [
+      "Demonstrated team leadership and mentoring capabilities with a focus on enabling junior engineers.",
+      "Provide technical leadership through architecture reviews, mentoring, and setting engineering standards across the Android foundations surface."
+    ],
+    "future_relevance": "Stable: organisations consistently need technical leaders who can develop engineers and improve delivery practices as systems grow in complexity.",
+    "future_weight": 0.72,
+    "empirical_trend": "Stable",
+    "kkni_level": 7,
+    "kkni_level_source": "sbert_labeller",
+    "kkni_match_similarity": 0.3855,
+    "education_levels_demanded": {
+      "D3": 0.5,
+      "S1": 0.5
+    },
+    "education_kkni_demanded": {
+      "5": 0.5,
+      "6": 0.5
+    },
+    "n_jobs_with_education": 2,
+    "grounding_score_preview": 1.0,
+    "grounding_flagged": false,
+    "grounding_score": 1.0,
+    "skill_grounding_score": 1.0,
+    "sentence_relevance_score": 1.0,
+    "grounding_passed": true,
+    "grounding_method": "sbert",
+    "grounding_reasoning": "skill_grounding = 2/2 = 1.000 | sentence_relevance = 2/2 = 1.000 | canonical (min) = 1.000 (threshold 0.50). ",
+    "evaluator_version": "v2.5.0",
+    "generated_at": "2026-05-13T11:52:30.913786+00:00",
+    "generator_version": "v2.0.0",
+    "cluster_id": "cluster_h0040",
+    "cluster_summary_label": "leadership mentoring salesforce: crm, team",
+    "provider": "jatevo",
+    "model": "gpt-5.4-mini",
+    "merged_from": [],
+    "title_evidence_concerns": [],
+    "demand_score": 0.1481,
+    "priority_score": 0.5753,
+    "title_id": "Memimpin engineer melalui mentoring dan technical standards",
+    "description_id": "Berikan technical leadership dengan membimbing engineer, meninjau keputusan arsitektur, dan menetapkan standar engineering bersama. Bimbing tim untuk meningkatkan kualitas delivery sambil mendukung adopsi praktik yang konsisten di seluruh platform atau area produk.",
+    "rationale_id": "Bukti mengarah pada kepemimpinan dalam konteks teknis, bukan manajemen umum. Frasa seperti enabling engineers, architecture reviews, dan menetapkan engineering standards menunjukkan tanggung jawab untuk meningkatkan cara orang lain bekerja dan untuk memengaruhi arah teknis. Seorang learner dapat mendemonstrasikannya dengan coaching rekan kerja, memfasilitasi design reviews, dan meningkatkan konsistensi pada tingkat tim dalam delivery practices. Ini terpisah dari kompetensi integrasi karena fokusnya bergeser dari membangun solusi CRM/API menjadi memimpin orang dan proses yang membangunnya.",
+    "future_relevance_id": "Stabil: organisasi secara konsisten membutuhkan technical leaders yang dapat mengembangkan engineer dan meningkatkan delivery practices seiring sistem bertumbuh dalam kompleksitas.",
+    "soft_skills_description_id": "Dukung pertumbuhan orang lain, berikan feedback yang dapat ditindaklanjuti, dan selaraskan beberapa engineer di sekitar keputusan dan standar teknis bersama.",
+    "related_skills_id": [
+      "mentoring",
+      "team leadership"
+    ],
+    "soft_skills_required_id": [
+      "coaching",
+      "pengaruh"
+    ],
+    "occupation_matches": [
+      {
+        "occupation_en": "Engineering Tech Lead",
+        "occupation_id": "Engineering Tech Lead",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.7773,
+        "description_en": "The Engineering Tech Lead occupational role covers competencies in technical leadership within a software engineering team. It includes mentoring engineers, defining technical standards and review practices, owning architectural decisions, coordinating delivery across sprints, breaking down complex problems into actionable tasks, and balancing hands-on engineering work with team-facing responsibil",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "Solutions Architect",
+        "occupation_id": "Solutions Architect",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.5257,
+        "description_en": "The Solutions Architect occupational role covers competencies in designing end-to-end software solutions that integrate multiple systems, technologies, and stakeholders. It includes gathering requirements, evaluating technical trade-offs, designing integration patterns between enterprise systems, defining data flows and APIs, and producing architectural documentation that guides engineering teams.",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "Frontend Developer",
+        "occupation_id": "Frontend Developer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.4711,
+        "description_en": "The Frontend Developer occupational role covers competencies in building user-facing web applications using modern JavaScript frameworks (React, Angular, Vue, Svelte), HTML5, CSS3, and responsive design principles. It includes implementing component-based UIs, managing client-side state, integrating with REST or GraphQL APIs, ensuring cross-browser compatibility, optimising performance, and applyi",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      }
+    ]
+  },
+  {
+    "id": "comp_d7b4c5f3",
+    "title": "Analyse and deliver software through SDLC and CI/CD practices",
+    "description": "Apply the full software development lifecycle to move work from analysis and design through testing, deployment, and maintenance. Use CI/CD, DevOps, and CI/CD pipelines to automate delivery and support reliable releases across cloud-enabled environments.",
+    "related_skills": [
+      "analysis",
+      "software development lifecycle (SDLC)",
+      "SDLC",
+      "DevOps",
+      "CI/CD",
+      "CI/CD pipelines"
+    ],
+    "soft_skills_required": [
+      "problem-solving",
+      "collaboration",
+      "continuous improvement"
+    ],
+    "soft_skills_description": "Work effectively across teams to diagnose issues, refine delivery flow, and improve release quality through iterative feedback.",
+    "rationale": "The evidence repeatedly links analysis, SDLC, DevOps, and CI/CD with end-to-end delivery rather than isolated tasks. Example sentences describe work from requirements gathering to production deployment and the use of automated pipelines and DevOps practices. A learner demonstrating mastery could map a feature from analysis to release, choose an appropriate delivery flow, and explain how automation improves reliability. This is distinct from front-end implementation because it focuses on process, release flow, and lifecycle decisions rather than UI construction.",
+    "batch_reasoning_id": "br_9ba1aa5b5e",
+    "contributing_item_ids": [
+      "item_55fbfe80b2",
+      "item_2c196a5d16",
+      "item_2352b5ad12",
+      "item_4b7e8dd229",
+      "item_b43f9dd842",
+      "item_65a1e8adfd",
+      "item_b6234ec4d7",
+      "item_465c41aef5",
+      "item_e26f6db7cc",
+      "item_a03f925fe8",
+      "item_033f122dfd",
+      "item_49ca80e7f2",
+      "item_be50481563",
+      "item_f69ea10ff2",
+      "item_31276cbbf4",
+      "item_b3e1e7e9bc",
+      "item_10b69b6d7e",
+      "item_f1c9758c09",
+      "item_b2e67c7557",
+      "item_50df841892",
+      "item_565b131b2f",
+      "item_37f80c3dce",
+      "item_886617982c",
+      "item_13243ff7b5",
+      "item_7ff4319cf1",
+      "item_6c9f0bf8c2",
+      "item_182fdec360",
+      "item_5a80843a62"
+    ],
+    "source_job_ids": [
+      "in-00485717888f4779",
+      "in-0cac4c44efc9dd8a",
+      "in-15b4d78150914a4f",
+      "in-1d10b0b5d6dc92b3",
+      "in-201f92bafa5ef9b9",
+      "in-243653205591e2c7",
+      "in-2c2310c2c4f07f3a",
+      "in-2c83eeb6d5507c81",
+      "in-3f0be147dfb88780",
+      "in-450d3c91c41ced10",
+      "in-47c6eb5055a292ed",
+      "in-48cbba391fc632c9",
+      "in-6b2996db275351fc",
+      "in-6cdd3ad192d06d21",
+      "in-7451d7440fd62236",
+      "in-7bfb0db7aca97a49",
+      "in-9bf2b6f364aa8027",
+      "in-a3588ca4c4a6455c",
+      "in-aa54af51fa5cae34",
+      "in-c2eb5e7e4fc1356c",
+      "in-d1bbd6cbce4a6b40",
+      "in-d8558a69e22516bc",
+      "in-df2b5c9cf0eec003",
+      "in-eefdffe82c18dc8b",
+      "in-f323714988853fba"
+    ],
+    "source_sentence_ids": [
+      "in-00485717888f4779_0005",
+      "in-0cac4c44efc9dd8a_0013",
+      "in-15b4d78150914a4f_0008",
+      "in-1d10b0b5d6dc92b3_0003",
+      "in-201f92bafa5ef9b9_0009",
+      "in-243653205591e2c7_0006",
+      "in-2c2310c2c4f07f3a_0010",
+      "in-2c83eeb6d5507c81_0003",
+      "in-3f0be147dfb88780_0002",
+      "in-3f0be147dfb88780_0011",
+      "in-3f0be147dfb88780_0016",
+      "in-3f0be147dfb88780_0023",
+      "in-450d3c91c41ced10_0011",
+      "in-47c6eb5055a292ed_0009",
+      "in-48cbba391fc632c9_0006",
+      "in-6b2996db275351fc_0005",
+      "in-6b2996db275351fc_0018",
+      "in-6cdd3ad192d06d21_0003",
+      "in-7451d7440fd62236_0018",
+      "in-7bfb0db7aca97a49_0015",
+      "in-9bf2b6f364aa8027_0007",
+      "in-a3588ca4c4a6455c_0003",
+      "in-aa54af51fa5cae34_0019",
+      "in-c2eb5e7e4fc1356c_0004",
+      "in-d1bbd6cbce4a6b40_0003",
+      "in-d8558a69e22516bc_0020",
+      "in-df2b5c9cf0eec003_0001",
+      "in-eefdffe82c18dc8b_0007",
+      "in-f323714988853fba_0005"
+    ],
+    "source_sentences": [
+      "Full SDLC experience: analysis, design, coding, testing, and implementation.",
+      "You’ll build your experience in system delivery, analysis and business change, gaining exposure to multiple departments, digital tools and commercial processes.",
+      "Develop meaningful outcome reports based on data collection, analysis, and performance measurements.",
+      "You will work on power modeling, analysis and correlation tasks for wireless communication SoCs.",
+      "Must haves: Extensive experience across the full software development lifecycle (SDLC), including design, coding, testing, debugging, deployment, and maintenance Development Experience – 35% UI development using modern frameworks like Angular and NodeJS.",
+      "Responsibilities Lead end -to -end solution development across the software development lifecycle (SDLC) – from business requirements gathering to design, implementation, and production deployment.",
+      "This role requires strong communication and documentation abilities, a deep understanding of the software development lifecycle (SDLC), and excellent presentation skills to drive product success across our teams and clients.",
+      "Strong aptitude to understand the SDLC of a developer and what is required for them to adopt our platform capabilities - and bringing that to every feature in development and on the roadmap Benchmark the tools and capabilities available to developers for other platforms. - Solicit feedback from the developer community and specific strategic developers. Preferred Qualifications Experience as developer advocate and assisting senior developer leadership to adopt capabilities and overcome technical and systematic complexities to drive adoption of new technology.",
+      "You bring: 3 -4 + years’ experience in Site Reliability, Platform Engineering, DevOps or similar roles, with a strong focus on production systems and operational excellence. Experience supporting live production environments, including participation in on -call rotations and incident response.",
+      "It is a hands -on engineering role with strong automation and DevOps practices at its core.",
+      "You’ll apply your skills within a DevOps framework to establish or provision virtual machines or networks and use cloud service providers to further your clients’ meaningful missions.",
+      "They will apply concepts from software engineering and DevOps and use data tools from a large and varied data landscape to present and host datasets for downstream consumption.",
+      "You should be able to solve problems related to coding and system design independently. Who You Are 5 + years of DevOps engineering experience. Demonstrated expertise in Kubernetes, Terraform, and GitOps Data streaming engineering experience.",
+      "In this Java Software Engineering role, you will design, develop, and test Java and code in a Linux, Agile, DevOps environment supporting aerospace and defense technology.",
+      "You will work to bridge the gap between these teams for seamless and secure application and software development. DevOps Engineer - Manager | Technology & Digital Consulting (Open) PwC Ireland - Bring Your Talent, Grow Your Skills, Unlock Your Potential! Would you like to be a part of a team of technology and digital leaders, experienced in scoping, and delivering large transformation programmes in varied environments.",
+      "Role description Job Title : Java Backend Developer – DevOps Location : Richardson, TX (Remote) Job Description : We are looking for an experienced Senior Software Engineer with strong expertise in Java backend development and hands -on DevOps experience.",
+      "You will leverage your extensive experience with AWS and other cloud platforms, Infrastructure as Code (IaC), and CI/CD methodologies to build scalable, secure, and automated systems.",
+      "You’ll contribute to real -world delivery, and grow your skills across Infrastructure as Code, CI/CD, and systems administration.",
+      "Collaborate cross -functionally with software, hardware, and systems teams to define verification strategies, integrate tests into CI/CD workflows, and ensure reliable feature validation.",
+      "They are responsible for automating tasks, managing CI/CD pipelines, and assist with system reliability automations and issues."
+    ],
+    "future_relevance": "Stable: CI/CD and SDLC delivery practices remain foundational as organizations continue automating software releases and operational controls.",
+    "future_weight": 0.86,
+    "empirical_trend": "Emerging",
+    "kkni_level": 5,
+    "kkni_level_source": "llm_suggested",
+    "kkni_match_similarity": null,
+    "education_levels_demanded": {
+      "D3": 0.0714,
+      "S1": 0.7857,
+      "S2": 0.1429
+    },
+    "education_kkni_demanded": {
+      "5": 0.0714,
+      "6": 0.7857,
+      "8": 0.1429
+    },
+    "n_jobs_with_education": 14,
+    "grounding_score_preview": 0.8571,
+    "grounding_flagged": false,
+    "grounding_score": 0.65,
+    "skill_grounding_score": 0.6667,
+    "sentence_relevance_score": 0.65,
+    "grounding_passed": true,
+    "grounding_method": "sbert",
+    "grounding_reasoning": "skill_grounding = 4/6 = 0.667 | sentence_relevance = 13/20 = 0.650 | canonical (min) = 0.650 (threshold 0.50). Skills not well-supported: 'analysis' (best_cos=0.27), 'CI/CD' (best_cos=0.38). Sentences off-topic: 7 of 20 (e.g., sent#1 cos=0.44, sent#2 cos=0.29, sent#3 cos=0.18). ",
+    "evaluator_version": "v2.5.0",
+    "generated_at": "2026-05-13T11:52:49.314026+00:00",
+    "generator_version": "v2.0.0",
+    "cluster_id": "cluster_h0042",
+    "cluster_summary_label": "analysis ci/cd pipelines: sdlc, css",
+    "provider": "jatevo",
+    "model": "gpt-5.4-mini",
+    "merged_from": [],
+    "title_evidence_concerns": [
+      {
+        "term": "Analyse",
+        "literal_hits": 0,
+        "n_sentences": 23,
+        "min_required": 5,
+        "severity": "warning"
+      }
+    ],
+    "demand_score": 0.9259,
+    "priority_score": 0.8234,
+    "title_id": "Analisis dan deliver software melalui praktik SDLC dan CI/CD",
+    "description_id": "Terapkan full software development lifecycle untuk memindahkan pekerjaan dari analisis dan desain hingga testing, deployment, dan maintenance. Gunakan CI/CD, DevOps, dan CI/CD pipelines untuk mengotomatiskan delivery dan mendukung release yang andal di berbagai cloud-enabled environments.",
+    "rationale_id": "Bukti berulang kali mengaitkan analysis, SDLC, DevOps, dan CI/CD dengan delivery end-to-end, bukan tugas yang terpisah. Kalimat contoh menggambarkan pekerjaan dari requirements gathering hingga production deployment serta penggunaan automated pipelines dan praktik DevOps. Seorang learner yang menunjukkan penguasaan dapat memetakan sebuah fitur dari analysis hingga release, memilih delivery flow yang sesuai, dan menjelaskan bagaimana automation meningkatkan reliability. Ini berbeda dari front-end implementation karena berfokus pada process, release flow, dan keputusan lifecycle, bukan pada construction UI.",
+    "future_relevance_id": "Stable: praktik delivery CI/CD dan SDLC tetap menjadi fondasi seiring organisasi terus mengotomatisasi software releases dan operational controls.",
+    "soft_skills_description_id": "Bekerja secara efektif lintas tim untuk mendiagnosis masalah, menyempurnakan alur delivery, dan meningkatkan kualitas release melalui feedback iteratif.",
+    "related_skills_id": [
+      "analisis",
+      "software development lifecycle (SDLC)",
+      "SDLC",
+      "DevOps",
+      "CI/CD",
+      "CI/CD pipelines"
+    ],
+    "soft_skills_required_id": [
+      "problem-solving",
+      "collaboration",
+      "continuous improvement"
+    ],
+    "occupation_matches": [
+      {
+        "occupation_en": "Software Developer",
+        "occupation_id": "Skema Okupasi Pengembang Perangkat Lunak",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.5824,
+        "description_en": "The Software Developer occupational certification scheme references SKKNI Kepmenaker No. 282 of 2016. It covers the software development lifecycle (SDLC), testing, deployment, and application maintenance competencies.",
+        "is_official": true,
+        "source_type": "Template-based / Kepmenaker 282/2016"
+      },
+      {
+        "occupation_en": "DevOps Engineer",
+        "occupation_id": "DevOps Engineer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.5534,
+        "description_en": "The DevOps Engineer occupational role covers competencies in automating software delivery pipelines (CI/CD), managing infrastructure-as-code with tools such as Terraform or Ansible, orchestrating containers with Kubernetes or Docker, monitoring production systems, implementing release strategies, and collaborating across development and operations to improve deployment frequency and reliability. C",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      },
+      {
+        "occupation_en": "MLOps Engineer",
+        "occupation_id": "MLOps Engineer",
+        "sector": "Teknologi Informasi dan Komunikasi",
+        "cosine": 0.4304,
+        "description_en": "The MLOps Engineer occupational role covers competencies in operationalising machine learning models. It includes building ML pipelines for data ingestion, training, and deployment; managing model versioning and experiment tracking with tools like MLflow or Weights & Biases; deploying models at scale on cloud or on-premises infrastructure; monitoring model drift and retraining; and integrating ML ",
+        "is_official": false,
+        "source_type": "Community-defined (non-official) — covers gaps in current SKKNI ICT catalogue"
+      }
+    ]
+  }
+]

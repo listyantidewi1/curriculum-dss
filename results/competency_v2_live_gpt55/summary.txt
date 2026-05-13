@@ -1,0 +1,415 @@
+========================================================================================
+Phase 2.2 live run — competencies from real Phase 1 output
+========================================================================================
+
+  competencies produced: 12
+  LLM calls (BatchReasoning records): 10
+  total prompt tokens:     11,689
+  total completion tokens: 12,394
+  total LLM wall-clock:    468.5s
+
+----------------------------------------------------------------------------------------
+[1] Build RESTful backend services on Linux platforms
+    id=comp_d8716176  cluster=cluster_h0004  provider=jatevo  model=gpt-5.5
+    KKNI level: 5   future_weight: 0.85   trend: Stable   grounding_preview: 1.00
+    description: Develop, run, and test backend services using Python or Java that expose REST APIs. Configure the service in a Linux or Ubuntu environment and demonstrate correct request handling, error responses, and basic integration behavior.
+    related_skills (7):
+       - Python
+       - Java
+       - API
+       - REST
+       - Linux
+       - Ubuntu
+       - platform
+    soft_skills_required: problem solving, attention to detail, technical documentation
+    rationale (546 chars):
+       The title matches the strongest recurring backend signals in the cluster:
+       Python, Java, API, REST, Linux, and Ubuntu. A learner can prove mastery by
+       implementing a small service, documenting endpoints, testing responses, and
+       deploying it locally on Linux. The competency is concrete enough for D3 or D4
+       assessment because it requires selecting language, runtime, and interface design
+       choices. It is distinct from the mobile and data competencies because the main
+       product is a server-side API service rather than a client UI or streaming
+       pipeline.
+    provenance: 28 items, 22 unique jobs, 7 source sentences
+----------------------------------------------------------------------------------------
+[2] Integrate data streaming and AI platform components
+    id=comp_1292ac44  cluster=cluster_h0004  provider=jatevo  model=gpt-5.5
+    KKNI level: 6   future_weight: 0.88   trend: Emerging   grounding_preview: 1.00
+    description: Configure and use platform components such as Kafka, Spark, Redis, and AI platforms to move, process, or cache application data. Demonstrate a small pipeline or integration that ingests data, transforms or routes it, and makes results available to another service.
+    related_skills (6):
+       - Kafka
+       - Spark
+       - Redis
+       - AI platforms
+       - platform
+       - Python
+    soft_skills_required: systems thinking, analytical reasoning, troubleshooting
+    rationale (529 chars):
+       Kafka, Spark, Redis, AI platforms, and Python indicate a platform-oriented data
+       integration theme. A learner can demonstrate mastery by building a small data
+       flow, using Redis for fast access, Kafka for messaging, or Spark/Python for
+       processing. The competency is broader than a single tool but still anchored in
+       common platform components found in job postings. It is distinct from backend
+       API work because the main emphasis is data movement, processing, caching, and
+       AI-platform integration rather than endpoint implementation.
+    provenance: 20 items, 16 unique jobs, 6 source sentences
+----------------------------------------------------------------------------------------
+[3] Build SQL and Power BI analytics solutions for accounting data
+    id=comp_3a932118  cluster=cluster_h0005  provider=jatevo  model=gpt-5.5
+    KKNI level: 5   future_weight: 0.86   trend: Emerging   grounding_preview: 1.00
+    description: Prepare, query, model, and visualize business or accounting data using SQL and Power BI. Create dashboards or analytical tools that support operational reporting and basic performance optimization.
+    related_skills (6):
+       - SQL
+       - Power BI
+       - analytics
+       - Accounting
+       - develop tools
+       - optimization
+    soft_skills_required: data interpretation, accuracy, business curiosity
+    rationale (472 chars):
+       The included skills point to practical business-intelligence work using SQL,
+       Power BI, analytics, and accounting-domain data. A learner can prove mastery by
+       transforming sample accounting records, writing SQL queries, and publishing a
+       Power BI dashboard with useful measures and filters. Optimization fits as
+       improving query, model, or dashboard performance. This competency is separate
+       from requirements work because the assessed artifact is a working analytical
+       product.
+    provenance: 18 items, 17 unique jobs, 7 source sentences
+----------------------------------------------------------------------------------------
+[4] Support cloud-enabled infrastructure and delivery pipelines
+    id=comp_4b00d9af  cluster=cluster_h0005  provider=jatevo  model=gpt-5.5
+    KKNI level: 6   future_weight: 0.84   trend: Emerging   grounding_preview: 1.00
+    description: Analyze system infrastructure needs, identify technical problems, and support deployment workflows using PaaS and CI/CD concepts. Select standard design and troubleshooting approaches for reliable application delivery.
+    related_skills (6):
+       - infrastructure
+       - PaaS
+       - CI/CD
+       - analyze systems
+       - solve technical problems
+       - design system
+    soft_skills_required: problem solving, persistence, collaboration
+    rationale (523 chars):
+       The skills combine infrastructure knowledge, PaaS, CI/CD, system analysis,
+       troubleshooting, and basic system design. A learner can demonstrate mastery by
+       mapping an application deployment architecture, configuring a simple pipeline
+       scenario, and diagnosing a failed build or deployment case. The competency is
+       not a full DevOps specialization, but it prepares learners to participate in
+       modern delivery environments. It is distinct from BI and documentation because
+       the focus is operational reliability and deployment flow.
+    provenance: 17 items, 17 unique jobs, 6 source sentences
+----------------------------------------------------------------------------------------
+[5] Analyze business requirements and document solution specifications
+    id=comp_732ebc25  cluster=cluster_h0005  provider=jatevo  model=gpt-5.5
+    KKNI level: 5   future_weight: 0.78   trend: Stable   grounding_preview: 1.00
+    description: Elicit, interpret, and organize software or data-system requirements into clear specifications, decision records, and user-facing documentation. Use collaborative documentation tools to maintain traceability between requirements, system behavior, and project deliverables.
+    related_skills (7):
+       - gather requirements
+       - understand requirements
+       - Business Analysis
+       - create documentation
+       - maintain documentation
+       - Confluence
+       - manage projects
+    soft_skills_required: stakeholder communication, attention to detail, structured thinking
+    rationale (505 chars):
+       The title reflects the strong overlap among requirements gathering, business
+       analysis, and documentation skills. A learner can demonstrate mastery by
+       producing a requirements brief, acceptance criteria, process notes, and
+       maintained Confluence-style documentation for a small system. Project management
+       is included only as coordination around requirements and deliverables. This is
+       distinct from analytics or infrastructure work because the primary output is an
+       agreed specification and documentation set.
+    provenance: 15 items, 12 unique jobs, 8 source sentences
+----------------------------------------------------------------------------------------
+[6] Operate secure and observable software services
+    id=comp_60c762f3  cluster=cluster_h0004  provider=jatevo  model=gpt-5.5
+    KKNI level: 5   future_weight: 0.90   trend: Emerging   grounding_preview: 1.00
+    description: Apply basic cybersecurity and observability practices to monitor, diagnose, and support software services. Use workflow or service-management tools such as Jira and ServiceNow to track incidents, changes, and remediation tasks.
+    related_skills (6):
+       - observability
+       - cybersecurity
+       - ServiceNow
+       - Jira
+       - JIRA
+       - Linux
+    soft_skills_required: accountability, collaboration, clear reporting
+    rationale (572 chars):
+       Observability, cybersecurity, ServiceNow, Jira, and Linux form an operations-
+       focused competency around running services safely and reliably. Mastery can be
+       shown by instrumenting logs or metrics, identifying a security or reliability
+       issue, and recording the response in an issue or service-management workflow.
+       The competency fits vocational curricula because learners can practice standard
+       procedures while also making basic diagnostic decisions. It is distinct from
+       building software because assessment centers on monitoring, incident handling,
+       and operational control.
+    provenance: 14 items, 14 unique jobs, 7 source sentences
+----------------------------------------------------------------------------------------
+[7] Analyze data and build basic machine learning models
+    id=comp_931da04b  cluster=cluster_h0006  provider=jatevo  model=gpt-5.5
+    KKNI level: 5   future_weight: 0.85   trend: Stable   grounding_preview: 1.00
+    description: Prepare datasets, perform exploratory data analysis, select an appropriate machine learning approach, and train a basic model for a defined prediction or classification task. Evaluate results using suitable metrics and communicate limitations clearly.
+    related_skills (5):
+       - machine learning
+       - Machine Learning
+       - data analysis
+       - AI/ML
+       - Artificial Intelligence (AI)
+    soft_skills_required: analytical thinking, attention to detail, technical communication
+    rationale (551 chars):
+       The title reflects the strongest signals in the cluster: machine learning,
+       AI/ML, and data analysis. A learner can demonstrate mastery by cleaning a
+       dataset, training a supervised model, evaluating accuracy or error, and
+       explaining model behavior. This is distinct from the generative AI competency
+       because it focuses on conventional model-building workflows rather than prompt-
+       based or foundation-model applications. It also differs from the vision/robotics
+       competency because the task can use tabular or general datasets without
+       perception hardware.
+    provenance: 14 items, 13 unique jobs, 5 source sentences
+----------------------------------------------------------------------------------------
+[8] Deploy and operate cloud infrastructure on AWS and Azure
+    id=comp_e2b8b0ea  cluster=cluster_h0002  provider=jatevo  model=gpt-5.5
+    KKNI level: 5   future_weight: 0.85   trend: Stable   grounding_preview: 1.00
+    description: Provision basic compute, storage, networking, and managed services in AWS and Azure using standard procedures. Monitor service status, apply configuration changes, and document the deployed cloud environment for operational handover.
+    related_skills (5):
+       - AWS
+       - Azure
+       - cloud infrastructure
+       - cloud services
+       - Azure DevOps
+    soft_skills_required: attention to detail, technical documentation, problem solving, process discipline, collaboration, analytical thinking
+    rationale (517 chars):
+       The title directly reflects the cluster emphasis on AWS, Azure, cloud
+       infrastructure, and cloud services. A learner could demonstrate mastery by
+       deploying a small cloud environment, configuring core services, and explaining
+       the purpose of each component. Assessment can include screenshots, configuration
+       records, cost-aware service choices, and basic troubleshooting logs. It is
+       distinct from the DevOps competency because the focus is on operating cloud
+       resources rather than automating software delivery pipelines.
+    merged_from: ['comp_8b2ede63']
+    provenance: 13 items, 10 unique jobs, 5 source sentences
+----------------------------------------------------------------------------------------
+[9] Model financial workflows for software applications
+    id=comp_69da9bc9  cluster=cluster_h0001  provider=jatevo  model=gpt-5.5
+    KKNI level: 5   future_weight: 0.82   trend: Emerging   grounding_preview: 1.00
+    description: Analyze basic finance, financial services, planning, and reporting requirements and translate them into software data fields, calculations, and user workflows. Produce simple specifications or prototypes for reports, budgets, transaction summaries, or fintech service features.
+    related_skills (5):
+       - Finance
+       - financial reporting
+       - financial planning
+       - fintech
+       - financial services
+    soft_skills_required: attention to detail, analytical thinking, ethical judgment
+    rationale (586 chars):
+       The title matches the finance-oriented items because it focuses on converting
+       financial domain knowledge into implementable software behavior. A learner could
+       demonstrate mastery by defining entities such as accounts, transactions,
+       budgets, and reports, then validating sample calculations or report outputs. The
+       inclusion of fintech and financial services keeps the competency relevant to
+       digital products, not only accounting theory. It is distinct from commerce and
+       supply-chain competencies because the main assessment evidence is financial
+       logic, reporting, and planning workflows.
+    provenance: 11 items, 8 unique jobs, 7 source sentences
+----------------------------------------------------------------------------------------
+[10] Develop cross-platform client applications
+    id=comp_6065614d  cluster=cluster_h0004  provider=jatevo  model=gpt-5.5
+    KKNI level: 5   future_weight: 0.78   trend: Stable   grounding_preview: 1.00
+    description: Create simple user-facing applications or front-end modules using React and mobile platform concepts for Android and iOS. Connect the client to an API and demonstrate responsive interaction, navigation, and basic data display.
+    related_skills (4):
+       - React
+       - Android
+       - iOS
+       - API
+    soft_skills_required: user orientation, communication, iterative improvement
+    rationale (554 chars):
+       The included skills point to client-side development across web and mobile
+       contexts: React for web UI and Android/iOS for mobile platforms. Mastery can be
+       shown through a working interface that consumes an API, handles user input, and
+       displays returned data. This competency is assessable without requiring full
+       native mobile specialization because the focus is client integration and
+       platform awareness. It is separate from backend services because learners are
+       evaluated on user interaction, presentation, and client behavior rather than
+       server design.
+    provenance: 11 items, 8 unique jobs, 4 source sentences
+----------------------------------------------------------------------------------------
+[11] Automate AI-enabled software workflows
+    id=comp_0901923d  cluster=cluster_h0007  provider=jatevo  model=gpt-5.5
+    KKNI level: 5   future_weight: 0.86   trend: Emerging   grounding_preview: 1.00
+    description: Design and implement scripts, integrations, or low-code services that automate recurring software or business workflows. Use AI-enabled workflow concepts where appropriate to improve routing, summarization, classification, or task handoff while maintaining human review points.
+    related_skills (4):
+       - automation
+       - automate workflows
+       - focus on automation
+       - AI-enabled workflows
+    soft_skills_required: process thinking, attention to detail, collaboration with users
+    rationale (537 chars):
+       The title reflects the cluster items centered on automation and AI-enabled
+       workflows. A learner could demonstrate mastery by mapping a manual workflow,
+       selecting automation points, implementing the workflow, and testing error
+       handling. The AI aspect is included only where it supports concrete workflow
+       tasks rather than as a general AI competency. It is distinct from architecture
+       and distributed systems because the focus is on improving task execution and
+       process flow, not designing system-wide structure or operating infrastructure.
+    provenance: 11 items, 10 unique jobs, 4 source sentences
+----------------------------------------------------------------------------------------
+[12] Deploy containerized applications with Docker and Kubernetes
+    id=comp_de58e4a0  cluster=cluster_h0009  provider=jatevo  model=gpt-5.5
+    KKNI level: 5   future_weight: 0.84   trend: Stable   grounding_preview: 1.00
+    description: Build and run application containers using Docker, then deploy and manage them in a Kubernetes environment. Learners configure basic workloads, expose services, and verify application health using standard operational procedures.
+    related_skills (3):
+       - Docker
+       - Kubernetes
+       - DevOps
+    soft_skills_required: problem solving, systematic troubleshooting, documentation
+    rationale (522 chars):
+       Docker and Kubernetes form a coherent deployment competency because containers
+       are commonly built before being orchestrated in clusters. Mastery can be
+       demonstrated by packaging an application in a Docker image, deploying it to
+       Kubernetes, and validating that the service runs correctly. Learners can also
+       show basic troubleshooting by inspecting logs, pods, and service status. It is
+       distinct from cloud provisioning because the focus is application runtime
+       operations rather than creating cloud infrastructure resources.
+    provenance: 11 items, 9 unique jobs, 3 source sentences
+
+========================================================================================
+[BATCH REASONINGS]
+========================================================================================
+----------------------------------------------------------------------------------------
+[1] cluster=cluster_h0000  comps_out=1  latency=22.2s
+    batch_reasoning (560 chars):
+       The cluster centers on understanding compliance requirements and applying them
+       to ensure regulatory compliance in work outputs or software-related processes.
+       The items are tightly overlapping, so they should be merged into one competency
+       rather than split into separate outcomes. No skills were dropped because all
+       listed items directly support the same curriculum outcome. I kept and merged
+       "ensure regulatory compliance," "compliance," and "regulatory compliance"
+       because they represent the applied skill and the underpinning knowledge needed
+       for assessment.
+----------------------------------------------------------------------------------------
+[2] cluster=cluster_h0001  comps_out=3  latency=43.5s
+    batch_reasoning (682 chars):
+       The cluster contains three clear application-domain sub-themes: finance and
+       financial services, retail/e-commerce commerce platforms, and supply-chain
+       operations including logistics and inventory. They should be split into multiple
+       competencies because each domain drives different software requirements, data
+       models, workflows, and assessment tasks. Duplicate capitalization variants were
+       merged conceptually but kept in related_skills only where useful and verbatim
+       from the item list. No major items were dropped, but broad labels such as
+       "Commerce" and "Finance" are used only as supporting context rather than
+       standalone competencies because they are too general by themselves.
+----------------------------------------------------------------------------------------
+[3] cluster=cluster_h0002  comps_out=2  latency=40.4s
+    batch_reasoning (815 chars):
+       The cluster contains two clear sub-themes: general cloud platform knowledge
+       across AWS and Azure, and delivery/operations tooling through Azure DevOps.
+       These should be represented as multiple competencies because provisioning cloud
+       infrastructure is different from automating build, release, and deployment
+       workflows. The generic entries "cloud" and "Cloud" were merged conceptually into
+       "cloud infrastructure" and "cloud services" rather than used as separate
+       anchors, because they are too broad for assessable curriculum outcomes. I kept
+       AWS, Azure, cloud infrastructure, cloud services, and Azure DevOps because they
+       form coherent vocational outcomes around cloud operations and DevOps-based
+       delivery. No item was completely unrelated, but the duplicate capitalization
+       variants were not emphasized independently.
+----------------------------------------------------------------------------------------
+[4] cluster=cluster_h0003  comps_out=3  latency=50.3s
+    batch_reasoning (846 chars):
+       The cluster combines software/data engineering with traditional engineering
+       domains: mechanical, electrical, civil, and a broad engineering foundation.
+       These should be split into multiple competencies because software-engineering
+       curriculum needs one competency for disciplined software development, one for
+       data engineering, and one for applying software in multidisciplinary engineering
+       contexts. I kept the broad Engineering/engineering items as umbrella foundations
+       rather than separate competencies, because they are too generic alone. I merged
+       duplicate capitalization variants such as civil engineering/Civil Engineering
+       and Engineering/engineering in interpretation, while preserving item wording in
+       related_skills. No items were fully dropped, but generic engineering terms were
+       only used where they support a more assessable competency.
+----------------------------------------------------------------------------------------
+[5] cluster=cluster_h0004  comps_out=4  latency=63.6s
+    batch_reasoning (953 chars):
+       The cluster contains several related software-engineering sub-themes:
+       backend/API development with Python, Java, REST, and Linux; client application
+       development with Android, iOS, and React; data and AI platform components such
+       as Kafka, Spark, Redis, and AI platforms; and operational concerns such as
+       observability, cybersecurity, Jira, and ServiceNow. These should be multiple
+       competencies because they represent different assessable outcomes: building
+       services, building user-facing apps, integrating data platforms, and operating
+       secure systems. I kept high-evidence and curriculum-relevant technologies and
+       merged duplicate capitalization such as Cybersecurity/cybersecurity and
+       Jira/JIRA conceptually. I dropped Defence/defence and fusion/Fusion because they
+       are domain labels or ambiguous terms rather than transferable software-
+       engineering competencies. Linux and platform are reused where they support both
+       development and operations contexts.
+----------------------------------------------------------------------------------------
+[6] cluster=cluster_h0005  comps_out=3  latency=54.2s
+    batch_reasoning (908 chars):
+       The cluster contains three clear sub-themes: business analysis and
+       documentation, SQL/Power BI analytics in an accounting context, and
+       infrastructure-oriented system delivery using PaaS and CI/CD. These should be
+       multiple competencies because requirements documentation, analytics
+       implementation, and infrastructure delivery are assessed through different
+       learner outputs. I kept and merged duplicate or near-duplicate items such as
+       Business Analysis/business analysis and Accounting/accounting, and grouped
+       create documentation with maintain documentation. I dropped utilities,
+       Utilities, Public Sector, and public sector because they are sector contexts
+       rather than core transferable software-engineering competencies in this cluster.
+       I also treated manage projects as supporting the requirements/documentation
+       competency rather than a standalone project-management outcome because the
+       evidence is limited.
+----------------------------------------------------------------------------------------
+[7] cluster=cluster_h0006  comps_out=3  latency=60.5s
+    batch_reasoning (840 chars):
+       The cluster contains three clear sub-themes: general AI/ML and data analysis
+       foundations, generative AI application development, and applied AI domains such
+       as computer vision, deep learning, and robotics. These should be multiple
+       competencies because the evidence spans different learner performances:
+       analyzing data and training models, building generative AI features, and
+       integrating perception or robotics capabilities. I did not force a separate
+       competency for generic labels such as "Artificial Intelligence" alone; instead,
+       those terms are merged into the more assessable AI/ML competencies.
+       Capitalization duplicates such as "Machine Learning"/"machine learning" and
+       "Computer Vision"/"computer vision" were treated as the same concept, while
+       robotics was kept as an applied AI context rather than a standalone robotics
+       curriculum.
+----------------------------------------------------------------------------------------
+[8] cluster=cluster_h0007  comps_out=3  latency=56.8s
+    batch_reasoning (917 chars):
+       I see three main sub-themes: automating workflows with AI support, designing
+       architecture for event-driven or information-heavy systems, and building or
+       operating distributed large-scale systems. These should be multiple competencies
+       because automation work, architectural modeling, and distributed runtime
+       operation require different demonstrations of mastery and map to different KKNI
+       expectations. I kept and merged repeated architecture terms such as
+       "architecture", "Architecture", "information architecture", and "Information
+       architecture" under one architecture competency because they describe related
+       design knowledge. I kept "automation", "automate workflows", "focus on
+       automation", and "AI-enabled workflows" together because they form a coherent
+       workflow-automation outcome. I dropped "Automotive" because it appears to be an
+       industry domain rather than a software-engineering competency in this cluster.
+----------------------------------------------------------------------------------------
+[9] cluster=cluster_h0008  comps_out=2  latency=30.7s
+    batch_reasoning (644 chars):
+       The cluster contains two clear sub-themes: JavaScript as the core programming
+       language, Node.js for server-side runtime use, and React Native for cross-
+       platform mobile application development. These should become multiple
+       competencies because backend JavaScript development and mobile UI/application
+       development require different deliverables, tools, and assessment evidence. No
+       listed skills are dropped because all three items connect coherently through the
+       JavaScript ecosystem. JavaScript is merged into both competencies as the shared
+       foundation, while Node.js anchors the backend competency and React Native
+       anchors the mobile competency.
+----------------------------------------------------------------------------------------
+[10] cluster=cluster_h0009  comps_out=3  latency=46.2s
+    batch_reasoning (772 chars):
+       The cluster contains three clear DevOps sub-themes: source-control work
+       practices, container-based deployment, and cloud infrastructure provisioning.
+       These should be split into multiple competencies because Git workflow,
+       Docker/Kubernetes runtime deployment, and Terraform/GCP infrastructure
+       automation are assessed through different learner products and operational
+       responsibilities. DevOps is treated as the integrating practice across the
+       competencies rather than a standalone tool competency. No listed skills are
+       dropped because all items fit one of the three curriculum-ready outcomes. Docker
+       is merged with Kubernetes, Terraform is merged with GCP, and Git is paired with
+       DevOps workflow practices to keep each competency broad enough for vocational
+       curriculum use.

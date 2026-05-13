@@ -1,0 +1,344 @@
+========================================================================================
+Phase 2.2 live run — competencies from real Phase 1 output
+========================================================================================
+
+  competencies produced: 12
+  LLM calls (BatchReasoning records): 10
+  total prompt tokens:     11,959
+  total completion tokens: 5,968
+  total LLM wall-clock:    198.6s
+
+----------------------------------------------------------------------------------------
+[1] Apply financial services principles in software solutions
+    id=comp_8430209b  cluster=cluster_h0001  provider=openrouter  model=deepseek/deepseek-chat
+    KKNI level: 5   future_weight: 0.80   trend: Stable   grounding_preview: 1.00
+    description: Design and implement software features that align with financial reporting, planning, and fintech requirements.
+    related_skills (5):
+       - Finance
+       - financial reporting
+       - fintech
+       - financial planning
+       - Financial Services
+    soft_skills_required: analytical thinking, attention to detail
+    rationale (510 chars):
+       Financial services and fintech are critical domains where software engineering
+       intersects with regulatory and operational requirements. Learners should
+       demonstrate the ability to integrate financial data handling, reporting
+       standards, and planning workflows into applications. This competency is distinct
+       because it focuses on the financial sector's unique constraints, unlike general
+       commerce or logistics. Mastery can be shown through projects that simulate real-
+       world financial systems or compliance checks.
+    provenance: 11 items, 8 unique jobs, 7 source sentences
+----------------------------------------------------------------------------------------
+[2] Develop e-commerce platform functionalities
+    id=comp_d0fb2d40  cluster=cluster_h0001  provider=openrouter  model=deepseek/deepseek-chat
+    KKNI level: 5   future_weight: 0.85   trend: Stable   grounding_preview: 1.00
+    description: Build and optimize features for online commerce platforms, ensuring seamless transaction processing and user experience.
+    related_skills (4):
+       - e-commerce platform
+       - E-commerce platform
+       - Commerce
+       - commerce
+    soft_skills_required: user empathy, problem-solving
+    rationale (476 chars):
+       E-commerce platforms require specialized knowledge of transaction flows, user
+       interfaces, and backend integrations. This competency ensures learners can
+       create scalable solutions for online sales, payment gateways, and inventory
+       displays. It stands apart from financial services by focusing on consumer-facing
+       systems rather than regulatory compliance. Proof of mastery includes deploying a
+       functional e-commerce prototype with cart, checkout, and product management
+       features.
+    provenance: 4 items, 4 unique jobs, 4 source sentences
+----------------------------------------------------------------------------------------
+[3] Integrate supply chain and logistics systems
+    id=comp_c5c406ae  cluster=cluster_h0001  provider=openrouter  model=deepseek/deepseek-chat
+    KKNI level: 5   future_weight: 0.75   trend: Emerging   grounding_preview: 1.00
+    description: Implement software solutions that manage inventory, logistics, and supply chain operations efficiently.
+    related_skills (3):
+       - supply chain
+       - inventory management
+       - logistics
+    soft_skills_required: systematic thinking, collaboration
+    rationale (439 chars):
+       Supply chain and logistics systems demand robust software for tracking,
+       forecasting, and resource allocation. Learners should show they can design
+       modules for inventory control, shipment tracking, and supplier coordination.
+       This competency differs by addressing operational workflows rather than
+       financial or consumer interactions. Mastery is demonstrated through projects
+       that automate supply chain processes or optimize logistics routes.
+    provenance: 6 items, 5 unique jobs, 3 source sentences
+----------------------------------------------------------------------------------------
+[4] Develop and maintain Power BI dashboards for business analytics
+    id=comp_e678589f  cluster=cluster_h0005  provider=openrouter  model=deepseek/deepseek-chat
+    KKNI level: 5   future_weight: 0.80   trend: Stable   grounding_preview: 1.00
+    description: Create and manage Power BI dashboards to visualize and analyze business data, ensuring accurate and up-to-date reporting.
+    related_skills (3):
+       - Power BI
+       - analytics
+       - maintain documentation
+    soft_skills_required: attention to detail, communication
+    rationale (391 chars):
+       Power BI is a critical tool for business analytics, and the ability to develop
+       and maintain dashboards is essential for effective data visualization. This
+       competency ensures learners can handle data analytics tasks and keep
+       documentation updated, which is crucial for business decision-making. It
+       distinguishes itself by focusing specifically on Power BI, a widely-used tool in
+       the industry.
+    provenance: 9 items, 9 unique jobs, 3 source sentences
+----------------------------------------------------------------------------------------
+[5] Gather and analyze business requirements for system design
+    id=comp_9d3b61a9  cluster=cluster_h0005  provider=openrouter  model=deepseek/deepseek-chat
+    KKNI level: 5   future_weight: 0.70   trend: Stable   grounding_preview: 1.00
+    description: Collect and interpret business requirements to inform the design and optimization of systems, ensuring alignment with organizational goals.
+    related_skills (3):
+       - gather requirements
+       - understand requirements
+       - Business Analysis
+    soft_skills_required: analytical thinking, collaboration
+    rationale (335 chars):
+       Effective system design begins with a thorough understanding of business
+       requirements. This competency focuses on the skills needed to gather and analyze
+       these requirements, ensuring that systems meet organizational needs. It is
+       distinct from other competencies by emphasizing the initial stages of system
+       design and business analysis.
+    provenance: 7 items, 7 unique jobs, 4 source sentences
+----------------------------------------------------------------------------------------
+[6] Create and manage technical documentation for systems
+    id=comp_220b0543  cluster=cluster_h0005  provider=openrouter  model=deepseek/deepseek-chat
+    KKNI level: 4   future_weight: 0.70   trend: Stable   grounding_preview: 1.00
+    description: Develop and maintain comprehensive documentation for systems, ensuring clarity and accessibility for all stakeholders.
+    related_skills (3):
+       - create documentation
+       - maintain documentation
+       - Confluence
+    soft_skills_required: organization, technical writing
+    rationale (312 chars):
+       Technical documentation is essential for system maintenance and user
+       understanding. This competency ensures learners can create and manage
+       documentation effectively, using tools like Confluence. It stands out by
+       focusing on the documentation process, which is critical for system
+       sustainability and user support.
+    provenance: 6 items, 5 unique jobs, 3 source sentences
+----------------------------------------------------------------------------------------
+[7] Design and implement AI-enabled workflow automation
+    id=comp_d5b6ed3c  cluster=cluster_h0007  provider=openrouter  model=deepseek/deepseek-chat
+    KKNI level: 5   future_weight: 0.80   trend: Emerging   grounding_preview: 1.00
+    description: Create and optimize automated workflows using AI technologies to improve efficiency and reduce manual intervention in software systems.
+    related_skills (4):
+       - automation
+       - automate workflows
+       - focus on automation
+       - AI-enabled workflows
+    soft_skills_required: problem-solving, attention to detail
+    rationale (440 chars):
+       The included skills highlight the importance of automation and AI in modern
+       workflows. Learners should demonstrate the ability to design, implement, and
+       optimize automated processes using AI tools. This competency is distinct as it
+       specifically targets the integration of AI with workflow automation, a growing
+       area in software engineering. Mastery can be shown through projects that
+       automate complex tasks with measurable efficiency gains.
+    provenance: 11 items, 10 unique jobs, 4 source sentences
+----------------------------------------------------------------------------------------
+[8] Build and operate large-scale distributed systems
+    id=comp_e0d9c5d7  cluster=cluster_h0007  provider=openrouter  model=deepseek/deepseek-chat
+    KKNI level: 6   future_weight: 0.70   trend: Stable   grounding_preview: 1.00
+    description: Develop and manage distributed systems with a focus on scalability, reliability, and event-driven architectures.
+    related_skills (4):
+       - build large-scale systems
+       - operate distributed systems
+       - distributed systems
+       - event-driven architecture
+    soft_skills_required: collaboration, systematic thinking
+    rationale (421 chars):
+       The skills emphasize the need for designing and maintaining scalable distributed
+       systems. Learners should prove capability by deploying systems that handle high
+       loads and demonstrate fault tolerance. This competency stands out by focusing on
+       the architectural and operational aspects of distributed systems. Evidence of
+       mastery includes successful deployment of systems that meet scalability and
+       reliability requirements.
+    provenance: 8 items, 5 unique jobs, 4 source sentences
+----------------------------------------------------------------------------------------
+[9] Develop cross-platform mobile applications using React Native
+    id=comp_361b20ee  cluster=cluster_h0008  provider=openrouter  model=deepseek/deepseek-chat
+    KKNI level: 5   future_weight: 0.80   trend: Stable   grounding_preview: 1.00
+    description: Design and implement mobile applications using React Native, leveraging JavaScript for cross-platform compatibility.
+    related_skills (2):
+       - React Native
+       - JavaScript
+    soft_skills_required: Problem-solving, Attention to detail
+    rationale (432 chars):
+       React Native is a widely-used framework for building mobile applications, and
+       its reliance on JavaScript makes it a natural extension of JavaScript skills.
+       Learners can demonstrate mastery by creating functional mobile applications that
+       run on both iOS and Android platforms. This competency is distinct because it
+       focuses specifically on mobile development, differentiating it from general
+       JavaScript or backend development skills.
+    provenance: 5 items, 4 unique jobs, 2 source sentences
+----------------------------------------------------------------------------------------
+[10] Build server-side applications using Node.js
+    id=comp_2394b09b  cluster=cluster_h0008  provider=openrouter  model=deepseek/deepseek-chat
+    KKNI level: 5   future_weight: 0.80   trend: Stable   grounding_preview: 1.00
+    description: Develop scalable server-side applications using Node.js, utilizing JavaScript for backend functionality.
+    related_skills (2):
+       - Node.js
+       - JavaScript
+    soft_skills_required: Logical thinking, Collaboration
+    rationale (350 chars):
+       Node.js is a key technology for server-side development, and its use of
+       JavaScript allows for seamless integration with front-end systems. Learners can
+       prove mastery by creating efficient and scalable backend systems. This
+       competency is distinct as it focuses on server-side development, contrasting
+       with front-end or mobile development competencies.
+    provenance: 6 items, 4 unique jobs, 2 source sentences
+----------------------------------------------------------------------------------------
+[11] Implement DevOps practices using version control and infrastructure as code
+    id=comp_491f7ea8  cluster=cluster_h0009  provider=openrouter  model=deepseek/deepseek-chat
+    KKNI level: 5   future_weight: 0.80   trend: Stable   grounding_preview: 1.00
+    description: Apply DevOps principles by utilizing Git for version control and Terraform for infrastructure as code, ensuring efficient and reproducible deployments.
+    related_skills (3):
+       - DevOps
+       - Git
+       - Terraform
+    soft_skills_required: Collaboration, Problem-solving
+    rationale (476 chars):
+       DevOps practices are essential for modern software development, emphasizing
+       collaboration and automation. Git is a fundamental tool for version control,
+       enabling teams to manage code changes effectively. Terraform allows for
+       infrastructure as code, ensuring environments are consistent and reproducible.
+       Together, these skills form a core competency in DevOps workflows, preparing
+       learners for roles that require efficient deployment and management of software
+       infrastructure.
+    provenance: 12 items, 11 unique jobs, 3 source sentences
+----------------------------------------------------------------------------------------
+[12] Deploy and manage containerized applications using Docker and Kubernetes
+    id=comp_612ecd50  cluster=cluster_h0009  provider=openrouter  model=deepseek/deepseek-chat
+    KKNI level: 6   future_weight: 0.90   trend: Emerging   grounding_preview: 1.00
+    description: Use Docker to create containerized applications and Kubernetes to orchestrate and manage these containers in a scalable and efficient manner.
+    related_skills (2):
+       - Docker
+       - Kubernetes
+    soft_skills_required: Attention to detail, Adaptability
+    rationale (526 chars):
+       Containerization with Docker has become a standard for packaging applications,
+       ensuring consistency across environments. Kubernetes provides robust
+       orchestration, enabling scalable and resilient deployments. Mastery of these
+       tools is critical for modern cloud-native development, allowing learners to
+       handle complex deployment scenarios. This competency is distinct from DevOps
+       practices as it focuses specifically on containerization and orchestration,
+       which are key skills in cloud computing and microservices architectures.
+    provenance: 5 items, 4 unique jobs, 2 source sentences
+
+========================================================================================
+[BATCH REASONINGS]
+========================================================================================
+----------------------------------------------------------------------------------------
+[1] cluster=cluster_h0000  comps_out=1  latency=13.4s
+    batch_reasoning (707 chars):
+       This cluster revolves around regulatory compliance, with all items directly or
+       indirectly referencing compliance and regulatory standards. The sub-themes are
+       tightly related, focusing on ensuring adherence to regulations and understanding
+       compliance requirements. They should form a single competency because they all
+       address the same core concept of regulatory compliance from different angles
+       (action, knowledge, and specific application). All items fit well within this
+       theme, with no outliers to drop. The skills 'ensure regulatory compliance',
+       'compliance', and 'regulatory compliance' are merged into one competency as they
+       collectively represent the knowledge and application of compliance standards.
+----------------------------------------------------------------------------------------
+[2] cluster=cluster_h0001  comps_out=3  latency=25.8s
+    batch_reasoning (691 chars):
+       This cluster revolves around financial services, e-commerce, and supply chain
+       logistics, with strong overlaps in commerce-related knowledge. The sub-themes
+       are: 1) financial services and fintech, 2) e-commerce platforms, and 3) supply
+       chain and logistics. These should be split into separate competencies as they
+       represent distinct domains within the broader cluster. All skills fit well into
+       these sub-themes, with 'Retail' being the weakest fit—it was dropped as it's
+       more of an industry context than a core skill. Skills like 'financial reporting'
+       and 'financial planning' were merged under financial services, while 'inventory
+       management' and 'logistics' were grouped under supply chain.
+----------------------------------------------------------------------------------------
+[3] cluster=cluster_h0002  comps_out=1  latency=9.4s
+    batch_reasoning (488 chars):
+       This cluster focuses on cloud infrastructure and services, with a strong
+       emphasis on AWS and Azure platforms. The sub-themes include cloud platforms
+       (AWS, Azure), cloud infrastructure, and cloud services. These should be grouped
+       into ONE competency because they are closely related and often used together in
+       real-world scenarios. All items fit well within this theme, so none are dropped.
+       The skills 'cloud' and 'Cloud' are merged into 'cloud infrastructure' for
+       consistency and clarity.
+----------------------------------------------------------------------------------------
+[4] cluster=cluster_h0003  comps_out=1  latency=12.8s
+    batch_reasoning (569 chars):
+       This cluster primarily revolves around foundational engineering disciplines,
+       with a strong emphasis on software, mechanical, data, electrical, and civil
+       engineering. The skills are closely related as they all pertain to core
+       engineering knowledge areas, making them suitable for a single competency
+       focused on interdisciplinary engineering fundamentals. All items fit well within
+       this theme, with no outliers needing exclusion. The skills will be merged into a
+       cohesive competency that highlights the intersection of these engineering
+       domains in practical applications.
+----------------------------------------------------------------------------------------
+[5] cluster=cluster_h0004  comps_out=4  latency=31.5s
+    batch_reasoning (671 chars):
+       This cluster primarily revolves around software development and cybersecurity,
+       with strong emphasis on programming languages (Python, Java), platforms (iOS,
+       Android, AI platforms), and tools (Kafka, React, Redis). The sub-themes are: 1)
+       Software Development (Python, Java, React, Kafka), 2) Platform Integration (iOS,
+       Android, AI platforms, API, REST), and 3) Cybersecurity (cybersecurity,
+       defence). These should be split into multiple competencies as they represent
+       distinct skill sets. Skills like 'ServiceNow' and 'Jira' don't fit well with the
+       main themes and are dropped due to weak relevance. Merged similar terms like
+       'Cybersecurity' and 'defence' for consistency.
+----------------------------------------------------------------------------------------
+[6] cluster=cluster_h0005  comps_out=3  latency=20.9s
+    batch_reasoning (617 chars):
+       This cluster primarily revolves around data analytics, business analysis, and
+       documentation management, with a strong emphasis on tools like Power BI and SQL.
+       The sub-themes include data analysis, requirement gathering, and documentation
+       creation/maintenance. These should be split into multiple competencies as they
+       address distinct yet complementary skill sets. Skills like 'infrastructure' and
+       'CI/CD' don't fit well with the main themes and are better left out to maintain
+       focus. Skills such as 'solve technical problems' and 'manage projects' are too
+       broad and don't align closely with the cluster's core themes.
+----------------------------------------------------------------------------------------
+[7] cluster=cluster_h0006  comps_out=1  latency=12.0s
+    batch_reasoning (528 chars):
+       This cluster primarily revolves around AI/ML and generative AI, with strong sub-
+       themes in machine learning, deep learning, and computer vision. The skills are
+       closely related and should form a single competency focused on foundational
+       AI/ML concepts. All items fit well within this theme, with no outliers needing
+       exclusion. Skills like 'data analysis' and 'robotics' are tangential but still
+       relevant to AI/ML applications, so they are included. The cluster's cohesion
+       score (0.744) supports grouping these into one competency.
+----------------------------------------------------------------------------------------
+[8] cluster=cluster_h0007  comps_out=2  latency=16.7s
+    batch_reasoning (566 chars):
+       This cluster revolves around AI-enabled workflow automation and system
+       architecture, with sub-themes including distributed systems, event-driven
+       architecture, and workflow automation. These should be split into two
+       competencies: one focusing on designing and implementing AI-enabled workflows,
+       and another on building and operating large-scale distributed systems. The items
+       'Automotive' and 'information architecture' don't fit well with the core themes
+       and should be dropped. The remaining skills are cohesive and relevant to modern
+       software engineering practices.
+----------------------------------------------------------------------------------------
+[9] cluster=cluster_h0008  comps_out=2  latency=37.3s
+    batch_reasoning (553 chars):
+       This cluster focuses on JavaScript-based technologies, specifically Node.js and
+       React Native. These skills are closely related as they are both built on
+       JavaScript, making them a natural fit for a single competency. All items in the
+       cluster are relevant and cohesive, with no outliers or weak fits. The skills
+       'Node.js', 'JavaScript', and 'React Native' are retained as they form a logical
+       progression in JavaScript-based development. No skills are dropped or merged, as
+       they collectively represent a foundational understanding of JavaScript
+       ecosystems.
+----------------------------------------------------------------------------------------
+[10] cluster=cluster_h0009  comps_out=2  latency=18.9s
+    batch_reasoning (573 chars):
+       This cluster revolves around DevOps practices and tools, with a focus on
+       containerization, orchestration, and version control. The sub-themes include
+       containerization (Docker), orchestration (Kubernetes), infrastructure as code
+       (Terraform), version control (Git), and cloud platforms (GCP). These should be
+       split into two competencies: one focusing on DevOps tools and practices, and
+       another on containerization and orchestration. All skills fit well within these
+       themes, so none were dropped. The split ensures clarity and focus, aligning with
+       vocational curriculum needs.

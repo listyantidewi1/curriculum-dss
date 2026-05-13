@@ -141,6 +141,11 @@ class SkillItem:
     sentence_id: Optional[str] = None
     sentence_text: Optional[str] = None
     extractor_source: Optional[str] = None
+    # Role-context (Phase 2.1 Tier 2): job_title of the posting this item was
+    # extracted from. Used by the clusterer's role-context embedding to give
+    # the same surface text different meanings in different role contexts
+    # (e.g. "DevOps" in a senior SRE role vs a junior helpdesk role).
+    job_title: Optional[str] = None
 
     def to_dict(self):
         # Ensure all numeric values are Python floats before rounding
@@ -159,6 +164,7 @@ class SkillItem:
             "sentence_id": self.sentence_id or "",
             "sentence_text": self.sentence_text or "",
             "extractor_source": self.extractor_source or self.source,
+            "job_title": self.job_title or "",
         }
 
 @dataclass
@@ -172,6 +178,7 @@ class KnowledgeItem:
     sentence_id: Optional[str] = None
     sentence_text: Optional[str] = None
     extractor_source: Optional[str] = None
+    job_title: Optional[str] = None  # Role-context (see SkillItem.job_title)
 
     def to_dict(self):
         # Ensure confidence_score is a Python float, not a tensor
@@ -184,6 +191,7 @@ class KnowledgeItem:
             "sentence_id": self.sentence_id or "",
             "sentence_text": self.sentence_text or "",
             "extractor_source": self.extractor_source or self.source,
+            "job_title": self.job_title or "",
         }
 
 # ============================================================

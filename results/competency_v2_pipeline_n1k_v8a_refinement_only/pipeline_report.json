@@ -1,0 +1,815 @@
+{
+  "tag": "n1k_v8a_refinement_only",
+  "model": "gpt-5.4-mini",
+  "phase1_input": "D:\\Projects\\skill-extraction\\DATA\\preprocessing\\phase1_n1k",
+  "jobs_metadata": "D:\\Projects\\skill-extraction\\DATA\\preprocessing\\data_prepared_n1k\\jobs_metadata.csv",
+  "stages": {
+    "phase1_load": {
+      "n_items": 11842,
+      "n_skills": 6699,
+      "n_knowledge": 5143
+    },
+    "phase2_1_clustering": {
+      "n_items_input": 11842,
+      "n_items_canonical": 9914,
+      "n_items_after_frequency_filter": 591,
+      "n_items_hard_plus_knowledge": 591,
+      "n_items_soft": 0,
+      "n_clusters_hdbscan": 64,
+      "n_clusters_recovered": 1,
+      "n_clusters_split": 2,
+      "n_clusters_dropped_low_cohesion": 0,
+      "n_items_ungrouped": 232,
+      "cohesion_mean": 0.8369,
+      "cohesion_median": 0.8387,
+      "cohesion_min": 0.603,
+      "runtime_seconds": 998.48,
+      "config": {
+        "embedder_model": "sentence-transformers/all-MiniLM-L6-v2",
+        "embedding_cache_dir": "cache/embeddings",
+        "template_prefix": "skill or knowledge area: ",
+        "enable_role_context": true,
+        "role_context_template": "skill in role '{job_title}': ",
+        "enable_cluster_refinement": true,
+        "refinement_model": "gpt-5.4-mini",
+        "refinement_max_iterations": 2,
+        "refinement_n_noise_candidates": 10,
+        "refinement_noise_candidate_min_cosine": 0.4,
+        "min_global_frequency": 2,
+        "min_cluster_size": 3,
+        "min_samples": 2,
+        "cluster_selection_epsilon": 0.15,
+        "cluster_selection_method": "eom",
+        "cohesion_threshold": 0.55,
+        "max_cluster_size": 25,
+        "max_split_recursion": 3,
+        "enable_agglomerative_recovery": true,
+        "enable_oversize_split": true,
+        "naming_max_unigrams": 5,
+        "naming_max_bigrams": 3,
+        "naming_max_trigrams": 2,
+        "seed": 42
+      },
+      "refinement": {
+        "enabled": true,
+        "model": "gpt-5.4-mini",
+        "n_clusters_processed": 65,
+        "n_clusters_unchanged": 61,
+        "n_clusters_dropped_below_min_size": 0,
+        "total_items_moved_out": 9,
+        "total_items_moved_in": 0,
+        "total_llm_calls": 130,
+        "cohesion_mean_before": 0.8334,
+        "cohesion_mean_after": 0.8371,
+        "runtime_seconds": 994.46,
+        "per_cluster": [
+          {
+            "cluster_idx": 0,
+            "iterations": 0,
+            "initial_cohesion": 0.9499,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 1,
+            "iterations": 0,
+            "initial_cohesion": 0.7528,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 2,
+            "iterations": 0,
+            "initial_cohesion": 0.7685,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 3,
+            "iterations": 0,
+            "initial_cohesion": 0.9073,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 4,
+            "iterations": 0,
+            "initial_cohesion": 0.9392,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 1,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 5,
+            "iterations": 0,
+            "initial_cohesion": 0.7126,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 6,
+            "iterations": 0,
+            "initial_cohesion": 0.9121,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 0,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 7,
+            "iterations": 0,
+            "initial_cohesion": 0.9683,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 0,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 8,
+            "iterations": 2,
+            "initial_cohesion": 0.7576,
+            "final_cohesion": 0.7941,
+            "n_items_moved_out": 5,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 1,
+            "move_decisions": [
+              {
+                "kind": "item",
+                "verdict": "move_out",
+                "reason": "Leadership is a general soft skill, not a physical task or work-activity requirement.",
+                "text": "leadership skills"
+              },
+              {
+                "kind": "item",
+                "verdict": "move_out",
+                "reason": "Math is a broad academic skill and does not match the physical/operational task theme.",
+                "text": "math"
+              },
+              {
+                "kind": "item",
+                "verdict": "move_out",
+                "reason": "Communication skills are generic and not specific to the task/mobility requirements in this cluster.",
+                "text": "communication skills"
+              },
+              {
+                "kind": "item",
+                "verdict": "move_out",
+                "reason": "Entering orders is a clerical/computer task, not a physical activity or labor function.",
+                "text": "enter orders using a computer keyboard or touch screen."
+              },
+              {
+                "kind": "item",
+                "verdict": "move_out",
+                "reason": "Analyzing and compiling data is a knowledge-work task, not a physical or repetitive labor activity.",
+                "text": "analyze and compile data,"
+              }
+            ]
+          },
+          {
+            "cluster_idx": 9,
+            "iterations": 0,
+            "initial_cohesion": 0.9049,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 10,
+            "iterations": 0,
+            "initial_cohesion": 0.9662,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 0,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 11,
+            "iterations": 0,
+            "initial_cohesion": 0.8376,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 12,
+            "iterations": 0,
+            "initial_cohesion": 0.8406,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 13,
+            "iterations": 0,
+            "initial_cohesion": 0.9651,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 1,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 14,
+            "iterations": 1,
+            "initial_cohesion": 0.8174,
+            "final_cohesion": 0.9058,
+            "n_items_moved_out": 1,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 0,
+            "move_decisions": [
+              {
+                "kind": "item",
+                "verdict": "move_out",
+                "reason": "A flexible schedule is a work-availability condition, not a visual ability.",
+                "text": "work a flexible schedule"
+              }
+            ]
+          },
+          {
+            "cluster_idx": 15,
+            "iterations": 0,
+            "initial_cohesion": 0.9176,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 16,
+            "iterations": 0,
+            "initial_cohesion": 0.949,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 17,
+            "iterations": 1,
+            "initial_cohesion": 0.843,
+            "final_cohesion": 0.9383,
+            "n_items_moved_out": 2,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 0,
+            "move_decisions": [
+              {
+                "kind": "item",
+                "verdict": "move_out",
+                "reason": "\"power tools\" refers to equipment/tools generally, not ASIC verification or validation.",
+                "text": "power tools"
+              },
+              {
+                "kind": "item",
+                "verdict": "move_out",
+                "reason": "A master's degree is a qualification, not a verification/validation skill or tool.",
+                "text": "Master's degree in Science, Engineering,"
+              }
+            ]
+          },
+          {
+            "cluster_idx": 18,
+            "iterations": 0,
+            "initial_cohesion": 0.865,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 19,
+            "iterations": 0,
+            "initial_cohesion": 0.7338,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 20,
+            "iterations": 0,
+            "initial_cohesion": 0.7972,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 21,
+            "iterations": 0,
+            "initial_cohesion": 0.8683,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 22,
+            "iterations": 0,
+            "initial_cohesion": 0.798,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 23,
+            "iterations": 0,
+            "initial_cohesion": 0.7769,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 24,
+            "iterations": 0,
+            "initial_cohesion": 0.7992,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 25,
+            "iterations": 0,
+            "initial_cohesion": 0.8735,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 26,
+            "iterations": 0,
+            "initial_cohesion": 0.7627,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 27,
+            "iterations": 0,
+            "initial_cohesion": 0.7677,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 28,
+            "iterations": 0,
+            "initial_cohesion": 0.8409,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 29,
+            "iterations": 0,
+            "initial_cohesion": 0.7539,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 30,
+            "iterations": 0,
+            "initial_cohesion": 0.8146,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 31,
+            "iterations": 0,
+            "initial_cohesion": 0.9359,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 32,
+            "iterations": 0,
+            "initial_cohesion": 0.8638,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 33,
+            "iterations": 0,
+            "initial_cohesion": 0.8762,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 34,
+            "iterations": 0,
+            "initial_cohesion": 0.8002,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 35,
+            "iterations": 0,
+            "initial_cohesion": 0.768,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 36,
+            "iterations": 0,
+            "initial_cohesion": 0.8131,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 37,
+            "iterations": 0,
+            "initial_cohesion": 0.9088,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 0,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 38,
+            "iterations": 0,
+            "initial_cohesion": 0.8986,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 39,
+            "iterations": 0,
+            "initial_cohesion": 0.7631,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 40,
+            "iterations": 0,
+            "initial_cohesion": 0.8189,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 41,
+            "iterations": 0,
+            "initial_cohesion": 0.8721,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 42,
+            "iterations": 0,
+            "initial_cohesion": 0.6639,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 43,
+            "iterations": 0,
+            "initial_cohesion": 0.8518,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 44,
+            "iterations": 0,
+            "initial_cohesion": 0.6972,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 45,
+            "iterations": 0,
+            "initial_cohesion": 0.7774,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 46,
+            "iterations": 0,
+            "initial_cohesion": 0.8942,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 47,
+            "iterations": 0,
+            "initial_cohesion": 0.8159,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 48,
+            "iterations": 0,
+            "initial_cohesion": 0.8232,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 49,
+            "iterations": 0,
+            "initial_cohesion": 0.786,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 50,
+            "iterations": 0,
+            "initial_cohesion": 0.8244,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 51,
+            "iterations": 0,
+            "initial_cohesion": 0.8136,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 52,
+            "iterations": 0,
+            "initial_cohesion": 0.8555,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 53,
+            "iterations": 0,
+            "initial_cohesion": 0.788,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 54,
+            "iterations": 0,
+            "initial_cohesion": 0.7867,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 55,
+            "iterations": 1,
+            "initial_cohesion": 0.8156,
+            "final_cohesion": 0.8397,
+            "n_items_moved_out": 1,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 0,
+            "move_decisions": [
+              {
+                "kind": "item",
+                "verdict": "move_out",
+                "reason": "Courage is a general character trait, not a requirements-analysis or teamwork skill.",
+                "text": "courage"
+              }
+            ]
+          },
+          {
+            "cluster_idx": 56,
+            "iterations": 0,
+            "initial_cohesion": 0.9033,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 57,
+            "iterations": 0,
+            "initial_cohesion": 0.8026,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 58,
+            "iterations": 0,
+            "initial_cohesion": 0.8722,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 59,
+            "iterations": 0,
+            "initial_cohesion": 0.8614,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 60,
+            "iterations": 0,
+            "initial_cohesion": 0.9199,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 61,
+            "iterations": 0,
+            "initial_cohesion": 0.8689,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 62,
+            "iterations": 0,
+            "initial_cohesion": 0.8181,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 63,
+            "iterations": 0,
+            "initial_cohesion": 0.8456,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          },
+          {
+            "cluster_idx": 64,
+            "iterations": 0,
+            "initial_cohesion": 0.603,
+            "final_cohesion": 0.0,
+            "n_items_moved_out": 0,
+            "n_items_moved_in": 0,
+            "rejected_rounds": 2,
+            "move_decisions": []
+          }
+        ]
+      }
+    },
+    "phase2_2_generation": {
+      "n_competencies": 9,
+      "n_batch_reasonings": 66,
+      "model": "gpt-5.4-mini",
+      "grounding_threshold": 0.8
+    },
+    "phase2_5b_text_quality": {
+      "n_passed": 9,
+      "n_failed": 0
+    },
+    "phase2_3_kkni": {
+      "version": "v2.3.0",
+      "n_evaluated": 9,
+      "n_relabeled": 5,
+      "n_skipped_low_confidence": 4,
+      "n_kept_llm": 0,
+      "mean_similarity": 0.36591726541519165,
+      "config": {
+        "sbert_model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+        "allowed_levels": [
+          3,
+          7
+        ],
+        "override_min_similarity": 0.3,
+        "snap_to_allowed": true
+      }
+    },
+    "phase2_4_education": {
+      "version": "v2.4.0",
+      "n_evaluated": 9,
+      "n_with_education_data": 9,
+      "n_no_education_data": 0,
+      "n_jobs_in_lookup": 535,
+      "jobs_metadata_path": "D:\\Projects\\skill-extraction\\DATA\\preprocessing\\data_prepared_n1k\\jobs_metadata.csv"
+    }
+  },
+  "total_runtime_seconds": 1710.83,
+  "final_n_competencies": 9
+}

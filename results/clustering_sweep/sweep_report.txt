@@ -1,0 +1,112 @@
+========================================================================================
+Phase 2.1 cohesion-threshold sweep — summary
+========================================================================================
+
+  thr n_clusters  hpk  soft  grouped  ungrouped    mean     min
+ 0.40         15   12     3      383          2   0.682   0.527
+ 0.45         15   12     3      383          2   0.682   0.527
+ 0.50         15   12     3      383          2   0.682   0.527
+ 0.55         13   10     3      318         28   0.706   0.601
+ 0.60         13   10     3      318         28   0.706   0.601
+ 0.65          6    4     2       88        116   0.750   0.681
+
+----------------------------------------------------------------------------------------
+[THRESHOLD = 0.40]  (15 clusters)
+----------------------------------------------------------------------------------------
+  cluster_h0004      stream=hard_plus_knowledge   n= 60  cohesion=0.647  → ai platforms android: api, cybersecurity
+  cluster_h0005      stream=hard_plus_knowledge   n= 54  cohesion=0.665  → accounting power bi: documentation, requirements
+  cluster_h0011      stream=hard_plus_knowledge   n= 45  cohesion=0.531  → agile methodologies quality: change, cnc
+  cluster_h0007      stream=hard_plus_knowledge   n= 28  cohesion=0.635  → ai-enabled workflows automation: architecture, systems
+  cluster_h0006      stream=hard_plus_knowledge   n= 27  cohesion=0.744  → ai ai/ml generative: artificial, intelligence
+  cluster_s0001      stream=soft_skill            n= 26  cohesion=0.719  → adapt change think: communicate, solve
+  cluster_s0000      stream=soft_skill            n= 25  cohesion=0.756  → collaborate team work: cross-functional, teams
+  cluster_h0001      stream=hard_plus_knowledge   n= 23  cohesion=0.654  → chain financial services: commerce, e-commerce
+  cluster_h0010      stream=hard_plus_knowledge   n= 20  cohesion=0.527  → apis powershell embedded: autocad, code
+  cluster_h0009      stream=hard_plus_knowledge   n= 19  cohesion=0.601  → devops git kubernetes: docker, gcp
+  cluster_h0002      stream=hard_plus_knowledge   n= 15  cohesion=0.760  → aws cloud infrastructure: azure, devops
+  cluster_s0002      stream=soft_skill            n= 14  cohesion=0.603  → business needs deliver: closely, data
+  cluster_h0003      stream=hard_plus_knowledge   n= 13  cohesion=0.769  → civil engineering electrical: mechanical, data
+  cluster_h0008      stream=hard_plus_knowledge   n=  8  cohesion=0.739  → javascript react native: js, node
+  cluster_h0000      stream=hard_plus_knowledge   n=  6  cohesion=0.886  → compliance compliance regulatory: ensure
+
+----------------------------------------------------------------------------------------
+[THRESHOLD = 0.45]  (15 clusters)
+----------------------------------------------------------------------------------------
+  cluster_h0004      stream=hard_plus_knowledge   n= 60  cohesion=0.647  → ai platforms android: api, cybersecurity
+  cluster_h0005      stream=hard_plus_knowledge   n= 54  cohesion=0.665  → accounting power bi: documentation, requirements
+  cluster_h0011      stream=hard_plus_knowledge   n= 45  cohesion=0.531  → agile methodologies quality: change, cnc
+  cluster_h0007      stream=hard_plus_knowledge   n= 28  cohesion=0.635  → ai-enabled workflows automation: architecture, systems
+  cluster_h0006      stream=hard_plus_knowledge   n= 27  cohesion=0.744  → ai ai/ml generative: artificial, intelligence
+  cluster_s0001      stream=soft_skill            n= 26  cohesion=0.719  → adapt change think: communicate, solve
+  cluster_s0000      stream=soft_skill            n= 25  cohesion=0.756  → collaborate team work: cross-functional, teams
+  cluster_h0001      stream=hard_plus_knowledge   n= 23  cohesion=0.654  → chain financial services: commerce, e-commerce
+  cluster_h0010      stream=hard_plus_knowledge   n= 20  cohesion=0.527  → apis powershell embedded: autocad, code
+  cluster_h0009      stream=hard_plus_knowledge   n= 19  cohesion=0.601  → devops git kubernetes: docker, gcp
+  cluster_h0002      stream=hard_plus_knowledge   n= 15  cohesion=0.760  → aws cloud infrastructure: azure, devops
+  cluster_s0002      stream=soft_skill            n= 14  cohesion=0.603  → business needs deliver: closely, data
+  cluster_h0003      stream=hard_plus_knowledge   n= 13  cohesion=0.769  → civil engineering electrical: mechanical, data
+  cluster_h0008      stream=hard_plus_knowledge   n=  8  cohesion=0.739  → javascript react native: js, node
+  cluster_h0000      stream=hard_plus_knowledge   n=  6  cohesion=0.886  → compliance compliance regulatory: ensure
+
+----------------------------------------------------------------------------------------
+[THRESHOLD = 0.50]  (15 clusters)
+----------------------------------------------------------------------------------------
+  cluster_h0004      stream=hard_plus_knowledge   n= 60  cohesion=0.647  → ai platforms android: api, cybersecurity
+  cluster_h0005      stream=hard_plus_knowledge   n= 54  cohesion=0.665  → accounting power bi: documentation, requirements
+  cluster_h0011      stream=hard_plus_knowledge   n= 45  cohesion=0.531  → agile methodologies quality: change, cnc
+  cluster_h0007      stream=hard_plus_knowledge   n= 28  cohesion=0.635  → ai-enabled workflows automation: architecture, systems
+  cluster_h0006      stream=hard_plus_knowledge   n= 27  cohesion=0.744  → ai ai/ml generative: artificial, intelligence
+  cluster_s0001      stream=soft_skill            n= 26  cohesion=0.719  → adapt change think: communicate, solve
+  cluster_s0000      stream=soft_skill            n= 25  cohesion=0.756  → collaborate team work: cross-functional, teams
+  cluster_h0001      stream=hard_plus_knowledge   n= 23  cohesion=0.654  → chain financial services: commerce, e-commerce
+  cluster_h0010      stream=hard_plus_knowledge   n= 20  cohesion=0.527  → apis powershell embedded: autocad, code
+  cluster_h0009      stream=hard_plus_knowledge   n= 19  cohesion=0.601  → devops git kubernetes: docker, gcp
+  cluster_h0002      stream=hard_plus_knowledge   n= 15  cohesion=0.760  → aws cloud infrastructure: azure, devops
+  cluster_s0002      stream=soft_skill            n= 14  cohesion=0.603  → business needs deliver: closely, data
+  cluster_h0003      stream=hard_plus_knowledge   n= 13  cohesion=0.769  → civil engineering electrical: mechanical, data
+  cluster_h0008      stream=hard_plus_knowledge   n=  8  cohesion=0.739  → javascript react native: js, node
+  cluster_h0000      stream=hard_plus_knowledge   n=  6  cohesion=0.886  → compliance compliance regulatory: ensure
+
+----------------------------------------------------------------------------------------
+[THRESHOLD = 0.55]  (13 clusters)
+----------------------------------------------------------------------------------------
+  cluster_h0004      stream=hard_plus_knowledge   n= 60  cohesion=0.647  → ai platforms android: api, cybersecurity
+  cluster_h0005      stream=hard_plus_knowledge   n= 54  cohesion=0.665  → accounting power bi: documentation, requirements
+  cluster_h0007      stream=hard_plus_knowledge   n= 28  cohesion=0.635  → ai-enabled workflows automation: architecture, systems
+  cluster_h0006      stream=hard_plus_knowledge   n= 27  cohesion=0.744  → ai ai/ml generative: artificial, intelligence
+  cluster_s0001      stream=soft_skill            n= 26  cohesion=0.719  → adapt change think: communicate, solve
+  cluster_s0000      stream=soft_skill            n= 25  cohesion=0.756  → collaborate team work: cross-functional, teams
+  cluster_h0001      stream=hard_plus_knowledge   n= 23  cohesion=0.654  → chain financial services: commerce, e-commerce
+  cluster_h0009      stream=hard_plus_knowledge   n= 19  cohesion=0.601  → devops git kubernetes: docker, gcp
+  cluster_h0002      stream=hard_plus_knowledge   n= 15  cohesion=0.760  → aws cloud infrastructure: azure, devops
+  cluster_s0002      stream=soft_skill            n= 14  cohesion=0.603  → business needs deliver: closely, data
+  cluster_h0003      stream=hard_plus_knowledge   n= 13  cohesion=0.769  → civil engineering electrical: mechanical, data
+  cluster_h0008      stream=hard_plus_knowledge   n=  8  cohesion=0.739  → javascript react native: js, node
+  cluster_h0000      stream=hard_plus_knowledge   n=  6  cohesion=0.886  → compliance compliance regulatory: ensure
+
+----------------------------------------------------------------------------------------
+[THRESHOLD = 0.60]  (13 clusters)
+----------------------------------------------------------------------------------------
+  cluster_h0004      stream=hard_plus_knowledge   n= 60  cohesion=0.647  → ai platforms android: api, cybersecurity
+  cluster_h0005      stream=hard_plus_knowledge   n= 54  cohesion=0.665  → accounting power bi: documentation, requirements
+  cluster_h0007      stream=hard_plus_knowledge   n= 28  cohesion=0.635  → ai-enabled workflows automation: architecture, systems
+  cluster_h0006      stream=hard_plus_knowledge   n= 27  cohesion=0.744  → ai ai/ml generative: artificial, intelligence
+  cluster_s0001      stream=soft_skill            n= 26  cohesion=0.719  → adapt change think: communicate, solve
+  cluster_s0000      stream=soft_skill            n= 25  cohesion=0.756  → collaborate team work: cross-functional, teams
+  cluster_h0001      stream=hard_plus_knowledge   n= 23  cohesion=0.654  → chain financial services: commerce, e-commerce
+  cluster_h0009      stream=hard_plus_knowledge   n= 19  cohesion=0.601  → devops git kubernetes: docker, gcp
+  cluster_h0002      stream=hard_plus_knowledge   n= 15  cohesion=0.760  → aws cloud infrastructure: azure, devops
+  cluster_s0002      stream=soft_skill            n= 14  cohesion=0.603  → business needs deliver: closely, data
+  cluster_h0003      stream=hard_plus_knowledge   n= 13  cohesion=0.769  → civil engineering electrical: mechanical, data
+  cluster_h0008      stream=hard_plus_knowledge   n=  8  cohesion=0.739  → javascript react native: js, node
+  cluster_h0000      stream=hard_plus_knowledge   n=  6  cohesion=0.886  → compliance compliance regulatory: ensure
+
+----------------------------------------------------------------------------------------
+[THRESHOLD = 0.65]  (6 clusters)
+----------------------------------------------------------------------------------------
+  cluster_s0001      stream=soft_skill            n= 26  cohesion=0.719  → adapt change think: communicate, solve
+  cluster_s0000      stream=soft_skill            n= 25  cohesion=0.756  → collaborate team work: cross-functional, teams
+  cluster_h0003      stream=hard_plus_knowledge   n= 17  cohesion=0.681  → ai-enabled workflows automation: autocad, automate
+  cluster_h0001      stream=hard_plus_knowledge   n=  8  cohesion=0.739  → javascript react native: js, node
+  cluster_h0000      stream=hard_plus_knowledge   n=  6  cohesion=0.886  → compliance compliance regulatory: ensure
+  cluster_h0002      stream=hard_plus_knowledge   n=  6  cohesion=0.716  → build dashboards maintain: documentation, create

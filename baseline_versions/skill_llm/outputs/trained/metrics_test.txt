@@ -1,0 +1,21 @@
+=== TEST METRICS - Skill-LLM (Kaggle, LLaMA 3.1 8B Instruct) ===
+# strict span-set F1 (Skill-LLM Table 2 definition)
+
+skill_precision: 0.5832
+skill_recall:    0.5789
+skill_f1:        0.5810
+knowledge_precision: 0.6603
+knowledge_recall:    0.7598
+knowledge_f1:        0.7065
+total_precision: 0.6260
+total_recall:    0.6727
+total_f1:        0.6485
+
+--- diagnostics ---
+json_parse_failures: 1 / 3569
+skill_predictions:   1083
+skill_short_spans:   178 (< 2 tokens)
+verb_short_rate:     0.1644
+training_baseline:   0.1441
+verb_fail_threshold: 0.2441 (baseline + tolerance 0.10)
+OK: verb-preservation diagnostic passed.

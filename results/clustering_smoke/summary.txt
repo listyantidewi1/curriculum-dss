@@ -1,0 +1,90 @@
+==============================================================================
+Phase 2.1 clustering — real-data smoke test
+==============================================================================
+
+[INPUT]
+  items input:                        3196
+  items after canonicalization:       2954
+  items after frequency filter:       145
+    -> hard+knowledge stream:         123
+    -> soft-skill stream:             22
+
+[CLUSTERING]
+  HDBSCAN clusters:                   5
+  agglomerative-recovery clusters:    2
+  oversize-split children:            10
+  dropped (cohesion < threshold):     0
+  items ungrouped (final noise):      2
+
+[COHESION]
+  mean:    0.6825
+  median:  0.6648
+  min:     0.5271  (threshold = 0.5)
+
+[RUNTIME] 8.01s
+
+[HARD + KNOWLEDGE — top 25 by size]
+  cluster_h0004      n= 60  jobs= 36  cohesion=0.647  (agglomerative_split)  → ai platforms android: api, cybersecurity
+  cluster_h0005      n= 54  jobs= 43  cohesion=0.665  (agglomerative_split)  → accounting power bi: documentation, requirements
+  cluster_h0011      n= 45  jobs= 42  cohesion=0.531  (agglomerative_split)  → agile methodologies quality: change, cnc
+  cluster_h0007      n= 28  jobs= 23  cohesion=0.635  (agglomerative_split)  → ai-enabled workflows automation: architecture, systems
+  cluster_h0006      n= 27  jobs= 22  cohesion=0.744  (agglomerative_split)  → ai ai/ml generative: artificial, intelligence
+  cluster_h0001      n= 23  jobs= 18  cohesion=0.654  (agglomerative_split)  → chain financial services: commerce, e-commerce
+  cluster_h0010      n= 20  jobs= 19  cohesion=0.527  (agglomerative_split)  → apis powershell embedded: autocad, code
+  cluster_h0009      n= 19  jobs= 13  cohesion=0.601  (agglomerative_split)  → devops git kubernetes: docker, gcp
+  cluster_h0002      n= 15  jobs= 12  cohesion=0.760  (agglomerative_split)  → aws cloud infrastructure: azure, devops
+  cluster_h0003      n= 13  jobs= 13  cohesion=0.769  (agglomerative_split)  → civil engineering electrical: mechanical, data
+  cluster_h0008      n=  8  jobs=  4  cohesion=0.739  (hdbscan)  → javascript react native: js, node
+  cluster_h0000      n=  6  jobs=  4  cohesion=0.886  (hdbscan)  → compliance compliance regulatory: ensure
+
+[SOFT SKILLS]
+  cluster_s0001      n= 26  jobs= 16  cohesion=0.719  (hdbscan)  → adapt change think: communicate, solve
+  cluster_s0000      n= 25  jobs= 23  cohesion=0.756  (hdbscan)  → collaborate team work: cross-functional, teams
+  cluster_s0002      n= 14  jobs= 13  cohesion=0.603  (agglomerative_recovery)  → business needs deliver: closely, data
+
+[TOP TERMS — first 5 hard+knowledge clusters]
+  cluster_h0004 (ai platforms android: api, cybersecurity)
+    - android
+    - api
+    - cybersecurity
+    - defence
+    - fusion
+    - api rest
+    - cybersecurity observability
+    - defence fusion
+  cluster_h0005 (accounting power bi: documentation, requirements)
+    - documentation
+    - requirements
+    - accounting
+    - analytics
+    - bi
+    - accounting power
+    - analysis accounting
+    - analytics utilities
+  cluster_h0011 (agile methodologies quality: change, cnc)
+    - agile
+    - change
+    - cnc
+    - drive
+    - gaming
+    - gaming cnc
+    - innovation provide
+    - issues microphones
+  cluster_h0007 (ai-enabled workflows automation: architecture, systems)
+    - architecture
+    - systems
+    - automation
+    - distributed
+    - workflows
+    - distributed systems
+    - architecture distributed
+    - architecture event-driven
+  cluster_h0006 (ai ai/ml generative: artificial, intelligence)
+    - artificial
+    - intelligence
+    - learning
+    - ai
+    - ai/ml
+    - artificial intelligence
+    - ai ai/ml
+    - ai artificial

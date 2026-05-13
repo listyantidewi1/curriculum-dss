@@ -1,0 +1,23 @@
+=== TEST METRICS -- meta-llama/llama-3.1-70b-instruct (zero-shot via OpenRouter) ===
+# strict span-set F1 (Skill-LLM Table 2 definition)
+# few-shot k = 0, sample = all
+
+skill_precision: 0.3359
+skill_recall:    0.3963
+skill_f1:        0.3636
+knowledge_precision: 0.4212
+knowledge_recall:    0.3552
+knowledge_f1:        0.3854
+total_precision: 0.3730
+total_recall:    0.3750
+total_f1:        0.3740
+
+--- diagnostics ---
+api_failures:        0 / 3569
+json_parse_failures: 11 / 3569
+skill_predictions:   1300
+skill_short_spans:   256 (< 2 tokens)
+verb_short_rate:     0.1969
+training_baseline:   0.1440
+verb_fail_threshold: 0.2440 (baseline + tolerance 0.10)
+OK: verb-preservation diagnostic passed.

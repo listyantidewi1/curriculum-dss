@@ -1,0 +1,15 @@
+# Streamlit Cloud installs from this file when the app boots.
+# Keep this MINIMAL — the v2 pipeline's full requirements (torch, hdbscan, etc.)
+# are NOT needed at dashboard runtime, only the read-side libs.
+
+streamlit>=1.43
+sentence-transformers>=5.0     # SBERT for curriculum coverage matching
+torch>=2.7                      # required by sentence-transformers (CPU build is fine)
+pypdf>=6.0                      # PDF curriculum upload
+langdetect>=1.0                 # auto-detect Indonesian sections
+openai>=2.0                     # for the Indonesian translator (Jatevo / OpenRouter)
+pandas>=2.0
+numpy>=1.26
+scikit-learn>=1.4               # CountVectorizer / TfidfVectorizer used by cluster_naming
+scipy>=1.10                     # imported by sentence-transformers transitive
+matplotlib>=3.8                 # if we render any charts

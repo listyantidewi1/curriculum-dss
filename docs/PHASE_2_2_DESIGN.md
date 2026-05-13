@@ -284,7 +284,7 @@ After Phase 2.2, every competency MUST satisfy:
 | `source_job_ids` non-empty | `len(c.source_job_ids) >= 1` |
 | `source_sentences` non-empty | `len(c.source_sentences) >= 1` |
 | Every `related_skill` traces to ≥ 1 contributing item | `grounding_score_preview >= 1.0 / len(related_skills)` |
-| `rationale` non-empty and not boilerplate | `len(c.rationale) >= 40 chars AND not c.rationale.startswith("This competency")` |
+| `rationale` is long-form and not boilerplate | `300 <= len(c.rationale) <= 900 chars AND not c.rationale.startswith("This competency")` |
 | `batch_reasoning_id` resolvable | `BatchReasoning.lookup(c.batch_reasoning_id) is not None` |
 
 Phase 2.5 evaluator's stricter gate (`grounding_score ≥ 0.80`) applies on top.
@@ -331,7 +331,7 @@ When a curriculum designer (or anyone on the public dashboard) opens `/competenc
 └─────────────────────────────────────────────────────────────┘
 ```
 
-The **"Why this competency?"** block is the per-competency `rationale`. The **"View batch reasoning"** link (admin-only, hidden from public surface) opens the `batch_reasoning` string for deeper audit.
+The **"Why this competency?"** block is the per-competency `rationale`. By default the UI shows the first ~200 chars with a **"Read more ▾"** toggle to expand the full long-form rationale (400–800 chars). Below that is a second collapsible labeled **"How the LLM grouped these skills (batch reasoning) ▾"** — public, collapsed by default — that exposes the full `batch_reasoning` string for the cluster.
 
 ---
 
@@ -371,17 +371,22 @@ The toggle prevents the situation where v2 has a bug we don't catch and users se
 
 ---
 
-## Open questions (need user input before implementation)
+## Resolved decisions (locked 2026-05-12)
 
-1. **Per-competency rationale length cap?** I default to 2-4 sentences (~200-400 chars). User-facing UI may want shorter (100-200 chars max). Pick a target.
+1. **Rationale length: long (400–800 chars, ~4–6 sentences).** UI renders the first ~200 chars by default and exposes a **"Read more ▾"** toggle to expand the full rationale. Keeps detail page clean for browsing; preserves the full justification for users who want to audit it.
 
-2. **Public surface visibility:** is `batch_reasoning` shown to anyone (admin-only? hidden entirely? exposed via API for paper figures)? Current design = admin-only. Confirm.
+2. **`batch_reasoning` is public via "View reasoning ▾" toggle.** On the competency detail page, a collapsible block titled "How the LLM grouped these skills (batch reasoning)" exposes the full `batch_reasoning` string. Collapsed by default. Same UI pattern as the rationale toggle. Aligns with the "no black boxes" mission — full audit trail visible to any user, not gated behind admin login.
 
-3. **Reasoning quality as paper signal?** I propose adding a `reasoning_quality` dimension to the expert review rubric (Section 3 in `docs/EXPERT_REVIEW_RUBRIC.md`) — reviewers rate whether the rationale is informative. Cheap to add; one more Likert column. Confirm if worth doing.
+3. **Add `reasoning_quality` to expert-review rubric.** Section 3 of `docs/EXPERT_REVIEW_RUBRIC.md` gets a 5th Likert column: *"This competency's rationale clearly explains why these skills belong together. (1 = Strongly Disagree, 5 = Strongly Agree)"*. Adds ~30 seconds per competency × 75 competencies per reviewer ≈ ~40 min total reviewer-time overhead. Becomes a paper finding (RQ5 augmentation): correlation between `reasoning_quality` rating and `grounding_score`.
 
-4. **LLM model choice for v2:** DeepSeek-V3.2 by default (current). Alternative: switch to a thinking model (Claude 3.7 thinking, ~10× cost) — better reasoning quality but per-run cost rises from $0.01 to $0.10. Worth A/B testing? Defer to user testing data.
+4. **A/B test two LLM model families in parallel.** Run identical clusters through:
+   - **DeepSeek-V3.2 via OpenRouter** (current default for v2 competency gen) — cheap, good JSON.
+   - **GPT-5 (or GPT-4o if GPT-5 not yet on Jatevo) via Jatevo** — reasoning-grade output, separate $1000 budget pool, no extra cost from OpenRouter pool.
+   - Selected by `AdvancedPipelineConfig.COMPETENCY_LLM_PROVIDER = "openrouter_deepseek" | "jatevo_gpt"`. Per-batch override possible.
+   - Comparison: side-by-side on 5–10 clusters, measure (a) `rationale` informativeness (manual rate 1–5), (b) hallucination rate (skills not in cluster), (c) `batch_reasoning` quality. Decide default after data, not vibes.
+   - **Provider-routing rule (durable):** Jatevo serves **GPT models only** (key: `api_keys/jatevo.txt`). OpenRouter serves everything else (key: `api_keys/OpenRouter.txt`). Implement `get_competency_llm_client(model_name)` to dispatch by model family — prevents the past 401 incident from `2aced75`.
 
-5. **Migration cutover timing:** I propose keeping legacy and v2 in parallel until Phase 2.5 evaluator lands. Alternative: cutover at Phase 2.2 completion and live-test. More aggressive. Confirm preference.
+5. **Keep v1 and v2 in parallel until Phase 2.5 evaluator lands, then flip default to v2.** `AdvancedPipelineConfig.COMPETENCY_GENERATOR_VERSION = "v1" | "v2"`, default "v1" through Week 2. Pipeline runs that explicitly request "v2" use the new path; users on default surface stay on v1. After Phase 2.5 evaluator + grounding gate land (Week 2 end), flip default to "v2". v1 stays callable for ablation / paper baseline; deleted only after user testing concludes. Safety net intact.
 
 ---
 
@@ -420,7 +425,7 @@ Total: ~22 person-hours. ≈ 3 working days. 0.5 day buffer for dedup edge cases
 
 1. ✅ `competency_generator_v2.py` exists and is invoked when `COMPETENCY_GENERATOR_VERSION = "v2"`.
 2. ✅ Every emitted competency has non-empty `contributing_item_ids`, `source_job_ids`, `source_sentences`.
-3. ✅ Every competency has a `rationale` of ≥ 100 chars.
+3. ✅ Every competency has a `rationale` of 300–900 chars (long-form).
 4. ✅ A `BatchReasoning` record exists per LLM call, FK'd from competencies.
 5. ✅ `grounding_score_preview` computed and attached to every competency.
 6. ✅ Unit tests pass: synthetic 3-skill cluster → expected 1-2 competencies with valid rationale.

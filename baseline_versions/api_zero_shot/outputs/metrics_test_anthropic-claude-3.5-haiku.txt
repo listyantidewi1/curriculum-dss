@@ -1,0 +1,23 @@
+=== TEST METRICS -- anthropic/claude-3.5-haiku (zero-shot via OpenRouter) ===
+# strict span-set F1 (Skill-LLM Table 2 definition)
+# few-shot k = 0, sample = all
+
+skill_precision: 0.2355
+skill_recall:    0.4495
+skill_f1:        0.3091
+knowledge_precision: 0.2987
+knowledge_recall:    0.6218
+knowledge_f1:        0.4035
+total_precision: 0.2696
+total_recall:    0.5389
+total_f1:        0.3594
+
+--- diagnostics ---
+api_failures:        0 / 3569
+json_parse_failures: 481 / 3569
+skill_predictions:   2348
+skill_short_spans:   789 (< 2 tokens)
+verb_short_rate:     0.3360
+training_baseline:   0.1440
+verb_fail_threshold: 0.2440 (baseline + tolerance 0.10)
+WARN: verb-preservation diagnostic FAILED.

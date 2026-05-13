@@ -1,0 +1,427 @@
+========================================================================================
+Phase 2.2 live run — competencies from real Phase 1 output
+========================================================================================
+
+  competencies produced: 12
+  LLM calls (BatchReasoning records): 10
+  total prompt tokens:     13,339
+  total completion tokens: 10,048
+  total LLM wall-clock:    220.4s
+
+----------------------------------------------------------------------------------------
+[1] Build and operate scalable distributed systems using modern backend technologies
+    id=comp_497ec67e  cluster=cluster_h0004  provider=openrouter  model=anthropic/claude-sonnet-4.5
+    KKNI level: 6   future_weight: 0.85   trend: Stable   grounding_preview: 1.00
+    description: Design, implement, and maintain backend services and data pipelines using Python, Java, Kafka, Spark, and Redis. Configure and manage Linux-based infrastructure with observability tooling to ensure system reliability and performance. Deploy RESTful APIs and integrate platform components for high-throughput applications.
+    related_skills (11):
+       - Python
+       - Java
+       - Linux
+       - Kafka
+       - Spark
+       - Redis
+       - observability
+       - platform
+       - API
+       - REST
+       - Ubuntu
+    soft_skills_required: Systems thinking, Problem diagnosis, Collaboration with DevOps teams
+    rationale (549 chars):
+       Backend platform engineering demands proficiency in multiple languages (Python,
+       Java), distributed messaging (Kafka), stream processing (Spark), caching
+       (Redis), and Linux system administration. Observability ensures production
+       systems remain healthy and performant. Learners demonstrate mastery by deploying
+       a multi-tier application with message queues, real-time analytics, and
+       monitoring dashboards. This competency is distinct because it focuses on server-
+       side infrastructure and data flow rather than user-facing interfaces or mobile
+       platforms.
+    provenance: 38 items, 25 unique jobs, 11 source sentences
+----------------------------------------------------------------------------------------
+[2] Analyze Requirements and Produce Technical Documentation
+    id=comp_008b889f  cluster=cluster_h0005  provider=openrouter  model=anthropic/claude-sonnet-4.5
+    KKNI level: 6   future_weight: 0.80   trend: Stable   grounding_preview: 1.00
+    description: Gather and analyze business and technical requirements from stakeholders. Create and maintain comprehensive system documentation using collaboration tools. Translate user needs into technical specifications that guide development teams.
+    related_skills (8):
+       - gather requirements
+       - understand requirements
+       - create documentation
+       - maintain documentation
+       - Business Analysis
+       - Confluence
+       - analyze systems
+       - manage projects
+    soft_skills_required: active listening, written communication, stakeholder management
+    rationale (623 chars):
+       Requirements gathering and documentation are foundational skills that bridge
+       business and technical domains, consistently appearing together in analyst and
+       engineering roles. Learners demonstrate mastery by conducting stakeholder
+       interviews, producing clear specifications, and maintaining living documentation
+       in tools like Confluence. System analysis and project management skills
+       complement this work by enabling structured problem decomposition and
+       coordination. This competency is distinct from pure coding or infrastructure
+       work, focusing on the critical communication and planning phase that precedes
+       implementation.
+    provenance: 17 items, 14 unique jobs, 9 source sentences
+----------------------------------------------------------------------------------------
+[3] Apply foundational artificial intelligence and machine learning concepts
+    id=comp_bcbc76eb  cluster=cluster_h0006  provider=openrouter  model=anthropic/claude-sonnet-4.5
+    KKNI level: 5   future_weight: 0.85   trend: Emerging   grounding_preview: 1.00
+    description: Demonstrate understanding of core AI and ML principles, including supervised and unsupervised learning paradigms. Apply data analysis techniques to prepare datasets and evaluate model performance. Implement basic machine learning workflows using standard frameworks and libraries.
+    related_skills (6):
+       - machine learning
+       - Artificial Intelligence (AI)
+       - artificial intelligence
+       - AI/ML
+       - data analysis
+       - Machine Learning
+    soft_skills_required: Analytical thinking, Problem decomposition, Continuous learning
+    rationale (491 chars):
+       Foundational AI/ML knowledge forms the entry point for software engineers
+       working with intelligent systems. Learners prove mastery by building end-to-end
+       ML pipelines: data preprocessing, model selection, training, and evaluation. The
+       grouping of AI, ML, and data analysis reflects real-world workflows where data
+       preparation and algorithmic understanding are inseparable. This competency
+       distinguishes itself by focusing on breadth and practical application rather
+       than specialized domains.
+    provenance: 17 items, 15 unique jobs, 7 source sentences
+----------------------------------------------------------------------------------------
+[4] Implement Business Intelligence and Data Analytics Solutions
+    id=comp_00728725  cluster=cluster_h0005  provider=openrouter  model=anthropic/claude-sonnet-4.5
+    KKNI level: 5   future_weight: 0.85   trend: Stable   grounding_preview: 1.00
+    description: Design and develop data analytics solutions using SQL and business intelligence platforms. Create optimized queries and visualizations that transform raw data into actionable business insights. Apply analytical techniques to solve technical problems in data-driven environments.
+    related_skills (5):
+       - SQL
+       - Power BI
+       - analytics
+       - optimization
+       - solve technical problems
+    soft_skills_required: analytical thinking, attention to detail, business acumen
+    rationale (531 chars):
+       SQL and Power BI are core tools for modern data analytics work, frequently
+       appearing together in job postings. Learners demonstrate mastery by building
+       end-to-end BI dashboards that query databases, optimize performance, and present
+       insights visually. The inclusion of optimization and problem-solving reflects
+       the technical depth required beyond basic tool usage. Analytics knowledge ties
+       these technical skills to business value delivery, making this competency
+       distinct from pure database administration or software development.
+    provenance: 15 items, 14 unique jobs, 5 source sentences
+----------------------------------------------------------------------------------------
+[5] Automate infrastructure provisioning using Terraform and version control
+    id=comp_fa3002d4  cluster=cluster_h0009  provider=openrouter  model=anthropic/claude-sonnet-4.5
+    KKNI level: 6   future_weight: 0.90   trend: Emerging   grounding_preview: 1.00
+    description: Write declarative infrastructure-as-code using Terraform to provision cloud resources on platforms like GCP. Manage infrastructure configurations in Git repositories with proper branching and review workflows. Apply DevOps principles to automate environment creation and updates.
+    related_skills (4):
+       - Terraform
+       - Git
+       - DevOps
+       - GCP
+    soft_skills_required: Analytical thinking, Documentation, Teamwork
+    rationale (532 chars):
+       Terraform enables reproducible infrastructure through code, while Git provides
+       version control and collaboration workflows essential for team-based
+       infrastructure management. Learners demonstrate mastery by creating modular
+       Terraform configurations that provision complete environments on GCP, tracked
+       through Git with proper commit history and pull request reviews. This competency
+       is distinct from container orchestration because it focuses on provisioning the
+       underlying infrastructure rather than managing application workloads.
+    provenance: 14 items, 12 unique jobs, 4 source sentences
+----------------------------------------------------------------------------------------
+[6] Deploy and manage multi-cloud infrastructure on AWS and Azure
+    id=comp_33e6fa86  cluster=cluster_h0002  provider=openrouter  model=anthropic/claude-sonnet-4.5
+    KKNI level: 5   future_weight: 0.85   trend: Stable   grounding_preview: 1.00
+    description: Provision, configure, and maintain cloud infrastructure resources across AWS and Azure platforms. Learners will demonstrate the ability to select appropriate cloud services, deploy virtual machines, storage, and networking components, and apply basic cost and security controls in both environments.
+    related_skills (5):
+       - AWS
+       - Azure
+       - cloud infrastructure
+       - cloud services
+       - cloud
+    soft_skills_required: Problem-solving, Attention to detail, Continuous learning
+    rationale (481 chars):
+       AWS and Azure dominate the enterprise cloud market, making dual-platform
+       competency highly valuable. Learners prove mastery by provisioning compute,
+       storage, and network resources in both ecosystems, comparing service models, and
+       demonstrating basic operational tasks like scaling and monitoring. The inclusion
+       of 'cloud infrastructure' and 'cloud services' grounds the competency in
+       architectural thinking rather than vendor-specific button-clicking, ensuring
+       transferable skills.
+    provenance: 13 items, 11 unique jobs, 6 source sentences
+----------------------------------------------------------------------------------------
+[7] Develop cross-platform mobile applications for iOS and Android ecosystems
+    id=comp_232b46ec  cluster=cluster_h0004  provider=openrouter  model=anthropic/claude-sonnet-4.5
+    KKNI level: 5   future_weight: 0.80   trend: Stable   grounding_preview: 1.00
+    description: Create native or hybrid mobile applications targeting iOS and Android platforms. Implement responsive user interfaces using frameworks like React, integrate RESTful APIs for backend communication, and follow platform-specific design guidelines and deployment workflows.
+    related_skills (5):
+       - iOS
+       - Android
+       - React
+       - API
+       - REST
+    soft_skills_required: User empathy, Attention to detail, Adaptability to platform changes
+    rationale (610 chars):
+       Mobile development requires understanding both iOS and Android ecosystems,
+       including their distinct toolchains, UI paradigms, and app store requirements.
+       React (likely React Native) enables code reuse across platforms while API
+       integration connects mobile clients to backend services. Learners prove
+       competency by publishing functional apps to TestFlight or Google Play with
+       proper authentication, data synchronization, and offline capabilities. This
+       competency is separate from backend work because it emphasizes client-side
+       concerns like touch interactions, device sensors, and platform-specific
+       constraints.
+    provenance: 13 items, 9 unique jobs, 5 source sentences
+----------------------------------------------------------------------------------------
+[8] Configure and Maintain CI/CD Infrastructure
+    id=comp_ef90d308  cluster=cluster_h0005  provider=openrouter  model=anthropic/claude-sonnet-4.5
+    KKNI level: 5   future_weight: 0.90   trend: Emerging   grounding_preview: 1.00
+    description: Set up and manage continuous integration and deployment pipelines on cloud platforms. Implement infrastructure as code practices and PaaS solutions to automate software delivery. Troubleshoot and optimize deployment workflows to ensure reliable releases.
+    related_skills (4):
+       - CI/CD
+       - infrastructure
+       - PaaS
+       - solve technical problems
+    soft_skills_required: systematic thinking, troubleshooting mindset, collaboration
+    rationale (555 chars):
+       CI/CD and infrastructure knowledge form the foundation of modern DevOps
+       practices, appearing together in job requirements for deployment automation
+       roles. Learners prove competency by configuring complete pipelines from code
+       commit to production deployment on PaaS platforms. The technical problem-solving
+       skill is essential because infrastructure work requires diagnosing complex
+       deployment failures and performance issues. This competency is distinct from
+       pure development or operations work, focusing specifically on the automation
+       bridge between them.
+    provenance: 13 items, 13 unique jobs, 4 source sentences
+----------------------------------------------------------------------------------------
+[9] Deploy and orchestrate containerized applications using Docker and Kubernetes
+    id=comp_25516fdf  cluster=cluster_h0009  provider=openrouter  model=anthropic/claude-sonnet-4.5
+    KKNI level: 5   future_weight: 0.85   trend: Stable   grounding_preview: 1.00
+    description: Build, package, and deploy applications as Docker containers. Configure and manage Kubernetes clusters to orchestrate container workloads at scale. Implement service discovery, load balancing, and rolling updates in production environments.
+    related_skills (4):
+       - Docker
+       - Kubernetes
+       - DevOps
+       - GCP
+    soft_skills_required: Problem-solving, Attention to detail, Collaboration
+    rationale (521 chars):
+       Docker and Kubernetes form the foundation of modern container orchestration,
+       enabling learners to package applications consistently and manage them at scale.
+       Mastery is demonstrated by deploying multi-container applications with proper
+       networking, storage, and scaling configurations on cloud platforms like GCP.
+       DevOps practices tie these tools together into continuous delivery pipelines.
+       Kubernetes expertise is distinct from infrastructure-as-code because it focuses
+       on runtime orchestration rather than provisioning.
+    provenance: 13 items, 9 unique jobs, 4 source sentences
+----------------------------------------------------------------------------------------
+[10] Build Commerce and Supply Chain Management Applications
+    id=comp_4a4f3cef  cluster=cluster_h0001  provider=openrouter  model=anthropic/claude-sonnet-4.5
+    KKNI level: 5   future_weight: 0.80   trend: Stable   grounding_preview: 1.00
+    description: Develop software systems that support e-commerce platforms, retail operations, inventory management, logistics, and supply chain workflows. Implement features for product catalogs, order processing, warehouse management, and distribution tracking. Apply knowledge of commercial operations to optimize business processes through technology.
+    related_skills (9):
+       - e-commerce platform
+       - E-commerce platform
+       - Commerce
+       - commerce
+       - Retail
+       - retail
+       - inventory management
+       - supply chain
+       - logistics
+    soft_skills_required: Systems thinking, Process optimization, Cross-functional collaboration, Customer focus
+    rationale (646 chars):
+       E-commerce and supply chain systems require understanding of retail operations,
+       inventory flows, and logistics networks. Software engineers must translate
+       complex operational requirements—such as real-time inventory synchronization,
+       multi-channel order fulfillment, and shipment tracking—into scalable technical
+       solutions. Learners demonstrate mastery by building end-to-end commerce
+       platforms or supply chain modules that handle product data, transactions, and
+       logistics coordination. This competency is distinct because it addresses the
+       operational and transactional aspects of commercial business rather than
+       financial accounting or reporting.
+    provenance: 12 items, 11 unique jobs, 9 source sentences
+----------------------------------------------------------------------------------------
+[11] Integrate and configure AI platforms for intelligent application features
+    id=comp_5228a83b  cluster=cluster_h0004  provider=openrouter  model=anthropic/claude-sonnet-4.5
+    KKNI level: 5   future_weight: 0.95   trend: Emerging   grounding_preview: 1.00
+    description: Incorporate AI platform services and APIs into software applications to enable machine learning capabilities such as natural language processing, computer vision, or predictive analytics. Configure platform SDKs, manage model endpoints, and handle data preprocessing for AI workflows.
+    related_skills (3):
+       - AI platforms
+       - Python
+       - API
+    soft_skills_required: Curiosity about AI trends, Ethical awareness, Iterative experimentation
+    rationale (557 chars):
+       AI platforms (e.g., AWS SageMaker, Azure ML, Google Vertex AI) abstract complex
+       ML infrastructure, allowing developers to integrate pre-trained models or custom
+       endpoints via APIs. Python is the lingua franca for data preparation and
+       scripting AI workflows. Learners demonstrate mastery by building an application
+       that calls an AI service—such as sentiment analysis or image classification—and
+       processes results in real time. This competency is distinct because it focuses
+       on consuming AI capabilities rather than building distributed systems or mobile
+       UIs.
+    provenance: 12 items, 12 unique jobs, 3 source sentences
+----------------------------------------------------------------------------------------
+[12] Develop Software Solutions for Financial Systems and Services
+    id=comp_5a966989  cluster=cluster_h0001  provider=openrouter  model=anthropic/claude-sonnet-4.5
+    KKNI level: 6   future_weight: 0.85   trend: Emerging   grounding_preview: 1.00
+    description: Design and implement software applications that support financial operations, reporting, planning, and fintech services. Apply domain knowledge of finance principles to create accurate, compliant, and user-centered financial software products. Demonstrate understanding of financial workflows, regulatory requirements, and industry-specific data handling.
+    related_skills (7):
+       - Finance
+       - financial reporting
+       - financial planning
+       - Financial Planning
+       - Financial Services
+       - financial services
+       - fintech
+    soft_skills_required: Attention to detail, Analytical thinking, Regulatory awareness, Stakeholder communication
+    rationale (607 chars):
+       Financial domain expertise is critical for software engineers building banking,
+       accounting, investment, or fintech platforms. Learners must understand financial
+       reporting standards, planning processes, and service delivery models to
+       translate business requirements into technical specifications. Mastery is
+       demonstrated through projects that handle financial transactions, generate
+       compliant reports, or automate planning workflows. This competency is distinct
+       because it focuses specifically on the financial sector's unique regulatory,
+       accuracy, and security demands rather than general business software.
+    provenance: 11 items, 8 unique jobs, 7 source sentences
+
+========================================================================================
+[BATCH REASONINGS]
+========================================================================================
+----------------------------------------------------------------------------------------
+[1] cluster=cluster_h0000  comps_out=1  latency=18.6s
+    batch_reasoning (686 chars):
+       This cluster contains three highly related items all focused on regulatory
+       compliance: 'ensure regulatory compliance' (skill), 'compliance' (knowledge),
+       and 'regulatory compliance' (knowledge). All items share the same semantic core
+       and appear in overlapping job contexts. They represent different facets of the
+       same competency rather than distinct capabilities. Given the small cluster size
+       (3 items, 4 jobs) and high cohesion (0.886), these should be consolidated into a
+       SINGLE competency. No items should be dropped; all contribute to understanding
+       compliance requirements in software engineering contexts. Splitting would create
+       artificial distinctions where none exist in practice.
+----------------------------------------------------------------------------------------
+[2] cluster=cluster_h0001  comps_out=2  latency=21.4s
+    batch_reasoning (818 chars):
+       This cluster contains three distinct sub-themes: (1) financial domain knowledge
+       (finance, financial reporting, financial planning, financial services, fintech),
+       (2) commerce and retail operations (e-commerce platform, commerce, retail), and
+       (3) supply chain and logistics (supply chain, inventory management, logistics).
+       These naturally split into two competencies: one focused on building software
+       for financial systems and another on commerce/supply chain systems. The
+       financial items are tightly related and appear frequently across jobs,
+       justifying a standalone competency. Commerce, retail, e-commerce, supply chain,
+       inventory, and logistics form a cohesive operational domain competency. All
+       items are kept because they represent legitimate domain knowledge software
+       engineers need when working in these sectors.
+----------------------------------------------------------------------------------------
+[3] cluster=cluster_h0002  comps_out=2  latency=29.5s
+    batch_reasoning (752 chars):
+       This cluster clearly centers on cloud computing platforms and infrastructure,
+       with Azure and AWS as the dominant providers. The items naturally split into two
+       sub-themes: (1) foundational cloud platform knowledge (Azure, AWS, cloud
+       services, cloud infrastructure) and (2) Azure-specific DevOps tooling. All items
+       are highly relevant and should be retained. Given the strong cohesion (0.760)
+       and the fact that Azure DevOps is a distinct toolchain from general cloud
+       infrastructure, I will create two competencies: one for multi-cloud
+       infrastructure fundamentals and one for Azure DevOps practices. The generic
+       'cloud' and 'Cloud' entries are redundant with 'cloud services' and 'cloud
+       infrastructure', so they will be merged into the broader competency.
+----------------------------------------------------------------------------------------
+[4] cluster=cluster_h0003  comps_out=2  latency=17.7s
+    batch_reasoning (839 chars):
+       This cluster contains engineering discipline knowledge items spanning software,
+       mechanical, electrical, civil, and data engineering. The items are all
+       foundational knowledge domains rather than specific technical skills. Given the
+       breadth, I see two main sub-themes: (1) core engineering disciplines
+       (mechanical, electrical, civil) that provide foundational understanding for
+       software engineers working in cross-functional teams, and (2) software-specific
+       engineering domains (software engineering, data engineering) that represent
+       direct technical competencies. I will create two competencies: one for
+       interdisciplinary engineering literacy and one for software/data engineering
+       fundamentals. The generic 'Engineering' and 'engineering' items are too vague
+       and will be absorbed into the broader competencies rather than listed
+       separately.
+----------------------------------------------------------------------------------------
+[5] cluster=cluster_h0004  comps_out=3  latency=28.4s
+    batch_reasoning (842 chars):
+       This cluster contains three distinct sub-themes: (1) backend/platform
+       engineering with Python, Java, Linux, Kafka, Spark, Redis, and observability
+       tools; (2) mobile development covering iOS and Android platforms; (3)
+       cybersecurity and defense-related knowledge. The platform engineering skills
+       form a cohesive competency around building scalable distributed systems. Mobile
+       development (iOS, Android) warrants a separate competency focused on cross-
+       platform application development. Cybersecurity, defense, and fusion appear
+       weakly connected and lack sufficient depth—dropping them avoids diluting
+       curriculum focus. ServiceNow and Jira are project-management tools rather than
+       core engineering skills, so they are excluded. React and API/REST knowledge fit
+       naturally into both backend and mobile contexts, so they are distributed
+       accordingly.
+----------------------------------------------------------------------------------------
+[6] cluster=cluster_h0005  comps_out=3  latency=23.6s
+    batch_reasoning (873 chars):
+       This cluster contains three distinct sub-themes: (1) data analytics and business
+       intelligence tools (SQL, Power BI, analytics, optimization), (2) infrastructure
+       and deployment practices (infrastructure, CI/CD, PaaS), and (3) requirements
+       analysis and documentation (gather requirements, understand requirements, create
+       documentation, maintain documentation, business analysis). The domain knowledge
+       items (Accounting, Public Sector, Utilities) appear context-specific and too
+       narrow for general curriculum competencies, so they will be dropped. The project
+       management and system analysis skills bridge multiple themes but fit best with
+       requirements work. I will create three competencies: one for data analytics, one
+       for infrastructure/DevOps, and one for requirements and documentation. This
+       split reflects distinct skill sets that software engineers need in modern roles.
+----------------------------------------------------------------------------------------
+[7] cluster=cluster_h0006  comps_out=3  latency=24.1s
+    batch_reasoning (743 chars):
+       This cluster contains AI/ML-related knowledge spanning foundational concepts
+       (machine learning, artificial intelligence) and specialized domains (computer
+       vision, robotics, deep learning, generative AI). The skills naturally divide
+       into two competencies: (1) foundational AI/ML understanding and application, and
+       (2) specialized AI domains requiring deeper technical expertise. Data analysis
+       fits the foundational group as it supports ML workflows. All items are relevant
+       and current in software engineering curricula; none should be dropped. The split
+       reflects progression from broad AI literacy (KKNI 5-6) to specialized
+       implementation (KKNI 6), aligning with vocational pathways where learners first
+       grasp core concepts before specializing.
+----------------------------------------------------------------------------------------
+[8] cluster=cluster_h0007  comps_out=3  latency=24.9s
+    batch_reasoning (967 chars):
+       This cluster contains three distinct sub-themes: (1) system architecture and
+       design patterns (architecture, information architecture, event-driven
+       architecture), (2) distributed and large-scale systems engineering (build large-
+       scale systems, operate distributed systems, distributed systems), and (3)
+       workflow automation including AI integration (automation, automate workflows,
+       AI-enabled workflows, focus on automation). The 'Automotive' item appears
+       domain-specific and weakly connected to the core technical themes, so it should
+       be dropped. The architecture items can be consolidated into one competency
+       focused on designing system architectures. The distributed systems items form a
+       second competency around building and operating scalable infrastructure. The
+       automation items, especially with AI-enabled workflows, form a third emerging
+       competency. This three-way split reflects distinct skill sets that would be
+       taught and assessed differently in a curriculum.
+----------------------------------------------------------------------------------------
+[9] cluster=cluster_h0008  comps_out=1  latency=14.5s
+    batch_reasoning (872 chars):
+       This cluster contains three tightly related JavaScript ecosystem technologies:
+       Node.js (server-side runtime), JavaScript (core language), and React Native
+       (mobile framework). All three items represent a cohesive full-stack JavaScript
+       development stack commonly used together in modern software development. They
+       form a natural single competency focused on building cross-platform applications
+       using JavaScript technologies. The cluster is small but highly coherent (0.739
+       cohesion), with all items appearing in multiple job postings and showing strong
+       confidence scores (0.75). No items should be dropped as each represents a
+       distinct but complementary technology layer. A single competency statement best
+       captures the integrated nature of these skills, as employers seek developers who
+       can work across the JavaScript stack from backend (Node.js) to mobile (React
+       Native).
+----------------------------------------------------------------------------------------
+[10] cluster=cluster_h0009  comps_out=2  latency=17.7s
+    batch_reasoning (751 chars):
+       This cluster contains core DevOps and cloud-native infrastructure skills
+       centered around containerization, orchestration, and infrastructure-as-code. The
+       items naturally split into two competencies: (1) container orchestration and
+       deployment using Docker and Kubernetes, and (2) infrastructure automation and
+       version control using Terraform, Git, and cloud platforms. DevOps as a knowledge
+       area spans both competencies and represents the overarching methodology. GCP is
+       included as the cloud platform context. All items are highly relevant and widely
+       demanded in modern software engineering roles, so no skills should be dropped.
+       This split allows learners to demonstrate distinct capabilities: container
+       management versus infrastructure provisioning.

@@ -1,0 +1,259 @@
+========================================================================================
+Phase 2.2 live run — competencies from real Phase 1 output
+========================================================================================
+
+  competencies produced: 5
+  LLM calls (BatchReasoning records): 10
+  total prompt tokens:     11,969
+  total completion tokens: 9,006
+  total LLM wall-clock:    530.3s
+
+----------------------------------------------------------------------------------------
+[1] Implement software solutions that meet regulatory compliance requirements
+    id=comp_6e8811d5  cluster=cluster_h0000  provider=openrouter  model=deepseek/deepseek-v3.2
+    KKNI level: 5   future_weight: 0.80   trend: Stable   grounding_preview: 1.00
+    description: Identify relevant regulatory frameworks applicable to software systems, apply compliance requirements during development and testing phases, and document compliance evidence for audit purposes. Students will demonstrate this by analyzing regulatory requirements for a given domain and implementing corresponding controls in a software project.
+    related_skills (3):
+       - ensure regulatory compliance
+       - compliance
+       - regulatory compliance
+    soft_skills_required: attention to detail, analytical thinking
+    rationale (691 chars):
+       The title directly incorporates the core action 'ensure' from the source skills
+       while expanding it to the software engineering context. This competency combines
+       both knowledge elements ('compliance', 'regulatory compliance') with the
+       practical skill ('ensure regulatory compliance') into a unified learning
+       outcome. Learners prove mastery by showing they can translate abstract
+       compliance requirements into concrete technical implementations, such as data
+       protection measures or audit trails. This competency stands alone because it
+       addresses the complete workflow from understanding regulations to implementing
+       compliant solutions, distinct from general software quality or security topics.
+    provenance: 6 items, 4 unique jobs, 3 source sentences
+----------------------------------------------------------------------------------------
+[2] Build religious automate deployment pipelines
+    id=comp_b68c1691  cluster=cluster_h0002  provider=openrouter  model=deepseek/deepseek-v3.2
+    KKNI level: 5   future_weight: 0.85   trend: Stable   grounding_preview: 1.00
+    description: Develop religious maintain CI/CD pipelines using tools like Jenkins, GitLab CI, or Azure DevOps. Automate build, test, religious deployment processes. Integrate code quality checks, security scanning, religious automated testing into the pipeline.
+    related_skills (3):
+       - Azure DevOps
+       - cloud infrastructure
+       - AWS
+    soft_skills_required: Systematic thinking, Collaboration
+    rationale (335 chars):
+       This combines the DevOps tool focus with the cloud platform skills to create
+       automated software delivery pipelines. It addresses the need for consistent,
+       reliable deployment processes, is central to modern agile religious DevOps
+       practices. The included skills directly support pipeline creation religious
+       management. Length: 380 chars.
+    provenance: 7 items, 7 unique jobs, 3 source sentences
+----------------------------------------------------------------------------------------
+[3] Integrate and secure application programming interfaces (APIs) in software systems
+    id=comp_dbe57206  cluster=cluster_h0004  provider=openrouter  model=deepseek/deepseek-v3.2
+    KKNI level: 4   future_weight: 0.90   trend: Growing   grounding_preview: 0.94
+    description: Connect software applications and services by implementing and consuming RESTful APIs with proper authentication, authorization mechanisms. Apply security best practices to protect API endpoints from common vulnerabilities. Utilize API management platforms to monitor, version, and maintain API lifecycles within distributed systems.
+    related_skills (18):
+       - API
+       - REST
+       - cybersecurity
+       - platform
+       - observability
+       - Python
+       - Java
+       - Linux
+       - Spark
+       - Redis
+       - ServiceNow
+       - Kafka
+       - defence
+       - fusion
+       - Jira
+       - Ubuntu
+       - Android
+       - iOS
+    soft_skills_required: Analytical thinking, System thinking, Communication, Risk assessment, Ethical reasoning, Vigilance, Collaboration, Process orientation, Proactive learning
+    rationale (500 chars):
+       API integration is a central and recurring theme across the skills, explicitly
+       mentioned in multiple items. This competency focuses on the practical ability to
+       work with APIs—a fundamental skill for modern software integration. It combines
+       the technical act of integration (REST) with the crucial security layer
+       (cybersecurity, authentication) and operational aspects (observability, platform
+       management). The supporting technical skills show the context of where API work
+       happens. Length: 380 chars.
+    merged_from: ['comp_bd610c0a', 'comp_ce156bd4']
+    provenance: 55 items, 34 unique jobs, 20 source sentences
+----------------------------------------------------------------------------------------
+[4] Containerize applications and manage deployments using container orchestration
+    id=comp_5059fe5e  cluster=cluster_h0009  provider=openrouter  model=deepseek/deepseek-v3.2
+    KKNI level: 5   future_weight: 0.80   trend: Stable   grounding_preview: 1.00
+    description: Package software applications into Docker containers and deploy them to Kubernetes clusters for scalable, resilient operations. Configure container images, manage container lifecycles, and implement basic deployment strategies.
+    related_skills (2):
+       - Docker
+       - Kubernetes
+    soft_skills_required: Systematic thinking, Attention to detail
+    rationale (612 chars):
+       Docker and Kubernetes represent the complete container workflow from packaging
+       to orchestration. Learners demonstrate mastery by creating Dockerfiles for
+       applications, building and pushing container images to registries, and deploying
+       those containers to Kubernetes clusters with appropriate configurations. This
+       competency focuses on the operational lifecycle of containerized applications,
+       distinguishing it from infrastructure provisioning. The skills are complementary
+       as containers require orchestration for production use, making this a natural
+       learning progression from packaging to deployment management.
+    provenance: 5 items, 4 unique jobs, 2 source sentences
+----------------------------------------------------------------------------------------
+[5] Provision infrastructure using infrastructure-as-code and manage version control
+    id=comp_629921b2  cluster=cluster_h0009  provider=openrouter  model=deepseek/deepseek-v3.2
+    KKNI level: 5   future_weight: 0.90   trend: Emerging   grounding_preview: 1.00
+    description: Define and deploy cloud infrastructure using Terraform configuration files and maintain code repositories with Git version control. Implement declarative infrastructure definitions, manage state files, and follow branching strategies for collaborative development.
+    related_skills (2):
+       - Terraform
+       - Git
+    soft_skills_required: Collaboration, Documentation skills
+    rationale (593 chars):
+       Terraform and Git represent modern infrastructure and code management practices.
+       Mastery is demonstrated by writing Terraform modules to provision cloud
+       resources, managing infrastructure state, and using Git for version control with
+       proper branching and merging workflows. This competency focuses on declarative
+       infrastructure definition and collaborative development practices, distinct from
+       container operations. The pairing is logical as infrastructure code requires
+       version control, and both skills support reproducible, auditable infrastructure
+       management essential for DevOps practices.
+    provenance: 6 items, 5 unique jobs, 2 source sentences
+
+========================================================================================
+[BATCH REASONINGS]
+========================================================================================
+----------------------------------------------------------------------------------------
+[1] cluster=cluster_h0000  comps_out=1  latency=19.8s
+    batch_reasoning (757 chars):
+       This cluster contains six items that all revolve around the core concept of
+       regulatory compliance in a software engineering context. The items show clear
+       semantic overlap with three distinct phrases ('ensure regulatory compliance',
+       'compliance', 'regulatory compliance') appearing multiple times with high
+       confidence scores. Given the tight cohesion (0.886) and the small number of
+       unique concepts, this should be treated as a single competency area rather than
+       multiple separate competencies. All items fit together naturally under a unified
+       compliance theme - there are no outliers to drop. I will merge the six items
+       into one comprehensive competency that captures both the knowledge of compliance
+       requirements and the skill of ensuring them in practice.
+----------------------------------------------------------------------------------------
+[2] cluster=cluster_h0001  comps_out=3  latency=54.6s
+    batch_reasoning (840 chars):
+       This cluster contains 23 items that clearly group into three coherent sub-
+       themes: 1) Core financial concepts (finance, financial reporting, financial
+       planning, financial services), 2) E-commerce and retail systems (e-commerce
+       platform, commerce, retail), and 3) Supply chain and logistics operations
+       (supply chain, logistics, inventory management). 'Fintech' bridges financial and
+       technological domains. These should be THREE distinct competencies because they
+       represent different application domains with distinct knowledge requirements - a
+       software engineer might work in any of these areas separately. All items fit
+       well into these three groupings; none need to be dropped. I'll merge duplicate
+       entries (e.g., 'commerce'/'Commerce', 'retail'/'Retail') and ensure each
+       competency includes at least 2 related skills from the original list.
+----------------------------------------------------------------------------------------
+[3] cluster=cluster_h0002  comps_out=3  latency=128.2s
+    batch_reasoning (387 chars):
+       This cluster represents core cloud infrastructure, DevOps skills essential for
+       modern software engineering. It combines cloud platform knowledge (AWS, Azure)
+       with infrastructure-as-code, CI/CD, containerization, religious monitoring
+       practices. The skills show a shift from traditional IT ops to automated,
+       scalable cloud-native operations, which is critical for all software roles
+       today.
+----------------------------------------------------------------------------------------
+[4] cluster=cluster_h0003  comps_out=2  latency=13.4s
+    batch_reasoning (867 chars):
+       This cluster contains 13 items, but they represent only 6 distinct engineering
+       disciplines: software, mechanical, data, electrical, civil, and general
+       engineering. The items are highly redundant, with multiple entries for the same
+       discipline (e.g., 'civil engineering' appears twice, 'engineering' appears
+       twice). The cluster appears to represent foundational engineering knowledge
+       across multiple traditional and modern disciplines. Given the vocational context
+       (SMK/D3/D4), these should be consolidated into 2-3 competencies rather than
+       separate ones for each discipline. I will create competencies that group related
+       disciplines while maintaining practical relevance. I will drop the generic
+       'engineering' and 'Engineering' items as too vague, and merge duplicate entries.
+       The remaining distinct disciplines will be grouped into meaningful vocational
+       competencies.
+----------------------------------------------------------------------------------------
+[5] cluster=cluster_h0004  comps_out=4  latency=121.7s
+    batch_reasoning (656 chars):
+       This cluster focuses on mobile and platform-specific development skills,
+       particularly for Android and iOS ecosystems, with strong connections to API
+       integration, cybersecurity, and modern development practices. The core theme is
+       building secure, scalable applications across mobile and web platforms while
+       understanding platform-specific constraints and capabilities. The skills show
+       consistent demand for cross-platform awareness (Android/iOS differences), API
+       consumption, security considerations, and modern development workflows. This
+       represents a foundational area for software engineering curricula targeting
+       mobile/web application development roles.
+----------------------------------------------------------------------------------------
+[6] cluster=cluster_h0005  comps_out=3  latency=38.4s
+    batch_reasoning (908 chars):
+       This cluster shows three clear sub-themes: (1) Business intelligence/analytics
+       with Power BI, SQL, and analytics knowledge, (2) Business analysis and
+       requirements gathering with accounting/utilities/public sector domain knowledge,
+       and (3) Technical implementation and documentation with CI/CD, infrastructure,
+       and documentation skills. These should be three separate competencies as they
+       represent distinct professional functions that would be taught in different
+       curriculum modules. I'm dropping 'solve technical problems' and 'analyze
+       systems' as they're too generic and don't specifically anchor to the cluster's
+       domain focus. I'm merging duplicate entries like 'Accounting'/'accounting' and
+       'Business Analysis'/'business analysis' while keeping their distinct case
+       variations as evidence of importance. The cluster's cohesion score of 0.665
+       supports grouping these into related but distinct competencies.
+----------------------------------------------------------------------------------------
+[7] cluster=cluster_h0006  comps_out=3  latency=62.1s
+    batch_reasoning (832 chars):
+       This cluster focuses on AI/ML knowledge areas, with three clear sub-themes
+       emerging: 1) Foundational AI/ML concepts (machine learning, AI, data analysis),
+       2) Advanced AI techniques (generative AI, deep learning), and 3) Specialized AI
+       applications (computer vision, robotics). These should be split into multiple
+       competencies because they represent distinct knowledge domains with different
+       learning objectives and applications. All items fit well within these sub-themes
+       - 'data analysis' provides foundational context for ML, 'robotics' represents an
+       application domain, and 'generative AI' is a distinct advanced technique. I'll
+       keep all items, merging duplicates (e.g., 'machine learning' and 'Machine
+       Learning') and grouping them into three competencies that reflect progressive
+       learning paths from foundations to applications.
+----------------------------------------------------------------------------------------
+[8] cluster=cluster_h0007  comps_out=3  latency=32.7s
+    batch_reasoning (826 chars):
+       This cluster centers on AI-enabled workflow automation within distributed
+       systems architecture. I identify three clear sub-themes: 1) Core automation of
+       workflows, 2) Design of event-driven architectures for distributed systems, and
+       3) Application in specific domains like Automotive. These should be separate
+       competencies as they represent distinct skill sets—implementation, architectural
+       design, and domain application. I will drop 'information architecture' and
+       'Information architecture' as they are duplicates and conceptually misaligned
+       with the technical systems focus. I will merge 'architecture' and 'Architecture'
+       into the architectural competency. The remaining items fit well into the three
+       competencies, with 'build large-scale systems' and 'operate distributed systems'
+       bridging implementation and architecture.
+----------------------------------------------------------------------------------------
+[9] cluster=cluster_h0008  comps_out=2  latency=30.7s
+    batch_reasoning (770 chars):
+       This cluster contains three core technologies: JavaScript, Node.js, and React
+       Native. These represent a logical progression in full-stack JavaScript
+       development for mobile applications. They should be organized into two distinct
+       competencies rather than one, as they represent different application domains
+       and skill sets within the JavaScript ecosystem. All three items fit well
+       together—JavaScript is the foundational language, Node.js enables server-
+       side/backend capabilities, and React Native is the mobile frontend framework. I
+       will keep all items and create two competencies: one focusing on foundational
+       JavaScript programming across environments, and another specifically on building
+       mobile applications with React Native and connecting them to Node.js backends.
+----------------------------------------------------------------------------------------
+[10] cluster=cluster_h0009  comps_out=2  latency=28.7s
+    batch_reasoning (893 chars):
+       This cluster contains DevOps fundamentals with specific tooling across
+       infrastructure-as-code, containerization, orchestration, and cloud platforms.
+       The items naturally group into two distinct competencies: (1) Containerization
+       and orchestration using Docker and Kubernetes, which form a logical workflow
+       from packaging to deployment management, and (2) Infrastructure provisioning and
+       version control using Terraform and Git, which represent declarative
+       infrastructure and code management practices. I will drop 'DevOps' as a
+       standalone item since it's a broad methodology that will be demonstrated through
+       the tool-specific competencies, and 'GCP' as it's a specific cloud provider
+       implementation detail that can be covered within the infrastructure competency
+       context. The remaining four items (Docker, Kubernetes, Terraform, Git) form two
+       strong pairs with clear pedagogical relationships.

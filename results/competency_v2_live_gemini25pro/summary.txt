@@ -1,0 +1,113 @@
+========================================================================================
+Phase 2.2 live run — competencies from real Phase 1 output
+========================================================================================
+
+  competencies produced: 2
+  LLM calls (BatchReasoning records): 10
+  total prompt tokens:     12,540
+  total completion tokens: 19,865
+  total LLM wall-clock:    664.9s
+
+----------------------------------------------------------------------------------------
+[1] Ensure Regulatory Compliance in Software Systems
+    id=comp_fe789b5d  cluster=cluster_h0000  provider=openrouter  model=google/gemini-2.5-pro
+    KKNI level: 5   future_weight: 0.80   trend: Stable   grounding_preview: 1.00
+    description: Analyze software projects to identify applicable legal and industry regulations, then implement and document technical and procedural measures to ensure the system meets all relevant compliance standards.
+    related_skills (3):
+       - ensure regulatory compliance
+       - compliance
+       - regulatory compliance
+    soft_skills_required: Attention to Detail, Ethical Judgment, Technical Communication
+    rationale (737 chars):
+       The title directly combines the action 'ensure' with the subject 'regulatory
+       compliance', reflecting the most concrete skill in the cluster. The description
+       operationalizes this by requiring analysis, implementation, and documentation,
+       which are tangible applications of the knowledge items 'compliance' and
+       'regulatory compliance'. A learner can demonstrate mastery by auditing a sample
+       application, identifying relevant regulations (e.g., data privacy laws), and
+       then producing a report and code modifications that bring the application into
+       compliance. This competency is distinct from general quality assurance as it
+       focuses specifically on adherence to external legal and industry-specific
+       mandates, not just functional correctness.
+    provenance: 6 items, 4 unique jobs, 3 source sentences
+----------------------------------------------------------------------------------------
+[2] Develop Cross-Platform Applications using the JavaScript Ecosystem
+    id=comp_7c13bb05  cluster=cluster_h0008  provider=openrouter  model=google/gemini-2.5-pro
+    KKNI level: 6   future_weight: 0.80   trend: Stable   grounding_preview: 1.00
+    description: Build, test, and deploy native-like mobile applications for iOS and Android using the React Native framework. Implement and connect to server-side APIs built with Node.js to manage data and application logic, leveraging core JavaScript proficiency throughout the entire stack.
+    related_skills (3):
+       - JavaScript
+       - React Native
+       - Node.js
+    soft_skills_required: Problem-Solving, Adaptability, Collaboration
+    rationale (672 chars):
+       The title frames the competency around a key outcome: creating cross-platform
+       applications, which is the primary use case for combining these technologies.
+       The description directly incorporates all the listed skills—JavaScript as the
+       foundation, React Native for the mobile front-end, and Node.js for the back-
+       end—showing how they integrate into a complete development workflow. A learner
+       can demonstrate mastery by building a functional mobile application that
+       communicates with a self-made Node.js API to perform CRUD operations. This
+       competency is a self-contained unit representing a full-stack JavaScript
+       developer profile, a common and valuable role in the industry.
+    provenance: 8 items, 4 unique jobs, 3 source sentences
+
+========================================================================================
+[BATCH REASONINGS]
+========================================================================================
+----------------------------------------------------------------------------------------
+[1] cluster=cluster_h0000  comps_out=1  latency=20.4s
+    batch_reasoning (633 chars):
+       The cluster's items are highly cohesive, all revolving around the central theme
+       of 'regulatory compliance'. The skills 'compliance', 'regulatory compliance',
+       and 'ensure regulatory compliance' represent the knowledge base and its
+       practical application, respectively. Given this tight semantic link, they are
+       best synthesized into a single, comprehensive competency rather than being split
+       into artificially narrow ones. No skills were dropped as all items directly
+       contribute to this core concept. Merging them creates a robust competency that
+       covers both understanding the rules and actively implementing them in a software
+       context.
+----------------------------------------------------------------------------------------
+[2] cluster=cluster_h0001  comps_out=0  latency=66.0s
+    batch_reasoning (0 chars):
+       
+----------------------------------------------------------------------------------------
+[3] cluster=cluster_h0002  comps_out=0  latency=71.7s
+    batch_reasoning (0 chars):
+       
+----------------------------------------------------------------------------------------
+[4] cluster=cluster_h0003  comps_out=0  latency=69.8s
+    batch_reasoning (0 chars):
+       
+----------------------------------------------------------------------------------------
+[5] cluster=cluster_h0004  comps_out=0  latency=77.8s
+    batch_reasoning (0 chars):
+       
+----------------------------------------------------------------------------------------
+[6] cluster=cluster_h0005  comps_out=0  latency=71.4s
+    batch_reasoning (0 chars):
+       
+----------------------------------------------------------------------------------------
+[7] cluster=cluster_h0006  comps_out=0  latency=73.2s
+    batch_reasoning (0 chars):
+       
+----------------------------------------------------------------------------------------
+[8] cluster=cluster_h0007  comps_out=0  latency=72.6s
+    batch_reasoning (0 chars):
+       
+----------------------------------------------------------------------------------------
+[9] cluster=cluster_h0008  comps_out=1  latency=69.3s
+    batch_reasoning (692 chars):
+       The cluster's items—JavaScript, Node.js, and React Native—form a cohesive and
+       popular technology stack for modern application development. JavaScript is the
+       foundational language, Node.js provides the server-side runtime, and React
+       Native is a framework for cross-platform mobile development. Given their strong
+       interdependence, it is most effective to synthesize them into a single,
+       comprehensive competency representing the ability to build full-stack mobile
+       solutions. This approach mirrors real-world job requirements where developers
+       are often expected to work across the stack using this unified ecosystem. No
+       skills were dropped as all three are essential to this development paradigm.
+----------------------------------------------------------------------------------------
+[10] cluster=cluster_h0009  comps_out=0  latency=72.8s
+    batch_reasoning (0 chars):
+       

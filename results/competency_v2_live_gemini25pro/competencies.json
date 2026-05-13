@@ -1,0 +1,126 @@
+[
+  {
+    "id": "comp_fe789b5d",
+    "title": "Ensure Regulatory Compliance in Software Systems",
+    "description": "Analyze software projects to identify applicable legal and industry regulations, then implement and document technical and procedural measures to ensure the system meets all relevant compliance standards.",
+    "related_skills": [
+      "ensure regulatory compliance",
+      "compliance",
+      "regulatory compliance"
+    ],
+    "soft_skills_required": [
+      "Attention to Detail",
+      "Ethical Judgment",
+      "Technical Communication"
+    ],
+    "soft_skills_description": "This competency requires meticulous attention to detail to interpret complex regulatory documents and apply their rules without error. Strong ethical judgment is needed to make responsible decisions about data handling and user privacy. Effective technical communication is also essential for documenting compliance measures and explaining them to team members and stakeholders.",
+    "rationale": "The title directly combines the action 'ensure' with the subject 'regulatory compliance', reflecting the most concrete skill in the cluster. The description operationalizes this by requiring analysis, implementation, and documentation, which are tangible applications of the knowledge items 'compliance' and 'regulatory compliance'. A learner can demonstrate mastery by auditing a sample application, identifying relevant regulations (e.g., data privacy laws), and then producing a report and code modifications that bring the application into compliance. This competency is distinct from general quality assurance as it focuses specifically on adherence to external legal and industry-specific mandates, not just functional correctness.",
+    "batch_reasoning_id": "br_174b3badc4",
+    "contributing_item_ids": [
+      "item_e4e33d2d1d",
+      "item_419c927f1a",
+      "item_77532e7a71",
+      "item_7df86829d8",
+      "item_9dd9596355",
+      "item_260dba2b4f"
+    ],
+    "source_job_ids": [
+      "in-75f30913de1b7459",
+      "in-bc0aa6df2d805b7b",
+      "in-ee0deef20dee727b",
+      "in-fb45f01ebbc2a223"
+    ],
+    "source_sentence_ids": [
+      "in-75f30913de1b7459_0007",
+      "in-bc0aa6df2d805b7b_0017",
+      "in-bc0aa6df2d805b7b_0022",
+      "in-ee0deef20dee727b_0002",
+      "in-ee0deef20dee727b_0017",
+      "in-fb45f01ebbc2a223_0039"
+    ],
+    "source_sentences": [
+      "compliance",
+      "ensure regulatory compliance",
+      "regulatory compliance"
+    ],
+    "future_relevance": "This competency is of stable and growing importance as data privacy regulations (like GDPR) and industry-specific rules become more stringent globally, making compliance a non-negotiable aspect of software development.",
+    "future_weight": 0.8,
+    "empirical_trend": "Stable",
+    "kkni_level": 5,
+    "kkni_level_source": "llm_suggested",
+    "kkni_match_similarity": null,
+    "grounding_score_preview": 1.0,
+    "grounding_flagged": false,
+    "generated_at": "2026-05-12T13:11:25.370063+00:00",
+    "generator_version": "v2.0.0",
+    "cluster_id": "cluster_h0000",
+    "cluster_summary_label": "compliance compliance regulatory: ensure",
+    "provider": "openrouter",
+    "model": "google/gemini-2.5-pro",
+    "merged_from": []
+  },
+  {
+    "id": "comp_7c13bb05",
+    "title": "Develop Cross-Platform Applications using the JavaScript Ecosystem",
+    "description": "Build, test, and deploy native-like mobile applications for iOS and Android using the React Native framework. Implement and connect to server-side APIs built with Node.js to manage data and application logic, leveraging core JavaScript proficiency throughout the entire stack.",
+    "related_skills": [
+      "JavaScript",
+      "React Native",
+      "Node.js"
+    ],
+    "soft_skills_required": [
+      "Problem-Solving",
+      "Adaptability",
+      "Collaboration"
+    ],
+    "soft_skills_description": "Requires strong problem-solving to debug issues across mobile and server environments, adaptability to keep up with frequent updates in the JavaScript ecosystem, and collaboration skills to work with UI/UX designers and other developers.",
+    "rationale": "The title frames the competency around a key outcome: creating cross-platform applications, which is the primary use case for combining these technologies. The description directly incorporates all the listed skills—JavaScript as the foundation, React Native for the mobile front-end, and Node.js for the back-end—showing how they integrate into a complete development workflow. A learner can demonstrate mastery by building a functional mobile application that communicates with a self-made Node.js API to perform CRUD operations. This competency is a self-contained unit representing a full-stack JavaScript developer profile, a common and valuable role in the industry.",
+    "batch_reasoning_id": "br_28f83ce8fd",
+    "contributing_item_ids": [
+      "item_ac59a8e56d",
+      "item_6176b396dd",
+      "item_4d884a3fd6",
+      "item_6f8b5ac35a",
+      "item_7dfc3d3092",
+      "item_febacbc22c",
+      "item_256147a491",
+      "item_afac2c68a0"
+    ],
+    "source_job_ids": [
+      "in-431768e5d2264d2d",
+      "in-443f3ba3c65aa81b",
+      "in-8b3ede5765e5e1c9",
+      "in-b96ed15875997926"
+    ],
+    "source_sentence_ids": [
+      "in-431768e5d2264d2d_0020",
+      "in-431768e5d2264d2d_0023",
+      "in-431768e5d2264d2d_0025",
+      "in-443f3ba3c65aa81b_0007",
+      "in-443f3ba3c65aa81b_0011",
+      "in-8b3ede5765e5e1c9_0021",
+      "in-b96ed15875997926_0032",
+      "in-b96ed15875997926_0035"
+    ],
+    "source_sentences": [
+      "JavaScript",
+      "Node.js",
+      "React Native"
+    ],
+    "future_relevance": "Stable, as the JavaScript ecosystem remains dominant, and the efficiency of building for multiple platforms with React Native continues to be highly valued by businesses.",
+    "future_weight": 0.8,
+    "empirical_trend": "Stable",
+    "kkni_level": 6,
+    "kkni_level_source": "llm_suggested",
+    "kkni_match_similarity": null,
+    "grounding_score_preview": 1.0,
+    "grounding_flagged": false,
+    "generated_at": "2026-05-12T13:21:02.629559+00:00",
+    "generator_version": "v2.0.0",
+    "cluster_id": "cluster_h0008",
+    "cluster_summary_label": "javascript react native: js, node",
+    "provider": "openrouter",
+    "model": "google/gemini-2.5-pro",
+    "merged_from": []
+  }
+]

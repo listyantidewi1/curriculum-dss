@@ -1,0 +1,21 @@
+{
+  "n_evaluated": 12,
+  "n_passed": 12,
+  "n_failed": 0,
+  "pass_rate": 1.0,
+  "threshold": 0.8,
+  "grounding_mean": 1.0,
+  "grounding_median": 1.0,
+  "grounding_min": 1.0,
+  "n_substring_only": 12,
+  "n_sbert_used": 0,
+  "n_unverifiable": 0,
+  "runtime_seconds": 32.058,
+  "config": {
+    "grounding_threshold": 0.8,
+    "sbert_threshold": 0.65,
+    "sbert_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "disable_sbert": false
+  },
+  "evaluator_version": "v2.5.0"
+}

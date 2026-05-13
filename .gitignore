@@ -192,3 +192,18 @@ docs/PROPOSAL_REVISION_BRIEF.md
 # Scratch scripts (not part of pipeline)
 evaluate_model.py
 save_fixed_model.py
+
+# Phase 2.1 — SBERT embedding cache (regenerated on demand)
+cache/embeddings/
+
+# Phase 2.6 — user rating store (contains hashed emails; treat as PII-adjacent)
+feedback_store/
+
+# Phase 2.6 — translation cache
+cache/translations.json
+
+# D-side venv (added 2026-05-12 migration)
+.venv-ml/
+
+# Streamlit cloud secrets file (if it exists locally)
+.streamlit/secrets.toml
